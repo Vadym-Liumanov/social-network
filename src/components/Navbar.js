@@ -2,8 +2,6 @@ import React from 'react'
 
 import navbarStyles from '../css/Navbar.module.css'
 
-console.log(navbarStyles)
-
 const Navbar = () => {
   return (
     <nav className={navbarStyles.nav}>
