@@ -1,12 +1,12 @@
 import React from 'react'
 
-import '../css/Profile.css'
+import styleProfile from'../css/Profile.module.css'
 
 const Profile = () => {
   return (
-    <div className="content">
+    <div className={styleProfile.content}>
       <div>
-        <img src="https://oboitd.ru/images/goods/big/20200125110231_Priroda_10-344.jpg" alt="nature" height="200" width="100%" />
+        <img src="https://oboitd.ru/images/goods/big/20200125110231_Priroda_10-344.jpg" alt="nature" />
       </div>
       <div>
         Avatar + description
@@ -19,7 +19,7 @@ const Profile = () => {
       </div>
       <div>
         Posts
-        <div>
+        <div className={styleProfile.item}>
           post1
         </div>
         <div>
