@@ -1,6 +1,6 @@
 import React from 'react'
 
-import profileStyles from'../css/Profile.module.css'
+import profileStyles from'./Profile.module.css'
 
 const Profile = () => {
   return (
