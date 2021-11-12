@@ -1,16 +1,13 @@
 import React from 'react'
 
-import profileStyles from'./Profile.module.css'
-
-import MainImg from './MainImg/MainImg'
-import Avatar from './Avatar/Avatar'
-
+import myPostsStyles from'./MyPosts.module.css'
 
 const Profile = () => {
   return (
-    <div className={profileStyles.content}>
-      <MainImg />
-      <Avatar />
+    <div className={myPostsStyles.content}>
+      <div>
+        <img src="https://oboitd.ru/images/goods/big/20200125110231_Priroda_10-344.jpg" alt="nature" />
+      </div>
       <div>
         Avatar + description
       </div>
@@ -22,7 +19,7 @@ const Profile = () => {
       </div>
       <div>
         Posts
-        <div className={profileStyles.item}>
+        <div className={myPostsStyles.item}>
           post1
         </div>
         <div>
