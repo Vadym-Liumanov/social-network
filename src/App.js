@@ -2,15 +2,15 @@ import React from 'react'
 import './css/App.css'
 
 import Header from './components/Header'
-import Sidebar from './components/Sidebar'
+import Navbar from './components/Navbar'
 import Profile from './components/Profile'
 
 function App() {
   return (
     <div className="appwrapper">
       <Header/>
-      <Sidebar />
-      <Profile className="content"/>
+      <Navbar />
+      <Profile />
     </div>
   );
 }
