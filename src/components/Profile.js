@@ -1,10 +1,10 @@
 import React from 'react'
 
-import styleProfile from'../css/Profile.module.css'
+import profileStyles from'../css/Profile.module.css'
 
 const Profile = () => {
   return (
-    <div className={styleProfile.content}>
+    <div className={profileStyles.content}>
       <div>
         <img src="https://oboitd.ru/images/goods/big/20200125110231_Priroda_10-344.jpg" alt="nature" />
       </div>
@@ -19,7 +19,7 @@ const Profile = () => {
       </div>
       <div>
         Posts
-        <div className={styleProfile.item}>
+        <div className={profileStyles.item}>
           post1
         </div>
         <div>
