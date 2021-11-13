@@ -18,7 +18,7 @@ const Navbar = () => {
         <a href="#c" className={navbarStyles.item}>Music</a>
       </div>
       <div>
-        <a href="#c" className={`${navbarStyles.item} ${navbarStyles.active}`}>Settings</a>
+        <a href="#c" className={navbarStyles.item}>Settings</a>
       </div>
     </nav>
   );
