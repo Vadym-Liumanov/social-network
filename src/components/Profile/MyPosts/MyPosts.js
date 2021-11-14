@@ -13,6 +13,10 @@ const MyPosts = () => {
         New post
       </div>
       <div>
+        <textarea name="" id="" cols="100" rows="10"></textarea>
+        <button>Send post</button>
+      </div>
+      <div>
         Posts
       </div>
       <Post value="post1"/>

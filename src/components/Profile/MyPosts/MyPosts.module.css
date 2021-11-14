@@ -1,6 +1,8 @@
 .content {
 	grid-area: c;
   background-color: dimgrey;
+  color: white;
+  font-weight: 600;
 }
 
 .item {
