@@ -8,6 +8,8 @@ const Navbar = () => {
   return (
     <nav className={navbarStyles.nav}>
       <NavbarItem value="Profile" />
+      <NavbarItem value="Messages" />
+      <NavbarItem value="News" />
       <NavbarItem value="Music" />
       <NavbarItem value="Settings" />
     </nav>

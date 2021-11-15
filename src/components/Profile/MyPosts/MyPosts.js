@@ -19,10 +19,10 @@ const MyPosts = () => {
       <div>
         Posts
       </div>
-      <Post value="post1"/>
-      <Post value="post2"/>
-      <Post value="post3"/>
-      <Post value="post4"/>
+      <Post value="It is my first post!" likesCount="20"/>
+      <Post value="How are you?" likesCount="10"/>
+      <Post value="Hello World!" likesCount="5"/>
+      <Post value="Why nobody loves me?" likesCount="12"/>
     </div>
   );
 }
