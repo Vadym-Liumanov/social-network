@@ -7,11 +7,11 @@ import NavbarItem from './Item/NavbarItem';
 const Navbar = () => {
   return (
     <nav className={navbarStyles.nav}>
-      <NavbarItem value="Profile" />
-      <NavbarItem value="Messages" />
-      <NavbarItem value="News" />
-      <NavbarItem value="Music" />
-      <NavbarItem value="Settings" />
+      <NavbarItem value="Profile" url="/profile" />
+      <NavbarItem value="Messages" url="/dialogs" />
+      <NavbarItem value="News" url="/news" />
+      <NavbarItem value="Music" url="/music" />
+      <NavbarItem value="Settings" url="/settings" />
     </nav>
   );
 }
