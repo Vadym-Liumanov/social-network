@@ -1,4 +1,5 @@
 .nav {
 	grid-area: navbar;
   background-color: darkturquoise;
+  padding: 10px;
 }

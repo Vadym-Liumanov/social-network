@@ -1,4 +1,9 @@
-.item {
+.item a {
   color:white;
   font-weight: 600;
+  text-decoration: none;
+}
+
+.item a:focus {
+  color:rgb(236, 223, 198);
 }

@@ -5,9 +5,9 @@ import navbarItemStyles from './NavbarItem.module.css'
 
 const NavbarItem = (props) => {
   return (
-      <div>
-        <NavLink to={props.url} className={navbarItemStyles.item}>{props.value}</NavLink>
-      </div>
+    <div className={navbarItemStyles.item}>
+      <NavLink to={props.url}>{props.value}</NavLink>
+    </div>
   );
 }
 
