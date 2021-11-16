@@ -1,13 +1,14 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 
 import userStyles from'./User.module.css'
 
 const User = (props) => {
   return (
-    <div className={userStyles.item + ' ' + userStyles.active}>
-      <div>
+    <div className={userStyles.item}>
+      <NavLink to={`/dialogs/${props.userName}`}>
         {props.userName}
-      </div>
+      </NavLink>
     </div>
   );
 }

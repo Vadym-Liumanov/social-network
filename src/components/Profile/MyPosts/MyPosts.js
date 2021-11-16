@@ -7,14 +7,18 @@ const MyPosts = () => {
   return (
     <div className={myPostsStyles.content}>
       <div>
-        My posts
+        <h3>My posts</h3>
       </div>
       <div>
         New post
       </div>
       <div>
-        <textarea name="" id="" cols="100" rows="10"></textarea>
-        <button>Send post</button>
+        <div>
+          <textarea name="" id="" cols="100" rows="10"></textarea>
+        </div>
+        <div>
+          <button>Add post</button>
+        </div>
       </div>
       <div>
         Posts
