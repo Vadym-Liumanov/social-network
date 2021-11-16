@@ -7,8 +7,6 @@ import profilePostsData from '../../../Data/profilePosts'
 
 const postData = profilePostsData
 
-console.log(postData)
-
 const MyPosts = () => {
   return (
     <div className={myPostsStyles.content}>
