@@ -1,7 +1,13 @@
 import React from 'react'
 
 import myPostsStyles from'./MyPosts.module.css'
-import Post from './Post/Post';
+import Post from './Post/Post'
+
+import profilePostsData from '../../../Data/profilePosts'
+
+const postData = profilePostsData
+
+console.log(postData)
 
 const MyPosts = () => {
   return (
@@ -23,10 +29,12 @@ const MyPosts = () => {
       <div>
         Posts
       </div>
-      <Post value="It is my first post!" likesCount="20"/>
-      <Post value="How are you?" likesCount="10"/>
-      <Post value="Hello World!" likesCount="5"/>
-      <Post value="Why nobody loves me?" likesCount="12"/>
+      <div>
+        <Post value={postData[0].post} likesCount={postData[0].likesCount} />
+        <Post value={postData[1].post} likesCount={postData[1].likesCount} />
+        <Post value={postData[2].post} likesCount={postData[2].likesCount} />
+        <Post value={postData[3].post} likesCount={postData[3].likesCount} />
+      </div>
     </div>
   );
 }

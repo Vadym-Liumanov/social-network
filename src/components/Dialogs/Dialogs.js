@@ -5,12 +5,10 @@ import dialogsStyles from './Dialogs.module.css'
 import User from './User/User'
 import Dialog from './Dialog/Dialog'
 
-const Dialogs = () => {
+import dialogsContent from '../../Data/dialogsContent'
+import dialogsUsers from '../../Data/dialogsUsers'
 
-  const dialog_1 = 'How are you?'
-  const dialog_2 = 'I am fine.'
-  const dialog_3 = 'What are you doing?'
-  const dialog_4 = 'Let\'s go to the stadium.'
+const Dialogs = () => {
 
   return (
     <div className={dialogsStyles.content}>
@@ -19,10 +17,10 @@ const Dialogs = () => {
           NickNames
         </div>
         <div>
-          <User userName="Dima" />
-          <User userName="Helen" />
-          <User userName="Vovan" />
-          <User userName="Alex" />
+          <User userName={dialogsUsers[0].userName} />
+          <User userName={dialogsUsers[1].userName} />
+          <User userName={dialogsUsers[2].userName} />
+          <User userName={dialogsUsers[3].userName} />
         </div>
       </div>
       <div>
@@ -30,10 +28,10 @@ const Dialogs = () => {
           DIALOGS
         </div>
         <div>
-          <Dialog dialogContent={dialog_1} />
-          <Dialog dialogContent={dialog_2} />
-          <Dialog dialogContent={dialog_3} />
-          <Dialog dialogContent={dialog_4} />
+          <Dialog dialogContent={dialogsContent[0].dialogContent} />
+          <Dialog dialogContent={dialogsContent[1].dialogContent} />
+          <Dialog dialogContent={dialogsContent[2].dialogContent} />
+          <Dialog dialogContent={dialogsContent[3].dialogContent} />
         </div>
       </div>
     </div>
