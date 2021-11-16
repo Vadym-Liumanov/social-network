@@ -1,11 +1,11 @@
 import React from 'react'
 
-import myPostsStyles from'./MyPosts.module.css'
+import myPostsStyles from './MyPosts.module.css'
 import Post from './Post/Post'
 
 import profilePostsData from '../../../Data/profilePosts'
 
-const postData = profilePostsData
+let postElements = profilePostsData.map(post => <Post key={post.id} value={post.post} likesCount={post.likesCount} />)
 
 const MyPosts = () => {
   return (
@@ -28,10 +28,7 @@ const MyPosts = () => {
         Posts
       </div>
       <div>
-        <Post value={postData[0].post} likesCount={postData[0].likesCount} />
-        <Post value={postData[1].post} likesCount={postData[1].likesCount} />
-        <Post value={postData[2].post} likesCount={postData[2].likesCount} />
-        <Post value={postData[3].post} likesCount={postData[3].likesCount} />
+        {postElements}
       </div>
     </div>
   );
