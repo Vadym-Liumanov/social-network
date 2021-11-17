@@ -8,6 +8,9 @@ import Dialog from './Dialog/Dialog'
 import dialogsContent from '../../Data/dialogsContent'
 import dialogsUsers from '../../Data/dialogsUsers'
 
+let dialogsUsersItems = dialogsUsers.map(user => <User key={user.id} userName={user.userName} />)
+let dialogsContentItems = dialogsContent.map(dialog => <Dialog key={dialog.id} dialogContent={dialog.dialogContent} />)
+
 const Dialogs = () => {
 
   return (
@@ -17,10 +20,7 @@ const Dialogs = () => {
           NickNames
         </div>
         <div>
-          <User userName={dialogsUsers[0].userName} />
-          <User userName={dialogsUsers[1].userName} />
-          <User userName={dialogsUsers[2].userName} />
-          <User userName={dialogsUsers[3].userName} />
+          {dialogsUsersItems}
         </div>
       </div>
       <div>
@@ -28,10 +28,7 @@ const Dialogs = () => {
           DIALOGS
         </div>
         <div>
-          <Dialog dialogContent={dialogsContent[0].dialogContent} />
-          <Dialog dialogContent={dialogsContent[1].dialogContent} />
-          <Dialog dialogContent={dialogsContent[2].dialogContent} />
-          <Dialog dialogContent={dialogsContent[3].dialogContent} />
+          {dialogsContentItems}
         </div>
       </div>
     </div>
