@@ -7,13 +7,13 @@ import Avatar from './Avatar/Avatar'
 import UserInfo from './UserInfo/UserInfo'
 import MyPosts from './MyPosts/MyPosts'
 
-const Profile = () => {
+const Profile = (props) => {
   return (
     <div className={profileStyles.content}>
       <MainImg />
       <Avatar />
       <UserInfo />
-      <MyPosts />
+      <MyPosts {...props} />
     </div>
   );
 }

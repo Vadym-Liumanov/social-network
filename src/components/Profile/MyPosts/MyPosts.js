@@ -3,11 +3,10 @@ import React from 'react'
 import myPostsStyles from './MyPosts.module.css'
 import Post from './Post/Post'
 
-import profilePostsData from '../../../Data/profilePosts'
+const MyPosts = (props) => {
 
-let postElements = profilePostsData.map(post => <Post key={post.id} value={post.post} likesCount={post.likesCount} />)
+  let postElements = Object.values(props).map(post => <Post key={post.id} value={post.post} likesCount={post.likesCount} />)
 
-const MyPosts = () => {
   return (
     <div className={myPostsStyles.content}>
       <div>
