@@ -7,11 +7,17 @@ const MyPosts = (props) => {
 // debugger
   let postElements = Object.values(props.state.profilePosts).map(post => <Post key={post.id} value={post.post} likesCount={post.likesCount} />)
 
+  let newPostElement = React.createRef()
+
   let newPostText = props.state.newPost
 
   let addPost = props.addPost
 
-  let updatePost = props.updatePost
+  let updatePost = () => {
+    let text = newPostElement.current.value
+    props.updatePost(text)
+  }
+
 
   return (
     <div className={myPostsStyles.content}>
@@ -23,7 +29,7 @@ const MyPosts = (props) => {
       </div>
       <div>
         <div>
-          <textarea onChange={updatePost} cols="100" rows="3" value={newPostText} />
+          <textarea onChange={updatePost} ref={newPostElement} cols="100" rows="3" value={newPostText} />
         </div>
         <div>
           <button onClick={addPost}>Add post</button>

@@ -74,11 +74,12 @@ export const addPost = () => {
     likesCount: 0
   }
   state = { ...state, ...state.profile.profilePosts.push(newPostObj) }
+  state.profile.newPost = ''
   rerenderEntireTree(state, addPost, updatePost)
 }
 
-export const updatePost = () => {
-  state.profile.newPost = 111111111
+export const updatePost = (text) => {
+  state.profile.newPost = text
   rerenderEntireTree(state, addPost, updatePost)
 }
 
