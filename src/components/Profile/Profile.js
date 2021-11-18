@@ -13,7 +13,7 @@ const Profile = (props) => {
       <MainImg />
       <Avatar />
       <UserInfo />
-      <MyPosts {...props} />
+      <MyPosts state={props.state} addPost={props.addPost} />
     </div>
   );
 }

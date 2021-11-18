@@ -1,4 +1,4 @@
-const state = {
+let state = {
   profilePosts: [
     {
       id: 1,
@@ -59,6 +59,16 @@ const state = {
       }
     ]
   }
+}
+
+export const addPost = (post) => {
+  let newPostId = state.profilePosts[state.profilePosts.length - 1].id + 1
+  let newPostObj = {
+    id: newPostId,
+    post: post,
+    likesCount: 0
+  }
+  state = { ...state, ...state.profilePosts.push(newPostObj) }
 }
 
 export default state
