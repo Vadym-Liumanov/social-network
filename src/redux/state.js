@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from '../render'
+
 let state = {
   profilePosts: [
     {
@@ -69,6 +71,7 @@ export const addPost = (post) => {
     likesCount: 0
   }
   state = { ...state, ...state.profilePosts.push(newPostObj) }
+  rerenderEntireTree(state, addPost)
 }
 
 export default state
