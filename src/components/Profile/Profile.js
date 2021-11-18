@@ -8,12 +8,13 @@ import UserInfo from './UserInfo/UserInfo'
 import MyPosts from './MyPosts/MyPosts'
 
 const Profile = (props) => {
+  // debugger
   return (
     <div className={profileStyles.content}>
       <MainImg />
       <Avatar />
       <UserInfo />
-      <MyPosts state={props.state} addPost={props.addPost} />
+      <MyPosts state={props.state} addPost={props.addPost} updatePost={props.updatePost} />
     </div>
   );
 }

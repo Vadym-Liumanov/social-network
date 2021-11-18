@@ -1,28 +1,31 @@
 import {rerenderEntireTree} from '../render'
 
 let state = {
-  profilePosts: [
-    {
-      id: 1,
-      post: 'It is my first post!',
-      likesCount: 20
-    },
-    {
-      id: 2,
-      post: 'How are you?',
-      likesCount: 10
-    },
-    {
-      id: 3,
-      post: 'Hello World',
-      likesCount: 5
-    },
-    {
-      id: 4,
-      post: 'Why nobody loves me',
-      likesCount: 12
-    }
-  ],
+  profile: {
+    profilePosts: [
+      {
+        id: 1,
+        post: 'It is my first post!',
+        likesCount: 20
+      },
+      {
+        id: 2,
+        post: 'How are you?',
+        likesCount: 10
+      },
+      {
+        id: 3,
+        post: 'Hello World',
+        likesCount: 5
+      },
+      {
+        id: 4,
+        post: 'Why nobody loves me',
+        likesCount: 12
+      }
+    ],
+    newPost: 'input post here'
+  },
   messages: {
     users: [
       {
@@ -63,15 +66,20 @@ let state = {
   }
 }
 
-export const addPost = (post) => {
-  let newPostId = state.profilePosts[state.profilePosts.length - 1].id + 1
+export const addPost = () => {
+  let newPostId = state.profile.profilePosts[state.profile.profilePosts.length - 1].id + 1
   let newPostObj = {
     id: newPostId,
-    post: post,
+    post: state.profile.newPost,
     likesCount: 0
   }
-  state = { ...state, ...state.profilePosts.push(newPostObj) }
-  rerenderEntireTree(state, addPost)
+  state = { ...state, ...state.profile.profilePosts.push(newPostObj) }
+  rerenderEntireTree(state, addPost, updatePost)
+}
+
+export const updatePost = () => {
+  state.profile.newPost = 111111111
+  rerenderEntireTree(state, addPost, updatePost)
 }
 
 export default state
