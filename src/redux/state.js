@@ -1,4 +1,6 @@
-import {rerenderEntireTree} from '../render'
+let rerenderEntireTree =() => {
+  console.log('State has changed')
+}
 
 let state = {
   profile: {
@@ -49,11 +51,11 @@ let state = {
         dialog: 'Let\'s go to the stadium.'
       }
     ],
-    newDialog: 'input'
+    newDialog: ''
   }
 }
 
-// window.state = state
+window.state = state
 
 export const addPost = () => {
   if (state.profile.newPost !== '') {
@@ -64,7 +66,7 @@ export const addPost = () => {
       likesCount: 0
     }
     state = { ...state, ...state.profile.profilePosts.push(newPostObj) }
-    rerenderEntireTree(state, addPost, updatePost, addDialog, updateDialog)
+    rerenderEntireTree()
     state.profile.newPost = ''
   }
 }
@@ -77,19 +79,23 @@ export const addDialog = () => {
       dialog: state.messages.newDialog
     }
     state = { ...state, ...state.messages.dialogs.push(newDialogtObj) }
-    rerenderEntireTree(state, addPost, updatePost, addDialog, updateDialog)
+    rerenderEntireTree()
     state.messages.newDialog = ''
   }
 }
 
 export const updatePost = (text) => {
   state.profile.newPost = text
-  rerenderEntireTree(state, addPost, updatePost, addDialog, updateDialog)
+  rerenderEntireTree()
 }
 
 export const updateDialog = (text) => {
   state.messages.newDialog = text
-  rerenderEntireTree(state, addPost, updatePost, addDialog, updateDialog)
+  rerenderEntireTree()
+}
+
+export const subscribe = (observer) => {
+  rerenderEntireTree = observer
 }
 
 export default state

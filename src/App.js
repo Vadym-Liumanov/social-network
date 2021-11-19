@@ -13,7 +13,7 @@ import Music from './components/Music/Music'
 import Settings from './components/Settings/Settings'
 
 function App(props) {
-  debugger
+  // debugger
   return (
     <BrowserRouter>
       <div className="app-wrapper">
