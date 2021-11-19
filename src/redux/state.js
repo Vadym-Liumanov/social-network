@@ -48,7 +48,8 @@ let state = {
         id: 4,
         dialog: 'Let\'s go to the stadium.'
       }
-    ]
+    ],
+    newDialog: 'input'
   }
 }
 
@@ -63,14 +64,32 @@ export const addPost = () => {
       likesCount: 0
     }
     state = { ...state, ...state.profile.profilePosts.push(newPostObj) }
-    rerenderEntireTree(state, addPost, updatePost)
+    rerenderEntireTree(state, addPost, updatePost, addDialog, updateDialog)
     state.profile.newPost = ''
+  }
+}
+
+export const addDialog = () => {
+  if (state.messages.newDialog !== '') {
+    let newDialogId = state.messages.dialogs[state.messages.dialogs.length - 1].id + 1
+    let newDialogtObj = {
+      id: newDialogId,
+      dialog: state.messages.newDialog
+    }
+    state = { ...state, ...state.messages.dialogs.push(newDialogtObj) }
+    rerenderEntireTree(state, addPost, updatePost, addDialog, updateDialog)
+    state.messages.newDialog = ''
   }
 }
 
 export const updatePost = (text) => {
   state.profile.newPost = text
-  rerenderEntireTree(state, addPost, updatePost)
+  rerenderEntireTree(state, addPost, updatePost, addDialog, updateDialog)
+}
+
+export const updateDialog = (text) => {
+  state.messages.newDialog = text
+  rerenderEntireTree(state, addPost, updatePost, addDialog, updateDialog)
 }
 
 export default state

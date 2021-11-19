@@ -10,11 +10,18 @@ const Dialogs = (props) => {
   let dialogsUsersItems = Object.values(props.state.users).map(user => <User key={user.id} userName={user.userName} />)
   let dialogsContentItems = Object.values(props.state.dialogs).map(dialog => <Dialog key={dialog.id} dialogContent={dialog.dialog} />)
 
+  let newDialogText = props.state.newDialog
+
   let newDilogElement = React.createRef()
 
-  let addNewDilog = () => {
-    alert(newDilogElement.current.value)
+  let addNewDilog = props.addDialog
+
+  let updateNewDialog = () => {
+    let text = newDilogElement.current.value
+    props.updateDialog(text)
   }
+
+  // debugger
 
   return (
     <div className={dialogsStyles.content}>
@@ -35,7 +42,7 @@ const Dialogs = (props) => {
         </div>
         <div>
           <div>
-            <textarea ref={newDilogElement} cols="30" rows="5"></textarea>
+            <textarea ref={newDilogElement} onChange={updateNewDialog} cols="30" rows="5" value={newDialogText} />
           </div>
           <div>
             <button onClick={addNewDilog}>Add dialog</button>
