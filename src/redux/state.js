@@ -13,18 +13,8 @@ let state = {
         post: 'How are you?',
         likesCount: 10
       },
-      {
-        id: 3,
-        post: 'Hello World',
-        likesCount: 5
-      },
-      {
-        id: 4,
-        post: 'Why nobody loves me',
-        likesCount: 12
-      }
     ],
-    newPost: 'input post here'
+    newPost: ''
   },
   messages: {
     users: [
@@ -40,10 +30,6 @@ let state = {
         id: 3,
         userName: 'Vovan'
       },
-      {
-        id: 4,
-        userName: 'Alex'
-      }
     ],
     dialogs: [
       {
@@ -66,16 +52,20 @@ let state = {
   }
 }
 
+// window.state = state
+
 export const addPost = () => {
-  let newPostId = state.profile.profilePosts[state.profile.profilePosts.length - 1].id + 1
-  let newPostObj = {
-    id: newPostId,
-    post: state.profile.newPost,
-    likesCount: 0
+  if (state.profile.newPost !== '') {
+    let newPostId = state.profile.profilePosts[state.profile.profilePosts.length - 1].id + 1
+    let newPostObj = {
+      id: newPostId,
+      post: state.profile.newPost,
+      likesCount: 0
+    }
+    state = { ...state, ...state.profile.profilePosts.push(newPostObj) }
+    rerenderEntireTree(state, addPost, updatePost)
+    state.profile.newPost = ''
   }
-  state = { ...state, ...state.profile.profilePosts.push(newPostObj) }
-  state.profile.newPost = ''
-  rerenderEntireTree(state, addPost, updatePost)
 }
 
 export const updatePost = (text) => {
