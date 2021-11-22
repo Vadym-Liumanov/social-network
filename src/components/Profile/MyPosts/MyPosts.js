@@ -11,11 +11,14 @@ const MyPosts = (props) => {
 
   let newPostText = props.state.newPost
 
-  let addPost = props.addPost
+  let addPost = () => {
+    // debugger
+    props.dispatch({ type: 'ADD-POST' })
+  }
 
   let updatePost = () => {
     let text = newPostElement.current.value
-    props.updatePost(text)
+    props.dispatch({ type: 'ADD-DIALOG', text: text })
   }
 
 

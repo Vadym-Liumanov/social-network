@@ -21,9 +21,8 @@ function App(props) {
         <Navbar />
         <div className="app-wrapper-content">
           <Routes>
-            <Route path='/' element={<Profile state={props.state.profile} addPost={props.addPost} updatePost={props.updatePost} />} />
-            <Route path='/profile' element={<Profile state={props.state.profile} addPost={props.addPost} updatePost={props.updatePost} />} />
-            <Route path='/dialogs/' element={<Dialogs state={props.state.messages} addDialog={props.addDialog} updateDialog={props.updateDialog} />} />
+            <Route path='/profile' element={<Profile state={props.state.profile} dispatch={props.dispatch} />} />
+            <Route path='/dialogs/' element={<Dialogs state={props.state.messages} dispatch={props.dispatch} />} />
             <Route path='/news' element={<News />} />
             <Route path='/music' element={<Music />} />
             <Route path='/settings' element={<Settings />} />

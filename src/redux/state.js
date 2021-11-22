@@ -51,47 +51,54 @@ let store = {
       newDialog: ''
     }
   },
-  getState() {
-    return this._state
-  },
   _callSubscriber() {
     console.log('State has changed')
+  },
+
+  getState() {
+    return this._state
   },
   subscribe(observer) {
     this._callSubscriber = observer
   },
-  addPost() {
-    if (this._state.profile.newPost !== '') {
-      let newPostId = this._state.profile.profilePosts[this._state.profile.profilePosts.length - 1].id + 1
-      let newPostObj = {
-        id: newPostId,
-        post: this._state.profile.newPost,
-        likesCount: 0
+
+  dispatch(action) {
+    if (action.type === 'ADD-POST') {
+      if (this._state.profile.newPost !== '') {
+        let newPostId = this._state.profile.profilePosts[this._state.profile.profilePosts.length - 1].id + 1
+        let newPostObj = {
+          id: newPostId,
+          post: this._state.profile.newPost,
+          likesCount: 0
+        }
+        this._state = { ...this._state, ...this._state.profile.profilePosts.push(newPostObj) }
+        this._callSubscriber(this._state)
+        this._state.profile.newPost = ''
       }
-      this._state = { ...this._state, ...this._state.profile.profilePosts.push(newPostObj) }
-      this._callSubscriber(this._state)
-      this._state.profile.newPost = ''
     }
-  },
-  addDialog() {
-    if (this._state.messages.newDialog !== '') {
-      let newDialogId = this._state.messages.dialogs[this._state.messages.dialogs.length - 1].id + 1
-      let newDialogtObj = {
-        id: newDialogId,
-        dialog: this._state.messages.newDialog
+
+    if (action.type === 'ADD-DIALOG') {
+      if (this._state.messages.newDialog !== '') {
+        let newDialogId = this._state.messages.dialogs[this._state.messages.dialogs.length - 1].id + 1
+        let newDialogtObj = {
+          id: newDialogId,
+          dialog: this._state.messages.newDialog
+        }
+        this._state = { ...this._state, ...this._state.messages.dialogs.push(newDialogtObj) }
+        this._callSubscriber(this._state)
+        this._state.messages.newDialog = ''
       }
-      this._state = { ...this._state, ...this._state.messages.dialogs.push(newDialogtObj) }
-      this._callSubscriber(this._state)
-      this._state.messages.newDialog = ''
     }
-  },
-  updatePost(text) {
-    this._state.profile.newPost = text
-    this._callSubscriber(this._state)
-  },
-  updateDialog(text) {
-    this._state.messages.newDialog = text
-    this._callSubscriber(this._state)
+
+    if (action.type === 'UPDATE-POST') {
+      this._state.profile.newPost = action.text
+      this._callSubscriber(this._state)
+    }
+
+    if (action.type === 'UPDATE-DIALOG') {
+      this._state.messages.newDialog = action.text
+      this._callSubscriber(this._state)
+    }
   }
 }
 
