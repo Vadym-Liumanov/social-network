@@ -1,101 +1,100 @@
-let rerenderEntireTree =() => {
-  console.log('State has changed')
-}
-
-let state = {
-  profile: {
-    profilePosts: [
-      {
-        id: 1,
-        post: 'It is my first post!',
-        likesCount: 20
-      },
-      {
-        id: 2,
-        post: 'How are you?',
-        likesCount: 10
-      },
-    ],
-    newPost: ''
+let store = {
+  _state: {
+    profile: {
+      profilePosts: [
+        {
+          id: 1,
+          post: 'It is my first post!',
+          likesCount: 20
+        },
+        {
+          id: 2,
+          post: 'How are you?',
+          likesCount: 10
+        },
+      ],
+      newPost: ''
+    },
+    messages: {
+      users: [
+        {
+          id: 1,
+          userName: 'Dima'
+        },
+        {
+          id: 2,
+          userName: 'Helen'
+        },
+        {
+          id: 3,
+          userName: 'Vovan'
+        },
+      ],
+      dialogs: [
+        {
+          id: 1,
+          dialog: 'How are you?'
+        },
+        {
+          id: 2,
+          dialog: 'I am fine.'
+        },
+        {
+          id: 3,
+          dialog: 'What are you doing'
+        },
+        {
+          id: 4,
+          dialog: 'Let\'s go to the stadium.'
+        }
+      ],
+      newDialog: ''
+    }
   },
-  messages: {
-    users: [
-      {
-        id: 1,
-        userName: 'Dima'
-      },
-      {
-        id: 2,
-        userName: 'Helen'
-      },
-      {
-        id: 3,
-        userName: 'Vovan'
-      },
-    ],
-    dialogs: [
-      {
-        id: 1,
-        dialog: 'How are you?'
-      },
-      {
-        id: 2,
-        dialog: 'I am fine.'
-      },
-      {
-        id: 3,
-        dialog: 'What are you doing'
-      },
-      {
-        id: 4,
-        dialog: 'Let\'s go to the stadium.'
+  getState() {
+    return this._state
+  },
+  _callSubscriber() {
+    console.log('State has changed')
+  },
+  subscribe(observer) {
+    this._callSubscriber = observer
+  },
+  addPost() {
+    if (this._state.profile.newPost !== '') {
+      let newPostId = this._state.profile.profilePosts[this._state.profile.profilePosts.length - 1].id + 1
+      let newPostObj = {
+        id: newPostId,
+        post: this._state.profile.newPost,
+        likesCount: 0
       }
-    ],
-    newDialog: ''
-  }
-}
-
-window.state = state
-
-export const addPost = () => {
-  if (state.profile.newPost !== '') {
-    let newPostId = state.profile.profilePosts[state.profile.profilePosts.length - 1].id + 1
-    let newPostObj = {
-      id: newPostId,
-      post: state.profile.newPost,
-      likesCount: 0
+      this._state = { ...this._state, ...this._state.profile.profilePosts.push(newPostObj) }
+      this._callSubscriber(this._state)
+      this._state.profile.newPost = ''
     }
-    state = { ...state, ...state.profile.profilePosts.push(newPostObj) }
-    rerenderEntireTree()
-    state.profile.newPost = ''
-  }
-}
-
-export const addDialog = () => {
-  if (state.messages.newDialog !== '') {
-    let newDialogId = state.messages.dialogs[state.messages.dialogs.length - 1].id + 1
-    let newDialogtObj = {
-      id: newDialogId,
-      dialog: state.messages.newDialog
+  },
+  addDialog() {
+    if (this._state.messages.newDialog !== '') {
+      let newDialogId = this._state.messages.dialogs[this._state.messages.dialogs.length - 1].id + 1
+      let newDialogtObj = {
+        id: newDialogId,
+        dialog: this._state.messages.newDialog
+      }
+      this._state = { ...this._state, ...this._state.messages.dialogs.push(newDialogtObj) }
+      this._callSubscriber(this._state)
+      this._state.messages.newDialog = ''
     }
-    state = { ...state, ...state.messages.dialogs.push(newDialogtObj) }
-    rerenderEntireTree()
-    state.messages.newDialog = ''
+  },
+  updatePost(text) {
+    this._state.profile.newPost = text
+    this._callSubscriber(this._state)
+  },
+  updateDialog(text) {
+    this._state.messages.newDialog = text
+    this._callSubscriber(this._state)
   }
 }
 
-export const updatePost = (text) => {
-  state.profile.newPost = text
-  rerenderEntireTree()
-}
+window.store = store
 
-export const updateDialog = (text) => {
-  state.messages.newDialog = text
-  rerenderEntireTree()
-}
-
-export const subscribe = (observer) => {
-  rerenderEntireTree = observer
-}
-
-export default state
+export default store
