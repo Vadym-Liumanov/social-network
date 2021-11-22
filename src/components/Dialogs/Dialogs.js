@@ -5,27 +5,23 @@ import dialogsStyles from './Dialogs.module.css'
 import User from './User/User'
 import Dialog from './Dialog/Dialog'
 
+import { addNewDilogActionCreator, updateNewDialogActionCreator } from '../../redux/state'
+
 const Dialogs = (props) => {
 
   let dialogsUsersItems = Object.values(props.state.users).map(user => <User key={user.id} userName={user.userName} />)
   let dialogsContentItems = Object.values(props.state.dialogs).map(dialog => <Dialog key={dialog.id} dialogContent={dialog.dialog} />)
 
   let newDialogText = props.state.newDialog
-
   let newDilogElement = React.createRef()
 
   let addNewDilog = () => {
-    let action = { type: 'ADD-DIALOG' }
-    props.dispatch(action)
+    props.dispatch(addNewDilogActionCreator())
   }
 
   let updateNewDialog = () => {
     let text = newDilogElement.current.value
-    let action = {
-      type: 'UPDATE-DIALOG',
-      text
-    }
-    props.dispatch(action)
+    props.dispatch(updateNewDialogActionCreator(text))
   }
 
   // debugger

@@ -1,3 +1,10 @@
+const ADD_POST = 'ADD-POST'
+const UPDATE_POST = 'UPDATE-POST'
+const ADD_DIALOG = 'ADD-DIALOG'
+const UPDATE_DIALOG = 'UPDATE-DIALOG'
+
+
+
 let store = {
   _state: {
     profile: {
@@ -99,6 +106,28 @@ let store = {
       this._state.messages.newDialog = action.text
       this._callSubscriber(this._state)
     }
+  }
+}
+
+export const addPostActionCreator = () => {
+  return { type: ADD_POST }
+}
+
+export const addNewDilogActionCreator = () => {
+  return { type: ADD_DIALOG }
+}
+
+export const updatePostActionCreator = (text) => {
+  return {
+    type: UPDATE_POST,
+    text
+  }
+}
+
+export const updateNewDialogActionCreator = (text) => {
+  return {
+    type: UPDATE_DIALOG,
+    text
   }
 }
 
