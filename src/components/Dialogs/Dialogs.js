@@ -14,11 +14,18 @@ const Dialogs = (props) => {
 
   let newDilogElement = React.createRef()
 
-  let addNewDilog = props.addDialog
+  let addNewDilog = () => {
+    let action = { type: 'ADD-DIALOG' }
+    props.dispatch(action)
+  }
 
   let updateNewDialog = () => {
     let text = newDilogElement.current.value
-    props.updateDialog(text)
+    let action = {
+      type: 'UPDATE-DIALOG',
+      text
+    }
+    props.dispatch(action)
   }
 
   // debugger
