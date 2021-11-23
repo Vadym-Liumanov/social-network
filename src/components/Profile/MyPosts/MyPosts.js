@@ -9,7 +9,6 @@ const MyPosts = (props) => {
 // debugger
   let postElements = Object.values(props.state.profilePosts).map(post => <Post key={post.id} value={post.post} likesCount={post.likesCount} />)
 
-  let newPostElement = React.createRef()
   let newPostText = props.state.newPost
 
   let addPost = () => {
@@ -17,8 +16,8 @@ const MyPosts = (props) => {
     props.dispatch(addPostActionCreator())
   }
 
-  let updatePost = () => {
-    let text = newPostElement.current.value
+  let updatePost = (event) => {
+    let text = event.target.value
     props.dispatch(updatePostActionCreator(text))
   }
 
@@ -33,7 +32,7 @@ const MyPosts = (props) => {
       </div>
       <div>
         <div>
-          <textarea onChange={updatePost} ref={newPostElement} cols="100" rows="3" value={newPostText} />
+          <textarea onChange={updatePost} value={newPostText} placeholder="Input your post here" />
         </div>
         <div>
           <button onClick={addPost}>Add post</button>

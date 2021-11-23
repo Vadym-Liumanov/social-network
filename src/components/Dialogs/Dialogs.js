@@ -13,14 +13,13 @@ const Dialogs = (props) => {
   let dialogsContentItems = Object.values(props.state.dialogs).map(dialog => <Dialog key={dialog.id} dialogContent={dialog.dialog} />)
 
   let newDialogText = props.state.newDialog
-  let newDilogElement = React.createRef()
 
   let addNewDilog = () => {
     props.dispatch(addNewDilogActionCreator())
   }
 
-  let updateNewDialog = () => {
-    let text = newDilogElement.current.value
+  let updateNewDialog = (event) => {
+    let text = event.target.value
     props.dispatch(updateNewDialogActionCreator(text))
   }
 
@@ -45,10 +44,10 @@ const Dialogs = (props) => {
         </div>
         <div>
           <div>
-            <textarea ref={newDilogElement} onChange={updateNewDialog} cols="30" rows="5" value={newDialogText} />
+            <textarea onChange={updateNewDialog} value={newDialogText} placeholder="Input your message here" />
           </div>
           <div>
-            <button onClick={addNewDilog}>Add dialog</button>
+            <button onClick={addNewDilog}>Add message</button>
           </div>
         </div>
       </div>
