@@ -12,7 +12,44 @@ export const updateNewDialogActionCreator = (text) => {
   }
 }
 
-const messagesReducer = (state, action) => { // state = state.messages
+const initialState = {
+  users: [
+    {
+      id: 1,
+      userName: 'Dima'
+    },
+    {
+      id: 2,
+      userName: 'Helen'
+    },
+    {
+      id: 3,
+      userName: 'Vovan'
+    },
+  ],
+  dialogs: [
+    {
+      id: 1,
+      dialog: 'How are you?'
+    },
+    {
+      id: 2,
+      dialog: 'I am fine.'
+    },
+    {
+      id: 3,
+      dialog: 'What are you doing'
+    },
+    {
+      id: 4,
+      dialog: 'Let\'s go to the stadium.'
+    }
+  ],
+  newDialog: ''
+}
+
+
+const messagesReducer = (state = initialState, action) => { // state = state.messages
   switch (action.type) {
 
     case ADD_DIALOG:

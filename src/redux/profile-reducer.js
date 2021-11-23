@@ -12,8 +12,23 @@ export const updatePostActionCreator = (text) => {
   }
 }
 
+const initialState = {
+  profilePosts: [
+    {
+      id: 1,
+      post: 'It is my first post!',
+      likesCount: 20
+    },
+    {
+      id: 2,
+      post: 'How are you?',
+      likesCount: 10
+    },
+  ],
+  newPost: ''
+}
 
-const profileReduser = (state, action) => { // state = state.profile
+const profileReduser = (state = initialState, action) => { // state = state.profile
   switch (action.type) {
 
     case ADD_POST:
