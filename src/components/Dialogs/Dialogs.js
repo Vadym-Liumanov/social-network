@@ -5,7 +5,7 @@ import dialogsStyles from './Dialogs.module.css'
 import User from './User/User'
 import Dialog from './Dialog/Dialog'
 
-import { addNewDilogActionCreator, updateNewDialogActionCreator } from '../../redux/state'
+import { addNewDilogActionCreator, updateNewDialogActionCreator } from '../../redux/messages-reducer'
 
 const Dialogs = (props) => {
 
