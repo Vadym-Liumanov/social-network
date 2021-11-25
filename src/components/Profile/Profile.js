@@ -14,7 +14,7 @@ const Profile = (props) => {
       <MainImg />
       <Avatar />
       <UserInfo />
-      <MyPostsContainer store={props.store} />
+      <MyPostsContainer />
     </div>
   );
 }
