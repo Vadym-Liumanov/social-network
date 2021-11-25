@@ -5,7 +5,7 @@ import profileStyles from'./Profile.module.css'
 import MainImg from './MainImg/MainImg'
 import Avatar from './Avatar/Avatar'
 import UserInfo from './UserInfo/UserInfo'
-import MyPosts from './MyPosts/MyPosts'
+import MyPostsContainer from './MyPosts/MyPostsContainer'
 
 const Profile = (props) => {
   // debugger
@@ -14,7 +14,7 @@ const Profile = (props) => {
       <MainImg />
       <Avatar />
       <UserInfo />
-      <MyPosts state={props.state} dispatch={props.dispatch} />
+      <MyPostsContainer store={props.store} />
     </div>
   );
 }

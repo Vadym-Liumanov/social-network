@@ -3,24 +3,21 @@ import React from 'react'
 import myPostsStyles from './MyPosts.module.css'
 import Post from './Post/Post'
 
-import { addPostActionCreator, updatePostActionCreator } from '../../../redux/profile-reducer'
-
 const MyPosts = (props) => {
 // debugger
-  let postElements = Object.values(props.state.profilePosts).map(post => <Post key={post.id} value={post.post} likesCount={post.likesCount} />)
+  let postElements = Object.values(props.profilePosts).map(post => <Post key={post.id} value={post.post} likesCount={post.likesCount} />)
 
-  let newPostText = props.state.newPost
+  let newPostText = props.newPostText
 
   let addPost = () => {
     // debugger
-    props.dispatch(addPostActionCreator())
+    props.addPost()
   }
 
   let updatePost = (event) => {
     let text = event.target.value
-    props.dispatch(updatePostActionCreator(text))
+    props.updatePost(text)
   }
-
 
   return (
     <div className={myPostsStyles.content}>

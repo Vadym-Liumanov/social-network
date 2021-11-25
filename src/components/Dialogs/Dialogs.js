@@ -5,22 +5,20 @@ import dialogsStyles from './Dialogs.module.css'
 import User from './User/User'
 import Dialog from './Dialog/Dialog'
 
-import { addNewDilogActionCreator, updateNewDialogActionCreator } from '../../redux/messages-reducer'
-
 const Dialogs = (props) => {
 
-  let dialogsUsersItems = Object.values(props.state.users).map(user => <User key={user.id} userName={user.userName} />)
-  let dialogsContentItems = Object.values(props.state.dialogs).map(dialog => <Dialog key={dialog.id} dialogContent={dialog.dialog} />)
+  let dialogsUsersItems = Object.values(props.users).map(user => <User key={user.id} userName={user.userName} />)
+  let dialogsContentItems = Object.values(props.dialogs).map(dialog => <Dialog key={dialog.id} dialogContent={dialog.dialog} />)
 
-  let newDialogText = props.state.newDialog
+  let newDialogText = props.newDialogText
 
   let addNewDilog = () => {
-    props.dispatch(addNewDilogActionCreator())
+    props.addNewDialog()
   }
 
   let updateNewDialog = (event) => {
     let text = event.target.value
-    props.dispatch(updateNewDialogActionCreator(text))
+    props.updateNewDialog(text)
   }
 
   // debugger
