@@ -8,7 +8,7 @@ export const addPostActionCreator = () => {
 export const updatePostActionCreator = (text) => {
   return {
     type: UPDATE_POST,
-    text
+    text: text
   }
 }
 
@@ -23,7 +23,7 @@ const initialState = {
       id: 2,
       post: 'How are you?',
       likesCount: 10
-    },
+    }
   ],
   newPost: ''
 }
@@ -39,14 +39,20 @@ const profileReduser = (state = initialState, action) => { // state = state.prof
           post: state.newPost,
           likesCount: 0
         }
-        state = { ...state, ...state.profilePosts.push(newPostObj) }
-        state.newPost = ''
+
+        const newState = { ...state }
+        newState.profilePosts = { ...state.profilePosts, newPostObj }
+
+        // newState.profilePosts.push(newPostObj)
+        newState.newPost = ''
+        return newState
       }
       return state
 
     case UPDATE_POST:
-      state.newPost = action.text
-      return state
+      const newState = { ...state }
+      newState.newPost = action.text
+      return newState
 
     default:
       return state
