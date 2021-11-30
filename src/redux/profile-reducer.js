@@ -40,27 +40,23 @@ const profileReduser = (state = initialState, action) => { // state = state.prof
           likesCount: 0
         }
 
-        state = {
+        return {
           ...state,
           profilePosts: [...state.profilePosts, newPostObj],
           newPost: ''
         }
-        return state
       }
       return state
 
     case UPDATE_POST:
-      state = {
+      return {
         ...state,
         newPost: action.text
       }
-      return state
 
     default:
       return state
-
   }
-
 }
 
 export default profileReduser
