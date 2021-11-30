@@ -9,6 +9,7 @@ const Navbar = () => {
     <nav className={navbarStyles.nav}>
       <NavbarItem value="Profile" url="/profile" />
       <NavbarItem value="Messages" url="/dialogs" />
+      <NavbarItem value="Users" url="/users" />
       <NavbarItem value="News" url="/news" />
       <NavbarItem value="Music" url="/music" />
       <NavbarItem value="Settings" url="/settings" />
