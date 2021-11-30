@@ -59,24 +59,25 @@ const messagesReducer = (state = initialState, action) => { // state = state.mes
           id: newDialogId,
           dialog: state.newDialog
         }
-        state = { ...state }
-        state.dialogs = [...state.dialogs]
-        state.dialogs.push(newDialogObj)
-        state.newDialog = ''
+        state = {
+          ...state,
+          dialogs: [...state.dialogs, newDialogObj],
+          newDialog: ''
+        }
         return state
       }
       return state
 
     case UPDATE_DIALOG:
-      state = { ...state }
-      state.newDialog = action.text
+      state = {
+        ...state,
+        newDialog: action.text
+      }
       return state
 
     default:
       return state
-
   }
-
 }
 
 export default messagesReducer
