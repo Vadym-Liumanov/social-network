@@ -8,7 +8,7 @@ import Navbar from './components/Navbar/Navbar'
 
 import Profile from './components/Profile/Profile'
 import DialogsContainer from './components/Dialogs/DialogsContainer'
-import Users from './components/Users/Users'
+import UsersContainer from './components/Users/UsersContainer'
 
 import News from './components/News/News'
 import Music from './components/Music/Music'
@@ -25,7 +25,7 @@ function App(props) {
           <Routes>
             <Route path='/profile' element={<Profile />} />
             <Route path='/dialogs' element={<DialogsContainer />} />
-            <Route path='/users' element={<Users />} />
+            <Route path='/users' element={<UsersContainer />} />
             <Route path='/news' element={<News />} />
             <Route path='/music' element={<Music />} />
             <Route path='/settings' element={<Settings />} />

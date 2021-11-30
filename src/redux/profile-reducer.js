@@ -28,7 +28,8 @@ const initialState = {
   newPost: ''
 }
 
-const profileReduser = (state = initialState, action) => { // state = state.profile
+// state = state.profile
+const profileReduser = (state = initialState, action) => {
   switch (action.type) {
 
     case ADD_POST:

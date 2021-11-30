@@ -1,19 +1,16 @@
-const FOLLOW = 'FOLLOW'
-const UNFOLLOW = 'UNFOLLOW'
+const FOLLOW_TOGGLE = 'FOLLOW_TOGGLE'
 const SET_USERS = 'SET_USERS'
 
 // AC - action creator
-export const followAC = () => {
-  return { type: FOLLOW, userId }
+export const followToggleAC = (userId) => {
+  return { type: FOLLOW_TOGGLE, userId }
 }
-export const unFollowAC = () => {
-  return { type: UNFOLLOW, userId }
-}
-export const setUsersAC = () => {
+
+export const setUsersAC = (usersList) => {
   return { type: SET_USERS, usersList }
 }
 
-
+// state = state.users
 const initialState = {
   usersList: [
     {
@@ -37,29 +34,18 @@ const initialState = {
       status: 'Relax!',
       location: { city: 'Moscow', country: 'Russia' }
     }
-  ],
+  ]
 
 }
 
 const usersReduser = (state = initialState, action) => { // state = state.users
   switch (action.type) {
-    case FOLLOW:
+    case FOLLOW_TOGGLE:
       return {
         ...state,
         usersList: state.usersList.map((user) => {
           if (user.id === action.userId) {
-            return { ...user, followed: true }
-          }
-          return user
-        })
-      }
-
-    case UNFOLLOW:
-      return {
-        ...state,
-        usersList: state.usersList.map((user) => {
-          if (user.id === action.userId) {
-            return { ...user, followed: false }
+            return { ...user, followed: (!user.followed) }
           }
           return user
         })
