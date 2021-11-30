@@ -40,19 +40,18 @@ const profileReduser = (state = initialState, action) => { // state = state.prof
           likesCount: 0
         }
 
-        const newState = { ...state }
-        newState.profilePosts = { ...state.profilePosts, newPostObj }
-
-        // newState.profilePosts.push(newPostObj)
-        newState.newPost = ''
-        return newState
+        state = { ...state }
+        state.profilePosts = [...state.profilePosts]
+        state.profilePosts.push(newPostObj)
+        state.newPost = ''
+        return state
       }
       return state
 
     case UPDATE_POST:
-      const newState = { ...state }
-      newState.newPost = action.text
-      return newState
+      state = { ...state }
+      state.newPost = action.text
+      return state
 
     default:
       return state
