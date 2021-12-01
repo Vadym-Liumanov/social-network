@@ -3,7 +3,10 @@ import React from 'react'
 import userStyles from './User.module.css'
 
 const User = (props) => {
-  debugger
+
+  const onFollowButtonClick = () => props.followToggle(props.userInfo.id)
+
+  let followButtonText = (props.userInfo.followed) ? 'UnFollow' : 'Follow'
 
   return (
     <div className={userStyles.userCard}>
@@ -12,8 +15,8 @@ const User = (props) => {
           <img src={props.userInfo.avatar} alt="avatar" />
         </div>
         <div>
-          <button>
-            FOLLOW
+          <button onClick={onFollowButtonClick}>
+            {followButtonText}
           </button>
         </div>
       </div>
