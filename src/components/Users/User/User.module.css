@@ -1,9 +1,12 @@
-.item {
+.userCard {
+  margin: 5px;
   font-weight: 600;
   color: white;
+  display: grid;
+  grid-template-columns: 1fr 5fr 5fr;
 }
 
-.item img{
+.userCard img{
   width: 100px;
   height: 100px;
 }

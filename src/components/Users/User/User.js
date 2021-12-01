@@ -6,8 +6,8 @@ const User = (props) => {
   debugger
 
   return (
-    <div className={userStyles.item}>
-      <span>
+    <div className={userStyles.userCard}>
+      <div>
         <div>
           <img src={props.userInfo.avatar} alt="avatar" />
         </div>
@@ -16,19 +16,19 @@ const User = (props) => {
             FOLLOW
           </button>
         </div>
-      </span>
+      </div>
 
-      <span>
+      <div>
         <div>
           {props.userInfo.fullName}
         </div>
         <div>
           {props.userInfo.status}
         </div>
-        <div>
-          {props.userInfo.location.city}, {props.userInfo.location.country}
-        </div>
-      </span>
+      </div>
+      <div>
+        {props.userInfo.location.city}, {props.userInfo.location.country}
+      </div>
     </div>
   )
 }
