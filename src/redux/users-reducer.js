@@ -15,6 +15,7 @@ const initialState = {
   usersList: [
     {
       id: 1,
+      avatar: 'https://i.pinimg.com/736x/f5/27/41/f52741fb62bf1d821948a49204406bdc.jpg',
       followed: true,
       fullName: 'Vadym',
       status: 'Don\'t worry! Be happy!',
@@ -22,6 +23,7 @@ const initialState = {
     },
     {
       id: 2,
+      avatar: 'https://i.pinimg.com/736x/f5/27/41/f52741fb62bf1d821948a49204406bdc.jpg',
       followed: false,
       fullName: 'Alex',
       status: 'I love life!',
@@ -29,6 +31,7 @@ const initialState = {
     },
     {
       id: 3,
+      avatar: 'https://i.pinimg.com/736x/f5/27/41/f52741fb62bf1d821948a49204406bdc.jpg',
       followed: true,
       fullName: 'Ann',
       status: 'Relax!',

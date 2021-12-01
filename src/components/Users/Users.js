@@ -1,40 +1,16 @@
 import React from 'react'
 
-const Users = (props) => {
-  return (
-    <div>
-      <div>
-        {
-          props.usersList.map((user) => {
-            return (
-              <div key={user.id}>
-                <span>
-                  <div>
-                    <img src="#" alt="avatarka" />
-                  </div>
-                  <div>
-                    <button>
-                      FOLLOW
-                    </button>
-                  </div>
-                </span>
+import User from './User/User'
 
-                <span>
-                  <div>
-                    {user.fullName}
-                  </div>
-                  <div>
-                    {user.status}
-                  </div>
-                  <div>
-                    {user.location.city}, {user.location.country}
-                  </div>
-                </span>
-              </div>
-            )
-          })
-        }
-      </div>
+import usersStyles from './Users.module.css'
+
+const Users = (props) => {
+
+  let usersListItems = props.usersList.map(user => <User key={user.id} userInfo={user} />)
+
+  return (
+    <div className={usersStyles.content}>
+      {usersListItems}
     </div>
   )
 }
