@@ -1,6 +1,9 @@
 import React from 'react'
+// import * as axios from 'axios'
 
 import User from './User/User'
+
+import userImage from '../../assets/images/userImage.jpg'
 
 import usersStyles from './Users.module.css'
 
@@ -11,7 +14,7 @@ const Users = (props) => {
     let usersList = [
       {
         id: 1,
-        avatar: 'https://i.pinimg.com/736x/f5/27/41/f52741fb62bf1d821948a49204406bdc.jpg',
+        avatar: userImage,
         followed: true,
         fullName: 'Vadym',
         status: 'Don\'t worry! Be happy!',
@@ -19,7 +22,7 @@ const Users = (props) => {
       },
       {
         id: 2,
-        avatar: 'https://i.pinimg.com/736x/f5/27/41/f52741fb62bf1d821948a49204406bdc.jpg',
+        avatar: userImage,
         followed: false,
         fullName: 'Alex',
         status: 'I love life!',
@@ -27,13 +30,17 @@ const Users = (props) => {
       },
       {
         id: 3,
-        avatar: 'https://i.pinimg.com/736x/f5/27/41/f52741fb62bf1d821948a49204406bdc.jpg',
+        avatar: userImage,
         followed: true,
         fullName: 'Ann',
         status: 'Relax!',
         location: { city: 'Moscow', country: 'Russia' }
       }
     ]
+
+    // const apiUrl = 'https://social-network.samuraijs.com/users'
+    // axios.get(apiUrl).then((response) => {props.setUsers(response.data.items)})
+
     props.setUsers(usersList)
   }
 
