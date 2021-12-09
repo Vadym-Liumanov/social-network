@@ -4,12 +4,13 @@
 
 .pages {
   margin: 5px;
-  font-weight: 600;
-  color: rgb(12, 231, 104);
+  font-weight: 400;
+  color: rgb(140, 216, 172);
 }
 
 .activePage {
   margin: 5px;
+  font-size: larger;
   font-weight: 800;
-  color: rgb(140, 216, 172);
+  color: rgb(12, 231, 104);
 }

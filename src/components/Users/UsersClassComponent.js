@@ -8,16 +8,20 @@ import usersStyles from './Users.module.css'
 class Users extends React.Component {
 
   componentDidMount() {
-      debugger
-      let apiUrl = `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersOnPageCount}`
-      axios.get(apiUrl).then((response) => {
-        this.props.setUsers(response.data.items)
-        this.props.setTotalCount(response.data.totalCount)
-      })
+    let apiUrl = `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersOnPageCount}`
+    axios.get(apiUrl).then((response) => {
+      this.props.setUsers(response.data.items)
+      this.props.setTotalCount(response.data.totalCount)
+    })
   }
 
-  onPageNumberClick = (page) => {
-    this.props.setCurrentPage(page)
+  onPageNumberClick = (pageNumber) => {
+    this.props.setCurrentPage(pageNumber)
+    let apiUrl = `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.usersOnPageCount}`
+    axios.get(apiUrl).then((response) => {
+      this.props.setUsers(response.data.items)
+      this.props.setTotalCount(response.data.totalCount)
+    })
   }
 
   render() {
@@ -32,12 +36,15 @@ class Users extends React.Component {
 
     return (
       <div>
-        <div>totalCount: {totalCount}</div>
+        <div>totalCount: {totalCount * 100}</div>
         <div>currentPage: {this.props.currentPage}</div>
         <div>
           {pageNumbersArr.map((page) => {
             return (
-              <span key={page} className={usersStyles.activePage} onClick={(e) => { this.onPageNumberClick(page) }}>
+              <span
+                key={page}
+                className={this.props.currentPage === page ? usersStyles.activePage : usersStyles.pages}
+                onClick={(e) => { this.onPageNumberClick(page) }}>
                 {page}
               </span>
             )

@@ -69,7 +69,7 @@ const usersReduser = (state = initialState, action) => { // state = state.users
       }
 
     case SET_USERS:
-      return { ...state, usersList: [...state.usersList, ...action.usersList] }
+      return { ...state, usersList: [ ...action.usersList] }
 
     case SET_TOTAL_COUNT:
       return { ...state, totalCount: action.totalCount }
