@@ -1,60 +1,39 @@
 import React from 'react'
-import * as axios from 'axios'
 
 import User from './User/User'
-
-// import userImage from '../../assets/images/userImage.jpg'
-
 import usersStyles from './Users.module.css'
 
 const Users = (props) => {
-  // debugger
-
-
-  const getUsers = () => {
-    if (props.usersList.length === 0) {
-      // let usersList = [
-      //   {
-      //     id: 1,
-      //     avatar: userImage,
-      //     followed: true,
-      //     fullName: 'Vadym',
-      //     status: 'Don\'t worry! Be happy!',
-      //     location: { city: 'Sever', country: 'Ukraine' }
-      //   },
-      //   {
-      //     id: 2,
-      //     avatar: userImage,
-      //     followed: false,
-      //     fullName: 'Alex',
-      //     status: 'I love life!',
-      //     location: { city: 'London', country: 'UK' }
-      //   },
-      //   {
-      //     id: 3,
-      //     avatar: userImage,
-      //     followed: true,
-      //     fullName: 'Ann',
-      //     status: 'Relax!',
-      //     location: { city: 'Moscow', country: 'Russia' }
-      //   }
-      // ]
-
-      // props.setUsers(usersList)
-
-      const apiUrl = 'https://social-network.samuraijs.com/api/1.0/users'
-      axios.get(apiUrl).then((response) => { props.setUsers(response.data.items) })
+    let usersListItems = props.usersList.map(user => <User key={user.id} userInfo={user} followToggle={props.followToggle} />)
+    let pageNumbersArr = []
+    const totalCount = Math.ceil(props.totalCount / 100)   //dlya uprosseniya vozmem v 100 raz menshe
+    let pagesCount = Math.ceil(totalCount / props.usersOnPageCount)
+    for (let i = 1; i <= pagesCount; i++) {
+      pageNumbersArr.push(i)
     }
-  }
 
-  let usersListItems = props.usersList.map(user => <User key={user.id} userInfo={user} followToggle={props.followToggle} />)
+    return (
+      <div>
+        <div>totalCount: {totalCount * 100}</div>
+        <div>currentPage: {props.currentPage}</div>
+        <div>
+          {pageNumbersArr.map((page) => {
+            return (
+              <span
+                key={page}
+                className={props.currentPage === page ? usersStyles.activePage : usersStyles.pages}
+                onClick={(e) => { props.onPageNumberClick(page) }}>
+                {page}
+              </span>
+            )
+          })}
+        </div>
+        <div className={usersStyles.content}>
+          {usersListItems}
+        </div>
+      </div>
+    )
 
-  return (
-    <div className={usersStyles.content}>
-      <button onClick={getUsers}>Get users</button>
-      {usersListItems}
-    </div>
-  )
 }
 
 export default Users
