@@ -1,5 +1,7 @@
 const FOLLOW_TOGGLE = 'FOLLOW_TOGGLE'
 const SET_USERS = 'SET_USERS'
+const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 
 // AC - action creator
 export const followToggleAC = (userId) => {
@@ -9,6 +11,16 @@ export const followToggleAC = (userId) => {
 export const setUsersAC = (usersList) => {
   return { type: SET_USERS, usersList }
 }
+
+export const setTotalCountAC = (totalCount) => {
+  return { type: SET_TOTAL_COUNT, totalCount }
+}
+
+export const setCurrentPageAC = (currentPage) => {
+  return { type: SET_CURRENT_PAGE, currentPage }
+}
+
+
 
 // state = state.users
 const initialState = {
@@ -37,8 +49,10 @@ const initialState = {
     //   status: 'Relax!',
     //   location: { city: 'Moscow', country: 'Russia' }
     // }
-  ]
-
+  ],
+  totalCount: 0,
+  currentPage: 1,
+  usersOnPageCount: 5,
 }
 
 const usersReduser = (state = initialState, action) => { // state = state.users
@@ -56,6 +70,12 @@ const usersReduser = (state = initialState, action) => { // state = state.users
 
     case SET_USERS:
       return { ...state, usersList: [...state.usersList, ...action.usersList] }
+
+    case SET_TOTAL_COUNT:
+      return { ...state, totalCount: action.totalCount }
+
+    case SET_CURRENT_PAGE:
+      return { ...state, currentPage: action.currentPage }
 
     default:
       return state
