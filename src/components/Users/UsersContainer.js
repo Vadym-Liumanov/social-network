@@ -5,7 +5,7 @@ import * as axios from 'axios'
 import { followToggleAC, setUsersAC, setTotalCountAC, setCurrentPageAC, toggleIsFetchingAC } from '../../redux/users-reducer'
 
 import Users from './Users'
-import preloader from '../../assets/images/preloader.gif'
+import Preloader from '../common/Preloader/Preloader'
 
 class UsersApiReqContainer extends React.Component {
 
@@ -33,7 +33,7 @@ class UsersApiReqContainer extends React.Component {
     return (
       <>
         {this.props.isFetching
-          ? <img src={preloader} alt='preloader' />
+          ? <Preloader />
           : <Users
             usersList={this.props.usersList}
             followToggle={this.props.followToggle}
