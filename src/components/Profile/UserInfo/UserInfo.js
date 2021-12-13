@@ -1,15 +1,22 @@
 import React from 'react'
 
-import userInfoStyles from'./UserInfo.module.css'
+import userInfoStyles from './UserInfo.module.css'
 
-const UserInfo = () => {
+const UserInfo = (props) => {
   return (
     <div className={userInfoStyles.info}>
       <div>
-        Vadym Liumanov
+        {/* <img src={props.photos.large} alt="userAvatar"/> */}
       </div>
       <div>
-        Aka Vadzzzila
+        {props.fullName}
+      </div>
+      <div>
+        {props.fullName}
+        {/* {JSON.stringify(props.photos.large)} */}
+      </div>
+      <div>
+        {props.aboutMe}
       </div>
     </div>
   );

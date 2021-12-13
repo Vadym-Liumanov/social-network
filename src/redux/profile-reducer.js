@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD-POST'
 const UPDATE_POST = 'UPDATE-POST'
+const SET_USER_PROFILE = 'SET_USER_PROFILE'
 
 export const addPostActionCreator = () => {
   return { type: ADD_POST }
@@ -9,6 +10,13 @@ export const updatePostActionCreator = (text) => {
   return {
     type: UPDATE_POST,
     text: text
+  }
+}
+
+export const setUserProfileAC = (profile) => {
+  return {
+    type: SET_USER_PROFILE,
+    profile
   }
 }
 
@@ -25,7 +33,8 @@ const initialState = {
       likesCount: 10
     }
   ],
-  newPost: ''
+  newPost: '',
+  userProfile: null
 }
 
 // state = state.profile
@@ -53,6 +62,12 @@ const profileReduser = (state = initialState, action) => {
       return {
         ...state,
         newPost: action.text
+      }
+
+    case SET_USER_PROFILE:
+      return {
+        ...state,
+        userProfile: action.profile
       }
 
     default:

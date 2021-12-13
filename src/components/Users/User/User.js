@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import userStyles from './User.module.css'
 
@@ -10,11 +11,16 @@ const User = (props) => {
 
   let followButtonText = (props.userInfo.followed) ? 'UnFollow' : 'Follow'
 
+  // let userProfileUrl = `profile/${props.userInfo.id}`
+  let userProfileUrl = `/profile/${props.userInfo.id}`
+
   return (
     <div className={userStyles.userCard}>
       <div>
         <div>
-          <img src={props.userInfo.photos.small ? props.userInfo.photos.small : userImage} alt="avatar" />
+          <Link to={userProfileUrl}>
+            <img src={props.userInfo.photos.small ? props.userInfo.photos.small : userImage} alt="avatar" />
+          </Link>
         </div>
         <div>
           <button onClick={onFollowButtonClick}>
