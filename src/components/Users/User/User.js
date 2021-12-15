@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import userStyles from './User.module.css'
 
@@ -18,9 +18,9 @@ const User = (props) => {
     <div className={userStyles.userCard}>
       <div>
         <div>
-          <Link to={userProfileUrl}>
+          <NavLink to={userProfileUrl}>
             <img src={props.userInfo.photos.small ? props.userInfo.photos.small : userImage} alt="avatar" />
-          </Link>
+          </NavLink>
         </div>
         <div>
           <button onClick={onFollowButtonClick}>

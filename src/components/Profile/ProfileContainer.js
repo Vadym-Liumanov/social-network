@@ -9,6 +9,7 @@ import profileStyles from './Profile.module.css'
 import MainImg from './MainImg/MainImg'
 import UserInfo from './UserInfo/UserInfo'
 import MyPostsContainer from './MyPosts/MyPostsContainer'
+import Preloader from '../common/Preloader/Preloader'
 
 class ProfileApiReqContainer extends React.Component {
 
@@ -27,7 +28,7 @@ class ProfileApiReqContainer extends React.Component {
     return (
       <div className={profileStyles.content}>
         <MainImg />
-        <UserInfo {...this.props.profileInfo} />
+        {this.props.profileInfo ? <UserInfo {...this.props.profileInfo} /> : <Preloader />}
         <MyPostsContainer />
       </div>
     )
