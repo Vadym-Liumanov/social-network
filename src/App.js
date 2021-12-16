@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, BrowserRouter, Routes } from 'react-router-dom'
+import { Route, BrowserRouter, Switch } from 'react-router-dom'
 
 import './App.css'
 
@@ -23,15 +23,17 @@ function App(props) {
         <Header />
         <Navbar />
         <div className="app-wrapper-content">
-          <Routes>
-            <Route path='/profile/' element={<Profile />} />
-            <Route path='/profile/*' element={<ProfileContainer />} />
-            <Route path='/dialogs/*' element={<DialogsContainer />} />
-            <Route path='/users' element={<UsersContainer />} />
-            <Route path='/news' element={<News />} />
-            <Route path='/music' element={<Music />} />
-            <Route path='/settings' element={<Settings />} />
-          </Routes>
+          <Switch>
+            {/* Next string is on v6 react-router-dom format */}
+            {/* <Route path='/profile/' element={<Profile />} /> */}
+            <Route exact path='/profile/' component={() => <Profile />} />
+            <Route path='/profile/*' component={() => <ProfileContainer />} />
+            <Route exact path='/dialogs' component={() => <DialogsContainer />} />
+            <Route exact path='/users' component={() => <UsersContainer />} />
+            <Route exact path='/news' component={() => <News />} />
+            <Route exact path='/music' component={() => <Music />} />
+            <Route exact path='/settings' component={() => <Settings />} />
+          </Switch>
         </div>
       </div>
     </BrowserRouter>

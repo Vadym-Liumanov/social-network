@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import * as axios from 'axios'
 
 import { setUserProfileAC } from '../../redux/profile-reducer'
@@ -47,6 +48,10 @@ const MapDispatchToProps = (dispatch) => {
   }
 }
 
-const ProfileContainer = connect(MapStateToProps, MapDispatchToProps)(ProfileApiReqContainer)
+const WithUrlDataContainer = withRouter(ProfileApiReqContainer)
+
+const ProfileContainer = connect(MapStateToProps, MapDispatchToProps)(WithUrlDataContainer)
+
+// const ProfileContainer = connect(MapStateToProps, MapDispatchToProps)(ProfileApiReqContainer)
 
 export default ProfileContainer
