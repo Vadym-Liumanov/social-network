@@ -27,7 +27,7 @@ function App(props) {
             {/* Next string is on v6 react-router-dom format */}
             {/* <Route path='/profile/' element={<Profile />} /> */}
             <Route exact path='/profile/' component={() => <Profile />} />
-            <Route path='/profile/*' component={() => <ProfileContainer />} />
+            <Route path='/profile/:userId' component={() => <ProfileContainer />} />
             <Route exact path='/dialogs' component={() => <DialogsContainer />} />
             <Route exact path='/users' component={() => <UsersContainer />} />
             <Route exact path='/news' component={() => <News />} />

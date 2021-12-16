@@ -21,7 +21,9 @@ class ProfileApiReqContainer extends React.Component {
   }
 
   componentDidMount() {
-    let apiUrl = 'https://social-network.samuraijs.com/api/1.0/profile/2'
+    // debugger
+    const userId = this.props.match.params.userId
+    let apiUrl = 'https://social-network.samuraijs.com/api/1.0/profile/' + userId
     this.getApiData(apiUrl)
   }
 
