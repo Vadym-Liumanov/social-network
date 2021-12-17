@@ -3,7 +3,7 @@ import { Route, BrowserRouter, Switch } from 'react-router-dom'
 
 import './App.css'
 
-import Header from './components/Header/Header'
+import Header from './components/Header/HeaderContainer'
 import Navbar from './components/Navbar/Navbar'
 
 import Profile from './components/Profile/Profile'
