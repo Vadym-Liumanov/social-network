@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as axios from 'axios'
+import axios from 'axios'
 
 import { followToggleAC, setUsersAC, setTotalCountAC, setCurrentPageAC, toggleIsFetchingAC } from '../../redux/users-reducer'
 
@@ -11,7 +11,7 @@ class UsersApiReqContainer extends React.Component {
 
   getApiData = (url) => {
     this.props.toggleIsFetching(true)
-    axios.get(url).then((response) => {
+    axios.get(url, { withCredentials: true }).then((response) => {
       this.props.setUsers(response.data.items)
       this.props.setTotalCount(response.data.totalCount)
       this.props.toggleIsFetching(false)
