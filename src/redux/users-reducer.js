@@ -30,29 +30,29 @@ export const toggleIsFetchingAC = (isFetching) => {
 // state = state.users
 const initialState = {
   usersList: [
+    // api format from url='https://social-network.samuraijs.com/api/1.0/users?page=1&count=2'
+
     // {
-    //   id: 1,
-    //   avatar: 'https://i.pinimg.com/736x/f5/27/41/f52741fb62bf1d821948a49204406bdc.jpg',
-    //   followed: true,
-    //   fullName: 'Vadym',
-    //   status: 'Don\'t worry! Be happy!',
-    //   location: { city: 'Sever', country: 'Ukraine' }
+    //   "name": "bruklin",
+    //   "id": 21402,
+    //   "uniqueUrlName": null,
+    //   "photos": {
+    //     "small": null,
+    //     "large": null
+    //   },
+    //   "status": null,
+    //   "followed": true
     // },
     // {
-    //   id: 2,
-    //   avatar: 'https://i.pinimg.com/736x/f5/27/41/f52741fb62bf1d821948a49204406bdc.jpg',
-    //   followed: false,
-    //   fullName: 'Alex',
-    //   status: 'I love life!',
-    //   location: { city: 'London', country: 'UK' }
-    // },
-    // {
-    //   id: 3,
-    //   avatar: 'https://i.pinimg.com/736x/f5/27/41/f52741fb62bf1d821948a49204406bdc.jpg',
-    //   followed: true,
-    //   fullName: 'Ann',
-    //   status: 'Relax!',
-    //   location: { city: 'Moscow', country: 'Russia' }
+    //   "name": "sershor",
+    //   "id": 21401,
+    //   "uniqueUrlName": null,
+    //   "photos": {
+    //     "small": null,
+    //     "large": null
+    //   },
+    //   "status": null,
+    //   "followed": false
     // }
   ],
   totalCount: 0,
@@ -75,7 +75,7 @@ const usersReduser = (state = initialState, action) => { // state = state.users
       }
 
     case SET_USERS:
-      return { ...state, usersList: [ ...action.usersList] }
+      return { ...state, usersList: [...action.usersList] }
 
     case SET_TOTAL_COUNT:
       return { ...state, totalCount: action.totalCount }

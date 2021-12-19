@@ -8,18 +8,33 @@ import userImage from '../../../assets/images/userImage.jpg'
 
 const User = (props) => {
 
+  const apiUrl = `https://social-network.samuraijs.com/api/1.0/follow/${props.userInfo.id}`
+  const axiosParameters = {
+    withCredentials: true,
+    headers: { "API-KEY": "185399ed-5bf1-4614-a945-6c901c6ff6b3" }
+  }
+
   const onFollowButtonClick = () => {
-    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.userInfo.id}`, {},
-      {
-        withCredentials: true,
-        headers: { "API-KEY": "185399ed-5bf1-4614-a945-6c901c6ff6b3" }
-      }
-    ).then((response) => {
-      console.log(response)
-      if (response.data.resultCode == 0) {
-        props.followToggle(props.userInfo.id)
-      }
-    })
+    if (props.userInfo.followed) {
+
+      axios.delete(apiUrl, axiosParameters).then((response) => {
+        console.log(response.data)
+        if (response.data.resultCode == 0) {
+          props.followToggle(props.userInfo.id)
+        }
+      })
+
+    } else {
+
+      axios.post(apiUrl, {}, axiosParameters).then((response) => {
+        console.log(response.data)
+        if (response.data.resultCode == 0) {
+          props.followToggle(props.userInfo.id)
+        }
+      })
+
+    }
+
   }
 
   let followButtonText = (props.userInfo.followed) ? 'UnFollow' : 'Follow'
