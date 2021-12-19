@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import axios from 'axios'
+
+import { setUserFollow, setUserUnfollow } from '../../../api/api'
 
 import userStyles from './User.module.css'
 
@@ -8,27 +9,19 @@ import userImage from '../../../assets/images/userImage.jpg'
 
 const User = (props) => {
 
-  const apiUrl = `https://social-network.samuraijs.com/api/1.0/follow/${props.userInfo.id}`
-  const axiosParameters = {
-    withCredentials: true,
-    headers: { "API-KEY": "185399ed-5bf1-4614-a945-6c901c6ff6b3" }
-  }
-
   const onFollowButtonClick = () => {
     if (props.userInfo.followed) {
 
-      axios.delete(apiUrl, axiosParameters).then((response) => {
-        console.log(response.data)
-        if (response.data.resultCode === 0) {
+      setUserUnfollow(props.userInfo.id).then((data) => {
+        if (data.resultCode === 0) {
           props.followToggle(props.userInfo.id)
         }
       })
 
     } else {
 
-      axios.post(apiUrl, {}, axiosParameters).then((response) => {
-        console.log(response.data)
-        if (response.data.resultCode === 0) {
+      setUserFollow(props.userInfo.id).then((data) => {
+        if (data.resultCode === 0) {
           props.followToggle(props.userInfo.id)
         }
       })

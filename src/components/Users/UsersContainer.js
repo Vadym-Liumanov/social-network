@@ -1,32 +1,30 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import axios from 'axios'
 
 import { followToggleAC, setUsersAC, setTotalCountAC, setCurrentPageAC, toggleIsFetchingAC } from '../../redux/users-reducer'
 
+import { getUsers } from '../../api/api'
 import Users from './Users'
 import Preloader from '../common/Preloader/Preloader'
 
 class UsersApiReqContainer extends React.Component {
 
-  getApiData = (url) => {
+  setUsersPage = (currentPage, usersOnPageCount) => {
     this.props.toggleIsFetching(true)
-    axios.get(url, { withCredentials: true }).then((response) => {
-      this.props.setUsers(response.data.items)
-      this.props.setTotalCount(response.data.totalCount)
+    getUsers(currentPage, usersOnPageCount).then((data) => {
+      this.props.setUsers(data.items)
+      this.props.setTotalCount(data.totalCount)
       this.props.toggleIsFetching(false)
     })
   }
 
   componentDidMount() {
-    let apiUrl = `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersOnPageCount}`
-    this.getApiData(apiUrl)
+    this.setUsersPage(this.props.currentPage, this.props.usersOnPageCount)
   }
 
   onPageNumberClick = (pageNumber) => {
     this.props.setCurrentPage(pageNumber)
-    let apiUrl = `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.usersOnPageCount}`
-    this.getApiData(apiUrl)
+    this.setUsersPage(pageNumber, this.props.usersOnPageCount)
   }
 
   render() {
