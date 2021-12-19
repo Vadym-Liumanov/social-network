@@ -19,7 +19,7 @@ const User = (props) => {
 
       axios.delete(apiUrl, axiosParameters).then((response) => {
         console.log(response.data)
-        if (response.data.resultCode == 0) {
+        if (response.data.resultCode === 0) {
           props.followToggle(props.userInfo.id)
         }
       })
@@ -28,7 +28,7 @@ const User = (props) => {
 
       axios.post(apiUrl, {}, axiosParameters).then((response) => {
         console.log(response.data)
-        if (response.data.resultCode == 0) {
+        if (response.data.resultCode === 0) {
           props.followToggle(props.userInfo.id)
         }
       })
