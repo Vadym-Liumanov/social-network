@@ -8,24 +8,25 @@ import userStyles from './User.module.css'
 import userImage from '../../../assets/images/userImage.jpg'
 
 const User = (props) => {
-
+  // debugger
   const onFollowButtonClick = () => {
-    if (props.userInfo.followed) {
+    props.isFollowingToggle(true)
 
+    if (props.userInfo.followed) {
       setUserUnfollow(props.userInfo.id).then((data) => {
         if (data.resultCode === 0) {
           props.followToggle(props.userInfo.id)
         }
+        props.isFollowingToggle(false)
       })
 
     } else {
-
       setUserFollow(props.userInfo.id).then((data) => {
         if (data.resultCode === 0) {
           props.followToggle(props.userInfo.id)
         }
+        props.isFollowingToggle(false)
       })
-
     }
 
   }
@@ -44,7 +45,7 @@ const User = (props) => {
           </NavLink>
         </div>
         <div>
-          <button onClick={onFollowButtonClick}>
+          <button onClick={onFollowButtonClick} disabled={props.isFollowingInProgress}>
             {followButtonText}
           </button>
         </div>

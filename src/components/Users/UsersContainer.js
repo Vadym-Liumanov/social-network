@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { followToggleAC, setUsersAC, setTotalCountAC, setCurrentPageAC, toggleIsFetchingAC } from '../../redux/users-reducer'
+import { followToggleAC, setUsersAC, setTotalCountAC, setCurrentPageAC, toggleIsFetchingAC, isFollowingToggleAC } from '../../redux/users-reducer'
 
 import { getUsers } from '../../api/api'
 import Users from './Users'
@@ -40,6 +40,8 @@ class UsersApiReqContainer extends React.Component {
             currentPage={this.props.currentPage}
             onPageNumberClick={this.onPageNumberClick}
             isFetching={this.props.isFetching}
+            isFollowingInProgress={this.props.isFollowingInProgress}
+            isFollowingToggle={this.props.isFollowingToggle}
           />
         }
       </>
@@ -55,7 +57,8 @@ let mapStateToProps = (state) => {
     totalCount: state.users.totalCount,
     usersOnPageCount: state.users.usersOnPageCount,
     currentPage: state.users.currentPage,
-    isFetching: state.users.isFetching
+    isFetching: state.users.isFetching,
+    isFollowingInProgress: state.users.isFollowingInProgress
   }
 }
 let mapDispatchToProps = (dispatch) => {
@@ -64,7 +67,8 @@ let mapDispatchToProps = (dispatch) => {
     setUsers: (usersList) => dispatch(setUsersAC(usersList)),
     setTotalCount: (totalCount) => dispatch(setTotalCountAC(totalCount)),
     setCurrentPage: (currentPage) => dispatch(setCurrentPageAC(currentPage)),
-    toggleIsFetching: (isFetching) => dispatch(toggleIsFetchingAC(isFetching))
+    toggleIsFetching: (isFetching) => dispatch(toggleIsFetchingAC(isFetching)),
+    isFollowingToggle: (isFollowing) => dispatch(isFollowingToggleAC(isFollowing))
   }
 }
 
