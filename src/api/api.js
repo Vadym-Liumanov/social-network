@@ -33,3 +33,7 @@ export const setUserFollow = (userId) => {
 export const setUserUnfollow = (userId) => {
   return instanceAxiosDelete(`follow/${userId}`).then(response => response.data)
 }
+
+export const getUserProfile = (userId) => {
+  return instanceAxiosGet(`profile/${userId}`).then(response => response.data)
+}

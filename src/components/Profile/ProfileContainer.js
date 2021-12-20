@@ -5,6 +5,8 @@ import * as axios from 'axios'
 
 import { setUserProfileAC } from '../../redux/profile-reducer'
 
+import { getUserProfile } from '../../api/api'
+
 import profileStyles from './Profile.module.css'
 
 import MainImg from './MainImg/MainImg'
@@ -14,17 +16,16 @@ import Preloader from '../common/Preloader/Preloader'
 
 class ProfileApiReqContainer extends React.Component {
 
-  getApiData = (url) => {
-    axios.get(url).then((response) => {
-      this.props.setUserProfile(response.data)
+  setProfile = (userId) => {
+    getUserProfile(userId).then((data) => {
+      this.props.setUserProfile(data)
     })
   }
 
   componentDidMount() {
     // debugger
     const userId = this.props.match.params.userId
-    let apiUrl = 'https://social-network.samuraijs.com/api/1.0/profile/' + userId
-    this.getApiData(apiUrl)
+    this.setProfile(userId)
   }
 
   render() {
