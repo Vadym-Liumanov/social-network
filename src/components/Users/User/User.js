@@ -9,15 +9,20 @@ import userImage from '../../../assets/images/userImage.jpg'
 
 const User = (props) => {
   // debugger
+
+  const userId = props.userInfo.id
+  const userProfileUrl = `/profile/${userId}`
+  let followButtonText = (props.userInfo.followed) ? 'UnFollow' : 'Follow'
+
   const onFollowButtonClick = () => {
-    props.isFollowingToggle(true)
+    props.isFollowingToggle(userId)
 
     if (props.userInfo.followed) {
       setUserUnfollow(props.userInfo.id).then((data) => {
         if (data.resultCode === 0) {
           props.followToggle(props.userInfo.id)
         }
-        props.isFollowingToggle(false)
+        props.isFollowingToggle(userId)
       })
 
     } else {
@@ -25,16 +30,11 @@ const User = (props) => {
         if (data.resultCode === 0) {
           props.followToggle(props.userInfo.id)
         }
-        props.isFollowingToggle(false)
+        props.isFollowingToggle(userId)
       })
     }
 
   }
-
-  let followButtonText = (props.userInfo.followed) ? 'UnFollow' : 'Follow'
-
-  // let userProfileUrl = `profile/${props.userInfo.id}`
-  let userProfileUrl = `/profile/${props.userInfo.id}`
 
   return (
     <div className={userStyles.userCard}>
@@ -45,7 +45,7 @@ const User = (props) => {
           </NavLink>
         </div>
         <div>
-          <button onClick={onFollowButtonClick} disabled={props.isFollowingInProgress}>
+          <button onClick={onFollowButtonClick} disabled={props.isFollowingInProgress.indexOf(userId) >= 0} >
             {followButtonText}
           </button>
         </div>

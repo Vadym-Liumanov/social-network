@@ -26,8 +26,8 @@ export const toggleIsFetchingAC = (isFetching) => {
   return { type: TOGGLE_IS_FETCHING, isFetching }
 }
 
-export const isFollowingToggleAC = (isFollowing) => {
-  return { type: IS_FOLLOWING_IN_PROGRESS_TOGGLE, isFollowing }
+export const isFollowingToggleAC = (followingUserId) => {
+  return { type: IS_FOLLOWING_IN_PROGRESS_TOGGLE, followingUserId }
 }
 
 
@@ -64,7 +64,7 @@ const initialState = {
   currentPage: 1,
   usersOnPageCount: 5,
   isFetching: false,
-  isFollowingInProgress: false
+  isFollowingInProgress: [] //massiv iz id userov kotorie v processe zaprosa na followed - esli id net, to button ne disable
 }
 
 const usersReduser = (state = initialState, action) => { // state = state.users
@@ -93,7 +93,14 @@ const usersReduser = (state = initialState, action) => { // state = state.users
       return { ...state, isFetching: action.isFetching }
 
     case IS_FOLLOWING_IN_PROGRESS_TOGGLE:
-      return { ...state, isFollowingInProgress: action.isFollowing }
+      let tempArr = [...state.isFollowingInProgress]
+      if (tempArr.indexOf(action.followingUserId) < 0) {
+        tempArr = [...tempArr, action.followingUserId]
+      }
+      else {
+        tempArr = tempArr.filter((item) => item !== action.followingUserId)
+      }
+      return { ...state, isFollowingInProgress: [...tempArr] }
 
     default:
       return state
