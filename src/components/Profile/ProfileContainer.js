@@ -2,9 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { setUserProfileAC } from '../../redux/profile-reducer'
-
-import { getUserProfile } from '../../api/api'
+import { setUserProfileThunk } from '../../redux/profile-reducer'
 
 import profileStyles from './Profile.module.css'
 
@@ -15,16 +13,10 @@ import Preloader from '../common/Preloader/Preloader'
 
 class ProfileApiReqContainer extends React.Component {
 
-  setProfile = (userId) => {
-    getUserProfile(userId).then((data) => {
-      this.props.setUserProfile(data)
-    })
-  }
-
   componentDidMount() {
     // debugger
     const userId = this.props.match.params.userId
-    this.setProfile(userId)
+    this.props.setUserProfileThunk(userId)
   }
 
   render() {
@@ -46,7 +38,7 @@ const MapStateToProps = (state) => {
 
 const MapDispatchToProps = (dispatch) => {
   return {
-    setUserProfile: (profile) => dispatch(setUserProfileAC(profile))
+    setUserProfileThunk: (id) => dispatch(setUserProfileThunk(id))
   }
 }
 

@@ -1,12 +1,14 @@
+import { getUserProfile } from '../api/api'
+
 const ADD_POST = 'ADD-POST'
 const UPDATE_POST = 'UPDATE-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 
-export const addPostActionCreator = () => {
+export const addPostAC = () => {
   return { type: ADD_POST }
 }
 
-export const updatePostActionCreator = (text) => {
+export const updatePostAC = (text) => {
   return {
     type: UPDATE_POST,
     text: text
@@ -17,6 +19,12 @@ export const setUserProfileAC = (profile) => {
   return {
     type: SET_USER_PROFILE,
     profile
+  }
+}
+
+export const setUserProfileThunk = (userId) => {
+  return (dispatch) => {
+    getUserProfile(userId).then((data) => dispatch(setUserProfileAC(data)))
   }
 }
 
@@ -65,10 +73,36 @@ const profileReduser = (state = initialState, action) => {
       }
 
     case SET_USER_PROFILE:
+      // https://social-network.samuraijs.com/api/1.0/profile/2
+
+      // const userProfile = {
+      //   "aboutMe": "я круто чувак 1001%",
+      //   "contacts": {
+      //     "facebook": "facebook.com",
+      //     "website": null,
+      //     "vk": "vk.com/dimych",
+      //     "twitter": "https://twitter.com/@sdf",
+      //     "instagram": "instagra.com/sds",
+      //     "youtube": null,
+      //     "github": "github.com",
+      //     "mainLink": null
+      //   },
+      //   "lookingForAJob": true,
+      //   "lookingForAJobDescription": "не ищу, а дурачусь",
+      //   "fullName": "samurai dimych",
+      //   "userId": 2,
+      //   "photos": {
+      //     "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+      //     "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+      //   }
+      // }
+
       return {
         ...state,
         userProfile: action.profile
       }
+
+
 
     default:
       return state

@@ -1,3 +1,5 @@
+import { getUsers } from '../api/api'
+
 const FOLLOW_TOGGLE = 'FOLLOW_TOGGLE'
 const SET_USERS = 'SET_USERS'
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
@@ -28,6 +30,18 @@ export const toggleIsFetchingAC = (isFetching) => {
 
 export const isFollowingToggleAC = (followingUserId) => {
   return { type: IS_FOLLOWING_IN_PROGRESS_TOGGLE, followingUserId }
+}
+
+// thunk-creators
+export const getUsersThunk = (currentPage, usersOnPageCount) => {
+  return (dispatch) => {
+    dispatch(toggleIsFetchingAC(true))
+    getUsers(currentPage, usersOnPageCount).then((data) => {
+      dispatch(setUsersAC(data.items))
+      dispatch(setTotalCountAC(data.totalCount))
+      dispatch(toggleIsFetchingAC(false))
+    })
+  }
 }
 
 

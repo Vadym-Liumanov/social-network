@@ -1,30 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { followToggleAC, setUsersAC, setTotalCountAC, setCurrentPageAC, toggleIsFetchingAC, isFollowingToggleAC } from '../../redux/users-reducer'
+import { followToggleAC, setCurrentPageAC, isFollowingToggleAC, getUsersThunk } from '../../redux/users-reducer'
 
-import { getUsers } from '../../api/api'
 import Users from './Users'
 import Preloader from '../common/Preloader/Preloader'
 
 class UsersApiReqContainer extends React.Component {
 
-  setUsersPage = (currentPage, usersOnPageCount) => {
-    this.props.toggleIsFetching(true)
-    getUsers(currentPage, usersOnPageCount).then((data) => {
-      this.props.setUsers(data.items)
-      this.props.setTotalCount(data.totalCount)
-      this.props.toggleIsFetching(false)
-    })
-  }
-
   componentDidMount() {
-    this.setUsersPage(this.props.currentPage, this.props.usersOnPageCount)
+    this.props.getUsersThunk(this.props.currentPage, this.props.usersOnPageCount)
   }
 
   onPageNumberClick = (pageNumber) => {
     this.props.setCurrentPage(pageNumber)
-    this.setUsersPage(pageNumber, this.props.usersOnPageCount)
+    this.props.getUsersThunk(pageNumber, this.props.usersOnPageCount)
   }
 
   render() {
@@ -45,9 +35,7 @@ class UsersApiReqContainer extends React.Component {
           />
         }
       </>
-
     )
-
   }
 }
 
@@ -64,11 +52,9 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
   return {
     followToggle: (userId) => dispatch(followToggleAC(userId)),
-    setUsers: (usersList) => dispatch(setUsersAC(usersList)),
-    setTotalCount: (totalCount) => dispatch(setTotalCountAC(totalCount)),
     setCurrentPage: (currentPage) => dispatch(setCurrentPageAC(currentPage)),
-    toggleIsFetching: (isFetching) => dispatch(toggleIsFetchingAC(isFetching)),
-    isFollowingToggle: (isFollowing) => dispatch(isFollowingToggleAC(isFollowing))
+    isFollowingToggle: (isFollowing) => dispatch(isFollowingToggleAC(isFollowing)),
+    getUsersThunk: (currentPage, usersOnPageCount) => dispatch(getUsersThunk(currentPage, usersOnPageCount))
   }
 }
 
