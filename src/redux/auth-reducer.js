@@ -17,7 +17,7 @@ export const getAuthDataThunk = () => {
 }
 
 
-
+// state = state.auth
 const initialState = {
   id: null,
   login: null,

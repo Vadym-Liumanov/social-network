@@ -10,6 +10,7 @@ import Profile from './components/Profile/Profile'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import DialogsContainer from './components/Dialogs/DialogsContainer'
 import UsersContainer from './components/Users/UsersContainer'
+import Login from './components/Login/Login'
 
 import News from './components/News/News'
 import Music from './components/Music/Music'
@@ -34,6 +35,7 @@ function App(props) {
             <Route exact path='/news' component={() => <News />} />
             <Route exact path='/music' component={() => <Music />} />
             <Route exact path='/settings' component={() => <Settings />} />
+            <Route exact path='/login' component={() => <Login />} />
           </Switch>
         </div>
       </div>
