@@ -6,7 +6,6 @@ import './App.css'
 import Header from './components/Header/HeaderContainer'
 import Navbar from './components/Navbar/Navbar'
 
-import Profile from './components/Profile/Profile'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import DialogsContainer from './components/Dialogs/DialogsContainer'
 import UsersContainer from './components/Users/UsersContainer'
@@ -27,8 +26,8 @@ function App(props) {
           <Switch>
             {/* Next string is on v6 react-router-dom format */}
             {/* <Route path='/profile/' element={<Profile />} /> */}
-            <Route exact path='/' component={() => <Profile />} />
-            <Route exact path='/profile/' component={() => <Profile />} />
+            {/* <Route exact path='/' component={() => <ProfileContainer />} /> */}
+            <Route exact path='/profile/' component={() => <ProfileContainer />} />
             <Route path='/profile/:userId' component={() => <ProfileContainer />} />
             <Route exact path='/dialogs' component={() => <DialogsContainer />} />
             <Route exact path='/users' component={() => <UsersContainer />} />

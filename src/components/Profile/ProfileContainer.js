@@ -16,13 +16,13 @@ class ProfileApiReqContainer extends React.Component {
   componentDidMount() {
     // debugger
     const userId = this.props.match.params.userId
-    this.props.setUserProfileThunk(userId)
+    if (!userId) { this.props.setUserProfileThunk(this.props.myId) } else { this.props.setUserProfileThunk(userId) }
   }
 
   render() {
     if (!this.props.isAuth) {
       return (
-        <Redirect to='/login'/>
+        <Redirect to='/login' />
       )
     }
 
@@ -39,7 +39,8 @@ class ProfileApiReqContainer extends React.Component {
 const MapStateToProps = (state) => {
   return {
     profileInfo: state.profile.userProfile,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    myId: state.auth.id
   }
 }
 
