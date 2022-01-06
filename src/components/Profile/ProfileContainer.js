@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import { setUserProfileThunk } from '../../redux/profile-reducer'
+
+import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 
 import profileStyles from './Profile.module.css'
 
@@ -20,12 +22,6 @@ class ProfileApiReqContainer extends React.Component {
   }
 
   render() {
-    if (!this.props.isAuth) {
-      return (
-        <Redirect to='/login' />
-      )
-    }
-
     return (
       <div className={profileStyles.content}>
         <MainImg />
@@ -39,7 +35,6 @@ class ProfileApiReqContainer extends React.Component {
 const MapStateToProps = (state) => {
   return {
     profileInfo: state.profile.userProfile,
-    isAuth: state.auth.isAuth,
     myId: state.auth.id
   }
 }
@@ -50,7 +45,9 @@ const MapDispatchToProps = (dispatch) => {
   }
 }
 
-const WithUrlDataContainer = withRouter(ProfileApiReqContainer)
+const withAuthRedirectContainer = withAuthRedirect(ProfileApiReqContainer)
+
+const WithUrlDataContainer = withRouter(withAuthRedirectContainer)
 
 const ProfileContainer = connect(MapStateToProps, MapDispatchToProps)(WithUrlDataContainer)
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+
+import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 
 import { followToggleAC, setCurrentPageAC, isFollowingToggleAC, getUsersThunk } from '../../redux/users-reducer'
 
@@ -19,10 +20,6 @@ class UsersApiReqContainer extends React.Component {
   }
 
   render() {
-    if (!this.props.isAuth) {
-      return <Redirect to="/login" />
-    }
-
     return (
       <>
         {this.props.isFetching
@@ -52,7 +49,6 @@ let mapStateToProps = (state) => {
     currentPage: state.users.currentPage,
     isFetching: state.users.isFetching,
     isFollowingInProgress: state.users.isFollowingInProgress,
-    isAuth: state.auth.isAuth
   }
 }
 let mapDispatchToProps = (dispatch) => {
@@ -64,6 +60,6 @@ let mapDispatchToProps = (dispatch) => {
   }
 }
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersApiReqContainer)
+const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(UsersApiReqContainer))
 
 export default UsersContainer
