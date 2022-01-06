@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { compose } from 'redux'
 
 import { setUserProfileThunk } from '../../redux/profile-reducer'
 
@@ -13,7 +14,7 @@ import UserInfo from './UserInfo/UserInfo'
 import MyPostsContainer from './MyPosts/MyPostsContainer'
 import Preloader from '../common/Preloader/Preloader'
 
-class ProfileApiReqContainer extends React.Component {
+class ProfileContainer extends React.Component {
 
   componentDidMount() {
     // debugger
@@ -45,12 +46,8 @@ const MapDispatchToProps = (dispatch) => {
   }
 }
 
-const withAuthRedirectContainer = withAuthRedirect(ProfileApiReqContainer)
-
-const WithUrlDataContainer = withRouter(withAuthRedirectContainer)
-
-const ProfileContainer = connect(MapStateToProps, MapDispatchToProps)(WithUrlDataContainer)
-
-// const ProfileContainer = connect(MapStateToProps, MapDispatchToProps)(ProfileApiReqContainer)
-
-export default ProfileContainer
+export default compose(
+  connect(MapStateToProps, MapDispatchToProps),
+  withRouter,
+  withAuthRedirect
+)(ProfileContainer)

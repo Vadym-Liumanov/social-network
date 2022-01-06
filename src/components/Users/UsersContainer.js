@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 
@@ -8,7 +9,8 @@ import { followToggleAC, setCurrentPageAC, isFollowingToggleAC, getUsersThunk } 
 import Users from './Users'
 import Preloader from '../common/Preloader/Preloader'
 
-class UsersApiReqContainer extends React.Component {
+
+class UsersContainer extends React.Component {
 
   componentDidMount() {
     this.props.getUsersThunk(this.props.currentPage, this.props.usersOnPageCount)
@@ -60,6 +62,9 @@ let mapDispatchToProps = (dispatch) => {
   }
 }
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(UsersApiReqContainer))
+// const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(UsersContainer))
 
-export default UsersContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(UsersContainer)
