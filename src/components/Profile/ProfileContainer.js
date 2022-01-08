@@ -13,6 +13,7 @@ import MainImg from './MainImg/MainImg'
 import UserInfo from './UserInfo/UserInfo'
 import MyPostsContainer from './MyPosts/MyPostsContainer'
 import Preloader from '../common/Preloader/Preloader'
+import ProfileStatus from './Profileinfo/ProfileStatus'
 
 class ProfileContainer extends React.Component {
 
@@ -26,6 +27,7 @@ class ProfileContainer extends React.Component {
     return (
       <div className={profileStyles.content}>
         <MainImg />
+        <ProfileStatus status={'Hello my friends'} />
         {this.props.profileInfo ? <UserInfo {...this.props.profileInfo} /> : <Preloader />}
         <MyPostsContainer />
       </div>
