@@ -1,8 +1,50 @@
-import { getUserProfile } from '../api/api'
+import { getUserProfile, getUserStatus, getMyStatus, putMyStatus } from '../api/api'
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_POST = 'UPDATE-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_USER_STATUS = 'SET_USER_STATUS'
+const SET_MY_STATUS = 'SET_MY_STATUS'
+const UPDATE_MY_STATUS = 'UPDATE_MY_STATUS'
+
+export const updateMyStatusAC = (myStatus) => {
+  return {
+    type: UPDATE_MY_STATUS,
+    myStatus
+  }
+}
+
+export const updateMyStatusThunk = (myStatus) => {
+  return (dispatch) => {
+    putMyStatus(myStatus).then((it) => dispatch(updateMyStatusAC(myStatus)))
+  }
+}
+
+export const setMyStatusAC = (myStatus) => {
+  return {
+    type: SET_MY_STATUS,
+    myStatus
+  }
+}
+
+export const setMyStatusThunk = (userId) => {
+  return (dispatch) => {
+    getMyStatus(userId).then((status) => dispatch(setMyStatusAC(status)))
+  }
+}
+
+export const setUserStatusAC = (status) => {
+  return {
+    type: SET_USER_STATUS,
+    status: status
+  }
+}
+
+export const setUserStatusThunk = (userId) => {
+  return (dispatch) => {
+    getUserStatus(userId).then((status) => dispatch(setUserStatusAC(status)))
+  }
+}
 
 export const addPostAC = () => {
   return { type: ADD_POST }
@@ -42,7 +84,9 @@ const initialState = {
     }
   ],
   newPost: '',
-  userProfile: null
+  userProfile: null,
+  userStatus: null,
+  myStatus: null
 }
 
 // state = state.profile
@@ -102,7 +146,23 @@ const profileReduser = (state = initialState, action) => {
         userProfile: action.profile
       }
 
+    case SET_USER_STATUS:
+      return {
+        ...state,
+        userStatus: action.status
+      }
 
+    case SET_MY_STATUS:
+      return {
+        ...state,
+        myStatus: action.myStatus
+      }
+
+    case UPDATE_MY_STATUS:
+      return {
+        ...state,
+        myStatus: action.myStatus
+      }
 
     default:
       return state

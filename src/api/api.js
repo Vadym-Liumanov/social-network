@@ -29,3 +29,15 @@ export const setUserUnfollow = (userId) => {
 export const getUserProfile = (userId) => {
   return instanceAxios.get(`profile/${userId}`).then(response => response.data)
 }
+
+export const getUserStatus = (userId) => {
+  return instanceAxios.get(`profile/status/${userId}`).then(response => response.data)
+}
+
+export const getMyStatus = (myId) => {
+  return instanceAxios.get(`profile/status/${myId}`).then(response => response.data)
+}
+
+export const putMyStatus = (myStatus) => {
+  return instanceAxios.put('profile/status/', { status: myStatus }).then(response => response.data)
+}

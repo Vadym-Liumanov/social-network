@@ -2,10 +2,14 @@
   color: greenyellow;
   font-weight: 600;
 }
+
 .info img {
   width: 100px;
   height: 100px;
 }
 
-
+.status {
+  color: rgb(238, 216, 20);
+  font-weight: 600;
+}
 

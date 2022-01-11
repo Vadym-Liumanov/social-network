@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, BrowserRouter, Switch } from 'react-router-dom'
+import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
 
 import './App.css'
 
@@ -27,7 +27,7 @@ function App(props) {
             {/* Next string is on v6 react-router-dom format */}
             {/* <Route path='/profile/' element={<Profile />} /> */}
             {/* <Route exact path='/' component={() => <ProfileContainer />} /> */}
-            <Route exact path='/profile/' component={() => <ProfileContainer />} />
+            <Route exact path='/profile/' component={() => <Redirect to='/profile/21206' />} />
             <Route path='/profile/:userId' component={() => <ProfileContainer />} />
             <Route exact path='/dialogs' component={() => <DialogsContainer />} />
             <Route exact path='/users' component={() => <UsersContainer />} />

@@ -1,9 +1,11 @@
 import React from 'react'
 
+import styles from './ProfileStatus.module.css'
+
 class ProfileStatus extends React.Component {
   state = {
     editMode: false,
-    statusText: this.props.status
+    statusText: this.props.status || 'No status'
   }
 
   activateEditMode = () => {
@@ -11,6 +13,7 @@ class ProfileStatus extends React.Component {
   }
 
   deactivateEditMode = () => {
+    this.props.updateMyStatus('11111')
     this.setState({ editMode: false })
   }
 
@@ -20,7 +23,7 @@ class ProfileStatus extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.status}>
         {!this.state.editMode &&
           <div>
             <span onDoubleClick={this.activateEditMode}>{this.state.statusText}</span>
@@ -37,4 +40,4 @@ class ProfileStatus extends React.Component {
   }
 }
 
-export default ProfileStatus
+export default (ProfileStatus)
