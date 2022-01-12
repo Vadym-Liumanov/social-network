@@ -16,7 +16,9 @@ export const updateMyStatusAC = (myStatus) => {
 
 export const updateMyStatusThunk = (myStatus) => {
   return (dispatch) => {
-    putMyStatus(myStatus).then((it) => dispatch(updateMyStatusAC(myStatus)))
+    putMyStatus(myStatus).then((data) => {
+      if (data.resultCode === 0) dispatch(updateMyStatusAC(myStatus))
+    })
   }
 }
 

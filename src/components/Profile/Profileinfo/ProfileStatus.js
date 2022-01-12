@@ -13,7 +13,7 @@ class ProfileStatus extends React.Component {
   }
 
   deactivateEditMode = () => {
-    this.props.updateMyStatus('11111')
+    this.props.updateMyStatus(this.state.statusText)
     this.setState({ editMode: false })
   }
 
