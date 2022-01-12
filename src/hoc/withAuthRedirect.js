@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 
 export const withAuthRedirect = (Component) => {
   const RedirectComponent = (props) => {
-    return !props.isAuth ? <Redirect to='/login' /> : <Component {...props} />
-    // if (!props.isAuth) return <Redirect to='/login' />
-    // return <Component {...props} />
+    // Временно отключил проверку на авторизацию
+    // return !props.isAuth ? <Redirect to='/login' /> : <Component {...props} />
+    return <Component {...props} />
   }
 
   const mapStateToProps = (state) => {
