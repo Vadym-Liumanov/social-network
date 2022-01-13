@@ -6,8 +6,6 @@ import userImage from '../../../assets/images/userImage.jpg'
 
 const UserInfo = (props) => {
   // debugger
-  let userStatus = props.userStatus
-  if (userStatus === null) userStatus = 'User have no status!'
 
   return (
     <div className={userInfoStyles.info}>
@@ -17,7 +15,7 @@ const UserInfo = (props) => {
       <div>{props.fullName}</div>
       <div>Status:</div>
       <div className={userInfoStyles.status}>
-        {userStatus}
+        {props.userStatus || 'User have no status!'}
       </div>
       <div>About me</div>
       <div>
