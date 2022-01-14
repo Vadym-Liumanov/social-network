@@ -9,7 +9,7 @@ const MyPosts = (props) => {
   let postElements = Object.values(props.profilePosts).map(post => <Post key={post.id} value={post.post} likesCount={post.likesCount} />)
 
   const onSubmitReduxForm = (formData) => {
-    console.log(formData)
+    // console.log(formData)
     props.addPost(formData.postText)
   }
 

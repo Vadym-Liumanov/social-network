@@ -1,4 +1,5 @@
 import React from 'react'
+import { Field, reduxForm } from 'redux-form'
 
 import dialogsStyles from './Dialogs.module.css'
 
@@ -10,18 +11,25 @@ const Dialogs = (props) => {
   let dialogsUsersItems = Object.values(props.users).map(user => <User key={user.id} userName={user.userName} />)
   let dialogsContentItems = Object.values(props.dialogs).map(dialog => <Dialog key={dialog.id} dialogContent={dialog.dialog} />)
 
-  let newDialogText = props.newDialogText
-
-  let addNewDilog = () => {
-    props.addNewDialog()
+  const onSubmitReduxForm = (formData) => {
+    // console.log(formData)
+    props.addNewDialog(formData.dialogText)
   }
 
-  let updateNewDialog = (event) => {
-    let text = event.target.value
-    props.updateNewDialog(text)
+  const DialogForm = (props) => {
+    return (
+      <form onSubmit={props.handleSubmit}>
+        <div>
+          <Field component={'textarea'} name={'dialogText'} placeholder={'Input your message here'} />
+        </div>
+        <div>
+          <button>Add message</button>
+        </div>
+      </form>
+    )
   }
 
-  // debugger
+  const DialogReduxForm = reduxForm({ form: 'dialogForm' })(DialogForm)
 
   return (
     <div className={dialogsStyles.content}>
@@ -40,14 +48,7 @@ const Dialogs = (props) => {
         <div>
           {dialogsContentItems}
         </div>
-        <div>
-          <div>
-            <textarea onChange={updateNewDialog} value={newDialogText} placeholder="Input your message here" />
-          </div>
-          <div>
-            <button onClick={addNewDilog}>Add message</button>
-          </div>
-        </div>
+        <DialogReduxForm onSubmit={onSubmitReduxForm} />
       </div>
     </div>
   );

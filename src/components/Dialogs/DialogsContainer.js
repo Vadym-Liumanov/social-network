@@ -4,20 +4,18 @@ import { compose } from 'redux'
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 
 import Dialogs from './Dialogs'
-import { addNewDilogActionCreator, updateNewDialogActionCreator } from '../../redux/messages-reducer'
+import { addNewDilogAC } from '../../redux/messages-reducer'
 
 const mapStateToProps = (state) => {
   return {
     users: state.messages.users,
     dialogs: state.messages.dialogs,
-    newDialogText: state.messages.newDialog,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addNewDialog: () => dispatch(addNewDilogActionCreator()),
-    updateNewDialog: (text) => dispatch(updateNewDialogActionCreator(text))
+    addNewDialog: (text) => dispatch(addNewDilogAC(text))
   }
 }
 

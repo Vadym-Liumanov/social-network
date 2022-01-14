@@ -1,15 +1,7 @@
 const ADD_DIALOG = 'ADD-DIALOG'
-const UPDATE_DIALOG = 'UPDATE-DIALOG'
 
-export const addNewDilogActionCreator = () => {
-  return { type: ADD_DIALOG }
-}
-
-export const updateNewDialogActionCreator = (text) => {
-  return {
-    type: UPDATE_DIALOG,
-    text
-  }
+export const addNewDilogAC = (text) => {
+  return { type: ADD_DIALOG, text }
 }
 
 const initialState = {
@@ -44,8 +36,7 @@ const initialState = {
       id: 4,
       dialog: 'Let\'s go to the stadium.'
     }
-  ],
-  newDialog: ''
+  ]
 }
 
 
@@ -53,28 +44,18 @@ const messagesReducer = (state = initialState, action) => { // state = state.mes
   switch (action.type) {
 
     case ADD_DIALOG:
-      if (state.newDialog !== '') {
-        let newDialogId = state.dialogs[state.dialogs.length - 1].id + 1
-        let newDialogObj = {
-          id: newDialogId,
-          dialog: state.newDialog
-        }
-        return {
-          ...state,
-          dialogs: [...state.dialogs, newDialogObj],
-          newDialog: ''
-        }
+      let newDialogId = state.dialogs[state.dialogs.length - 1].id + 1
+      let newDialogObj = {
+        id: newDialogId,
+        dialog: action.text
       }
-      return state
-
-    case UPDATE_DIALOG:
       return {
         ...state,
-        newDialog: action.text
+        dialogs: [...state.dialogs, newDialogObj],
       }
 
     default:
-      return state
+return state
   }
 }
 
