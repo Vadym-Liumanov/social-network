@@ -1,7 +1,7 @@
 import { getUserProfile, getUserStatus, getMyStatus, putMyStatus } from '../api/api'
 
 const ADD_POST = 'ADD-POST'
-const UPDATE_POST = 'UPDATE-POST'
+// const UPDATE_POST = 'UPDATE-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_USER_STATUS = 'SET_USER_STATUS'
 const SET_MY_STATUS = 'SET_MY_STATUS'
@@ -48,16 +48,16 @@ export const setUserStatusThunk = (userId) => {
   }
 }
 
-export const addPostAC = () => {
-  return { type: ADD_POST }
+export const addPostAC = (postText) => {
+  return { type: ADD_POST, postText }
 }
 
-export const updatePostAC = (text) => {
-  return {
-    type: UPDATE_POST,
-    text: text
-  }
-}
+// export const updatePostAC = (text) => {
+//   return {
+//     type: UPDATE_POST,
+//     text: text
+//   }
+// }
 
 export const setUserProfileAC = (profile) => {
   return {
@@ -85,7 +85,6 @@ const initialState = {
       likesCount: 10
     }
   ],
-  newPost: '',
   userProfile: null,
   userStatus: null,
   myStatus: null
@@ -96,27 +95,23 @@ const profileReduser = (state = initialState, action) => {
   switch (action.type) {
 
     case ADD_POST:
-      if (state.newPost !== '') {
         const newPostId = state.profilePosts[state.profilePosts.length - 1].id + 1
         const newPostObj = {
           id: newPostId,
-          post: state.newPost,
+          post: action.postText,
           likesCount: 0
         }
 
         return {
           ...state,
           profilePosts: [...state.profilePosts, newPostObj],
-          newPost: ''
         }
-      }
-      return state
 
-    case UPDATE_POST:
-      return {
-        ...state,
-        newPost: action.text
-      }
+    // case UPDATE_POST:
+    //   return {
+    //     ...state,
+    //     newPost: action.text
+    //   }
 
     case SET_USER_PROFILE:
       // https://social-network.samuraijs.com/api/1.0/profile/2
