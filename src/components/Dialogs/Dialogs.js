@@ -5,6 +5,8 @@ import dialogsStyles from './Dialogs.module.css'
 
 import User from './User/User'
 import Dialog from './Dialog/Dialog'
+import { required, maxLength } from '../../utils/validators/validators'
+import { Textarea } from '../common/FormsControls/FormsControls'
 
 const Dialogs = (props) => {
 
@@ -16,11 +18,13 @@ const Dialogs = (props) => {
     props.addNewDialog(formData.dialogText)
   }
 
+  const maxLength10 = maxLength(10)
+
   const DialogForm = (props) => {
     return (
       <form onSubmit={props.handleSubmit}>
         <div>
-          <Field component={'textarea'} name={'dialogText'} placeholder={'Input your message here'} />
+          <Field component={Textarea} name={'dialogText'} placeholder={'Input your message here'} validate={[required, maxLength10]} />
         </div>
         <div>
           <button>Add message</button>
