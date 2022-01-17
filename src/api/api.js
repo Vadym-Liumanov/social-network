@@ -41,3 +41,11 @@ export const getMyStatus = (myId) => {
 export const putMyStatus = (myStatus) => {
   return instanceAxios.put('profile/status/', { status: myStatus }).then(response => response.data)
 }
+
+export const loginOnTheService = ({ email, password, rememberMe }) => {
+  return instanceAxios.post('auth/login', { email, password, rememberMe }).then(response => response.data)
+}
+
+export const logoutFromTheService = () => {
+  return instanceAxios.delete('auth/login').then(response => response.data)
+}
