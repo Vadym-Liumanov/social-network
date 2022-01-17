@@ -1,8 +1,12 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
+
+import { loginThunk } from '../../redux/auth-reducer'
 
 import { required } from '../../utils/validators/validators'
 import { Element } from '../common/FormsControls/FormsControls'
+
 
 const LoginForm = (props) => {
   return (
@@ -11,7 +15,7 @@ const LoginForm = (props) => {
         <Field component={Element} placeholder={'Email'} name={'email'} elementType='input' validate={[required]} />
       </div>
       <div>
-        <Field component={Element} placeholder={'Password'} name={'password'} elementType='input' validate={[required]} />
+        <Field component={Element} placeholder={'Password'} name={'password'} elementType='input' type='password' validate={[required]} />
       </div>
       <div>
         <Field component={'input'} type={'checkbox'} name={'rememberMe'} /> Remember me
@@ -32,8 +36,8 @@ const Login = (props) => {
   // надо будет использовать эти formData для логинизации в дальнейшем -
   // диспатчить из onSubmit formData в state и т.д.
 
-  const onSubmit = (formData) => {
-    console.log(formData)
+  const onSubmit = ({ email, password, rememberMe }) => {
+    props.loginThunk(email, password, rememberMe)
   }
 
   return (
@@ -44,4 +48,16 @@ const Login = (props) => {
   )
 }
 
-export default Login
+const mapStateToProps = (state) => {
+  return {
+
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginThunk: (email, password, rememberMe) => dispatch(loginThunk(email, password, rememberMe))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

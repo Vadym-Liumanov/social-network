@@ -17,9 +17,9 @@ export const getAuthDataThunk = () => {
   }
 }
 
-export const LoginThunk = ({ email, password, rememberMe }) => {
+export const loginThunk = (email, password, rememberMe) => {
   return (dispatch) => {
-    loginOnTheService({ email, password, rememberMe }).then((data) => {
+    loginOnTheService(email, password, rememberMe).then((data) => {
       if (data.resultCode === 0) {
         dispatch(getAuthDataThunk())
       }
@@ -31,7 +31,7 @@ export const resetAuthDataAC = () => {
   return { type: RESET_USER_AUTH_DATA }
 }
 
-export const LogoutThunk = () => {
+export const logoutThunk = () => {
   return (dispatch) => {
     logoutFromTheService().then((data) => {
       if (data.resultCode === 0) {
