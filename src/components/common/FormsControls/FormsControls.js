@@ -2,7 +2,7 @@ import React from 'react'
 
 import styles from './FormsControls.module.css'
 
-export const Textarea = ({ input, meta, ...props }) => {
+export const Element = ({ input, meta, ...props }) => {
   // debugger
 
   const hasError = meta.touched && meta.error
@@ -10,7 +10,7 @@ export const Textarea = ({ input, meta, ...props }) => {
   return (
     <div className={styles.formControl + " " + (hasError ? styles.error : '')}>
       <div>
-        <textarea {...input} {...props} />
+        <props.elementType {...input} {...props} />
       </div>
       {hasError && <span>{meta.error}</span>}
     </div>
