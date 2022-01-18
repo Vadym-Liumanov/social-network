@@ -8,6 +8,8 @@ import { loginThunk } from '../../redux/auth-reducer'
 import { required } from '../../utils/validators/validators'
 import { Element } from '../common/FormsControls/FormsControls'
 
+import styles from './Login.module.css'
+
 
 const LoginForm = (props) => {
   return (
@@ -21,6 +23,11 @@ const LoginForm = (props) => {
       <div>
         <Field component={'input'} type={'checkbox'} name={'rememberMe'} /> Remember me
       </div>
+      {props.error &&
+        <div className={styles.formSummaryError}>
+          {props.error}
+        </div>
+      }
       <div>
         <button>Login</button>
       </div>
@@ -44,7 +51,7 @@ const Login = (props) => {
 
   if (props.isAuth) {
     return <Redirect to='/profile' />
-   }
+  }
 
   return (
     <div>

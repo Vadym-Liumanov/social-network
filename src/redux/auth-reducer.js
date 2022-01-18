@@ -1,3 +1,4 @@
+import { stopSubmit } from 'redux-form'
 import { getAuthData, loginOnTheService, logoutFromTheService } from '../api/api'
 
 const SET_USER_AUTH_DATA = 'SET_USER_AUTH_DATA'
@@ -22,6 +23,11 @@ export const loginThunk = (email, password, rememberMe) => {
     loginOnTheService(email, password, rememberMe).then((data) => {
       if (data.resultCode === 0) {
         dispatch(getAuthDataThunk())
+      }
+      else {
+        let ErrorMessage = data.messages.length > 0 ? data.messages[0] : 'Somthing wrong'
+        let action = stopSubmit('login', { _error: ErrorMessage })
+        dispatch(action)
       }
     })
   }
