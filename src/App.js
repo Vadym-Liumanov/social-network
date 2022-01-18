@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { getAuthDataThunk } from './redux/auth-reducer'
+import { initializeAppThunk } from './redux/app-reducer'
 
 import './App.css'
 
@@ -17,13 +17,16 @@ import Login from './components/Login/Login'
 import News from './components/News/News'
 import Music from './components/Music/Music'
 import Settings from './components/Settings/Settings'
+import Preloader from './components/common/Preloader/Preloader'
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.getAuthDataThunk()
+    this.props.initializeAppThunk()
   }
 
   render() {
+    if (!this.props.isAppInitialized) <Preloader />
+
     return (
       <BrowserRouter>
         <div className="app-wrapper">
@@ -50,10 +53,16 @@ class App extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    getAuthDataThunk: () => dispatch(getAuthDataThunk())
+    isAppInitialized: state.app.isAppInitialized
   }
 }
 
-export default connect(null, mapDispatchToProps)(App)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    initializeAppThunk: () => dispatch(initializeAppThunk())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
