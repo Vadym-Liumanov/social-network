@@ -1,15 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-
-
 import headerStyles from './Header.module.css'
 import logo from '../../assets/images/logo_nike.jpg'
 
 const Header = (props) => {
   // debugger
-
-  // const onLogout = () => console.log(props.logoutThunk)
 
   return (
     <header className={headerStyles.header}>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 
 import { loginThunk } from '../../redux/auth-reducer'
@@ -33,12 +34,17 @@ const Login = (props) => {
 
   // onSubmit передается в пропсах в child component и определяет,
   // что делать с собранными формой данными formData
-  // надо будет использовать эти formData для логинизации в дальнейшем -
-  // диспатчить из onSubmit formData в state и т.д.
+  // Используем эти formData (через деструктуризацию) для логинизации -
+  // диспатчим из onSubmit formData через POST запрос на API для
+  // авторизации на стороннем сервисе
 
   const onSubmit = ({ email, password, rememberMe }) => {
     props.loginThunk(email, password, rememberMe)
   }
+
+  if (props.isAuth) {
+    return <Redirect to='/profile' />
+   }
 
   return (
     <div>
@@ -50,7 +56,7 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-
+    isAuth: state.auth.isAuth
   }
 }
 

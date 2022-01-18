@@ -42,7 +42,7 @@ export const putMyStatus = (myStatus) => {
   return instanceAxios.put('profile/status/', { status: myStatus }).then(response => response.data)
 }
 
-export const loginOnTheService = (email, password, rememberMe) => {
+export const loginOnTheService = (email, password, rememberMe = false) => {
   return instanceAxios.post('auth/login', { email, password, rememberMe }).then(response => response.data)
 }
 
