@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
-import { withAuthRedirect } from '../../hoc/withAuthRedirect'
+// import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 
 import { followToggleAC, setCurrentPageAC, isFollowingToggleAC, getUsersThunk } from '../../redux/users-reducer'
 
@@ -66,5 +66,5 @@ let mapDispatchToProps = (dispatch) => {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  withAuthRedirect
+  // withAuthRedirect
 )(UsersContainer)

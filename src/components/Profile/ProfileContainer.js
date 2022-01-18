@@ -28,7 +28,6 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-    // const isMyProfile = (!this.props.match.params.userId) ? true : false
 
     return (
       <div className={profileStyles.content}>
@@ -39,7 +38,6 @@ class ProfileContainer extends React.Component {
         <MainImg />
         {this.props.profileInfo ? <UserInfo
           {...this.props.profileInfo}
-          // isMyProfile={isMyProfile}
           userStatus={this.props.userStatus} />
           : <Preloader />}
         <MyPostsContainer />

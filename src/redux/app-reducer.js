@@ -2,14 +2,15 @@ import { getAuthDataThunk } from './auth-reducer'
 
 const SET_APP_INITIALIZED = 'SET_APP_INITIALIZED'
 
-export const setAppInitSuccessAC = () => {
+export const appInitSuccessAC = () => {
   return { type: SET_APP_INITIALIZED }
 }
 
 export const initializeAppThunk = () => {
   return (dispatch) => {
-    Promise.all([dispatch(getAuthDataThunk())]).then(() => {
-      dispatch(setAppInitSuccessAC())
+    const promise = dispatch(getAuthDataThunk())
+    Promise.all([promise]).then(() => {
+      dispatch(appInitSuccessAC())
     })
   }
 }
