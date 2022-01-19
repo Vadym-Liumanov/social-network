@@ -10,7 +10,7 @@ import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 import profileStyles from './Profile.module.css'
 
 import MainImg from './MainImg/MainImg'
-import UserInfo from './UserInfo/UserInfo'
+import ProfileInfo from './Profileinfo/ProfileInfo'
 import MyPostsContainer from './MyPosts/MyPostsContainer'
 import Preloader from '../common/Preloader/Preloader'
 import ProfileStatus from './Profileinfo/ProfileStatus'
@@ -36,7 +36,7 @@ class ProfileContainer extends React.Component {
           <ProfileStatus status={this.props.myStatus} updateMyStatus={this.props.updateMyStatusThunk} />
         </div>
         <MainImg />
-        {this.props.profileInfo ? <UserInfo
+        {this.props.profileInfo ? <ProfileInfo
           {...this.props.profileInfo}
           userStatus={this.props.userStatus} />
           : <Preloader />}

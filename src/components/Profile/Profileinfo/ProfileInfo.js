@@ -1,20 +1,20 @@
 import React from 'react'
 
-import userInfoStyles from './UserInfo.module.css'
+import styles from './ProfileInfo.module.css'
 import userImage from '../../../assets/images/userImage.jpg'
 
 
-const UserInfo = (props) => {
+const ProfileInfo = (props) => {
   // debugger
 
   return (
-    <div className={userInfoStyles.info}>
+    <div className={styles.info}>
       <div>
         <img src={props.photos.small ? props.photos.small : userImage} alt="userAvatar" />
       </div>
       <div>{props.fullName}</div>
       <div>Status:</div>
-      <div className={userInfoStyles.status}>
+      <div className={styles.status}>
         {props.userStatus || 'User have no status!'}
       </div>
       <div>About me</div>
@@ -25,4 +25,4 @@ const UserInfo = (props) => {
   )
 }
 
-export default UserInfo
+export default ProfileInfo
