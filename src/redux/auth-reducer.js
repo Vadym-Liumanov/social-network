@@ -10,7 +10,7 @@ export const setUserAuthDataAC = (authData) => {
 
 export const getAuthDataThunk = () => {
   return (dispatch) => {
-    getAuthData().then((data) => {
+    return getAuthData().then((data) => {
       if (data.resultCode === 0) {
         dispatch(setUserAuthDataAC(data.data))
       }
