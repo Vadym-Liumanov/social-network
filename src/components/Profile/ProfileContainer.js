@@ -37,6 +37,7 @@ class ProfileContainer extends React.Component {
         </div>
         <MainImg />
         {this.props.profileInfo ? <ProfileInfo
+          isOwner={!this.props.match.params.userId}
           {...this.props.profileInfo}
           userStatus={this.props.userStatus} />
           : <Preloader />}

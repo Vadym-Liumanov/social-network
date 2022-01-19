@@ -39,7 +39,7 @@ class App extends React.Component {
               {/* Next string is on v6 react-router-dom format */}
               {/* <Route path='/profile/' element={<Profile />} /> */}
               {/* <Route exact path='/' component={() => <ProfileContainer />} /> */}
-              <Route exact path='/profile/' component={() => <Redirect to='/profile/21206' />} />
+              <Route exact path='/' component={() => <Redirect to='/profile' />} />
               <Route path='/profile/:userId' component={() => <ProfileContainer />} />
               <Route exact path='/dialogs' component={() => <DialogsContainer />} />
               <Route exact path='/users' component={() => <UsersContainer />} />
