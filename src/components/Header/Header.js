@@ -14,7 +14,7 @@ const Header = (props) => {
         {props.isAuth
           ? (
             <div>
-              <div>Hello {props.login}</div>
+              <div>Hello {props.login}. Your id: {props.id}</div>
               {/* <div>Your id: {props.id}</div> */}
               <button onClick={props.logoutThunk}>Logout</button>
             </div>

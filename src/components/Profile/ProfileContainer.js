@@ -13,33 +13,37 @@ import MainImg from './MainImg/MainImg'
 import ProfileInfo from './Profileinfo/ProfileInfo'
 import MyPostsContainer from './MyPosts/MyPostsContainer'
 import Preloader from '../common/Preloader/Preloader'
-import ProfileStatus from './Profileinfo/ProfileStatus'
+// import ProfileStatus from './Profileinfo/ProfileStatus'
 
 class ProfileContainer extends React.Component {
 
   componentDidMount() {
     // debugger
     const paramsUserId = this.props.match.params.userId
-    // const userId = (paramsUserId) ? paramsUserId : this.props.myId
+    const userId = (paramsUserId) ? paramsUserId : this.props.myId
 
-    this.props.setUserProfileThunk(paramsUserId)
-    this.props.setUserStatusThunk(paramsUserId)
+    this.props.setUserProfileThunk(userId)
+    this.props.setUserStatusThunk(userId)
     this.props.setMyStatusThunk(this.props.myId)
   }
 
   render() {
 
+    const isOwner = (!this.props.match.params.userId && this.props.myId) || (+this.props.match.params.userId === this.props.myId) ? true : false
+
     return (
       <div className={profileStyles.content}>
-        <div>
+        {/* <div>
           <span>My status is:</span>
           <ProfileStatus status={this.props.myStatus} updateMyStatus={this.props.updateMyStatusThunk} />
-        </div>
+        </div> */}
         <MainImg />
         {this.props.profileInfo ? <ProfileInfo
-          isOwner={!this.props.match.params.userId}
+          isOwner={isOwner}
           {...this.props.profileInfo}
-          userStatus={this.props.userStatus} />
+          userStatus={this.props.userStatus}
+          myStatus={this.props.myStatus}
+          updateMyStatus={this.props.updateMyStatusThunk} />
           : <Preloader />}
         <MyPostsContainer />
       </div>

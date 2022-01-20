@@ -5,7 +5,7 @@ import styles from './ProfileStatus.module.css'
 class ProfileStatus extends React.Component {
   state = {
     editMode: false,
-    statusText: this.props.status || 'No status'
+    statusText: this.props.status
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -36,7 +36,7 @@ class ProfileStatus extends React.Component {
       <div className={styles.status}>
         {!this.state.editMode &&
           <div>
-            <span onDoubleClick={this.activateEditMode}>{this.state.statusText}</span>
+            <span onDoubleClick={this.activateEditMode}>{this.state.statusText || 'No status'}</span>
           </div>
         }
 
