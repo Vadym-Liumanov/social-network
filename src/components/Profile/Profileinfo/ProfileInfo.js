@@ -3,6 +3,7 @@ import React from 'react'
 import styles from './ProfileInfo.module.css'
 import userImage from '../../../assets/images/userImage.jpg'
 import ProfileStatus from './ProfileStatus'
+// import ProfileStatus from './ProfileStatusWithHooks'
 
 
 const ProfileInfo = (props) => {

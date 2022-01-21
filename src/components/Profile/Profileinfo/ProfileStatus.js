@@ -19,10 +19,8 @@ class ProfileStatus extends React.Component {
   }
 
   deactivateEditMode = () => {
-    let newStatusText
-    if (this.state.statusText !== this.props.status && this.state.statusText !== 'No status') {
-      newStatusText = this.state.statusText
-      this.props.updateMyStatus(newStatusText)
+    if (this.state.statusText !== this.props.status) {
+      this.props.updateMyStatus(this.state.statusText)
     }
     this.setState({ editMode: false })
   }
