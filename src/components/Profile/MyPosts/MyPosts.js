@@ -8,6 +8,9 @@ import { Element } from '../../common/FormsControls/FormsControls'
 
 const MyPosts = (props) => {
   // debugger
+
+  // console.log('COMPONENT WAS RENDERED')
+
   let postElements = Object.values(props.profilePosts).map(post => <Post key={post.id} value={post.post} likesCount={post.likesCount} />)
 
   const onSubmitReduxForm = (formData) => {
