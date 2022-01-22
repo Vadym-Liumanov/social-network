@@ -10,7 +10,7 @@ export const Element = ({ input, meta, ...props }) => {
   return (
     <div className={styles.formControl + " " + (hasError ? styles.error : '')}>
       <div>
-        <props.elementType {...input} {...props} />
+        <props.elementtype {...input} {...props} />
       </div>
       {hasError && <span>{meta.error}</span>}
     </div>
