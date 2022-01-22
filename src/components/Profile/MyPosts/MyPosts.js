@@ -6,7 +6,7 @@ import Post from './Post/Post'
 import { required, maxLength } from '../../../utils/validators/validators'
 import { Element } from '../../common/FormsControls/FormsControls'
 
-const MyPosts = (props) => {
+const MyPosts = React.memo((props) => {
   // debugger
 
   // console.log('COMPONENT WAS RENDERED')
@@ -52,6 +52,6 @@ const MyPosts = (props) => {
       </div>
     </div>
   );
-}
+})
 
 export default MyPosts
