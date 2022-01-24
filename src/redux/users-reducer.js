@@ -1,11 +1,11 @@
 import { getUsers } from '../api/api'
 
-const FOLLOW_TOGGLE = 'FOLLOW_TOGGLE'
-const SET_USERS = 'SET_USERS'
-const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
-const IS_FOLLOWING_IN_PROGRESS_TOGGLE = 'IS_FOLLOWING_IN_PROGRESS_TOGGLE'
+const FOLLOW_TOGGLE = 'social_network/users/FOLLOW_TOGGLE'
+const SET_USERS = 'social_network/users/SET_USERS'
+const SET_TOTAL_COUNT = 'social_network/users/SET_TOTAL_COUNT'
+const SET_CURRENT_PAGE = 'social_network/users/SET_CURRENT_PAGE'
+const TOGGLE_IS_FETCHING = 'social_network/users/TOGGLE_IS_FETCHING'
+const IS_FOLLOWING_IN_PROGRESS_TOGGLE = 'social_network/users/IS_FOLLOWING_IN_PROGRESS_TOGGLE'
 
 // AC - action creator
 export const followToggleAC = (userId) => {
@@ -43,8 +43,6 @@ export const getUsersThunk = (currentPage, usersOnPageCount) => {
     })
   }
 }
-
-
 
 // state = state.users
 const initialState = {

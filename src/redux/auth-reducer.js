@@ -1,8 +1,8 @@
 import { stopSubmit } from 'redux-form'
 import { getAuthData, loginOnTheService, logoutFromTheService } from '../api/api'
 
-const SET_USER_AUTH_DATA = 'SET_USER_AUTH_DATA'
-const RESET_USER_AUTH_DATA = 'RESET_USER_AUTH_DATA'
+const SET_USER_AUTH_DATA = 'social_network/auth/SET_USER_AUTH_DATA'
+const RESET_USER_AUTH_DATA = 'social_network/auth/RESET_USER_AUTH_DATA'
 
 export const setUserAuthDataAC = (authData) => {
   return { type: SET_USER_AUTH_DATA, authData }
@@ -46,7 +46,6 @@ export const logoutThunk = () => {
     })
   }
 }
-
 
 // state = state.auth
 const initialState = {

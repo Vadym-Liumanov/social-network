@@ -1,4 +1,4 @@
-const ADD_DIALOG = 'ADD-DIALOG'
+const ADD_DIALOG = 'social_network/messages/ADD-DIALOG'
 
 export const addNewDilogAC = (text) => {
   return { type: ADD_DIALOG, text }

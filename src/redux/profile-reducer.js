@@ -1,11 +1,11 @@
 import { getUserProfile, getUserStatus, getMyStatus, putMyStatus } from '../api/api'
 
-const ADD_POST = 'ADD-POST'
-// const UPDATE_POST = 'UPDATE-POST'
-const SET_USER_PROFILE = 'SET_USER_PROFILE'
-const SET_USER_STATUS = 'SET_USER_STATUS'
-const SET_MY_STATUS = 'SET_MY_STATUS'
-const UPDATE_MY_STATUS = 'UPDATE_MY_STATUS'
+const ADD_POST = 'social_network/profile/ADD-POST'
+// const UPDATE_POST = 'social_network/profile/UPDATE-POST'
+const SET_USER_PROFILE = 'social_network/profile/SET_USER_PROFILE'
+const SET_USER_STATUS = 'social_network/profile/SET_USER_STATUS'
+const SET_MY_STATUS = 'social_network/profile/SET_MY_STATUS'
+const UPDATE_MY_STATUS = 'social_network/profile/UPDATE_MY_STATUS'
 
 export const updateMyStatusAC = (myStatus) => {
   return {
