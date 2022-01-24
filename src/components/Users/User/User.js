@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { setUserFollow, setUserUnfollow } from '../../../api/api'
+import { usersAPI } from '../../../api/api'
 
 import userStyles from './User.module.css'
 
@@ -18,7 +18,7 @@ const User = (props) => {
     props.isFollowingToggle(userId)
 
     if (props.userInfo.followed) {
-      setUserUnfollow(props.userInfo.id).then((data) => {
+      usersAPI.setUserUnfollow(props.userInfo.id).then((data) => {
         if (data.resultCode === 0) {
           props.followToggle(props.userInfo.id)
         }
@@ -26,7 +26,7 @@ const User = (props) => {
       })
 
     } else {
-      setUserFollow(props.userInfo.id).then((data) => {
+      usersAPI.setUserFollow(props.userInfo.id).then((data) => {
         if (data.resultCode === 0) {
           props.followToggle(props.userInfo.id)
         }

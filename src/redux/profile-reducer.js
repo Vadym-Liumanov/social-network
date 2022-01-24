@@ -1,13 +1,12 @@
-import { getUserProfile, getUserStatus, getMyStatus, putMyStatus } from '../api/api'
+import { profileAPI } from '../api/api'
 
 const ADD_POST = 'social_network/profile/ADD-POST'
-// const UPDATE_POST = 'social_network/profile/UPDATE-POST'
 const SET_USER_PROFILE = 'social_network/profile/SET_USER_PROFILE'
 const SET_USER_STATUS = 'social_network/profile/SET_USER_STATUS'
 const SET_MY_STATUS = 'social_network/profile/SET_MY_STATUS'
 const UPDATE_MY_STATUS = 'social_network/profile/UPDATE_MY_STATUS'
 
-export const updateMyStatusAC = (myStatus) => {
+const updateMyStatusAC = (myStatus) => {
   return {
     type: UPDATE_MY_STATUS,
     myStatus
@@ -16,13 +15,13 @@ export const updateMyStatusAC = (myStatus) => {
 
 export const updateMyStatusThunk = (myStatus) => {
   return (dispatch) => {
-    putMyStatus(myStatus).then((data) => {
+    profileAPI.putMyStatus(myStatus).then((data) => {
       if (data.resultCode === 0) dispatch(updateMyStatusAC(myStatus))
     })
   }
 }
 
-export const setMyStatusAC = (myStatus) => {
+const setMyStatusAC = (myStatus) => {
   return {
     type: SET_MY_STATUS,
     myStatus
@@ -31,11 +30,11 @@ export const setMyStatusAC = (myStatus) => {
 
 export const setMyStatusThunk = (userId) => {
   return (dispatch) => {
-    getMyStatus(userId).then((status) => dispatch(setMyStatusAC(status)))
+    profileAPI.getMyStatus(userId).then((status) => dispatch(setMyStatusAC(status)))
   }
 }
 
-export const setUserStatusAC = (status) => {
+const setUserStatusAC = (status) => {
   return {
     type: SET_USER_STATUS,
     status: status
@@ -44,20 +43,9 @@ export const setUserStatusAC = (status) => {
 
 export const setUserStatusThunk = (userId) => {
   return (dispatch) => {
-    getUserStatus(userId).then((status) => dispatch(setUserStatusAC(status)))
+    profileAPI.getUserStatus(userId).then((status) => dispatch(setUserStatusAC(status)))
   }
 }
-
-export const addPostAC = (postText) => {
-  return { type: ADD_POST, postText }
-}
-
-// export const updatePostAC = (text) => {
-//   return {
-//     type: UPDATE_POST,
-//     text: text
-//   }
-// }
 
 export const setUserProfileAC = (profile) => {
   return {
@@ -68,8 +56,12 @@ export const setUserProfileAC = (profile) => {
 
 export const setUserProfileThunk = (userId) => {
   return (dispatch) => {
-    getUserProfile(userId).then((data) => dispatch(setUserProfileAC(data)))
+    profileAPI.getUserProfile(userId).then((data) => dispatch(setUserProfileAC(data)))
   }
+}
+
+export const addPostAC = (postText) => {
+  return { type: ADD_POST, postText }
 }
 
 const initialState = {

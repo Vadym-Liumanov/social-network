@@ -2,7 +2,7 @@ import { getAuthDataThunk } from './auth-reducer'
 
 const SET_APP_INITIALIZED = 'social_network/app/SET_APP_INITIALIZED'
 
-export const appInitSuccessAC = () => {
+const appInitSuccessAC = () => {
   return { type: SET_APP_INITIALIZED }
 }
 

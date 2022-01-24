@@ -10,42 +10,45 @@ const instanceAxios = axios.create(
   { ...instanceParameters }
 )
 
-export const getAuthData = () => {
-  return instanceAxios.get('auth/me').then(response => response.data)
+export const usersAPI = {
+  getUsers(currentPage, usersOnPageCount) {
+    return instanceAxios.get(`users?page=${currentPage}&count=${usersOnPageCount}`).then(response => response.data)
+  },
+  setUserFollow(userId) {
+    return instanceAxios.post(`follow/${userId}`).then(response => response.data)
+  },
+
+  setUserUnfollow(userId) {
+    return instanceAxios.delete(`follow/${userId}`).then(response => response.data)
+  }
 }
 
-export const getUsers = (currentPage, usersOnPageCount) => {
-  return instanceAxios.get(`users?page=${currentPage}&count=${usersOnPageCount}`).then(response => response.data)
+export const profileAPI = {
+  getUserProfile(userId) {
+    return instanceAxios.get(`profile/${userId}`).then(response => response.data)
+  },
+
+  getUserStatus(userId) {
+    return instanceAxios.get(`profile/status/${userId}`).then(response => response.data)
+  },
+
+  getMyStatus(myId) {
+    return instanceAxios.get(`profile/status/${myId}`).then(response => response.data)
+  },
+
+  putMyStatus(myStatus) {
+    return instanceAxios.put('profile/status/', { status: myStatus }).then(response => response.data)
+  }
 }
 
-export const setUserFollow = (userId) => {
-  return instanceAxios.post(`follow/${userId}`).then(response => response.data)
-}
-
-export const setUserUnfollow = (userId) => {
-  return instanceAxios.delete(`follow/${userId}`).then(response => response.data)
-}
-
-export const getUserProfile = (userId) => {
-  return instanceAxios.get(`profile/${userId}`).then(response => response.data)
-}
-
-export const getUserStatus = (userId) => {
-  return instanceAxios.get(`profile/status/${userId}`).then(response => response.data)
-}
-
-export const getMyStatus = (myId) => {
-  return instanceAxios.get(`profile/status/${myId}`).then(response => response.data)
-}
-
-export const putMyStatus = (myStatus) => {
-  return instanceAxios.put('profile/status/', { status: myStatus }).then(response => response.data)
-}
-
-export const loginOnTheService = (email, password, rememberMe = false) => {
-  return instanceAxios.post('auth/login', { email, password, rememberMe }).then(response => response.data)
-}
-
-export const logoutFromTheService = () => {
-  return instanceAxios.delete('auth/login').then(response => response.data)
+export const authAPI = {
+  getAuthData() {
+    return instanceAxios.get('auth/me').then(response => response.data)
+  },
+  loginOnTheService(email, password, rememberMe = false) {
+    return instanceAxios.post('auth/login', { email, password, rememberMe }).then(response => response.data)
+  },
+  logoutFromTheService() {
+    return instanceAxios.delete('auth/login').then(response => response.data)
+  }
 }

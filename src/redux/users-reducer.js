@@ -1,4 +1,4 @@
-import { getUsers } from '../api/api'
+import { usersAPI } from '../api/api'
 
 const FOLLOW_TOGGLE = 'social_network/users/FOLLOW_TOGGLE'
 const SET_USERS = 'social_network/users/SET_USERS'
@@ -36,7 +36,7 @@ export const isFollowingToggleAC = (followingUserId) => {
 export const getUsersThunk = (currentPage, usersOnPageCount) => {
   return (dispatch) => {
     dispatch(toggleIsFetchingAC(true))
-    getUsers(currentPage, usersOnPageCount).then((data) => {
+    usersAPI.getUsers(currentPage, usersOnPageCount).then((data) => {
       dispatch(setUsersAC(data.items))
       dispatch(setTotalCountAC(data.totalCount))
       dispatch(toggleIsFetchingAC(false))
