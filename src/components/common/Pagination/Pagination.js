@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 
 import styles from './Pagination.module.css'
 
-const Pagination = ({ totalCount, pageSize, currentPage, onPageNumberClick }) => {
+const Pagination = ({ totalCount, pageSize = 4, currentPage, onPageNumberClick, portionSize = 10 }) => {
   const pageNumbersArr = []
   const pagesCount = Math.ceil(totalCount / pageSize)
   for (let i = 1; i <= pagesCount; i++) {
     pageNumbersArr.push(i)
   }
 
-  const portionSize = 10
   const portionCount = Math.ceil(pagesCount / portionSize)
   let startPortionNumber = Math.ceil(currentPage / portionSize)
   let [portionNumber, setPortionNumber] = useState(startPortionNumber)
