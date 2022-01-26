@@ -16,7 +16,7 @@ const Users = (props) => {
   return (
     <div>
       <Pagination totalCount={props.totalCount}
-        usersOnPageCount={props.usersOnPageCount}
+        pageSize={props.usersOnPageCount}
         currentPage={props.currentPage}
         onPageNumberClick={props.onPageNumberClick}
       />
