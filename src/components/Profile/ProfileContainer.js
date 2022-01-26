@@ -29,7 +29,7 @@ class ProfileContainer extends React.Component {
 
   render() {
 
-    const isOwner = (!this.props.match.params.userId && this.props.myId) || (+this.props.match.params.userId === this.props.myId) ? true : false
+    const isOwner = (!this.props.match.params.userId && this.props.myId) || (+this.props.match.params.userId === this.props.myId)
 
     return (
       <div className={profileStyles.content}>
