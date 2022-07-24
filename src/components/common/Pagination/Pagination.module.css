@@ -1,12 +1,19 @@
-.pages {
+.pages, .activePage {
   margin: 5px;
+}
+
+.pages {
   font-weight: 400;
   color: rgb(140, 216, 172);
 }
 
 .activePage {
-  margin: 5px;
   font-size: larger;
+  font-weight: 800;
+  color: rgb(12, 231, 104);
+}
+
+.pages:hover {
   font-weight: 800;
   color: rgb(12, 231, 104);
 }
