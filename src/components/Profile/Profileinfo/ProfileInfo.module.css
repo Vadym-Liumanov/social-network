@@ -1,15 +1,51 @@
-.info {
+.container {
+  font-weight: normal;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.avaNameStatus,
+.aboutMe {
+  margin: 5px;
+  background-color: silver;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+div .avatar {
+  width: 250px;
+  height: 250px;
+  border-radius: 20px;
+}
+
+.fullName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fullName span {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: blue;
+}
+
+.status__title {
+  color: rgb(57, 141, 226);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.status__text {
+  font-size: 1rem;
+  color: rgb(203, 11, 210);
+  font-weight: 600;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.aboutMe__title {
+  font-weight: 600;
   color: greenyellow;
-  font-weight: 600;
 }
-
-.info img {
-  width: 100px;
-  height: 100px;
-}
-
-.status {
-  color: rgb(238, 216, 20);
-  font-weight: 600;
-}
-
