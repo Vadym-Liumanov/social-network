@@ -21,10 +21,12 @@ const ProfileInfo = ({ fullName, photos, isOwner, userStatus, myStatus, updateMy
     <div className={styles.container}>
       <section className={styles.avaNameStatus}>
         <div className={styles.avaContainer}>
-          <img src={photos.small ? photos.small : userImage} alt="userAvatar" className={styles.avatar} />
-        </div>
-        <div>
-          <input type="file" onChange={onFileSelect} />
+          <div className={styles.imgContainer}>
+            <img src={photos.small ? photos.small : userImage} alt="userAvatar" className={styles.avatar} />
+          </div>
+          <div className={styles.inputFileContainer}>
+            <input type="file" onChange={onFileSelect} className={styles.inputFile}/>
+          </div>
         </div>
         <div className={styles.fullName}><span>{fullName}</span></div>
         <div className={styles.status}>

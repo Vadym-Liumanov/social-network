@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .container {
   font-weight: normal;
   display: flex;
@@ -11,22 +15,59 @@
   background-color: silver;
   padding: 10px;
   border-radius: 5px;
-  height: 58vh;
-  min-width: 20vw;
+  height: 65vh;
   overflow: hidden;
 }
 
-.avaContainer {
-  display: flex;
-  justify-content: center;
+.aboutMe {
+  min-width: 20vw;
 }
 
-div .avatar {
+.avaNameStatus {
+  min-width: 270px;
+  width: 25vw;
+}
+
+
+.avaContainer {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.imgContainer {
+  position: static;
+}
+
+img.avatar {
   width: 250px;
   height: 250px;
   border-radius: 20px;
 }
 
+.inputFileContainer {
+  position: absolute;
+  margin: 10px;
+  top: 80%;
+  visibility: hidden;
+}
+
+.avaContainer:hover .inputFileContainer {
+  visibility: visible;
+}
+
+.inputFile {
+  color: red;
+  width: 100%;
+  margin-right: 20px;
+}
+
+
+
+
+
+/* ********************** */
 .fullName {
   display: flex;
   justify-content: center;
