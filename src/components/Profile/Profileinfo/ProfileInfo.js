@@ -7,13 +7,15 @@ import ProfileStatus from './ProfileStatusWithHooks'
 
 
 const ProfileInfo = ({ fullName, photos, isOwner, userStatus, myStatus, updateMyStatus, aboutMe,
-  contacts, lookingForAJob, lookingForAJobDescription }) => {
- 
+  contacts, lookingForAJob, lookingForAJobDescription, savePhoto }) => {
+
   const notSpecified = 'Not specified'
 
   const onFileSelect = (e) => {
-    const temp = e.target.files[0]
-    console.log(temp)
+    if (e.target.files.length) {
+      const fileData = e.target.files[0]
+      savePhoto(fileData)
+    }
   }
 
   return (
@@ -21,7 +23,7 @@ const ProfileInfo = ({ fullName, photos, isOwner, userStatus, myStatus, updateMy
       <section className={styles.avaNameStatus}>
         <div className={styles.avaContainer}>
           <div className={styles.imgContainer}>
-            <img src={photos.small ? photos.small : userImage} alt="userAvatar" className={styles.avatar} />
+            <img src={photos.large ? photos.large : userImage} alt="userAvatar" className={styles.avatar} />
           </div>
           {isOwner && (
             <div className={styles.inputFileContainer}>

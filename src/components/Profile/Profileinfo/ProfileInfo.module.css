@@ -32,10 +32,8 @@
 }
 
 .avaContainer {
+  align-self: center;
   position: relative;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
   width: fit-content;
 }
 
@@ -61,7 +59,7 @@ img.avatar {
 }
 
 .inputFile {
-  color: red;
+  color: rgb(236, 0, 0);
   width: 100%;
   margin-right: 20px;
 }

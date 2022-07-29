@@ -5,6 +5,22 @@ const SET_USER_PROFILE = 'social_network/profile/SET_USER_PROFILE'
 const SET_USER_STATUS = 'social_network/profile/SET_USER_STATUS'
 const SET_MY_STATUS = 'social_network/profile/SET_MY_STATUS'
 const UPDATE_MY_STATUS = 'social_network/profile/UPDATE_MY_STATUS'
+const UPDATE_MY_PHOTO = 'social_network/profile/UPDATE_MY_PHOTO'
+
+const updateMyPhotoSuccessAC = (photos) => {
+  return {
+    type: UPDATE_MY_PHOTO,
+    photos
+  }
+}
+
+export const savePhotoThunk = (file) => {
+  return (dispatch) => {
+    profileAPI.savePhoto(file).then((data) => {
+      if (data.resultCode === 0) dispatch(updateMyPhotoSuccessAC(data.data.photos))
+    })
+  }
+}
 
 const updateMyStatusAC = (myStatus) => {
   return {
@@ -86,18 +102,28 @@ const initialState = {
 const profileReduser = (state = initialState, action) => {
   switch (action.type) {
 
-    case ADD_POST:
-        const newPostId = state.profilePosts[state.profilePosts.length - 1].id + 1
-        const newPostObj = {
-          id: newPostId,
-          post: action.postText,
-          likesCount: 0
-        }
+    case UPDATE_MY_PHOTO:
+      //   "photos": {
+      //     "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+      //     "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+      //   }  
 
-        return {
-          ...state,
-          profilePosts: [...state.profilePosts, newPostObj],
-        }
+      return {
+        ...state, userProfile: { ...state.userProfile, photos: action.photos }
+      }
+
+    case ADD_POST:
+      const newPostId = state.profilePosts[state.profilePosts.length - 1].id + 1
+      const newPostObj = {
+        id: newPostId,
+        post: action.postText,
+        likesCount: 0
+      }
+
+      return {
+        ...state,
+        profilePosts: [...state.profilePosts, newPostObj],
+      }
 
     // case UPDATE_POST:
     //   return {

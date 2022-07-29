@@ -1,5 +1,6 @@
 import React from 'react'
-import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
+// import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
+import { Route, HashRouter, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { initializeAppThunk } from './redux/app-reducer'
@@ -30,7 +31,7 @@ class App extends React.Component {
     }
 
     return (
-      <BrowserRouter>
+      <HashRouter>
         <div className="app-wrapper">
           <Header />
           <Navbar />
@@ -51,7 +52,7 @@ class App extends React.Component {
             </Switch>
           </div>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     )
   }
 }
