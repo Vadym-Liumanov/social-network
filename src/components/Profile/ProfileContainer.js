@@ -43,7 +43,7 @@ class ProfileContainer extends React.Component {
           myStatus={this.props.myStatus}
           updateMyStatus={this.props.updateMyStatusThunk} />
           : <Preloader />}
-        <MyPostsContainer />
+        {isOwner && <MyPostsContainer />}
       </div>
     )
   }
