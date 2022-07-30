@@ -3,13 +3,13 @@ import React from 'react'
 import styles from './ProfileInfo.module.css'
 import userImage from '../../../assets/images/userImage.jpg'
 // import ProfileStatus from './ProfileStatus'
-import ProfileStatus from './ProfileStatusWithHooks'
+import ProfileStatus from './ProfileStatus/ProfileStatusWithHooks'
+import Aboutme from './Aboutme/Aboutme'
 
 
-const ProfileInfo = ({ fullName, photos, isOwner, userStatus, myStatus, updateMyStatus, aboutMe,
-  contacts, lookingForAJob, lookingForAJobDescription, savePhoto }) => {
+const ProfileInfo = ({ fullName, photos, isOwner, userStatus, myStatus, updateMyStatus, savePhoto, ...props }) => {
 
-  const notSpecified = 'Not specified'
+
 
   const onFileSelect = (e) => {
     if (e.target.files.length) {
@@ -27,7 +27,7 @@ const ProfileInfo = ({ fullName, photos, isOwner, userStatus, myStatus, updateMy
           </div>
           {isOwner && (
             <div className={styles.inputFileContainer}>
-              <input type="file" onChange={onFileSelect} className={styles.inputFile} />
+              <input type="file" onChange={onFileSelect} className={styles.inputFile} accept="image/*" />
             </div>
           )}
         </div>
@@ -41,21 +41,7 @@ const ProfileInfo = ({ fullName, photos, isOwner, userStatus, myStatus, updateMy
         </div>
       </section>
       <section className={styles.aboutMe}>
-        <div>
-          <div className={styles.aboutMe__title}>About me</div>
-          <div>
-            {aboutMe || notSpecified}
-          </div>
-          <div>
-            {/* { contacts || notSpecified} */}
-          </div>
-          <div>
-            lookingForAJob: {lookingForAJob || notSpecified}
-          </div>
-          <div>
-            lookingForAJobDescription:{lookingForAJobDescription || notSpecified}
-          </div>
-        </div>
+        <Aboutme {...props} />
       </section>
     </div>
   )
