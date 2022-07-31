@@ -4,12 +4,9 @@ import styles from './ProfileInfo.module.css'
 import userImage from '../../../assets/images/userImage.jpg'
 // import ProfileStatus from './ProfileStatus'
 import ProfileStatus from './ProfileStatus/ProfileStatusWithHooks'
-import Aboutme from './Aboutme/Aboutme'
+import ProfileSettings from './ProfileSettings/ProfileSettings'
 
-
-const ProfileInfo = ({ fullName, photos, isOwner, userStatus, myStatus, updateMyStatus, savePhoto, ...props }) => {
-
-
+const ProfileInfo = ({ photos, isOwner, userStatus, myStatus, updateMyStatus, savePhoto, ...profileDetails }) => {
 
   const onFileSelect = (e) => {
     if (e.target.files.length) {
@@ -31,7 +28,7 @@ const ProfileInfo = ({ fullName, photos, isOwner, userStatus, myStatus, updateMy
             </div>
           )}
         </div>
-        <div className={styles.fullName}><span>{fullName}</span></div>
+        <div className={styles.fullName}><span>{profileDetails.fullName}</span></div>
         <div className={styles.status}>
           <div className={styles.status__title}>Status:</div>
           <div className={styles.status__text}>
@@ -41,7 +38,7 @@ const ProfileInfo = ({ fullName, photos, isOwner, userStatus, myStatus, updateMy
         </div>
       </section>
       <section className={styles.aboutMe}>
-        <Aboutme {...props} />
+        <ProfileSettings {...profileDetails} />
       </section>
     </div>
   )
