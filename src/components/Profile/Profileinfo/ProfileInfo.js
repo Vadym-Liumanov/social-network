@@ -6,7 +6,7 @@ import userImage from '../../../assets/images/userImage.jpg'
 import ProfileStatus from './ProfileStatus/ProfileStatusWithHooks'
 import ProfileSettings from './ProfileSettings/ProfileSettings'
 
-const ProfileInfo = ({ photos, isOwner, userStatus, myStatus, updateMyStatus, savePhoto, ...profileDetails }) => {
+const ProfileInfo = ({ photos, isOwner, userStatus, myStatus, updateMyStatus, savePhoto, updateProfile, ...profileDetails }) => {
 
   const onFileSelect = (e) => {
     if (e.target.files.length) {
@@ -38,7 +38,7 @@ const ProfileInfo = ({ photos, isOwner, userStatus, myStatus, updateMyStatus, sa
         </div>
       </section>
       <section className={styles.aboutMe}>
-        <ProfileSettings {...profileDetails} />
+        <ProfileSettings {...profileDetails} updateProfile={updateProfile} />
       </section>
     </div>
   )

@@ -7,6 +7,14 @@ const SET_MY_STATUS = 'social_network/profile/SET_MY_STATUS'
 const UPDATE_MY_STATUS = 'social_network/profile/UPDATE_MY_STATUS'
 const UPDATE_MY_PHOTO = 'social_network/profile/UPDATE_MY_PHOTO'
 
+export const updateProfileThunk = (profileData) => {
+  return (dispatch) => {
+    profileAPI.updateProfile(profileData).then((data) => {
+      if (data.resultCode === 0) console.log('Profile was updated')
+    })
+  }
+}
+
 const updateMyPhotoSuccessAC = (photos) => {
   return {
     type: UPDATE_MY_PHOTO,

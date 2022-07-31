@@ -45,6 +45,12 @@ export const profileAPI = {
     formData.append('image', file)
     return instanceAxios.put('profile/photo/', formData, { headers: { 'Content-type': 'multipart/form-data' } })
       .then(response => response.data)
+  },
+
+  updateProfile(profileData) {
+    return instanceAxios.put('profile/', profileData)
+      .then(response => response.data)
+      .catch(err => {console.log('Server err')})
   }
 }
 

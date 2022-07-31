@@ -3,7 +3,10 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 
-import { setUserProfileThunk, setUserStatusThunk, setMyStatusThunk, updateMyStatusThunk, savePhotoThunk } from '../../redux/profile-reducer'
+import {
+  setUserProfileThunk, setUserStatusThunk, setMyStatusThunk,
+  updateMyStatusThunk, savePhotoThunk, updateProfileThunk
+} from '../../redux/profile-reducer'
 
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 
@@ -42,7 +45,8 @@ class ProfileContainer extends React.Component {
           userStatus={this.props.userStatus}
           myStatus={this.props.myStatus}
           updateMyStatus={this.props.updateMyStatusThunk}
-          savePhoto = {this.props.savePhotoThunk} />
+          savePhoto={this.props.savePhotoThunk}
+          updateProfile={this.props.updateProfile} />
           : <Preloader />}
         {isOwner && <MyPostsContainer />}
       </div>
@@ -66,7 +70,8 @@ const MapDispatchToProps = (dispatch) => {
     setUserStatusThunk: (id) => dispatch(setUserStatusThunk(id)),
     setMyStatusThunk: (myId) => dispatch(setMyStatusThunk(myId)),
     updateMyStatusThunk: (myStatus) => dispatch(updateMyStatusThunk(myStatus)),
-    savePhotoThunk: (fileData) => dispatch(savePhotoThunk(fileData)) 
+    savePhotoThunk: (fileData) => dispatch(savePhotoThunk(fileData)),
+    updateProfile: (profileData) => dispatch(updateProfileThunk(profileData))
   }
 }
 
