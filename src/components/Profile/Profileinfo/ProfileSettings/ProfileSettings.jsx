@@ -49,7 +49,7 @@ const ProfileSettings = (props) => {
       {editMode && (
         <div>
           <div>Form</div>
-          <ProfileReduxForm onSubmit={onSubmitProfileReduxForm} />
+          <ProfileReduxForm onSubmit={onSubmitProfileReduxForm} initialValues={props} />
           <button onClick={onDisableEditMode}>Back</button>
         </div>
       )}
