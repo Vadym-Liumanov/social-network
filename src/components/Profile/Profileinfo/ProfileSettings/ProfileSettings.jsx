@@ -4,7 +4,6 @@ import ProfileReduxForm from './ProfileForm/ProfileForm'
 import styles from './ProfileSettings.module.css'
 
 const ProfileSettings = (props) => {
-
   const [editMode, setEditMode] = useState(false)
 
   const onEnableEditMode = () => {
@@ -15,7 +14,7 @@ const ProfileSettings = (props) => {
   }
 
   const onSubmitProfileReduxForm = (profileData) => {
-    // console.log(profileData)
+    debugger
     setEditMode(false)
     props.updateProfile(profileData)
   }
@@ -36,7 +35,7 @@ const ProfileSettings = (props) => {
           </div>
           <div className={styles.settingsItem}>
             <div><b>lookingForAJob: </b></div>
-            <div>{props.lookingForAJob || '----------'}</div>
+            <div>{props.lookingForAJob ? 'yes' : 'no'}</div>
           </div>
           <div className={styles.settingsItem}>
             <div><b>lookingForAJobDescription: </b></div>
@@ -45,10 +44,15 @@ const ProfileSettings = (props) => {
           <div className={styles.contacts}>
             <div><b>Contacts</b></div>
             <div>
-              {Object.values(pros.contacts).map((contact) => { return (
-                  <div key={contact}><span>{‘${contact}‘}</span><span>{props.contacts[contact]}</span></div>
+              {Object.keys(props.contacts).map((contact) => {
+                return (
+                  <div key={contact}>
+                    <span><b>{contact}</b></span>
+                    <span>{props.contacts[contact] || ' -----'}</span>
+                  </div>
                 )
               })}
+
             </div>
           </div>
           <button onClick={onEnableEditMode}>Edit</button>
@@ -58,7 +62,7 @@ const ProfileSettings = (props) => {
       {editMode && (
         <div>
           <div>Form</div>
-          <ProfileReduxForm onSubmit={onSubmitProfileReduxForm} initialValues={props} />
+          <ProfileReduxForm onSubmit={onSubmitProfileReduxForm} initialValues={props} profileDetails={props} />
           <button onClick={onDisableEditMode}>Back</button>
         </div>
       )}
