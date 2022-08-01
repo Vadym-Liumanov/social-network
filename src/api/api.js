@@ -50,7 +50,6 @@ export const profileAPI = {
   updateProfile(profileData) {
     return instanceAxios.put('profile/', profileData)
       .then(response => response.data)
-      .catch(err => {console.log('Server err')})
   }
 }
 

@@ -29,6 +29,7 @@ const ProfileForm = (props) => {
           )
         })}
       </div>
+      {props.error && <div>{props.error}</div>}
       <button>Save</button>
     </form>
   )

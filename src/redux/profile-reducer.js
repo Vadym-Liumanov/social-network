@@ -1,3 +1,4 @@
+import { stopSubmit } from 'redux-form'
 import { profileAPI } from '../api/api'
 
 const ADD_POST = 'social_network/profile/ADD-POST'
@@ -9,11 +10,13 @@ const UPDATE_MY_PHOTO = 'social_network/profile/UPDATE_MY_PHOTO'
 
 export const updateProfileThunk = (profileData) => {
   return (dispatch, getState) => {
-    const store = getState()
-    const userId = store.auth.id
+    const userId = getState().auth.id
     profileAPI.updateProfile(profileData).then((data) => {
       if (data.resultCode === 0) {
         dispatch(setUserProfileThunk(userId))
+      }
+      else {
+        dispatch(stopSubmit('profile', {_error: data.messages}))
       }
     })
   }

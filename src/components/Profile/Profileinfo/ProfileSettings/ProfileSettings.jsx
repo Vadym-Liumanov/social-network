@@ -14,9 +14,8 @@ const ProfileSettings = (props) => {
   }
 
   const onSubmitProfileReduxForm = (profileData) => {
-    debugger
-    setEditMode(false)
     props.updateProfile(profileData)
+    setEditMode(false)
   }
 
   return (
