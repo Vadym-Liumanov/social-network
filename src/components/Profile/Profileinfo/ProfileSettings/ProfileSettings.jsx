@@ -10,12 +10,12 @@ const ProfileSettings = (props) => {
   const onEnableEditMode = () => {
     setEditMode(true)
   }
-  // const onDisableEditMode = () => {
-  //   setEditMode(false)
-  // }
+  const onDisableEditMode = () => {
+    setEditMode(false)
+  }
 
   const onSubmitProfileReduxForm = (profileData) => {
-    console.log(profileData)
+    // console.log(profileData)
     setEditMode(false)
     props.updateProfile(profileData)
   }
@@ -50,6 +50,7 @@ const ProfileSettings = (props) => {
         <div>
           <div>Form</div>
           <ProfileReduxForm onSubmit={onSubmitProfileReduxForm} />
+          <button onClick={onDisableEditMode}>Back</button>
         </div>
       )}
 

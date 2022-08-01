@@ -8,9 +8,13 @@ const UPDATE_MY_STATUS = 'social_network/profile/UPDATE_MY_STATUS'
 const UPDATE_MY_PHOTO = 'social_network/profile/UPDATE_MY_PHOTO'
 
 export const updateProfileThunk = (profileData) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const store = getState()
+    const userId = store.auth.id
     profileAPI.updateProfile(profileData).then((data) => {
-      if (data.resultCode === 0) console.log('Profile was updated')
+      if (data.resultCode === 0) {
+        dispatch(setUserProfileThunk(userId))
+      }
     })
   }
 }
