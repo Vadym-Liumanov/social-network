@@ -42,6 +42,15 @@ const ProfileSettings = (props) => {
             <div><b>lookingForAJobDescription: </b></div>
             <div>{props.lookingForAJobDescription || '----------'}</div>
           </div>
+          <div className={styles.contacts}>
+            <div><b>Contacts</b></div>
+            <div>
+              {Object.values(pros.contacts).map((contact) => { return (
+                  <div key={contact}><span>{‘${contact}‘}</span><span>{props.contacts[contact]}</span></div>
+                )
+              })}
+            </div>
+          </div>
           <button onClick={onEnableEditMode}>Edit</button>
         </div>
       )}
