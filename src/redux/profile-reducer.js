@@ -11,12 +11,13 @@ const UPDATE_MY_PHOTO = 'social_network/profile/UPDATE_MY_PHOTO'
 export const updateProfileThunk = (profileData) => {
   return (dispatch, getState) => {
     const userId = getState().auth.id
-    profileAPI.updateProfile(profileData).then((data) => {
+    return profileAPI.updateProfile(profileData).then((data) => {
       if (data.resultCode === 0) {
         dispatch(setUserProfileThunk(userId))
       }
       else {
         dispatch(stopSubmit('profile', {_error: data.messages}))
+        return Promise.reject(data.messages)
       }
     })
   }
