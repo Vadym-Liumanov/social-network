@@ -23,6 +23,11 @@ const LoginForm = (props) => {
       <div>
         <Field component={'input'} type={'checkbox'} name={'rememberMe'} /> Remember me
       </div>
+      {props.captchaUrl && <div><img src={props.captchaUrl} alt="captcha" /></div>}
+      {props.captchaUrl &&
+        <div>
+          <Field component={Element} placeholder={'captcha'} name={'captcha'} elementType='input' type='text' validate={[required]} />
+        </div>}
       {props.error &&
         <div className={styles.formSummaryError}>
           {props.error}
@@ -45,8 +50,8 @@ const Login = (props) => {
   // диспатчим из onSubmit formData через POST запрос на API для
   // авторизации на стороннем сервисе
 
-  const onSubmit = ({ email, password, rememberMe }) => {
-    props.loginThunk(email, password, rememberMe)
+  const onSubmit = ({ email, password, rememberMe, captcha }) => {
+    props.loginThunk(email, password, rememberMe, captcha)
   }
 
   if (props.isAuth) {
@@ -56,20 +61,21 @@ const Login = (props) => {
   return (
     <div>
       <h1>Login</h1>
-      <LoginReduxForm onSubmit={onSubmit} />
+      <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} />
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaUrl: state.auth.captchaUrl,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginThunk: (email, password, rememberMe) => dispatch(loginThunk(email, password, rememberMe))
+    loginThunk: (email, password, rememberMe, captcha) => dispatch(loginThunk(email, password, rememberMe, captcha))
   }
 }
 

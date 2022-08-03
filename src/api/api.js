@@ -57,10 +57,13 @@ export const authAPI = {
   getAuthData() {
     return instanceAxios.get('auth/me').then(response => response.data)
   },
-  loginOnTheService(email, password, rememberMe = false) {
-    return instanceAxios.post('auth/login', { email, password, rememberMe }).then(response => response.data)
+  loginOnTheService(email, password, rememberMe = false, captcha = null) {
+    return instanceAxios.post('auth/login', { email, password, rememberMe, captcha }).then(response => response.data)
   },
   logoutFromTheService() {
     return instanceAxios.delete('auth/login').then(response => response.data)
+  },
+  getCaptchaUrl() {
+    return instanceAxios.get('/security/get-captcha-url').then(response => response.data)
   }
 }
