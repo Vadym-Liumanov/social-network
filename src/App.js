@@ -21,8 +21,24 @@ import Settings from './components/Settings/Settings'
 import Preloader from './components/common/Preloader/Preloader'
 
 class App extends React.Component {
+  //метод для обработки rejected промисов
+  catchAllUnhandledErrors = (promiseRejectionEvent) => {
+    // вместо алерта можно запилить dispatch thunk-и, по которой мы будем изменять значение в state.app.globalError
+    // by default is null. Туда можем сохранить текст ошибки (или еще какую инфу), потом эту ошибку вывести в UI
+    // красиво во всплывающем окне, затем через setTimeOut поле state.app.globalError обнулить - для повторения запроса
+    // ну или запросить у юзера нажать button for retry
+    alert(promiseRejectionEvent.reason)
+    console.error(promiseRejectionEvent)
+  }
   componentDidMount() {
     this.props.initializeAppThunk()
+    //добавляем событие, по которому мы обрабатываем все необработанные отклоненные rejected промисы
+    window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors)
+  }
+
+  //удаляем мусор при демонтировании компоненты 
+  componentWillUnmount() {
+    window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors)
   }
 
   render() {
