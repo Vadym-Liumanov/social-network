@@ -2,11 +2,15 @@ import { getAuthDataThunk } from './auth-reducer'
 
 const SET_APP_INITIALIZED = 'social_network/app/SET_APP_INITIALIZED'
 
-const appInitSuccessAC = () => {
+type AppInitSuccessACType = {
+  type: typeof SET_APP_INITIALIZED
+}
+
+const appInitSuccessAC = (): AppInitSuccessACType => {
   return { type: SET_APP_INITIALIZED }
 }
 
-export const initializeAppThunk = () => {
+export const initializeAppThunk: () => any = () => {
   return (dispatch: any) => {
     const promise = dispatch(getAuthDataThunk())
     Promise.all([promise]).then(() => {
@@ -15,18 +19,22 @@ export const initializeAppThunk = () => {
   }
 }
 
+export type InitialStateType = {
+  isAppInitialized: boolean
+}
+
 // state = state.app
-const initialState = {
+const initialState: InitialStateType = {
   isAppInitialized: false
 }
 
-const appReducer = (state = initialState, action: any) => {
+const appReducer = (state = initialState, action: AppInitSuccessACType): InitialStateType => {
   switch (action.type) {
 
     case SET_APP_INITIALIZED:
       return {
         ...state,
-        isAppInitialized: true
+        isAppInitialized: true,
       }
 
     default:
