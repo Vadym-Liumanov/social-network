@@ -57,7 +57,7 @@ export const authAPI = {
   getAuthData() {
     return instanceAxios.get('auth/me').then(response => response.data)
   },
-  loginOnTheService(email, password, rememberMe = false, captcha = null) {
+  loginOnTheService(email, password, rememberMe = false, captcha) {
     return instanceAxios.post('auth/login', { email, password, rememberMe, captcha }).then(response => response.data)
   },
   logoutFromTheService() {
