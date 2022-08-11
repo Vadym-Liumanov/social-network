@@ -19,7 +19,7 @@ export const initializeAppThunk: () => any = () => {
   }
 }
 
-export type InitialStateType = {
+type InitialStateType = {
   isAppInitialized: boolean
 }
 

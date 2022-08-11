@@ -1,4 +1,5 @@
 import { usersAPI } from '../api/api'
+import { UserInfoType } from '../types/types'
 
 const FOLLOW_TOGGLE = 'social_network/users/FOLLOW_TOGGLE'
 const SET_USERS = 'social_network/users/SET_USERS'
@@ -75,20 +76,6 @@ export const getUsersThunk = (currentPage: number, usersOnPageCount: number) => 
   }
 }
 
-type PhotosType = {
-  small: string | null,
-  large: string | null
-}
-
-type UserInfoType = {
-    name: string,
-    id: number,
-    uniqueUrlName: string | null,
-    photos: PhotosType,
-    status: string | null,
-    followed: boolean
-}
-
 type UsersListType = Array<UserInfoType>
 
 type InitialStateType = {
@@ -103,30 +90,30 @@ type InitialStateType = {
 // state = state.users
 const initialState: InitialStateType = {
   usersList: [],
-    // api format from url='https://social-network.samuraijs.com/api/1.0/users?page=1&count=2'
+  // api format from url='https://social-network.samuraijs.com/api/1.0/users?page=1&count=2'
 
-    // {
-    //   "name": "bruklin",
-    //   "id": 21402,
-    //   "uniqueUrlName": null,
-    //   "photos": {
-    //     "small": null,
-    //     "large": null
-    //   },
-    //   "status": null,
-    //   "followed": true
-    // },
-    // {
-    //   "name": "sershor",
-    //   "id": 21401,
-    //   "uniqueUrlName": null,
-    //   "photos": {
-    //     "small": null,
-    //     "large": null
-    //   },
-    //   "status": null,
-    //   "followed": false
-    // }
+  // {
+  //   "name": "bruklin",
+  //   "id": 21402,
+  //   "uniqueUrlName": null,
+  //   "photos": {
+  //     "small": null,
+  //     "large": null
+  //   },
+  //   "status": null,
+  //   "followed": true
+  // },
+  // {
+  //   "name": "sershor",
+  //   "id": 21401,
+  //   "uniqueUrlName": null,
+  //   "photos": {
+  //     "small": null,
+  //     "large": null
+  //   },
+  //   "status": null,
+  //   "followed": false
+  // }
   totalCount: 0,
   currentPage: 1,
   usersOnPageCount: 5,
@@ -135,7 +122,7 @@ const initialState: InitialStateType = {
 }
 
 // state = state.users
-const usersReduser = (state = initialState, action: any): InitialStateType => { 
+const usersReduser = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case FOLLOW_TOGGLE:
       return {

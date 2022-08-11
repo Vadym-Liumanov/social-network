@@ -1,5 +1,6 @@
 import { stopSubmit } from 'redux-form'
 import { profileAPI } from '../api/api'
+import { PhotosType, ProfileType } from '../types/types'
 
 const ADD_POST = 'social_network/profile/ADD-POST'
 const SET_USER_PROFILE = 'social_network/profile/SET_USER_PROFILE'
@@ -97,32 +98,6 @@ export const setUserStatusThunk = (userId: number) => {
   return (dispatch: any) => {
     profileAPI.getUserStatus(userId).then((status) => dispatch(setUserStatusAC(status)))
   }
-}
-
-type ContactsType = {
-  facebook: string | null,
-  website: string | null,
-  vk: string | null,
-  twitter: string | null,
-  instagram: string | null,
-  youtube: string | null,
-  github: string | null,
-  mainLink: string | null
-}
-
-type PhotosType = {
-  small: string | null,
-  large: string | null
-}
-
-type ProfileType = {
-  aboutMe: string | null,
-  contacts: ContactsType,
-  lookingForAJob: boolean,
-  lookingForAJobDescription: string | null,
-  fullName: string | null,
-  userId: number,
-  photos: PhotosType
 }
 
 type SetUserProfileACType = {
