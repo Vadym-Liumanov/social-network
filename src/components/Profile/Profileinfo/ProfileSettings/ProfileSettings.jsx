@@ -3,7 +3,7 @@ import ProfileReduxForm from './ProfileForm/ProfileForm'
 
 import styles from './ProfileSettings.module.css'
 
-const ProfileSettings = (props) => {
+const ProfileSettings = ({isOwner, ...props}) => {
   const [editMode, setEditMode] = useState(false)
 
   const onEnableEditMode = () => {
@@ -56,7 +56,7 @@ const ProfileSettings = (props) => {
 
             </div>
           </div>
-          <button onClick={onEnableEditMode}>Edit</button>
+          {isOwner && <button onClick={onEnableEditMode}>Edit</button>}
         </div>
       )}
 

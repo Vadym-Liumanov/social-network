@@ -38,7 +38,7 @@ const ProfileInfo = ({ photos, isOwner, userStatus, myStatus, updateMyStatus, sa
         </div>
       </section>
       <section className={styles.aboutMe}>
-        <ProfileSettings {...profileDetails} updateProfile={updateProfile} />
+        <ProfileSettings {...profileDetails} isOwner={isOwner} updateProfile={updateProfile} />
       </section>
     </div>
   )
