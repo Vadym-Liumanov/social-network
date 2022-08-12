@@ -29,12 +29,12 @@ export const setUsersAC = (usersList: UsersListType): SetUsersACType => {
 }
 
 type SetTotalCountACType = {
-  type: typeof FOLLOW_TOGGLE,
+  type: typeof SET_TOTAL_COUNT,
   totalCount: number
 }
 
 export const setTotalCountAC = (totalCount: number): SetTotalCountACType => {
-  return { type: FOLLOW_TOGGLE, totalCount }
+  return { type: SET_TOTAL_COUNT, totalCount }
 }
 
 type SetCurrentPageACType = {
