@@ -7,11 +7,11 @@ type PropsType = {
   pageSize: number,
   currentPage: number,
   onPageNumberClick: (page: number) => void,
-  portionSize: number
+  portionSize?: number
 }
 
 const Pagination: React.FC<PropsType> = ({ totalCount, pageSize = 4, currentPage, onPageNumberClick, portionSize = 10 }) => {
-  const pageNumbersArr = []
+  const pageNumbersArr: Array<number> = []
   const pagesCount = Math.ceil(totalCount / pageSize)
   for (let i = 1; i <= pagesCount; i++) {
     pageNumbersArr.push(i)

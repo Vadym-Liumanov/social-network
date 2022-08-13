@@ -16,6 +16,7 @@ class UsersContainer extends React.Component {
     this.props.getUsersThunk(this.props.currentPage, this.props.usersOnPageCount)
   }
 
+  //function is use for selecting current page number in Pagination.tsx
   onPageNumberClick = (pageNumber) => {
     this.props.setCurrentPage(pageNumber)
     this.props.getUsersThunk(pageNumber, this.props.usersOnPageCount)
