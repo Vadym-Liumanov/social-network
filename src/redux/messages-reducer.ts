@@ -9,18 +9,18 @@ export const addNewDilogAC = (text: string): AddNewDilogACType => {
   return { type: ADD_DIALOG, text }
 }
 
-type UsersType = {
+type UserType = {
   id: number,
   userName: string
 }
-type DialogsType = {
+type DialogType = {
   id: number,
   dialog: string
 }
 
 type InitialStateType = {
-  users: Array<UsersType>,
-  dialogs: Array<DialogsType>
+  users: Array<UserType>,
+  dialogs: Array<DialogType>
 }
 
 const initialState: InitialStateType = {
