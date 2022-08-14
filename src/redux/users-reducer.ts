@@ -1,5 +1,7 @@
+import { Dispatch } from 'redux'
 import { usersAPI } from '../api/api'
 import { UserInfoType } from '../types/types'
+import { AppStateType } from './store-redux'
 
 const FOLLOW_TOGGLE = 'social_network/users/FOLLOW_TOGGLE'
 const SET_USERS = 'social_network/users/SET_USERS'
@@ -9,6 +11,10 @@ const TOGGLE_IS_FETCHING = 'social_network/users/TOGGLE_IS_FETCHING'
 const IS_FOLLOWING_IN_PROGRESS_TOGGLE = 'social_network/users/IS_FOLLOWING_IN_PROGRESS_TOGGLE'
 
 // AC - action creator
+
+// Type for all action creator types
+type ActionCreatorTypes = FollowToggleACType | SetUsersACType | SetTotalCountACType
+  | SetCurrentPageACType | ToggleIsFetchingACType | IsFollowingToggleACType
 
 type FollowToggleACType = {
   type: typeof FOLLOW_TOGGLE,
@@ -64,9 +70,13 @@ export const isFollowingToggleAC = (followingUserId: number): IsFollowingToggleA
   return { type: IS_FOLLOWING_IN_PROGRESS_TOGGLE, followingUserId }
 }
 
-// thunk-creators
+// thunk creators
+
+type DispatchType = Dispatch<ActionCreatorTypes>
+type GetStateType = () => AppStateType
+
 export const getUsersThunk = (currentPage: number, usersOnPageCount: number) => {
-  return (dispatch: any) => {
+  return (dispatch: DispatchType, getState: GetStateType) => {
     dispatch(toggleIsFetchingAC(true))
     usersAPI.getUsers(currentPage, usersOnPageCount).then((data) => {
       dispatch(setUsersAC(data.items))
@@ -93,31 +103,8 @@ type InitialStateType = {
 
 // state = state.users
 const initialState: InitialStateType = {
+  // see usersList format on url='https://social-network.samuraijs.com/api/1.0/users?page=1&count=2'
   usersList: [],
-  // api format from url='https://social-network.samuraijs.com/api/1.0/users?page=1&count=2'
-
-  // {
-  //   "name": "bruklin",
-  //   "id": 21402,
-  //   "uniqueUrlName": null,
-  //   "photos": {
-  //     "small": null,
-  //     "large": null
-  //   },
-  //   "status": null,
-  //   "followed": true
-  // },
-  // {
-  //   "name": "sershor",
-  //   "id": 21401,
-  //   "uniqueUrlName": null,
-  //   "photos": {
-  //     "small": null,
-  //     "large": null
-  //   },
-  //   "status": null,
-  //   "followed": false
-  // }
   totalCount: 0,
   currentPage: 1,
   usersOnPageCount: 5,
@@ -125,8 +112,8 @@ const initialState: InitialStateType = {
   isFollowingInProgress: [] //massiv iz id userov kotorie v processe zaprosa na followed - esli id net, to button ne disable
 }
 
-// state = state.users
-const usersReduser = (state = initialState, action: any): InitialStateType => {
+// getState().users
+const usersReduser = (state = initialState, action: ActionCreatorTypes): InitialStateType => {
   switch (action.type) {
     case FOLLOW_TOGGLE:
       return {
@@ -146,7 +133,7 @@ const usersReduser = (state = initialState, action: any): InitialStateType => {
       return { ...state, totalCount: action.totalCount }
 
     case SET_CURRENT_PAGE:
-      return { ...state, currentPage: action.currentPage }
+      return { ...state, currentPage: action.currentPage}
 
     case TOGGLE_IS_FETCHING:
       return { ...state, isFetching: action.isFetching }
