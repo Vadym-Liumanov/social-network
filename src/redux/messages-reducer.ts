@@ -58,8 +58,10 @@ const initialState: InitialStateType = {
   ]
 }
 
-// state = state.messages
-const messagesReducer = (state = initialState, action: AddNewDilogACType): InitialStateType => { 
+type ActionCreatorTypes = AddNewDilogACType
+
+// getState().messages
+const messagesReducer = (state = initialState, action: ActionCreatorTypes): InitialStateType => { 
   switch (action.type) {
 
     case ADD_DIALOG:

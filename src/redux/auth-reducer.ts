@@ -5,6 +5,9 @@ const SET_USER_AUTH_DATA = 'social_network/auth/SET_USER_AUTH_DATA'
 const RESET_USER_AUTH_DATA = 'social_network/auth/RESET_USER_AUTH_DATA'
 const GET_CAPTCHA_URL_SUCCESS = 'social_network/auth/GET_CAPTCHA_URL_SUCCESS'
 
+type ActionCreatorTypes = GetCaptchaUrlSuccessACType
+  | SetUserAuthDataACType | ResetAuthDataACType
+
 type GetCaptchaUrlSuccessACType = {
   type: typeof GET_CAPTCHA_URL_SUCCESS,
   captchaUrl: string
@@ -92,8 +95,8 @@ type InitialStateType = {
   captchaUrl: string | null
 }
 
-// state = state.auth
-const initialState:InitialStateType = {
+// getState().auth
+const initialState: InitialStateType = {
   id: null,
   login: null,
   email: null,
@@ -101,7 +104,7 @@ const initialState:InitialStateType = {
   captchaUrl: null
 }
 
-const authReducer = (state = initialState, action: any): InitialStateType => {
+const authReducer = (state = initialState, action: ActionCreatorTypes): InitialStateType => {
   switch (action.type) {
 
     case SET_USER_AUTH_DATA:

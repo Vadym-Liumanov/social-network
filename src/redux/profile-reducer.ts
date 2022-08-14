@@ -1,6 +1,7 @@
 import { stopSubmit } from 'redux-form'
 import { profileAPI } from '../api/api'
 import { PhotosType, ProfileType } from '../types/types'
+import { AppStateType } from './store-redux'
 
 const ADD_POST = 'social_network/profile/ADD-POST'
 const SET_USER_PROFILE = 'social_network/profile/SET_USER_PROFILE'
@@ -9,8 +10,10 @@ const SET_MY_STATUS = 'social_network/profile/SET_MY_STATUS'
 const UPDATE_MY_STATUS = 'social_network/profile/UPDATE_MY_STATUS'
 const UPDATE_MY_PHOTO = 'social_network/profile/UPDATE_MY_PHOTO'
 
+type GetStateType = () => AppStateType
+
 export const updateProfileThunk = (profileData: ProfileType) => {
-  return (dispatch: any, getState: any) => {
+  return (dispatch: any, getState: GetStateType) => {
     const userId = getState().auth.id
     return profileAPI.updateProfile(profileData).then((data) => {
       if (data.resultCode === 0) {
@@ -112,7 +115,7 @@ export const setUserProfileAC = (profile: ProfileType): SetUserProfileACType => 
   }
 }
 
-export const setUserProfileThunk = (userId: number) => {
+export const setUserProfileThunk = (userId: number | null) => {
   return (dispatch: any) => {
     profileAPI.getUserProfile(userId).then((data) => dispatch(setUserProfileAC(data)))
   }
@@ -134,9 +137,9 @@ type ProfilePostsType = {
 }
 
 type InitialStateType = {
-  profilePosts: Array<ProfilePostsType>,
-  userProfile: ProfileType | null,
-  userStatus: string | null,
+  profilePosts: Array<ProfilePostsType>
+  userProfile: ProfileType | null
+  userStatus: string | null
   myStatus: string | null
 }
 
@@ -158,16 +161,20 @@ const initialState: InitialStateType = {
   myStatus: null
 }
 
+type ActionCreatorTypes = UpdateMyPhotoSuccessACType | UpdateMyStatusACType | SetMyStatusACType
+  | SetUserStatusACType | SetUserProfileACType | AddPostACType
+
 // state = state.profile
-const profileReduser = (state = initialState, action: any) => {
+const profileReduser = (state = initialState, action: ActionCreatorTypes) => {
   switch (action.type) {
 
     case UPDATE_MY_PHOTO:
-      //   "photos": {
-      //     "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
-      //     "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-      //   }  
-
+      /*
+        "photos": {
+          "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+          "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+        }  
+      */
       return {
         ...state, userProfile: { ...state.userProfile, photos: action.photos }
       }
@@ -185,36 +192,16 @@ const profileReduser = (state = initialState, action: any) => {
         profilePosts: [...state.profilePosts, newPostObj],
       }
 
-    // case UPDATE_POST:
-    //   return {
-    //     ...state,
-    //     newPost: action.text
-    //   }
+    /* 
+      case UPDATE_POST:
+        return {
+          ..state,
+          newPost: action.text
+        }
+    */
 
     case SET_USER_PROFILE:
       // https://social-network.samuraijs.com/api/1.0/profile/2
-
-      // const userProfile = {
-      //   "aboutMe": "я круто чувак 1001%",
-      //   "contacts": {
-      //     "facebook": "facebook.com",
-      //     "website": null,
-      //     "vk": "vk.com/dimych",
-      //     "twitter": "https://twitter.com/@sdf",
-      //     "instagram": "instagra.com/sds",
-      //     "youtube": null,
-      //     "github": "github.com",
-      //     "mainLink": null
-      //   },
-      //   "lookingForAJob": true,
-      //   "lookingForAJobDescription": "не ищу, а дурачусь",
-      //   "fullName": "samurai dimych",
-      //   "userId": 2,
-      //   "photos": {
-      //     "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
-      //     "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-      //   }
-      // }
 
       return {
         ...state,

@@ -11,7 +11,7 @@ const appInitSuccessAC = (): AppInitSuccessACType => {
   return { type: SET_APP_INITIALIZED }
 }
 
-type ActionTypes = AppInitSuccessACType
+type ActionCreatorTypes = AppInitSuccessACType
 
 export const initializeAppThunk = () => {
   return (dispatch: any, getState: () => AppStateType) => {
@@ -31,7 +31,7 @@ const initialState: InitialStateType = {
   isAppInitialized: false
 }
 
-const appReducer = (state = initialState, action: ActionTypes): InitialStateType => {
+const appReducer = (state = initialState, action: ActionCreatorTypes): InitialStateType => {
   switch (action.type) {
 
     case SET_APP_INITIALIZED:
