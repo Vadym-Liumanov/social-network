@@ -29,7 +29,6 @@ type AuthDataType = {
   id: number,
   login: string,
   email: string,
-  isAuth: boolean
 }
 
 type SetUserAuthDataACType = {

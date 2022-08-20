@@ -9,7 +9,7 @@ type PropsType = {
   //Массив объектов user
   usersList: Array<UserInfoType>
   // ф-ция переключает для userId follow/unfollow
-  followToggle: (userId: number) => void
+  followToggle: (userId: number | null) => void
   //общее кол-во всех пользователей
   totalCount: number
   //сколько пользователей выводить на странице
@@ -24,9 +24,9 @@ type PropsType = {
   follow/unfollow (асинхронного запроса к серверу). Массив позволяет при рендере страницы юзеров
   поюзерно блокировать кнопку дружбы на время разрешения запроса (проблематика - чтобы можно было 
   фолловить очередного юзера, пока процесс фоллоу для предыдущего в процессе) */
-  isFollowingInProgress: Array<number>
+  isFollowingInProgress: Array<number | null>
   //ф-ция переключения для юзера с id статуса following на противоположный
-  isFollowingToggle: (followingUserId: number) => void
+  isFollowingToggle: (followingUserId: number | null) => void
 }
 
 const Users: React.FC<PropsType> = (props) => {

@@ -18,10 +18,10 @@ type ActionCreatorTypes = FollowToggleACType | SetUsersACType | SetTotalCountACT
 
 type FollowToggleACType = {
   type: typeof FOLLOW_TOGGLE,
-  userId: number
+  userId: number | null
 }
 
-export const followToggleAC = (userId: number): FollowToggleACType => {
+export const followToggleAC = (userId: number | null): FollowToggleACType => {
   return { type: FOLLOW_TOGGLE, userId }
 }
 
@@ -63,10 +63,10 @@ export const toggleIsFetchingAC = (isFetching: boolean): ToggleIsFetchingACType 
 
 type IsFollowingToggleACType = {
   type: typeof IS_FOLLOWING_IN_PROGRESS_TOGGLE,
-  followingUserId: number
+  followingUserId: number | null
 }
 
-export const isFollowingToggleAC = (followingUserId: number): IsFollowingToggleACType => {
+export const isFollowingToggleAC = (followingUserId: number | null): IsFollowingToggleACType => {
   return { type: IS_FOLLOWING_IN_PROGRESS_TOGGLE, followingUserId }
 }
 
@@ -98,7 +98,7 @@ type InitialStateType = {
   follow/unfollow (асинхронного запроса к серверу). Массив позволяет при рендере страницы юзеров
   поюзерно блокировать кнопку дружбы на время разрешения запроса (проблематика - чтобы можно было 
   фолловить очередного юзера, пока процесс фоллоу для предыдущего в процессе) */
-  isFollowingInProgress: Array<number>
+  isFollowingInProgress: Array<number | null>
 }
 
 // state = state.users

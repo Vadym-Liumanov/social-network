@@ -26,7 +26,7 @@ export type ProfileType = {
 
 export type UserInfoType = {
   name: string,
-  id: number,
+  id: number | null,
   uniqueUrlName: string | null,
   photos: PhotosType,
   status: string | null,

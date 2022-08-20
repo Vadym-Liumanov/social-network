@@ -69,10 +69,10 @@ export const updateMyStatusThunk = (myStatus: string) => {
 
 type SetMyStatusACType = {
   type: typeof SET_MY_STATUS,
-  myStatus: string
+  myStatus: string | null
 }
 
-const setMyStatusAC = (myStatus: string): SetMyStatusACType => {
+const setMyStatusAC = (myStatus: string | null): SetMyStatusACType => {
   return {
     type: SET_MY_STATUS,
     myStatus
@@ -87,10 +87,10 @@ export const setMyStatusThunk = (userId: number) => {
 
 type SetUserStatusACType = {
   type: typeof SET_USER_STATUS,
-  status: string
+  status: string | null
 }
 
-const setUserStatusAC = (status: string): SetUserStatusACType => {
+const setUserStatusAC = (status: string | null): SetUserStatusACType => {
   return {
     type: SET_USER_STATUS,
     status: status

@@ -22,11 +22,11 @@ type MapStatePropsType = {
   isFetching: boolean
   usersList: Array<UserInfoType>
   totalCount: number
-  isFollowingInProgress: Array<number>
+  isFollowingInProgress: Array<number | null>
 }
 type MapDispatchPropsType = {
-  followToggle: (userId: number) => void
-  isFollowingToggle: (followingUserId: number) => void
+  followToggle: (userId: number | null) => void
+  isFollowingToggle: (followingUserId: number | null) => void
   getUsersThunk: (currentPage: number, usersOnPageCount: number) => void
   setCurrentPage: (pageNumber: number) => void
 }
@@ -79,9 +79,9 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 let mapDispatchToProps = (dispatch: any): MapDispatchPropsType  => {
   return {
-    followToggle: (userId: number) => dispatch(followToggleAC(userId)),
+    followToggle: (userId: number | null) => dispatch(followToggleAC(userId)),
     setCurrentPage: (currentPage: number) => dispatch(setCurrentPageAC(currentPage)),
-    isFollowingToggle: (followingUserId: number) => dispatch(isFollowingToggleAC(followingUserId)),
+    isFollowingToggle: (followingUserId: number | null) => dispatch(isFollowingToggleAC(followingUserId)),
     getUsersThunk: (currentPage: number, usersOnPageCount: number) => dispatch(getUsersThunk(currentPage, usersOnPageCount))
   }
 }
