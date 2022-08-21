@@ -2,9 +2,8 @@ import React from 'react'
 
 import styles from './FormsControls.module.css'
 
-export const Element = ({ input, meta, elementType: ElementType, ...props }) => {
-  // debugger
-
+export const Element: React.FC<any> = ({ input, meta, elementType: ElementType, ...props }) => {
+  debugger
   const hasError = meta.touched && meta.error
 
   return (

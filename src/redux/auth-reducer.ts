@@ -50,7 +50,7 @@ export const getAuthDataThunk = () => {
   }
 }
 
-export const loginThunk = (email: string, password: string, rememberMe: boolean, captcha: string) => {
+export const loginThunk = (email: string, password: string, rememberMe: boolean, captcha: string | null) => {
   return (dispatch: any) => {
     authAPI.loginOnTheService(email, password, rememberMe, captcha).then((data) => {
       if (data.resultCode === 0) {
