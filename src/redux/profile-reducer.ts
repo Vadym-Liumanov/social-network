@@ -1,5 +1,5 @@
 import { stopSubmit } from 'redux-form'
-import { profileAPI } from '../api/api'
+import { profileAPI } from "../api/profileAPI"
 import { PhotosType, ProfileType } from '../types/types'
 import { AppStateType } from './store-redux'
 

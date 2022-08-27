@@ -1,5 +1,5 @@
 import { stopSubmit } from 'redux-form'
-import { profileAPI } from '../api/api'
+import { profileAPI } from "../api/profileAPI"
 
 const ADD_POST = 'social_network/profile/ADD-POST'
 const SET_USER_PROFILE = 'social_network/profile/SET_USER_PROFILE'

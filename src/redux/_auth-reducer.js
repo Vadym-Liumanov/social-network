@@ -1,5 +1,5 @@
 import { stopSubmit } from 'redux-form'
-import { authAPI } from '../api/api'
+import { authAPI } from "../api/authAPI"
 
 const SET_USER_AUTH_DATA = 'social_network/auth/SET_USER_AUTH_DATA'
 const RESET_USER_AUTH_DATA = 'social_network/auth/RESET_USER_AUTH_DATA'

@@ -32,3 +32,11 @@ export type UserInfoType = {
   status: string | null,
   followed: boolean
 }
+
+export type MainResponseType<T> = {
+  resultCode: number
+  messages: Array<string>
+  fieldsErrors: []
+  // T = {smth} or {}
+  data: T
+}

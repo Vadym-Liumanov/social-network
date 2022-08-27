@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { usersAPI } from '../../../api/api'
+import { usersAPI } from "../../../api/usersAPI"
 
 import userStyles from './User.module.css'
 
