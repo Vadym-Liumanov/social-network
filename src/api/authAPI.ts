@@ -23,7 +23,7 @@ export const authAPI = {
     return instanceAxios.post<MainResponseType<LoginType>>('auth/login', { email, password, rememberMe, captcha }).then(response => response.data);
   },
   logoutFromTheService() {
-    return instanceAxios.delete<MainResponseType<{}>>('auth/login').then(response => response.data);
+    return instanceAxios.delete<MainResponseType>('auth/login').then(response => response.data);
   },
   getCaptchaUrl() {
     return instanceAxios.get<GetCaptchaUrlResponseType>('/security/get-captcha-url').then(response => response.data);

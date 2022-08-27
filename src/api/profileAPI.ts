@@ -22,7 +22,7 @@ export const profileAPI = {
   },
 
   putMyStatus(myStatus: string) {
-    return instanceAxios.put<MainResponseType<{}>>('profile/status/', { status: myStatus }).then(response => response.data);
+    return instanceAxios.put<MainResponseType>('profile/status/', { status: myStatus }).then(response => response.data);
   },
 
   savePhoto(file: any) {
@@ -33,7 +33,7 @@ export const profileAPI = {
   },
 
   updateProfile(profileData: ProfileType) {
-    return instanceAxios.put<MainResponseType<{}>>('profile/', profileData)
+    return instanceAxios.put<MainResponseType>('profile/', profileData)
       .then(response => response.data);
   }
 }

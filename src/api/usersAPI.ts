@@ -18,10 +18,10 @@ export const usersAPI = {
     return instanceAxios.get<GetItemsResponseType<UserInfoType>>(`users?page=${currentPage}&count=${usersOnPageCount}`).then(response => response.data);
   },
   setUserFollow(userId: number | null) {
-    return instanceAxios.post<MainResponseType<{}>>(`follow/${userId}`).then(response => response.data);
+    return instanceAxios.post<MainResponseType>(`follow/${userId}`).then(response => response.data);
   },
 
   setUserUnfollow(userId: number | null) {
-    return instanceAxios.delete<MainResponseType<{}>>(`follow/${userId}`).then(response => response.data);
+    return instanceAxios.delete<MainResponseType>(`follow/${userId}`).then(response => response.data);
   }
 }
