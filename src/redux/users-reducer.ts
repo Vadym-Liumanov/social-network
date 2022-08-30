@@ -13,75 +13,45 @@ const IS_FOLLOWING_IN_PROGRESS_TOGGLE = 'social_network/users/IS_FOLLOWING_IN_PR
 // AC - action creator
 
 // Type for all action creator types
-type ActionCreatorTypes = FollowToggleACType | SetUsersACType | SetTotalCountACType
-  | SetCurrentPageACType | ToggleIsFetchingACType | IsFollowingToggleACType
+// type ActionCreatorsTypes = FollowToggleACType | SetUsersACType | SetTotalCountACType
+//   | SetCurrentPageACType | ToggleIsFetchingACType | IsFollowingToggleACType
 
-type FollowToggleACType = {
-  type: typeof FOLLOW_TOGGLE,
-  userId: number | null
+export const actionCreators = {
+  followToggleAC: (userId: number | null) => {
+    return { type: FOLLOW_TOGGLE, userId } as const
+  },
+  setUsersAC: (usersList: UsersListType) => {
+    return { type: SET_USERS, usersList } as const
+  },
+  setTotalCountAC: (totalCount: number) => {
+    return { type: SET_TOTAL_COUNT, totalCount } as const
+  },
+  setCurrentPageAC: (currentPage: number) => {
+    return { type: SET_CURRENT_PAGE, currentPage } as const
+  },
+  toggleIsFetchingAC: (isFetching: boolean) => {
+    return { type: TOGGLE_IS_FETCHING, isFetching } as const
+  },
+  isFollowingToggleAC: (followingUserId: number | null) => {
+    return { type: IS_FOLLOWING_IN_PROGRESS_TOGGLE, followingUserId } as const
+  }
 }
 
-export const followToggleAC = (userId: number | null): FollowToggleACType => {
-  return { type: FOLLOW_TOGGLE, userId }
-}
-
-type SetUsersACType = {
-  type: typeof SET_USERS,
-  usersList: UsersListType
-}
-
-export const setUsersAC = (usersList: UsersListType): SetUsersACType => {
-  return { type: SET_USERS, usersList }
-}
-
-type SetTotalCountACType = {
-  type: typeof SET_TOTAL_COUNT,
-  totalCount: number
-}
-
-export const setTotalCountAC = (totalCount: number): SetTotalCountACType => {
-  return { type: SET_TOTAL_COUNT, totalCount }
-}
-
-type SetCurrentPageACType = {
-  type: typeof SET_CURRENT_PAGE,
-  currentPage: number
-}
-
-export const setCurrentPageAC = (currentPage: number): SetCurrentPageACType => {
-  return { type: SET_CURRENT_PAGE, currentPage }
-}
-
-type ToggleIsFetchingACType = {
-  type: typeof TOGGLE_IS_FETCHING,
-  isFetching: boolean
-}
-
-export const toggleIsFetchingAC = (isFetching: boolean): ToggleIsFetchingACType => {
-  return { type: TOGGLE_IS_FETCHING, isFetching }
-}
-
-type IsFollowingToggleACType = {
-  type: typeof IS_FOLLOWING_IN_PROGRESS_TOGGLE,
-  followingUserId: number | null
-}
-
-export const isFollowingToggleAC = (followingUserId: number | null): IsFollowingToggleACType => {
-  return { type: IS_FOLLOWING_IN_PROGRESS_TOGGLE, followingUserId }
-}
+type ActionCreatorsValuesTypes<T> = T extends { [key: string]: infer U } ? U : never
+type ActionCreatorsTypes = ReturnType<ActionCreatorsValuesTypes<typeof actionCreators>>
 
 // thunk creators
 
-type DispatchType = Dispatch<ActionCreatorTypes>
+type DispatchType = Dispatch<ActionCreatorsTypes>
 type GetStateType = () => AppStateType
 
 export const getUsersThunk = (currentPage: number, usersOnPageCount: number) => {
   return (dispatch: DispatchType, getState: GetStateType) => {
-    dispatch(toggleIsFetchingAC(true))
+    dispatch(actionCreators.toggleIsFetchingAC(true))
     usersAPI.getUsers(currentPage, usersOnPageCount).then((data) => {
-      dispatch(setUsersAC(data.items))
-      dispatch(setTotalCountAC(data.totalCount))
-      dispatch(toggleIsFetchingAC(false))
+      dispatch(actionCreators.setUsersAC(data.items))
+      dispatch(actionCreators.setTotalCountAC(data.totalCount))
+      dispatch(actionCreators.toggleIsFetchingAC(false))
     })
   }
 }
@@ -113,7 +83,7 @@ const initialState: InitialStateType = {
 }
 
 // getState().users
-const usersReduser = (state = initialState, action: ActionCreatorTypes): InitialStateType => {
+const usersReduser = (state = initialState, action: ActionCreatorsTypes): InitialStateType => {
   switch (action.type) {
     case FOLLOW_TOGGLE:
       return {
@@ -133,7 +103,7 @@ const usersReduser = (state = initialState, action: ActionCreatorTypes): Initial
       return { ...state, totalCount: action.totalCount }
 
     case SET_CURRENT_PAGE:
-      return { ...state, currentPage: action.currentPage}
+      return { ...state, currentPage: action.currentPage }
 
     case TOGGLE_IS_FETCHING:
       return { ...state, isFetching: action.isFetching }

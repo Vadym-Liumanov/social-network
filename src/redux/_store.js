@@ -1,3 +1,5 @@
+// Это самописный стор. Не используется в проекте.
+// Используется redux-store.ts
 import messagesReducer from "./messages-reducer"
 import profileReduser from "./profile-reducer"
 

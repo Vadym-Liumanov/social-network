@@ -1,3 +1,5 @@
+export type Nullable<T> = null | T
+
 export type ContactsType = {
   facebook: string | null,
   website: string | null,

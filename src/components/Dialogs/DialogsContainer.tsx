@@ -3,7 +3,7 @@ import { compose } from 'redux'
 
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 import Dialogs from './Dialogs'
-import { addNewDilogAC } from '../../redux/messages-reducer'
+import { actionCreators } from '../../redux/messages-reducer'
 import {AppStateType} from '../../redux/store-redux'
 
 const mapStateToProps = (state: AppStateType) => {
@@ -15,7 +15,7 @@ const mapStateToProps = (state: AppStateType) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    addNewDialog: (text: string) => dispatch(addNewDilogAC(text))
+    addNewDialog: (text: string) => dispatch(actionCreators.addNewDilogAC(text))
   }
 }
 

@@ -4,7 +4,7 @@ import { compose } from 'redux'
 
 // import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 
-import { followToggleAC, setCurrentPageAC, isFollowingToggleAC, getUsersThunk } from '../../redux/users-reducer'
+import { actionCreators, getUsersThunk } from '../../redux/users-reducer'
 
 import Users from './Users'
 import Preloader from '../common/Preloader/Preloader'
@@ -79,9 +79,9 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 let mapDispatchToProps = (dispatch: any): MapDispatchPropsType  => {
   return {
-    followToggle: (userId: number | null) => dispatch(followToggleAC(userId)),
-    setCurrentPage: (currentPage: number) => dispatch(setCurrentPageAC(currentPage)),
-    isFollowingToggle: (followingUserId: number | null) => dispatch(isFollowingToggleAC(followingUserId)),
+    followToggle: (userId: number | null) => dispatch(actionCreators.followToggleAC(userId)),
+    setCurrentPage: (currentPage: number) => dispatch(actionCreators.setCurrentPageAC(currentPage)),
+    isFollowingToggle: (followingUserId: number | null) => dispatch(actionCreators.isFollowingToggleAC(followingUserId)),
     getUsersThunk: (currentPage: number, usersOnPageCount: number) => dispatch(getUsersThunk(currentPage, usersOnPageCount))
   }
 }

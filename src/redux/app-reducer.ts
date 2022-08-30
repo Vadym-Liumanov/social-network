@@ -3,35 +3,32 @@ import { AppStateType } from './store-redux'
 
 const SET_APP_INITIALIZED = 'social_network/app/SET_APP_INITIALIZED'
 
-type AppInitSuccessACType = {
-  type: typeof SET_APP_INITIALIZED
-}
+type ActionCreatorsValuesTypes<T> = T extends { [key: string]: infer U } ? U : never
+type ActionCreatorsTypes = ReturnType<ActionCreatorsValuesTypes<typeof actionCreators>>
 
-const appInitSuccessAC = (): AppInitSuccessACType => {
-  return { type: SET_APP_INITIALIZED }
+const actionCreators = {
+  appInitSuccess: () => {
+    return { type: SET_APP_INITIALIZED } as const
+  }
 }
-
-type ActionCreatorTypes = AppInitSuccessACType
 
 export const initializeAppThunk = () => {
   return (dispatch: any, getState: () => AppStateType) => {
     const promise1 = dispatch(getAuthDataThunk())
     Promise.all([promise1]).then(() => {
-      dispatch(appInitSuccessAC())
+      dispatch(actionCreators.appInitSuccess())
     })
   }
 }
 
-type InitialStateType = {
-  isAppInitialized: boolean
-}
-
-// state = state.app
-const initialState: InitialStateType = {
+// getState().app
+const initialState = {
   isAppInitialized: false
 }
 
-const appReducer = (state = initialState, action: ActionCreatorTypes): InitialStateType => {
+type StateType = typeof initialState
+
+const appReducer = (state = initialState, action: ActionCreatorsTypes): StateType => {
   switch (action.type) {
 
     case SET_APP_INITIALIZED:

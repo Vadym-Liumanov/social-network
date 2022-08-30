@@ -1,29 +1,29 @@
 const ADD_DIALOG = 'social_network/messages/ADD-DIALOG'
 
-type AddNewDilogACType = {
-  type: typeof ADD_DIALOG,
-  text: string
+export const actionCreators = {
+  addNewDilogAC: (text: string) => {
+    return { type: ADD_DIALOG, text } as const
+  }
 }
 
-export const addNewDilogAC = (text: string): AddNewDilogACType => {
-  return { type: ADD_DIALOG, text }
-}
+type ActionCreatorsValuesTypes<T> = T extends {[key: string]: infer U} ? U : never
+type ActionCreatorsTypes = ReturnType<ActionCreatorsValuesTypes<typeof actionCreators>>
 
-type UserType = {
-  id: number,
-  userName: string
-}
-type DialogType = {
-  id: number,
-  dialog: string
-}
+// type UserType = {
+//   id: number,
+//   userName: string
+// }
+// type DialogType = {
+//   id: number,
+//   dialog: string
+// }
 
-type InitialStateType = {
-  users: Array<UserType>,
-  dialogs: Array<DialogType>
-}
+// type InitialStateType = {
+//   users: Array<UserType>,
+//   dialogs: Array<DialogType>
+// }
 
-const initialState: InitialStateType = {
+const initialState = {
   users: [
     {
       id: 1,
@@ -58,10 +58,10 @@ const initialState: InitialStateType = {
   ]
 }
 
-type ActionCreatorTypes = AddNewDilogACType
+type StateType = typeof initialState
 
 // getState().messages
-const messagesReducer = (state = initialState, action: ActionCreatorTypes): InitialStateType => { 
+const messagesReducer = (state = initialState, action: ActionCreatorsTypes): StateType => { 
   switch (action.type) {
 
     case ADD_DIALOG:
@@ -72,7 +72,7 @@ const messagesReducer = (state = initialState, action: ActionCreatorTypes): Init
       }
       return {
         ...state,
-        dialogs: [...state.dialogs, newDialogObj],
+        dialogs: [...state.dialogs, newDialogObj]
       }
 
     default:

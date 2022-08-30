@@ -1,6 +1,6 @@
 import { stopSubmit } from 'redux-form'
 import { profileAPI } from "../api/profileAPI"
-import { PhotosType, ProfileType } from '../types/types'
+import { PhotosType, ProfileType, Nullable } from '../types/types'
 import { AppStateType } from './store-redux'
 
 const ADD_POST = 'social_network/profile/ADD-POST'
@@ -27,123 +27,96 @@ export const updateProfileThunk = (profileData: ProfileType) => {
   }
 }
 
-type UpdateMyPhotoSuccessACType = {
-  type: typeof UPDATE_MY_PHOTO,
-  photos: PhotosType
-}
+type ActionCreatorsValuesTypes<T> = T extends { [key: string]: infer U } ? U : never
+type ActionCreatorsTypes = ReturnType<ActionCreatorsValuesTypes<typeof actionCreators>>
 
-const updateMyPhotoSuccessAC = (photos: PhotosType): UpdateMyPhotoSuccessACType => {
-  return {
-    type: UPDATE_MY_PHOTO,
-    photos
+export const actionCreators = {
+  updateMyPhotoSuccess: (photos: PhotosType) => {
+    return {
+      type: UPDATE_MY_PHOTO,
+      photos
+    } as const
+  },
+  updateMyStatus: (myStatus: string) => {
+    return {
+      type: UPDATE_MY_STATUS,
+      myStatus
+    } as const
+  },
+  setMyStatus: (myStatus: Nullable<string>) => {
+    return {
+      type: SET_MY_STATUS,
+      myStatus
+    } as const
+  },
+  setUserStatus: (status: Nullable<string>) => {
+    return {
+      type: SET_USER_STATUS,
+      status
+    } as const
+  },
+  setUserProfile: (profile: Nullable<ProfileType>) => {
+    return {
+      type: SET_USER_PROFILE,
+      profile
+    } as const
+  },
+  addPost: (postText: string) => {
+    return {
+      type: ADD_POST,
+      postText
+    } as const
   }
 }
 
 export const savePhotoThunk = (file: any) => {
   return (dispatch: any) => {
     profileAPI.savePhoto(file).then((data) => {
-      if (data.resultCode === 0) dispatch(updateMyPhotoSuccessAC(data.data.photos))
+      if (data.resultCode === 0) dispatch(actionCreators.updateMyPhotoSuccess(data.data.photos))
     })
-  }
-}
-
-type UpdateMyStatusACType = {
-  type: typeof UPDATE_MY_STATUS,
-  myStatus: string
-}
-
-const updateMyStatusAC = (myStatus: string): UpdateMyStatusACType => {
-  return {
-    type: UPDATE_MY_STATUS,
-    myStatus
   }
 }
 
 export const updateMyStatusThunk = (myStatus: string) => {
   return (dispatch: any) => {
     profileAPI.putMyStatus(myStatus).then((data) => {
-      if (data.resultCode === 0) dispatch(updateMyStatusAC(myStatus))
+      if (data.resultCode === 0) dispatch(actionCreators.updateMyStatus(myStatus))
     })
-  }
-}
-
-type SetMyStatusACType = {
-  type: typeof SET_MY_STATUS,
-  myStatus: string | null
-}
-
-const setMyStatusAC = (myStatus: string | null): SetMyStatusACType => {
-  return {
-    type: SET_MY_STATUS,
-    myStatus
   }
 }
 
 export const setMyStatusThunk = (userId: number) => {
   return (dispatch: any) => {
-    profileAPI.getMyStatus(userId).then((status) => dispatch(setMyStatusAC(status)))
-  }
-}
-
-type SetUserStatusACType = {
-  type: typeof SET_USER_STATUS,
-  status: string | null
-}
-
-const setUserStatusAC = (status: string | null): SetUserStatusACType => {
-  return {
-    type: SET_USER_STATUS,
-    status: status
+    profileAPI.getMyStatus(userId).then((status) => dispatch(actionCreators.setMyStatus(status)))
   }
 }
 
 export const setUserStatusThunk = (userId: number) => {
   return (dispatch: any) => {
-    profileAPI.getUserStatus(userId).then((status) => dispatch(setUserStatusAC(status)))
-  }
-}
-
-type SetUserProfileACType = {
-  type: typeof SET_USER_PROFILE,
-  profile: ProfileType
-}
-
-export const setUserProfileAC = (profile: ProfileType): SetUserProfileACType => {
-  return {
-    type: SET_USER_PROFILE,
-    profile
+    profileAPI.getUserStatus(userId).then((status) => dispatch(actionCreators.setUserStatus(status)))
   }
 }
 
 export const setUserProfileThunk = (userId: number | null) => {
   return (dispatch: any) => {
-    profileAPI.getUserProfile(userId).then((data) => dispatch(setUserProfileAC(data)))
+    profileAPI.getUserProfile(userId).then((data) => dispatch(actionCreators.setUserProfile(data)))
   }
 }
 
-type AddPostACType = {
-  type: typeof ADD_POST,
-  postText: string
-}
-
-export const addPostAC = (postText: string): AddPostACType => {
-  return { type: ADD_POST, postText }
-}
-
-type ProfilePostsType = {
+type ProfilePostType = {
   id: number,
   post: string,
   likesCount: number
 }
 
-type InitialStateType = {
-  profilePosts: Array<ProfilePostsType>
-  userProfile: ProfileType | null
-  userStatus: string | null
-  myStatus: string | null
-}
+// type StateType = {
+//   profilePosts: Array<ProfilePostType>
+//   userProfile: ProfileType | null
+//   userStatus: string | null
+//   myStatus: string | null
+// }
 
-const initialState: InitialStateType = {
+const initialState = {
   profilePosts: [
     {
       id: 1,
@@ -155,28 +128,20 @@ const initialState: InitialStateType = {
       post: 'How are you?',
       likesCount: 10
     }
-  ],
-  userProfile: null,
-  userStatus: null,
-  myStatus: null
+  ] as Array<ProfilePostType>,
+  userProfile: null as Nullable<ProfileType>,
+  userStatus: null as Nullable<string>,
+  myStatus: null as Nullable<string>
 }
 
-type ActionCreatorTypes = UpdateMyPhotoSuccessACType | UpdateMyStatusACType | SetMyStatusACType
-  | SetUserStatusACType | SetUserProfileACType | AddPostACType
-
 // state = state.profile
-const profileReduser = (state = initialState, action: ActionCreatorTypes) => {
+const profileReduser = (state = initialState, action: ActionCreatorsTypes): any => {
   switch (action.type) {
 
     case UPDATE_MY_PHOTO:
-      /*
-        "photos": {
-          "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
-          "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-        }  
-      */
       return {
-        ...state, userProfile: { ...state.userProfile, photos: action.photos }
+        ...state,
+        userProfile: { ...state.userProfile, photos: action.photos }
       }
 
     case ADD_POST:

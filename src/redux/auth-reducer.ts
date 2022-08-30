@@ -1,50 +1,45 @@
 import { stopSubmit } from 'redux-form'
 import { authAPI } from "../api/authAPI"
+import { Nullable } from '../types/types'
 
 const SET_USER_AUTH_DATA = 'social_network/auth/SET_USER_AUTH_DATA'
 const RESET_USER_AUTH_DATA = 'social_network/auth/RESET_USER_AUTH_DATA'
 const GET_CAPTCHA_URL_SUCCESS = 'social_network/auth/GET_CAPTCHA_URL_SUCCESS'
 
-type ActionCreatorTypes = GetCaptchaUrlSuccessACType
-  | SetUserAuthDataACType | ResetAuthDataACType
-
-type GetCaptchaUrlSuccessACType = {
-  type: typeof GET_CAPTCHA_URL_SUCCESS,
-  captchaUrl: string
-}
-
-const getCaptchaUrlSuccessAC = (captchaUrl: string): GetCaptchaUrlSuccessACType => {
-  return { type: GET_CAPTCHA_URL_SUCCESS, captchaUrl }
-}
-
-export const getCaptchaUrlThunk = () => {
-  return (dispatch: any) => {
-    return authAPI.getCaptchaUrl().then((data) => {
-      dispatch(getCaptchaUrlSuccessAC(data.url))
-    })
-  }
-}
-
-type AuthDataType = {
+export type AuthDataType = {
   id: number,
   login: string,
   email: string,
 }
 
-type SetUserAuthDataACType = {
-  type: typeof SET_USER_AUTH_DATA,
-  authData: AuthDataType
+type ActionCreatorsValuesTypes<T> = T extends { [key: string]: infer U } ? U : never
+type ActionCreatorsTypes = ReturnType<ActionCreatorsValuesTypes<typeof actionCreators>>
+
+const actionCreators = {
+  getCaptchaUrlSuccess: (captchaUrl: string) => {
+    return { type: GET_CAPTCHA_URL_SUCCESS, captchaUrl } as const
+  },
+  setUserAuthData: (authData: AuthDataType) => {
+    return { type: SET_USER_AUTH_DATA, authData } as const
+  },
+  resetAuthData: () => {
+    return { type: RESET_USER_AUTH_DATA } as const
+  }
 }
 
-const setUserAuthDataAC = (authData: AuthDataType): SetUserAuthDataACType => {
-  return { type: SET_USER_AUTH_DATA, authData }
+export const getCaptchaUrlThunk = () => {
+  return (dispatch: any) => {
+    return authAPI.getCaptchaUrl().then((data) => {
+      dispatch(actionCreators.getCaptchaUrlSuccess(data.url))
+    })
+  }
 }
 
 export const getAuthDataThunk = () => {
   return (dispatch: any) => {
     return authAPI.getAuthData().then((data) => {
       if (data.resultCode === 0) {
-        dispatch(setUserAuthDataAC(data.data))
+        dispatch(actionCreators.setUserAuthData(data.data))
       }
     })
   }
@@ -68,42 +63,28 @@ export const loginThunk = (email: string, password: string, rememberMe: boolean,
   }
 }
 
-type ResetAuthDataACType = {
-  type: typeof RESET_USER_AUTH_DATA
-}
-
-const resetAuthDataAC = (): ResetAuthDataACType => {
-  return { type: RESET_USER_AUTH_DATA }
-}
-
 export const logoutThunk = () => {
   return (dispatch: any) => {
     authAPI.logoutFromTheService().then((data) => {
       if (data.resultCode === 0) {
-        dispatch(resetAuthDataAC())
+        dispatch(actionCreators.resetAuthData())
       }
     })
   }
 }
 
-type InitialStateType = {
-  id: number | null,
-  login: string | null,
-  email: string | null,
-  isAuth: boolean,
-  captchaUrl: string | null
-}
-
 // getState().auth
-const initialState: InitialStateType = {
-  id: null,
-  login: null,
-  email: null,
+const initialState = {
+  id: null as Nullable<number>,
+  login: null as Nullable<string>,
+  email: null as Nullable<string>,
   isAuth: false,
-  captchaUrl: null
+  captchaUrl: null as Nullable<string>
 }
 
-const authReducer = (state = initialState, action: ActionCreatorTypes): InitialStateType => {
+type StateType = typeof initialState
+
+const authReducer = (state = initialState, action: ActionCreatorsTypes): StateType => {
   switch (action.type) {
 
     case SET_USER_AUTH_DATA:
@@ -112,7 +93,7 @@ const authReducer = (state = initialState, action: ActionCreatorTypes): InitialS
         id: action.authData.id,
         login: action.authData.login,
         email: action.authData.email,
-        isAuth: true
+        isAuth: true,
       }
 
     case RESET_USER_AUTH_DATA:
