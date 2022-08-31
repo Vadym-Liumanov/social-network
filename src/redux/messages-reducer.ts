@@ -8,7 +8,7 @@ export const actionCreators = {
   }
 }
 
-type ActionCreatorsTypes = InferActionsTypes<typeof actionCreators>
+type ActionTypes = InferActionsTypes<typeof actionCreators>
 
 // type UserType = {
 //   id: number,
@@ -62,7 +62,7 @@ const initialState = {
 type StateType = typeof initialState
 
 // getState().messages
-const messagesReducer = (state = initialState, action: ActionCreatorsTypes): StateType => {
+const messagesReducer = (state = initialState, action: ActionTypes): StateType => {
   switch (action.type) {
 
     case ADD_DIALOG:

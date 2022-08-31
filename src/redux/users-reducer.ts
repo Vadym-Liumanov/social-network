@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux'
+import { ThunkAction } from 'redux-thunk'
 import { usersAPI } from "../api/usersAPI"
 import { UserInfoType } from '../types/types'
 import { AppStateType, InferActionsTypes } from './store-redux'
@@ -37,14 +38,15 @@ export const actionCreators = {
   }
 }
 
-type ActionCreatorsTypes = InferActionsTypes<typeof actionCreators>
+type ActionTypes = InferActionsTypes<typeof actionCreators>
 
 // thunk creators
 
-type DispatchType = Dispatch<ActionCreatorsTypes>
 type GetStateType = () => AppStateType
+type DispatchType = Dispatch<ActionTypes>
+type ThunkType = ThunkAction<any, AppStateType, unknown, ActionTypes>
 
-export const getUsersThunk = (currentPage: number, usersOnPageCount: number) => {
+export const getUsersThunk = (currentPage: number, usersOnPageCount: number): ThunkType => {
   return (dispatch: DispatchType, getState: GetStateType) => {
     dispatch(actionCreators.toggleIsFetchingAC(true))
     usersAPI.getUsers(currentPage, usersOnPageCount).then((data) => {
@@ -57,7 +59,7 @@ export const getUsersThunk = (currentPage: number, usersOnPageCount: number) => 
 
 type UsersListType = Array<UserInfoType>
 
-type InitialStateType = {
+type StateType = {
   usersList: UsersListType,
   totalCount: number,
   currentPage: number,
@@ -71,7 +73,7 @@ type InitialStateType = {
 }
 
 // getState().users
-const initialState: InitialStateType = {
+const initialState: StateType = {
   // see usersList format on url='https://social-network.samuraijs.com/api/1.0/users?page=1&count=2'
   usersList: [],
   totalCount: 0,
@@ -81,7 +83,7 @@ const initialState: InitialStateType = {
   isFollowingInProgress: [] //massiv iz id userov kotorie v processe zaprosa na followed - esli id net, to button ne disable
 }
 
-const usersReduser = (state = initialState, action: ActionCreatorsTypes): InitialStateType => {
+const usersReduser = (state = initialState, action: ActionTypes): StateType => {
   switch (action.type) {
     case FOLLOW_TOGGLE:
       return {

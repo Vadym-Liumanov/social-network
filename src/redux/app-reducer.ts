@@ -3,7 +3,7 @@ import { AppStateType, InferActionsTypes } from './store-redux'
 
 const SET_APP_INITIALIZED = 'social_network/app/SET_APP_INITIALIZED'
 
-type ActionCreatorsTypes = InferActionsTypes<typeof actionCreators>
+type ActionTypes = InferActionsTypes<typeof actionCreators>
 
 const actionCreators = {
   appInitSuccess: () => {
@@ -27,7 +27,7 @@ const initialState = {
 
 type StateType = typeof initialState
 
-const appReducer = (state = initialState, action: ActionCreatorsTypes): StateType => {
+const appReducer = (state = initialState, action: ActionTypes): StateType => {
   switch (action.type) {
 
     case SET_APP_INITIALIZED:

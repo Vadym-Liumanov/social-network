@@ -11,7 +11,7 @@ const SET_MY_STATUS = 'social_network/profile/SET_MY_STATUS'
 const UPDATE_MY_STATUS = 'social_network/profile/UPDATE_MY_STATUS'
 const UPDATE_MY_PHOTO = 'social_network/profile/UPDATE_MY_PHOTO'
 
-type DispatchType = Dispatch<ActionCreatorsTypes>
+type DispatchType = Dispatch<ActionTypes>
 type GetStateType = () => AppStateType
 
 export const updateProfileThunk = (profileData: ProfileType) => {
@@ -29,7 +29,7 @@ export const updateProfileThunk = (profileData: ProfileType) => {
   }
 }
 
-type ActionCreatorsTypes = InferActionsTypes<typeof actionCreators>
+type ActionTypes = InferActionsTypes<typeof actionCreators>
 
 export const actionCreators = {
   updateMyPhotoSuccess: (photos: PhotosType) => {
@@ -136,7 +136,7 @@ const initialState = {
 }
 
 // state = state.profile
-const profileReduser = (state = initialState, action: ActionCreatorsTypes): any => {
+const profileReduser = (state = initialState, action: ActionTypes): any => {
   switch (action.type) {
 
     case UPDATE_MY_PHOTO:
