@@ -1,7 +1,8 @@
 import { stopSubmit } from 'redux-form'
+import { Dispatch } from 'redux'
 import { profileAPI } from "../api/profileAPI"
 import { PhotosType, ProfileType, Nullable } from '../types/types'
-import { AppStateType } from './store-redux'
+import { AppStateType, InferActionsTypes } from './store-redux'
 
 const ADD_POST = 'social_network/profile/ADD-POST'
 const SET_USER_PROFILE = 'social_network/profile/SET_USER_PROFILE'
@@ -10,6 +11,7 @@ const SET_MY_STATUS = 'social_network/profile/SET_MY_STATUS'
 const UPDATE_MY_STATUS = 'social_network/profile/UPDATE_MY_STATUS'
 const UPDATE_MY_PHOTO = 'social_network/profile/UPDATE_MY_PHOTO'
 
+type DispatchType = Dispatch<ActionCreatorsTypes>
 type GetStateType = () => AppStateType
 
 export const updateProfileThunk = (profileData: ProfileType) => {
@@ -27,8 +29,7 @@ export const updateProfileThunk = (profileData: ProfileType) => {
   }
 }
 
-type ActionCreatorsValuesTypes<T> = T extends { [key: string]: infer U } ? U : never
-type ActionCreatorsTypes = ReturnType<ActionCreatorsValuesTypes<typeof actionCreators>>
+type ActionCreatorsTypes = InferActionsTypes<typeof actionCreators>
 
 export const actionCreators = {
   updateMyPhotoSuccess: (photos: PhotosType) => {

@@ -1,6 +1,7 @@
 import { stopSubmit } from 'redux-form'
 import { authAPI } from "../api/authAPI"
 import { Nullable } from '../types/types'
+import { InferActionsTypes } from './store-redux'
 
 const SET_USER_AUTH_DATA = 'social_network/auth/SET_USER_AUTH_DATA'
 const RESET_USER_AUTH_DATA = 'social_network/auth/RESET_USER_AUTH_DATA'
@@ -12,8 +13,7 @@ export type AuthDataType = {
   email: string,
 }
 
-type ActionCreatorsValuesTypes<T> = T extends { [key: string]: infer U } ? U : never
-type ActionCreatorsTypes = ReturnType<ActionCreatorsValuesTypes<typeof actionCreators>>
+type ActionCreatorsTypes = InferActionsTypes<typeof actionCreators>
 
 const actionCreators = {
   getCaptchaUrlSuccess: (captchaUrl: string) => {

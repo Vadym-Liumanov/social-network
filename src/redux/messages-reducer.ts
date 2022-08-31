@@ -1,3 +1,5 @@
+import { InferActionsTypes } from './store-redux'
+
 const ADD_DIALOG = 'social_network/messages/ADD-DIALOG'
 
 export const actionCreators = {
@@ -6,8 +8,7 @@ export const actionCreators = {
   }
 }
 
-type ActionCreatorsValuesTypes<T> = T extends {[key: string]: infer U} ? U : never
-type ActionCreatorsTypes = ReturnType<ActionCreatorsValuesTypes<typeof actionCreators>>
+type ActionCreatorsTypes = InferActionsTypes<typeof actionCreators>
 
 // type UserType = {
 //   id: number,
@@ -61,7 +62,7 @@ const initialState = {
 type StateType = typeof initialState
 
 // getState().messages
-const messagesReducer = (state = initialState, action: ActionCreatorsTypes): StateType => { 
+const messagesReducer = (state = initialState, action: ActionCreatorsTypes): StateType => {
   switch (action.type) {
 
     case ADD_DIALOG:

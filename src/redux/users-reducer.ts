@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux'
 import { usersAPI } from "../api/usersAPI"
 import { UserInfoType } from '../types/types'
-import { AppStateType } from './store-redux'
+import { AppStateType, InferActionsTypes } from './store-redux'
 
 const FOLLOW_TOGGLE = 'social_network/users/FOLLOW_TOGGLE'
 const SET_USERS = 'social_network/users/SET_USERS'
@@ -37,8 +37,7 @@ export const actionCreators = {
   }
 }
 
-type ActionCreatorsValuesTypes<T> = T extends { [key: string]: infer U } ? U : never
-type ActionCreatorsTypes = ReturnType<ActionCreatorsValuesTypes<typeof actionCreators>>
+type ActionCreatorsTypes = InferActionsTypes<typeof actionCreators>
 
 // thunk creators
 
@@ -71,7 +70,7 @@ type InitialStateType = {
   isFollowingInProgress: Array<number | null>
 }
 
-// state = state.users
+// getState().users
 const initialState: InitialStateType = {
   // see usersList format on url='https://social-network.samuraijs.com/api/1.0/users?page=1&count=2'
   usersList: [],
@@ -82,7 +81,6 @@ const initialState: InitialStateType = {
   isFollowingInProgress: [] //massiv iz id userov kotorie v processe zaprosa na followed - esli id net, to button ne disable
 }
 
-// getState().users
 const usersReduser = (state = initialState, action: ActionCreatorsTypes): InitialStateType => {
   switch (action.type) {
     case FOLLOW_TOGGLE:

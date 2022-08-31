@@ -22,6 +22,13 @@ const rootReducer = combineReducers({
 type RootReducerType = typeof rootReducer
 export type AppStateType = ReturnType<RootReducerType>
 
+// type InferActionsTypes<T> определяет тип actions, которые подаются на вход редьюсеров
+// где T = typeof actionCreators
+// actionCreators = {AC1: (...args) => any, AC2: (...args) => any} - сборный объект всех actionCreators редьюсора
+// Таким образом мы просто добавляем AC в объект actionCreators, а union-тип экшенов сам обновляется
+type PropertiesTypes<T> = T extends { [key: string]: infer U } ? U : never
+export type InferActionsTypes<T extends { [key: string]: (...args: any[]) => any }> = ReturnType<PropertiesTypes<T>>
+
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 

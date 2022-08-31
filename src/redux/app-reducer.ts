@@ -1,10 +1,9 @@
 import { getAuthDataThunk } from './auth-reducer'
-import { AppStateType } from './store-redux'
+import { AppStateType, InferActionsTypes } from './store-redux'
 
 const SET_APP_INITIALIZED = 'social_network/app/SET_APP_INITIALIZED'
 
-type ActionCreatorsValuesTypes<T> = T extends { [key: string]: infer U } ? U : never
-type ActionCreatorsTypes = ReturnType<ActionCreatorsValuesTypes<typeof actionCreators>>
+type ActionCreatorsTypes = InferActionsTypes<typeof actionCreators>
 
 const actionCreators = {
   appInitSuccess: () => {
