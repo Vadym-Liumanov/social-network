@@ -1,5 +1,5 @@
-import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
-
+import { combineReducers, createStore, applyMiddleware, compose, Action } from 'redux'
+import { ThunkAction } from 'redux-thunk'
 import { reducer as formReducer } from 'redux-form'
 
 import thunkMiddleware from 'redux-thunk'
@@ -28,6 +28,9 @@ export type AppStateType = ReturnType<RootReducerType>
 // Таким образом мы просто добавляем AC в объект actionCreators, а union-тип экшенов сам обновляется
 type PropertiesTypes<T> = T extends { [key: string]: infer U } ? U : never
 export type InferActionsTypes<T extends { [key: string]: (...args: any[]) => any }> = ReturnType<PropertiesTypes<T>>
+
+// export type BaseThunkType<A extends Action = Action, R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>
+export type BaseThunkType<A extends Action = Action, R = any> = ThunkAction<R, AppStateType, unknown, A>
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

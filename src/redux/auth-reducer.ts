@@ -1,7 +1,7 @@
 import { stopSubmit } from 'redux-form'
 import { authAPI } from "../api/authAPI"
 import { Nullable } from '../types/types'
-import { InferActionsTypes } from './store-redux'
+import { InferActionsTypes, BaseThunkType } from './store-redux'
 
 const SET_USER_AUTH_DATA = 'social_network/auth/SET_USER_AUTH_DATA'
 const RESET_USER_AUTH_DATA = 'social_network/auth/RESET_USER_AUTH_DATA'
@@ -27,16 +27,18 @@ const actionCreators = {
   }
 }
 
-export const getCaptchaUrlThunk = () => {
-  return (dispatch: any) => {
+type ThunkType = BaseThunkType<ActionTypes>
+
+export const getCaptchaUrlThunk = (): ThunkType => {
+  return (dispatch) => {
     return authAPI.getCaptchaUrl().then((data) => {
       dispatch(actionCreators.getCaptchaUrlSuccess(data.url))
     })
   }
 }
 
-export const getAuthDataThunk = () => {
-  return (dispatch: any) => {
+export const getAuthDataThunk = (): ThunkType => {
+  return (dispatch) => {
     return authAPI.getAuthData().then((data) => {
       if (data.resultCode === 0) {
         dispatch(actionCreators.setUserAuthData(data.data))
@@ -45,8 +47,8 @@ export const getAuthDataThunk = () => {
   }
 }
 
-export const loginThunk = (email: string, password: string, rememberMe: boolean, captcha: string | null) => {
-  return (dispatch: any) => {
+export const loginThunk = (email: string, password: string, rememberMe: boolean, captcha: string | null): ThunkType => {
+  return (dispatch) => {
     authAPI.loginOnTheService(email, password, rememberMe, captcha).then((data) => {
       if (data.resultCode === 0) {
         dispatch(getAuthDataThunk())
@@ -63,8 +65,8 @@ export const loginThunk = (email: string, password: string, rememberMe: boolean,
   }
 }
 
-export const logoutThunk = () => {
-  return (dispatch: any) => {
+export const logoutThunk = (): BaseThunkType => {
+  return (dispatch) => {
     authAPI.logoutFromTheService().then((data) => {
       if (data.resultCode === 0) {
         dispatch(actionCreators.resetAuthData())

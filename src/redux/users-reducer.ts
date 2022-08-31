@@ -1,8 +1,6 @@
-import { Dispatch } from 'redux'
-import { ThunkAction } from 'redux-thunk'
 import { usersAPI } from "../api/usersAPI"
 import { UserInfoType } from '../types/types'
-import { AppStateType, InferActionsTypes } from './store-redux'
+import { InferActionsTypes, BaseThunkType } from './store-redux'
 
 const FOLLOW_TOGGLE = 'social_network/users/FOLLOW_TOGGLE'
 const SET_USERS = 'social_network/users/SET_USERS'
@@ -42,12 +40,13 @@ type ActionTypes = InferActionsTypes<typeof actionCreators>
 
 // thunk creators
 
-type GetStateType = () => AppStateType
-type DispatchType = Dispatch<ActionTypes>
-type ThunkType = ThunkAction<any, AppStateType, unknown, ActionTypes>
+// type GetStateType = () => AppStateType
+// type DispatchType = Dispatch<ActionTypes>
+// предыдущие 2 типа описывали типы ф-ций (dispatch, getState), пока не был введен тип для санки ThunkType
+type ThunkType = BaseThunkType<ActionTypes>
 
 export const getUsersThunk = (currentPage: number, usersOnPageCount: number): ThunkType => {
-  return (dispatch: DispatchType, getState: GetStateType) => {
+  return (dispatch) => {
     dispatch(actionCreators.toggleIsFetchingAC(true))
     usersAPI.getUsers(currentPage, usersOnPageCount).then((data) => {
       dispatch(actionCreators.setUsersAC(data.items))

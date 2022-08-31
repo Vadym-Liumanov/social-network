@@ -1,8 +1,7 @@
-import { stopSubmit } from 'redux-form'
-import { Dispatch } from 'redux'
+import { FormAction, stopSubmit } from 'redux-form'
 import { profileAPI } from "../api/profileAPI"
 import { PhotosType, ProfileType, Nullable } from '../types/types'
-import { AppStateType, InferActionsTypes } from './store-redux'
+import { InferActionsTypes, BaseThunkType } from './store-redux'
 
 const ADD_POST = 'social_network/profile/ADD-POST'
 const SET_USER_PROFILE = 'social_network/profile/SET_USER_PROFILE'
@@ -11,11 +10,10 @@ const SET_MY_STATUS = 'social_network/profile/SET_MY_STATUS'
 const UPDATE_MY_STATUS = 'social_network/profile/UPDATE_MY_STATUS'
 const UPDATE_MY_PHOTO = 'social_network/profile/UPDATE_MY_PHOTO'
 
-type DispatchType = Dispatch<ActionTypes>
-type GetStateType = () => AppStateType
+type ThunkType = BaseThunkType<ActionTypes | FormAction>
 
-export const updateProfileThunk = (profileData: ProfileType) => {
-  return (dispatch: any, getState: GetStateType) => {
+export const updateProfileThunk = (profileData: ProfileType): ThunkType => {
+  return (dispatch, getState) => {
     const userId = getState().auth.id
     return profileAPI.updateProfile(profileData).then((data) => {
       if (data.resultCode === 0) {
@@ -70,36 +68,36 @@ export const actionCreators = {
   }
 }
 
-export const savePhotoThunk = (file: any) => {
-  return (dispatch: any) => {
+export const savePhotoThunk = (file: any): ThunkType => {
+  return (dispatch) => {
     profileAPI.savePhoto(file).then((data) => {
       if (data.resultCode === 0) dispatch(actionCreators.updateMyPhotoSuccess(data.data.photos))
     })
   }
 }
 
-export const updateMyStatusThunk = (myStatus: string) => {
-  return (dispatch: any) => {
+export const updateMyStatusThunk = (myStatus: string): ThunkType => {
+  return (dispatch) => {
     profileAPI.putMyStatus(myStatus).then((data) => {
       if (data.resultCode === 0) dispatch(actionCreators.updateMyStatus(myStatus))
     })
   }
 }
 
-export const setMyStatusThunk = (userId: number) => {
-  return (dispatch: any) => {
+export const setMyStatusThunk = (userId: number): ThunkType => {
+  return (dispatch) => {
     profileAPI.getMyStatus(userId).then((status) => dispatch(actionCreators.setMyStatus(status)))
   }
 }
 
-export const setUserStatusThunk = (userId: number) => {
-  return (dispatch: any) => {
+export const setUserStatusThunk = (userId: number): ThunkType => {
+  return (dispatch) => {
     profileAPI.getUserStatus(userId).then((status) => dispatch(actionCreators.setUserStatus(status)))
   }
 }
 
-export const setUserProfileThunk = (userId: number | null) => {
-  return (dispatch: any) => {
+export const setUserProfileThunk = (userId: number | null): ThunkType => {
+  return (dispatch) => {
     profileAPI.getUserProfile(userId).then((data) => dispatch(actionCreators.setUserProfile(data)))
   }
 }

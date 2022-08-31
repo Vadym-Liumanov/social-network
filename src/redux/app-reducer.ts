@@ -1,5 +1,5 @@
 import { getAuthDataThunk } from './auth-reducer'
-import { AppStateType, InferActionsTypes } from './store-redux'
+import { InferActionsTypes, BaseThunkType } from './store-redux'
 
 const SET_APP_INITIALIZED = 'social_network/app/SET_APP_INITIALIZED'
 
@@ -11,8 +11,10 @@ const actionCreators = {
   }
 }
 
-export const initializeAppThunk = () => {
-  return (dispatch: any, getState: () => AppStateType) => {
+type ThunkType = BaseThunkType<ActionTypes>
+
+export const initializeAppThunk = (): ThunkType => {
+  return (dispatch) => {
     const promise1 = dispatch(getAuthDataThunk())
     Promise.all([promise1]).then(() => {
       dispatch(actionCreators.appInitSuccess())
