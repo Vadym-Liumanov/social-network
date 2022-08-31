@@ -13,7 +13,7 @@ export type AuthDataType = {
   email: string,
 }
 
-type ActionCreatorsTypes = InferActionsTypes<typeof actionCreators>
+type ActionTypes = InferActionsTypes<typeof actionCreators>
 
 const actionCreators = {
   getCaptchaUrlSuccess: (captchaUrl: string) => {
@@ -84,7 +84,7 @@ const initialState = {
 
 type StateType = typeof initialState
 
-const authReducer = (state = initialState, action: ActionCreatorsTypes): StateType => {
+const authReducer = (state = initialState, action: ActionTypes): StateType => {
   switch (action.type) {
 
     case SET_USER_AUTH_DATA:
