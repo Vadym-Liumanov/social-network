@@ -84,7 +84,7 @@ const initialState = {
   captchaUrl: null as Nullable<string>
 }
 
-type StateType = typeof initialState
+export type StateType = typeof initialState
 
 const authReducer = (state = initialState, action: ActionTypes): StateType => {
   switch (action.type) {

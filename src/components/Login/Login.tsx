@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import { compose } from 'redux'
 
 import LoginReduxForm, { LoginFormValuesType } from './LoginReduxForm'
 
@@ -42,8 +43,6 @@ const Login: React.FC<LoginPropsType> = (props) => {
   )
 }
 
-
-
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
   return {
     isAuth: state.auth.isAuth,
@@ -57,4 +56,6 @@ const mapDispatchToProps = (dispatch: any): MapDispatchPropsType => {
   }
 }
 
-export default connect<MapStatePropsType, MapDispatchPropsType, null, AppStateType>(mapStateToProps, mapDispatchToProps)(Login)
+export default compose<React.ComponentType>(
+  connect<MapStatePropsType, MapDispatchPropsType, null, AppStateType>(mapStateToProps, mapDispatchToProps)
+)(Login)

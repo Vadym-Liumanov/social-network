@@ -77,7 +77,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     isFollowingInProgress: state.users.isFollowingInProgress,
   }
 }
-let mapDispatchToProps = (dispatch: any): MapDispatchPropsType  => {
+let mapDispatchToProps = (dispatch: any): MapDispatchPropsType => {
   return {
     followToggle: (userId: number | null) => dispatch(actionCreators.followToggleAC(userId)),
     setCurrentPage: (currentPage: number) => dispatch(actionCreators.setCurrentPageAC(currentPage)),
@@ -88,7 +88,7 @@ let mapDispatchToProps = (dispatch: any): MapDispatchPropsType  => {
 
 // const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(UsersContainer))
 
-export default compose(
+export default compose<React.ComponentType>(
   connect<MapStatePropsType, MapDispatchPropsType, null, AppStateType>(mapStateToProps, mapDispatchToProps),
   // withAuthRedirect
 )(UsersContainer)

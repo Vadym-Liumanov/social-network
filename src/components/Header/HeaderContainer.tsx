@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 
 import { logoutThunk } from '../../redux/auth-reducer'
 import { AppStateType } from '../../redux/store-redux'
@@ -12,14 +13,14 @@ type MapStatePropsType = {
 type MapDispatchPropsType = {
   logoutThunk: () => void
 }
-type PropsType = MapStatePropsType & MapDispatchPropsType
+// type PropsType = MapStatePropsType & MapDispatchPropsType
 
-class HeaderContainer extends React.Component<PropsType> {
+// class HeaderContainer extends React.Component<PropsType> {
 
-  render() {
-    return <Header {...this.props.authData} logoutThunk={this.props.logoutThunk} />
-  }
-}
+//   render() {
+//     return <Header {...this.props.authData} logoutThunk={this.props.logoutThunk} />
+//   }
+// }
 
 const mapStateToProps = (state: AppStateType) => {
   return {
@@ -33,4 +34,6 @@ const mapDispatchToProps = (dispatch: any) => {
   }
 }
 
-export default connect<MapStatePropsType, MapDispatchPropsType, null, AppStateType>(mapStateToProps, mapDispatchToProps)(HeaderContainer)
+export default compose<React.ComponentType>(
+  connect<MapStatePropsType, MapDispatchPropsType, null, AppStateType>(mapStateToProps, mapDispatchToProps)
+)(Header)
