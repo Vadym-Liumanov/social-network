@@ -40,9 +40,6 @@ const Dialogs: React.FC<PropsType> = ({ users, dialogs, addNewDialog }) => {
 
   const maxLength10 = maxLength(10)
 
-  type DialogFormPropsType = {
-    handleSubmit: any
-  }
   type LoginFormOwnPropsType = {
   }
 
