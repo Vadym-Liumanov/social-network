@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import LoginReduxForm from './LoginReduxForm'
+import LoginReduxForm, { LoginFormValuesType } from './LoginReduxForm'
 
 import { loginThunk } from '../../redux/auth-reducer'
 import { AppStateType } from '../../redux/store-redux'
@@ -26,7 +26,7 @@ const Login: React.FC<LoginPropsType> = (props) => {
   диспатчим из onSubmit formData через POST запрос на API для
   авторизации на стороннем сервисе */
 
-  const onSubmit = (formData: any) => {
+  const onSubmit = (formData: LoginFormValuesType) => {
     props.loginThunk(formData.email, formData.password, formData.rememberMe, formData.captcha)
   }
 

@@ -4,7 +4,7 @@ import { compose } from 'redux'
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 import Dialogs from './Dialogs'
 import { actionCreators } from '../../redux/messages-reducer'
-import {AppStateType} from '../../redux/store-redux'
+import { AppStateType } from '../../redux/store-redux'
 
 const mapStateToProps = (state: AppStateType) => {
   return {

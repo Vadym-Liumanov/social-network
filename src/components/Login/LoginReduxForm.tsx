@@ -5,7 +5,7 @@ import styles from './Login.module.css'
 import { required } from '../../utils/validators/validators'
 import { Element } from '../common/FormsControls/FormsControls'
 
-type LoginFormValuesType = {
+export type LoginFormValuesType = {
   email: string
   password: string
   rememberMe: boolean

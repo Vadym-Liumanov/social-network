@@ -1,5 +1,5 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 
 import dialogsStyles from './Dialogs.module.css'
 
@@ -9,27 +9,31 @@ import { required, maxLength } from '../../utils/validators/validators'
 import { Element } from '../common/FormsControls/FormsControls'
 
 type UserType = {
-  id: number,
+  id: number
   userName: string
 }
 
 type DialogType = {
-  id: number,
+  id: number
   dialog: string
 }
 
 type PropsType = {
-  users: Array<UserType>,
+  users: Array<UserType>
   dialogs: Array<DialogType>
   addNewDialog: (text: string) => void
 }
 
-const Dialogs: React.FC<PropsType> = ({users, dialogs, addNewDialog}) => {
+const Dialogs: React.FC<PropsType> = ({ users, dialogs, addNewDialog }) => {
 
   let dialogsUsersItems = users.map(user => <User key={user.id} userName={user.userName} />)
   let dialogsContentItems = dialogs.map(dialog => <Dialog key={dialog.id} dialogContent={dialog.dialog} />)
 
-  const onSubmitReduxForm = (formData: any) => {
+  type LoginFormValuesType = {
+    dialogText: string
+  }
+
+  const onSubmitReduxForm = (formData: LoginFormValuesType) => {
     // console.log(formData)
     addNewDialog(formData.dialogText)
   }
@@ -39,8 +43,10 @@ const Dialogs: React.FC<PropsType> = ({users, dialogs, addNewDialog}) => {
   type DialogFormPropsType = {
     handleSubmit: any
   }
+  type LoginFormOwnPropsType = {
+  }
 
-  const DialogForm: React.FC<DialogFormPropsType> = (props) => {
+  const DialogForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnPropsType> & LoginFormOwnPropsType> = (props) => {
     return (
       <form onSubmit={props.handleSubmit}>
         <div>
@@ -53,7 +59,7 @@ const Dialogs: React.FC<PropsType> = ({users, dialogs, addNewDialog}) => {
     )
   }
 
-  const DialogReduxForm = reduxForm({ form: 'dialogForm' })(DialogForm)
+  const DialogReduxForm = reduxForm<LoginFormValuesType, LoginFormOwnPropsType>({ form: 'dialogForm' })(DialogForm)
 
   return (
     <div className={dialogsStyles.content}>
@@ -75,7 +81,7 @@ const Dialogs: React.FC<PropsType> = ({users, dialogs, addNewDialog}) => {
         <DialogReduxForm onSubmit={onSubmitReduxForm} />
       </div>
     </div>
-  );
+  )
 }
 
 export default Dialogs
