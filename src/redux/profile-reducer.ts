@@ -68,7 +68,7 @@ export const actionCreators = {
   }
 }
 
-export const savePhotoThunk = (file: any): ThunkType => {
+export const savePhotoThunk = (file: File): ThunkType => {
   return (dispatch) => {
     profileAPI.savePhoto(file).then((data) => {
       if (data.resultCode === 0) dispatch(actionCreators.updateMyPhotoSuccess(data.data.photos))

@@ -1,4 +1,4 @@
-import { stopSubmit } from 'redux-form'
+import { stopSubmit, FormAction } from 'redux-form'
 import { authAPI } from "../api/authAPI"
 import { Nullable } from '../types/types'
 import { InferActionsTypes, BaseThunkType } from './store-redux'
@@ -27,7 +27,7 @@ const actionCreators = {
   }
 }
 
-type ThunkType = BaseThunkType<ActionTypes>
+type ThunkType = BaseThunkType<ActionTypes | FormAction>
 
 export const getCaptchaUrlThunk = (): ThunkType => {
   return (dispatch) => {
