@@ -4,23 +4,16 @@ import { compose } from 'redux'
 
 import { logoutThunk } from '../../redux/auth-reducer'
 import { AppStateType } from '../../redux/store-redux'
+import { StateType } from '../../redux/auth-reducer'
 
 import Header from './Header'
 
 type MapStatePropsType = {
-  authData: any
+  authData: StateType
 }
 type MapDispatchPropsType = {
   logoutThunk: () => void
 }
-// type PropsType = MapStatePropsType & MapDispatchPropsType
-
-// class HeaderContainer extends React.Component<PropsType> {
-
-//   render() {
-//     return <Header {...this.props.authData} logoutThunk={this.props.logoutThunk} />
-//   }
-// }
 
 const mapStateToProps = (state: AppStateType) => {
   return {

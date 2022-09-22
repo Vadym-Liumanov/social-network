@@ -28,10 +28,14 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnPro
       <div>
         <Field component={'input'} type={'checkbox'} name={'rememberMe'} /> Remember me
       </div>
-      {captchaUrl && <div><img src={captchaUrl} alt="captcha" /></div>}
       {captchaUrl &&
         <div>
-          <Field component={Element} placeholder={'captcha'} name={'captcha'} elementType='input' type='text' validate={[required]} />
+          <div>
+            <img src={captchaUrl} alt="captcha" />
+          </div>
+          <div>
+            <Field component={Element} placeholder={'captcha'} name={'captcha'} elementType='input' type='text' validate={[required]} />
+          </div>
         </div>}
       {error &&
         <div className={styles.formSummaryError}>

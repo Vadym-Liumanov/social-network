@@ -19,26 +19,26 @@ type MapDispatchPropsType = {
 
 type LoginPropsType = MapStatePropsType & MapDispatchPropsType
 
-const Login: React.FC<LoginPropsType> = (props) => {
+const Login: React.FC<LoginPropsType> = ({ loginThunk, isAuth, captchaUrl }) => {
 
   /* onSubmit передается в пропсах в child component и определяет,
-  что делать с собранными формой данными formData
+  что делать с собранными формой данными formData.
   Используем эти formData (через деструктуризацию) для логинизации -
   диспатчим из onSubmit formData через POST запрос на API для
-  авторизации на стороннем сервисе */
+  авторизации на сервере стороннего сервиса */
 
   const onSubmit = (formData: LoginFormValuesType) => {
-    props.loginThunk(formData.email, formData.password, formData.rememberMe, formData.captcha)
+    loginThunk(formData.email, formData.password, formData.rememberMe, formData.captcha)
   }
 
-  if (props.isAuth) {
+  if (isAuth) {
     return <Redirect to='/profile' />
   }
 
   return (
     <div>
       <h1>Login</h1>
-      <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} />
+      <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
     </div>
   )
 }

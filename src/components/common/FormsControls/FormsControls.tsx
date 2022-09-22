@@ -8,7 +8,6 @@ type ElementOwnPropsType = {
 }
 
 export const Element: React.FC<WrappedFieldProps & ElementOwnPropsType> = ({ input, meta, elementType: ElementType, ...props }) => {
-  debugger
   const hasError: boolean = meta.touched && meta.error
 
   return (
