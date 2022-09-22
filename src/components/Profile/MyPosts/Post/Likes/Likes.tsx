@@ -2,14 +2,18 @@ import React from 'react'
 
 import likesStyles from './Likes.module.css'
 
-const Likes = (props) => {
+type PropsType = {
+  likesCount: number
+}
+
+const Likes: React.FC<PropsType> = ({ likesCount }) => {
   return (
     <div className={likesStyles.item}>
       <div>
-        LIKES: {props.likesCount}
+        LIKES: {likesCount}
       </div>
     </div>
-  );
+  )
 }
 
 export default Likes

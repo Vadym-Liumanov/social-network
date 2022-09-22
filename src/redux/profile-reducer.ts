@@ -102,9 +102,9 @@ export const setUserProfileThunk = (userId: number | null): ThunkType => {
   }
 }
 
-type ProfilePostType = {
-  id: number,
-  post: string,
+export type ProfilePostType = {
+  id: number
+  post: string
   likesCount: number
 }
 

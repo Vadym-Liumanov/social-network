@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './Aboutme.module.css'
 
-const Aboutme = ({ aboutMe, contacts, lookingForAJob, lookingForAJobDescription }) => {
+const Aboutme: React.FC<any> = ({ aboutMe, contacts, lookingForAJob, lookingForAJobDescription }) => {
   // const Aboutme = (props) => {
   debugger
   const notSpecified = 'Not specified'

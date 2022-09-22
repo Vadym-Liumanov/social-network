@@ -1,28 +1,37 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
-
+import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import myPostsStyles from './MyPosts.module.css'
 import Post from './Post/Post'
 import { required, maxLength } from '../../../utils/validators/validators'
 import { Element } from '../../common/FormsControls/FormsControls'
+import { ProfilePostType } from '../../../redux/profile-reducer'
 
-const MyPosts = React.memo((props) => {
-  // debugger
 
-  // console.log('COMPONENT WAS RENDERED')
+type PropsType = {
+  profilePosts: Array<ProfilePostType>
+  addPost: (text: string) => void
+}
+
+const MyPosts: React.FC<PropsType> = React.memo((props) => {
 
   let postElements = Object.values(props.profilePosts).map(post => <Post key={post.id} value={post.post} likesCount={post.likesCount} />)
 
-  const onSubmitReduxForm = (formData) => {
-    // console.log(formData)
+  type PostFormValuesType = {
+    postText: string
+  }
+
+  const onSubmitReduxForm = (formData: PostFormValuesType) => {
     props.addPost(formData.postText)
   }
 
   const maxLength5 = maxLength(5)
 
-  const MyPostForm = (props) => {
+  // Пропсы, которые передаются в <MyPostForm /> в качестве инлайн атрибутов
+  type PostFormOwnPropsType = {}
+
+  const MyPostForm: React.FC<InjectedFormProps<PostFormValuesType, PostFormOwnPropsType> & PostFormOwnPropsType> = ({ handleSubmit }) => {
     return (
-      <form onSubmit={props.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div>
           <Field component={Element} name={'postText'} placeholder={'Input your post here'} validate={[required, maxLength5]} elementType='textarea' />
         </div>
@@ -33,7 +42,7 @@ const MyPosts = React.memo((props) => {
     )
   }
 
-  const MyPostReduxForm = reduxForm({ form: 'profileMyPost' })(MyPostForm)
+  const MyPostReduxForm = reduxForm<PostFormValuesType, PostFormOwnPropsType>({ form: 'profileMyPost' })(MyPostForm)
 
   return (
     <div className={myPostsStyles.content}>
@@ -51,7 +60,7 @@ const MyPosts = React.memo((props) => {
         {postElements}
       </div>
     </div>
-  );
+  )
 })
 
 export default MyPosts

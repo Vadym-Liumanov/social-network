@@ -62,7 +62,6 @@ const ProfileSettings = ({isOwner, ...props}) => {
 
       {editMode && (
         <div>
-          <div>Form</div>
           <ProfileReduxForm onSubmit={onSubmitProfileReduxForm} initialValues={props} profileDetails={props} />
           <button onClick={onDisableEditMode}>Back</button>
         </div>
