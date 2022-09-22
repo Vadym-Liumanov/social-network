@@ -4,7 +4,7 @@ import navbarStyles from './Navbar.module.css'
 
 import NavbarItem from './Item/NavbarItem';
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   return (
     <nav className={navbarStyles.nav}>
       <NavbarItem value="Profile" url="/profile" />
