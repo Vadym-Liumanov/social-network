@@ -1,9 +1,16 @@
 import React, { useState } from 'react'
+import { ContactsType, ProfileType } from '../../../../types/types'
 import ProfileReduxForm from './ProfileForm/ProfileForm'
 
 import styles from './ProfileSettings.module.css'
 
-const ProfileSettings = ({isOwner, ...props}) => {
+type PropsType = {
+  profileDetails: ProfileType
+  isOwner: boolean
+  updateProfile: (profileData: ProfileType) => Promise<any>
+}
+
+const ProfileSettings: React.FC<PropsType> = ({ profileDetails, isOwner, updateProfile }) => {
   const [editMode, setEditMode] = useState(false)
 
   const onEnableEditMode = () => {
@@ -13,10 +20,9 @@ const ProfileSettings = ({isOwner, ...props}) => {
     setEditMode(false)
   }
 
-  const onSubmitProfileReduxForm = (profileData) => {
-
-    props.updateProfile(profileData)
-      // debugger
+  // todo remove then latter
+  const onSubmitProfileReduxForm = (profileData: ProfileType) => {
+    updateProfile(profileData)
       .then(() => { setEditMode(false) })
   }
 
@@ -28,28 +34,28 @@ const ProfileSettings = ({isOwner, ...props}) => {
         <div>
           <div className={styles.settingsItem}>
             <div><b>fullName: </b></div>
-            <div>{props.fullName || '----------'}</div>
+            <div>{profileDetails.fullName || '----------'}</div>
           </div>
           <div className={styles.settingsItem}>
             <div><b>aboutMe: </b></div>
-            <div>{props.aboutMe || '----------'}</div>
+            <div>{profileDetails.aboutMe || '----------'}</div>
           </div>
           <div className={styles.settingsItem}>
             <div><b>lookingForAJob: </b></div>
-            <div>{props.lookingForAJob ? 'yes' : 'no'}</div>
+            <div>{profileDetails.lookingForAJob ? 'yes' : 'no'}</div>
           </div>
           <div className={styles.settingsItem}>
             <div><b>lookingForAJobDescription: </b></div>
-            <div>{props.lookingForAJobDescription || '----------'}</div>
+            <div>{profileDetails.lookingForAJobDescription || '----------'}</div>
           </div>
           <div className={styles.contacts}>
             <div><b>Contacts</b></div>
             <div>
-              {Object.keys(props.contacts).map((contact) => {
+              {Object.keys(profileDetails.contacts).map((contact) => {
                 return (
                   <div key={contact}>
                     <span><b>{contact}</b></span>
-                    <span>{props.contacts[contact] || ' -----'}</span>
+                    <span>{profileDetails.contacts[contact as keyof ContactsType] || ' -----'}</span>
                   </div>
                 )
               })}
@@ -62,7 +68,7 @@ const ProfileSettings = ({isOwner, ...props}) => {
 
       {editMode && (
         <div>
-          <ProfileReduxForm onSubmit={onSubmitProfileReduxForm} initialValues={props} profileDetails={props} />
+          <ProfileReduxForm onSubmit={onSubmitProfileReduxForm} initialValues={profileDetails} profileDetails={profileDetails} />
           <button onClick={onDisableEditMode}>Back</button>
         </div>
       )}
@@ -70,7 +76,5 @@ const ProfileSettings = ({isOwner, ...props}) => {
     </div>
   )
 }
-
-
 
 export default ProfileSettings

@@ -1,15 +1,25 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 
 import styles from './ProfileInfo.module.css'
 import userImage from '../../../assets/images/userImage.jpg'
-// import ProfileStatus from './ProfileStatus'
 import ProfileStatus from './ProfileStatus/ProfileStatusWithHooks'
 import ProfileSettings from './ProfileSettings/ProfileSettings'
+import { ProfileType } from '../../../types/types'
 
-const ProfileInfo = ({ photos, isOwner, userStatus, myStatus, updateMyStatus, savePhoto, updateProfile, ...profileDetails }) => {
+type PropsType = {
+  isOwner: boolean
+  userStatus: string
+  myStatus: string
+  updateMyStatus: (myStatus: string) => void
+  savePhoto: (file: File) => void
+  updateProfile: (profileData: ProfileType) => Promise<any>
+  profileDetails: ProfileType
+}
 
-  const onFileSelect = (e) => {
-    if (e.target.files.length) {
+const ProfileInfo: React.FC<PropsType> = ({ isOwner, userStatus, myStatus, updateMyStatus, savePhoto, updateProfile, profileDetails }) => {
+  debugger
+  const onFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files?.length) {
       const fileData = e.target.files[0]
       savePhoto(fileData)
     }
@@ -20,7 +30,7 @@ const ProfileInfo = ({ photos, isOwner, userStatus, myStatus, updateMyStatus, sa
       <section className={styles.avaNameStatus}>
         <div className={styles.avaContainer}>
           <div className={styles.imgContainer}>
-            <img src={photos.large ? photos.large : userImage} alt="userAvatar" className={styles.avatar} />
+            <img src={profileDetails.photos.large ? profileDetails.photos.large : userImage} alt="userAvatar" className={styles.avatar} />
           </div>
           {isOwner && (
             <div className={styles.inputFileContainer}>
@@ -38,7 +48,7 @@ const ProfileInfo = ({ photos, isOwner, userStatus, myStatus, updateMyStatus, sa
         </div>
       </section>
       <section className={styles.aboutMe}>
-        <ProfileSettings {...profileDetails} isOwner={isOwner} updateProfile={updateProfile} />
+        <ProfileSettings profileDetails = {profileDetails} isOwner={isOwner} updateProfile={updateProfile} />
       </section>
     </div>
   )

@@ -2,7 +2,7 @@ import React from 'react'
 
 import settingsStyles from'./Settings.module.css'
 
-const Settings = () => {
+const Settings: React.FC = () => {
   return (
     <div className={settingsStyles.content}>
       <div>

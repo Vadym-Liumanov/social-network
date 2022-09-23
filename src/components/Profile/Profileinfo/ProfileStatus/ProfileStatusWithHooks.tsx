@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, ChangeEvent } from 'react'
 
 import styles from './ProfileStatus.module.css'
 
-const ProfileStatusWithHooks = ({ status, updateMyStatus }) => {
+type PropsType = {
+  status: string
+  updateMyStatus: (myStatus: string) => void
+}
+
+const ProfileStatusWithHooks: React.FC<PropsType> = ({ status, updateMyStatus }) => {
 
   useEffect((
     () => {
@@ -13,7 +18,7 @@ const ProfileStatusWithHooks = ({ status, updateMyStatus }) => {
   const [editMode, setEditMode] = useState(false)
   const [statusText, setStatusText] = useState(status)
 
-  const onChangeStatus = (e) => {
+  const onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
     setStatusText(e.target.value)
   }
 

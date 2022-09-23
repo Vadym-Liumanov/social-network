@@ -1,11 +1,24 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, InjectedFormProps } from 'redux-form'
+import { ProfileType } from '../../../../../types/types'
 // import styles from './ProfileForm.module.css'
 import { required } from '../../../../../utils/validators/validators'
 import { Element } from '../../../../common/FormsControls/FormsControls'
 
+// export type ProfileFormValuesType = {
+//   fullName: string | null
+//   aboutMe: string | null
+//   lookingForAJob: boolean | null
+//   lookingForAJobDescription: string | null
+// }
+type ProfileFormValuesType = ProfileType
 
-const ProfileForm = (props) => {
+type ProfileFormOwnPropsType = {
+  initialValues: ProfileType
+  profileDetails: ProfileType
+}
+
+const ProfileForm: React.FC<InjectedFormProps<ProfileFormValuesType, ProfileFormOwnPropsType> & ProfileFormOwnPropsType> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
@@ -35,6 +48,6 @@ const ProfileForm = (props) => {
   )
 }
 
-const ProfileReduxForm = reduxForm({ form: 'profile' })(ProfileForm)
+const ProfileReduxForm = reduxForm<ProfileFormValuesType, ProfileFormOwnPropsType>({ form: 'profile' })(ProfileForm)
 
 export default ProfileReduxForm
