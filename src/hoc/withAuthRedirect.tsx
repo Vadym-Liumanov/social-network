@@ -13,7 +13,7 @@ type MapStatePropsType = {
 type MapDispatchPropsType = {
 }
 
-export function withAuthRedirect<WCP>(WrappedComponent: React.ComponentType<WCP>) {
+export function withAuthRedirect<WCP extends object>(WrappedComponent: React.ComponentType<WCP>) {
 
   const RedirectComponent: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
     let { isAuth, ...restProps } = props
@@ -27,5 +27,5 @@ export function withAuthRedirect<WCP>(WrappedComponent: React.ComponentType<WCP>
     mapStateToProps, {})
     (RedirectComponent)
 
-  return ConnectedAuthRedirectComponent;
+  return ConnectedAuthRedirectComponent
 }

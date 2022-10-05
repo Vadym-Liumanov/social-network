@@ -8,14 +8,14 @@ const SET_TOTAL_COUNT = 'social_network/users/SET_TOTAL_COUNT'
 const SET_CURRENT_PAGE = 'social_network/users/SET_CURRENT_PAGE'
 const TOGGLE_IS_FETCHING = 'social_network/users/TOGGLE_IS_FETCHING'
 const IS_FOLLOWING_IN_PROGRESS_TOGGLE = 'social_network/users/IS_FOLLOWING_IN_PROGRESS_TOGGLE'
+const SET_USERS_FILTER = 'social_network/users/SET_USERS_FILTER'
 
 // AC - action creator
 
-// Type for all action creator types
-// type ActionCreatorsTypes = FollowToggleACType | SetUsersACType | SetTotalCountACType
-//   | SetCurrentPageACType | ToggleIsFetchingACType | IsFollowingToggleACType
-
 export const actionCreators = {
+  setUsersFilterAC: (usersFilter: UsersFilterType = { term: '', friend: null }) => {
+    return { type: SET_USERS_FILTER, payload: usersFilter } as const
+  },
   followToggleAC: (userId: number | null) => {
     return { type: FOLLOW_TOGGLE, userId } as const
   },
@@ -45,10 +45,10 @@ type ActionTypes = InferActionsTypes<typeof actionCreators>
 // предыдущие 2 типа описывали типы ф-ций (dispatch, getState), пока не был введен тип для санки ThunkType
 type ThunkType = BaseThunkType<ActionTypes>
 
-export const getUsersThunk = (currentPage: number, usersOnPageCount: number): ThunkType => {
+export const getUsersThunk = (currentPage: number, usersOnPageCount: number, usersFilter: UsersFilterType): ThunkType => {
   return (dispatch) => {
     dispatch(actionCreators.toggleIsFetchingAC(true))
-    usersAPI.getUsers(currentPage, usersOnPageCount).then((data) => {
+    usersAPI.getUsers(currentPage, usersOnPageCount, usersFilter).then((data) => {
       dispatch(actionCreators.setUsersAC(data.items))
       dispatch(actionCreators.setTotalCountAC(data.totalCount))
       dispatch(actionCreators.toggleIsFetchingAC(false))
@@ -58,17 +58,23 @@ export const getUsersThunk = (currentPage: number, usersOnPageCount: number): Th
 
 type UsersListType = Array<UserInfoType>
 
+export type UsersFilterType = {
+  term: string
+  friend: boolean | null
+}
+
 type StateType = {
-  usersList: UsersListType,
-  totalCount: number,
-  currentPage: number,
-  usersOnPageCount: number,
-  isFetching: boolean,
+  usersList: UsersListType
+  totalCount: number
+  currentPage: number
+  usersOnPageCount: number
+  isFetching: boolean
   /* массив из id юзеров, которые отображены на текущей странице и находятся в процессе операции
   follow/unfollow (асинхронного запроса к серверу). Массив позволяет при рендере страницы юзеров
   поюзерно блокировать кнопку дружбы на время разрешения запроса (проблематика - чтобы можно было 
   фолловить очередного юзера, пока процесс фоллоу для предыдущего в процессе) */
   isFollowingInProgress: Array<number | null>
+  usersFilter: UsersFilterType
 }
 
 // getState().users
@@ -79,11 +85,21 @@ const initialState: StateType = {
   currentPage: 1,
   usersOnPageCount: 5,
   isFetching: false,
-  isFollowingInProgress: [] //massiv iz id userov kotorie v processe zaprosa na followed - esli id net, to button ne disable
+  //massiv iz id userov kotorie v processe zaprosa na followed - esli id net, to button ne disable
+  isFollowingInProgress: [],
+  usersFilter: {
+    term: '',
+    friend: null
+  }
+
 }
 
 const usersReduser = (state = initialState, action: ActionTypes): StateType => {
   switch (action.type) {
+
+    case SET_USERS_FILTER:
+      return { ...state, usersFilter: { ...action.payload } }
+
     case FOLLOW_TOGGLE:
       return {
         ...state,

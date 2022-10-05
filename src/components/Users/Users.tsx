@@ -4,6 +4,8 @@ import User from './User/User'
 import { UserInfoType } from '../../types/types'
 import usersStyles from './Users.module.css'
 import Pagination from '../common/Pagination/Pagination'
+import UsersSearchForm from './UsersSearchForm/UsersSearchForm'
+import { UsersFilterType } from '../../redux/users-reducer'
 
 type PropsType = {
   //Массив объектов user
@@ -27,6 +29,12 @@ type PropsType = {
   isFollowingInProgress: Array<number | null>
   //ф-ция переключения для юзера с id статуса following на противоположный
   isFollowingToggle: (followingUserId: number | null) => void
+  // объект фильтра для отображения users. Передается в UsersSearchForm
+  usersFilter: UsersFilterType
+  // callBack диспатчит Thunk для обновления списка users по фильтру usersFilter. Передается в UsersSearchForm
+  getUsersThunk: (currentPage: number, usersOnPageCount: number, usersFilter: UsersFilterType) => void
+  // callBack диспатчит AC для обновления фильтра usersFilter через компоненту формы UsersSearchForm.
+  setUsersFilter: (usersFilter: UsersFilterType) => void
 }
 
 const Users: React.FC<PropsType> = (props) => {
@@ -40,6 +48,13 @@ const Users: React.FC<PropsType> = (props) => {
 
   return (
     <div>
+      <div>
+        <UsersSearchForm
+          usersFilter={props.usersFilter}
+          getUsersThunk={props.getUsersThunk}
+          setUsersFilter={props.setUsersFilter}
+        />
+      </div>
       <Pagination totalCount={props.totalCount}
         pageSize={props.usersOnPageCount}
         currentPage={props.currentPage}
@@ -50,7 +65,6 @@ const Users: React.FC<PropsType> = (props) => {
       </div>
     </div>
   )
-
 }
 
-export default Users
+export default React.memo(Users)
