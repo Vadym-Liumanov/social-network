@@ -34,6 +34,11 @@ const UsersSearchForm: React.FC<PropsType> = ({ usersFilter, onChangeUsersFilter
           <Form>
             <Field type="text" name="term" />
             <ErrorMessage name="term" component="div" />
+            <Field as="select" name="friend">
+              <option value="null">All users</option>
+              <option value="true">Only followed users</option>
+              <option value="false">Only unFollowed users</option>
+            </Field>
             <button type="submit" disabled={isSubmitting}>
               Find
             </button>
