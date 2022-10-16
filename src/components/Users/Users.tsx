@@ -34,7 +34,8 @@ type PropsType = {
   // callBack диспатчит Thunk для обновления списка users по фильтру usersFilter. Передается в UsersSearchForm
   getUsersThunk: (currentPage: number, usersOnPageCount: number, usersFilter: UsersFilterType) => void
   // callBack диспатчит AC для обновления фильтра usersFilter через компоненту формы UsersSearchForm.
-  setUsersFilter: (usersFilter: UsersFilterType) => void
+  // После диспатчит с обновленным фильтром getUsersThunk для обновления UsersList
+  onChangeUsersFilter: (usersFilter: UsersFilterType) => void
 }
 
 const Users: React.FC<PropsType> = (props) => {
@@ -51,8 +52,7 @@ const Users: React.FC<PropsType> = (props) => {
       <div>
         <UsersSearchForm
           usersFilter={props.usersFilter}
-          getUsersThunk={props.getUsersThunk}
-          setUsersFilter={props.setUsersFilter}
+          onChangeUsersFilter={props.onChangeUsersFilter}
         />
       </div>
       <Pagination totalCount={props.totalCount}

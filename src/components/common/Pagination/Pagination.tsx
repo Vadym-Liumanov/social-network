@@ -10,7 +10,7 @@ type PropsType = {
   portionSize?: number
 }
 
-const Pagination: React.FC<PropsType> = ({ totalCount, pageSize = 4, currentPage, onPageNumberClick, portionSize = 10 }) => {
+const Pagination: React.FC<PropsType> = ({ totalCount, pageSize = 5, currentPage, onPageNumberClick, portionSize = 10 }) => {
   const pageNumbersArr: Array<number> = []
   const pagesCount = Math.ceil(totalCount / pageSize)
   for (let i = 1; i <= pagesCount; i++) {
@@ -54,4 +54,4 @@ const Pagination: React.FC<PropsType> = ({ totalCount, pageSize = 4, currentPage
   )
 }
 
-export default Pagination
+export default React.memo(Pagination)

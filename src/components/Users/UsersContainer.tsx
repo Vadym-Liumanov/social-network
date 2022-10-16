@@ -46,6 +46,11 @@ class UsersContainer extends React.Component<PropsType> {
     this.props.setCurrentPage(pageNumber)
     this.props.getUsersThunk(pageNumber, this.props.usersOnPageCount, this.props.usersFilter)
   }
+  onChangeUsersFilter = (usersFilter: UsersFilterType) => {
+    this.props.setCurrentPage(1)
+    this.props.setUsersFilter(usersFilter)
+    this.props.getUsersThunk(this.props.currentPage, this.props.usersOnPageCount, this.props.usersFilter)
+  }
 
   render() {
     return (
@@ -53,7 +58,7 @@ class UsersContainer extends React.Component<PropsType> {
         {this.props.isFetching
           ? <Preloader />
           : <Users
-            setUsersFilter={this.props.setUsersFilter}
+            onChangeUsersFilter={this.onChangeUsersFilter}
             usersFilter={this.props.usersFilter}
             getUsersThunk={this.props.getUsersThunk}
             usersList={this.props.usersList}
