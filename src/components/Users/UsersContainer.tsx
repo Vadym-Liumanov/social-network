@@ -4,7 +4,7 @@ import { compose } from 'redux'
 
 // import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 
-import { actionCreators, getUsersThunk, UsersFilterType } from '../../redux/users-reducer'
+import { actionCreators, requestUsersThunk, UsersFilterType } from '../../redux/users-reducer'
 
 import Users from './Users'
 import Preloader from '../common/Preloader/Preloader'
@@ -28,7 +28,7 @@ type MapStatePropsType = {
 type MapDispatchPropsType = {
   followToggle: (userId: number | null) => void
   isFollowingToggle: (followingUserId: number | null) => void
-  getUsersThunk: (currentPage: number, usersOnPageCount: number, usersFilter: UsersFilterType) => void
+  requestUsersThunk: (currentPage: number, usersOnPageCount: number, usersFilter: UsersFilterType) => void
   setCurrentPage: (pageNumber: number) => void
   setUsersFilter: (usersFilter: UsersFilterType) => void
 }
@@ -38,18 +38,18 @@ type PropsType = MapStatePropsType & MapDispatchPropsType
 class UsersContainer extends React.Component<PropsType> {
 
   componentDidMount() {
-    this.props.getUsersThunk(this.props.currentPage, this.props.usersOnPageCount, this.props.usersFilter)
+    this.props.requestUsersThunk(this.props.currentPage, this.props.usersOnPageCount, this.props.usersFilter)
   }
 
   //function is use for selecting current page number in Pagination.tsx
   onPageNumberClick = (pageNumber: number) => {
     this.props.setCurrentPage(pageNumber)
-    this.props.getUsersThunk(pageNumber, this.props.usersOnPageCount, this.props.usersFilter)
+    this.props.requestUsersThunk(pageNumber, this.props.usersOnPageCount, this.props.usersFilter)
   }
   onChangeUsersFilter = (usersFilter: UsersFilterType) => {
     this.props.setCurrentPage(1)
     this.props.setUsersFilter(usersFilter)
-    this.props.getUsersThunk(this.props.currentPage, this.props.usersOnPageCount, this.props.usersFilter)
+    this.props.requestUsersThunk(this.props.currentPage, this.props.usersOnPageCount, this.props.usersFilter)
   }
 
   render() {
@@ -60,7 +60,7 @@ class UsersContainer extends React.Component<PropsType> {
           : <Users
             onChangeUsersFilter={this.onChangeUsersFilter}
             usersFilter={this.props.usersFilter}
-            getUsersThunk={this.props.getUsersThunk}
+            requestUsersThunk={this.props.requestUsersThunk}
             usersList={this.props.usersList}
             followToggle={this.props.followToggle}
             totalCount={this.props.totalCount}
@@ -94,7 +94,7 @@ let mapDispatchToProps = (dispatch: any): MapDispatchPropsType => {
     followToggle: (userId: number | null) => dispatch(actionCreators.followToggleAC(userId)),
     setCurrentPage: (currentPage: number) => dispatch(actionCreators.setCurrentPageAC(currentPage)),
     isFollowingToggle: (followingUserId: number | null) => dispatch(actionCreators.isFollowingToggleAC(followingUserId)),
-    getUsersThunk: (currentPage: number, usersOnPageCount: number, usersFilter: UsersFilterType) => dispatch(getUsersThunk(currentPage, usersOnPageCount, usersFilter))
+    requestUsersThunk: (currentPage: number, usersOnPageCount: number, usersFilter: UsersFilterType) => dispatch(requestUsersThunk(currentPage, usersOnPageCount, usersFilter))
   }
 }
 

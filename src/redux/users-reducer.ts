@@ -45,7 +45,7 @@ type ActionTypes = InferActionsTypes<typeof actionCreators>
 // предыдущие 2 типа описывали типы ф-ций (dispatch, getState), пока не был введен тип для санки ThunkType
 type ThunkType = BaseThunkType<ActionTypes>
 
-export const getUsersThunk = (currentPage: number, usersOnPageCount: number, usersFilter: UsersFilterType): ThunkType => {
+export const requestUsersThunk = (currentPage: number, usersOnPageCount: number, usersFilter: UsersFilterType): ThunkType => {
   return (dispatch) => {
     dispatch(actionCreators.toggleIsFetchingAC(true))
     usersAPI.getUsers(currentPage, usersOnPageCount, usersFilter).then((data) => {

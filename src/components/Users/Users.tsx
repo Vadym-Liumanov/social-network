@@ -32,9 +32,9 @@ type PropsType = {
   // объект фильтра для отображения users. Передается в UsersSearchForm
   usersFilter: UsersFilterType
   // callBack диспатчит Thunk для обновления списка users по фильтру usersFilter. Передается в UsersSearchForm
-  getUsersThunk: (currentPage: number, usersOnPageCount: number, usersFilter: UsersFilterType) => void
+  requestUsersThunk: (currentPage: number, usersOnPageCount: number, usersFilter: UsersFilterType) => void
   // callBack диспатчит AC для обновления фильтра usersFilter через компоненту формы UsersSearchForm.
-  // После диспатчит с обновленным фильтром getUsersThunk для обновления UsersList
+  // После диспатчит с обновленным фильтром requestUsersThunk для обновления UsersList
   onChangeUsersFilter: (usersFilter: UsersFilterType) => void
 }
 
