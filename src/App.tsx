@@ -12,7 +12,7 @@ import Navbar from './components/Navbar/Navbar'
 
 import ProfileContainer from './components/Profile/ProfileContainer'
 import DialogsContainer from './components/Dialogs/DialogsContainer'
-import UsersContainer from './components/Users/UsersContainer'
+import Users from './components/Users/Users'
 import Login from './components/Login/Login'
 
 import News from './components/News/News'
@@ -65,7 +65,7 @@ class App extends React.Component<PropsType> {
               <Route exact path='/profile' component={() => <ProfileContainer />} />
               <Route path='/profile/:userId' component={() => <ProfileContainer />} />
               <Route exact path='/dialogs' component={() => <DialogsContainer />} />
-              <Route exact path='/users' component={() => <UsersContainer />} />
+              <Route exact path='/users' component={() => <Users />} />
               <Route exact path='/news' component={() => <News />} />
               <Route exact path='/music' component={() => <Music />} />
               <Route exact path='/settings' component={() => <Settings />} />
