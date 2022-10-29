@@ -8,9 +8,15 @@ type PropsType = {
 }
 
 const UsersSearchForm: React.FC<PropsType> = ({ usersFilter, onChangeUsersFilter }) => {
-  type FormValuesType = UsersFilterType
+  type FormValuesType = {
+    term: string
+    friend: 'true' | 'false' | 'null'
+  }
 
-  const initialFormValues: FormValuesType = usersFilter
+  const initialFormValues: FormValuesType = {
+    term: usersFilter.term,
+    friend: usersFilter.friend === null ? 'null' : usersFilter.friend === true ? 'true' : 'false'
+  }
 
   const formValidate = (values: FormValuesType) => {
     const errors = {}
@@ -18,8 +24,11 @@ const UsersSearchForm: React.FC<PropsType> = ({ usersFilter, onChangeUsersFilter
   }
 
   const onFormSubmit = (values: FormValuesType, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
-    // alert(JSON.stringify(values, null, 2))
-    onChangeUsersFilter(values)
+    const filter: UsersFilterType = {
+      term: values.term,
+      friend: values.friend === 'null' ? null : values.friend === 'true' ? true : false
+    }
+    onChangeUsersFilter(filter)
     setSubmitting(false)
   }
 
