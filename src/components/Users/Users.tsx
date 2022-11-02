@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useLocation, useHistory } from 'react-router-dom'
+import queryString from 'querystring'
+
 import {
   getCurrentPage, getIsFetching, getIsFollowingInProgress,
   getTotalCount, getUsers, getUsersFilter, getUsersOnPageCount
@@ -13,43 +16,10 @@ import usersStyles from './Users.module.css'
 import Pagination from '../common/Pagination/Pagination'
 import UsersSearchForm from './UsersSearchForm/UsersSearchForm'
 
-// type PropsType = {
-//   //Массив объектов user
-//   usersList: Array<UserInfoType>
-//   // ф-ция переключает для userId follow/unfollow
-//   followToggle: (userId: number | null) => void
-//   //общее кол-во всех пользователей
-//   totalCount: number
-//   //сколько пользователей выводить на странице
-//   usersOnPageCount: number
-//   // номер текущей страницы пользователей
-//   currentPage: number
-//   // ф-ция выбора ативной страницы в пагинаторе
-//   onPageNumberClick: (pageNumber: number) => void
-//   // флаг загрузки данных - отобразит preloader (true) или данные загруженные (false)
-//   isFetching: boolean
-//   /* массив из id юзеров, которые отображены на текущей странице и находятся в процессе операции
-//   follow/unfollow (асинхронного запроса к серверу). Массив позволяет при рендере страницы юзеров
-//   поюзерно блокировать кнопку дружбы на время разрешения запроса (проблематика - чтобы можно было 
-//   фолловить очередного юзера, пока процесс фоллоу для предыдущего в процессе) */
-//   isFollowingInProgress: Array<number | null>
-//   //ф-ция переключения для юзера с id статуса following на противоположный
-//   isFollowingToggle: (followingUserId: number | null) => void
-//   // объект фильтра для отображения users. Передается в UsersSearchForm
-//   usersFilter: UsersFilterType
-//   // callBack диспатчит Thunk для обновления списка users по фильтру usersFilter. Передается в UsersSearchForm
-//   requestUsers: (currentPage: number, usersOnPageCount: number, usersFilter: UsersFilterType) => void
-//   // callBack диспатчит AC для обновления фильтра usersFilter через компоненту формы UsersSearchForm.
-//   // После диспатчит с обновленным фильтром requestUsersThunk для обновления UsersList
-//   onChangeUsersFilter: (usersFilter: UsersFilterType) => void
-// }
-
 const Users: React.FC = () => {
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    requestUsers(currentPage, usersOnPageCount, usersFilter)
-  }, [])
+  const location = useLocation()
+  const history = useHistory()
 
   const usersList = useSelector(getUsers)
   const totalCount = useSelector(getTotalCount)
@@ -83,6 +53,54 @@ const Users: React.FC = () => {
     isFollowingInProgress={isFollowingInProgress}
     isFollowingToggle={isFollowingToggle}
   />)
+
+  type QueryParamsType = {
+    term?: string
+    friend?: string
+    page?: string
+  }
+
+  useEffect(() => {
+    const parsedQuery: QueryParamsType = queryString.parse(location.search.substring(1))
+    let actualPage = currentPage
+    let actualFilter = { ...usersFilter }
+    if (!!parsedQuery.page) { actualPage = Number(parsedQuery.page) }
+    if (!!parsedQuery.term) { actualFilter.term = parsedQuery.term }
+    if (!!parsedQuery.friend) {
+      let actualFriend = null
+      switch (parsedQuery.friend) {
+        case 'true':
+          actualFriend = true
+          break
+        case 'false':
+          actualFriend = false
+          break
+      }
+      actualFilter.friend = actualFriend
+    }
+
+    // console.log(location.search)
+    // console.log(parsedQuery)
+    // console.log(actualPage, actualFilter)
+    setCurrentPage(actualPage)
+    requestUsers(actualPage, usersOnPageCount, actualFilter)
+  }, [])
+
+  useEffect(() => {
+    let parsedQuery = {} as QueryParamsType
+    if (!!usersFilter.term) { parsedQuery.term = usersFilter.term }
+    if (usersFilter.friend !== null) {
+      parsedQuery.friend = String(usersFilter.friend)
+      console.log(parsedQuery.friend)
+    }
+    if (currentPage != 1) { parsedQuery.page = String(currentPage) }
+
+
+    history.push({
+      pathname: '/users',
+      search: '?' + queryString.stringify(parsedQuery)
+    })
+  }, [usersFilter, currentPage])
 
   return (
     <div>
