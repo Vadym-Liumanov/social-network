@@ -61,6 +61,10 @@ const Users: React.FC = () => {
   }
 
   useEffect(() => {
+    /*
+    const paramsObj = new URLSearchParams(location.search)
+    console.log(paramsObj)
+    */
     const parsedQuery: QueryParamsType = queryString.parse(location.search.substring(1))
     let actualPage = currentPage
     let actualFilter = { ...usersFilter }
@@ -78,6 +82,22 @@ const Users: React.FC = () => {
       }
       actualFilter.friend = actualFriend
     }
+/*
+    if (!!paramsObj.page) { actualPage = Number(paramsObj.page) }
+    if (!!paramsObj.term) { actualFilter.term = paramsObj.term }
+    if (!!paramsObj.friend) {
+      switch (paramsObj.friend) {
+        case 'true':
+          actualFilter.friend = true
+          break
+        case 'false':
+          actualFilter.friend = false
+          break
+        default:
+          actualFilter.friend = null
+      }
+    }
+*/
 
     // console.log(location.search)
     // console.log(parsedQuery)
@@ -87,18 +107,25 @@ const Users: React.FC = () => {
   }, [])
 
   useEffect(() => {
+    /*
+    let paramsObj = new URLSearchParams() as QueryParamsType
+    */ 
     let parsedQuery = {} as QueryParamsType
     if (!!usersFilter.term) { parsedQuery.term = usersFilter.term }
+//  if (!!usersFilter.term) { paramsObj.set('term', usersFilter.term) }  
     if (usersFilter.friend !== null) {
       parsedQuery.friend = String(usersFilter.friend)
-      console.log(parsedQuery.friend)
+//  paramsObj.set('friend', String(usersFilter.friend))
     }
-    if (currentPage != 1) { parsedQuery.page = String(currentPage) }
-
+    if (currentPage !== 1) { 
+      parsedQuery.page = String(currentPage)
+//  paramsObj.set('page', String(currentPage))
+    }
 
     history.push({
       pathname: '/users',
       search: '?' + queryString.stringify(parsedQuery)
+//    search: '?' + paramsObj.toString()
     })
   }, [usersFilter, currentPage])
 
