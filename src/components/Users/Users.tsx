@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation, useHistory } from 'react-router-dom'
-import queryString from 'querystring'
 
 import {
   getCurrentPage, getIsFetching, getIsFollowingInProgress,
@@ -54,39 +53,16 @@ const Users: React.FC = () => {
     isFollowingToggle={isFollowingToggle}
   />)
 
-  type QueryParamsType = {
-    term?: string
-    friend?: string
-    page?: string
-  }
-
   useEffect(() => {
-    /*
-    const paramsObj = new URLSearchParams(location.search)
-    console.log(paramsObj)
-    */
-    const parsedQuery: QueryParamsType = queryString.parse(location.search.substring(1))
+    const queryParams = new URLSearchParams(location.search)
+
     let actualPage = currentPage
     let actualFilter = { ...usersFilter }
-    if (!!parsedQuery.page) { actualPage = Number(parsedQuery.page) }
-    if (!!parsedQuery.term) { actualFilter.term = parsedQuery.term }
-    if (!!parsedQuery.friend) {
-      let actualFriend = null
-      switch (parsedQuery.friend) {
-        case 'true':
-          actualFriend = true
-          break
-        case 'false':
-          actualFriend = false
-          break
-      }
-      actualFilter.friend = actualFriend
-    }
-/*
-    if (!!paramsObj.page) { actualPage = Number(paramsObj.page) }
-    if (!!paramsObj.term) { actualFilter.term = paramsObj.term }
-    if (!!paramsObj.friend) {
-      switch (paramsObj.friend) {
+
+    if (queryParams.has('page')) { actualPage = Number(queryParams.get('page')) }
+    if (queryParams.has('term')) { actualFilter.term = queryParams.get('term') as string }
+    if (queryParams.has('friend')) {
+      switch (queryParams.get('friend')) {
         case 'true':
           actualFilter.friend = true
           break
@@ -97,36 +73,24 @@ const Users: React.FC = () => {
           actualFilter.friend = null
       }
     }
-*/
 
-    // console.log(location.search)
-    // console.log(parsedQuery)
-    // console.log(actualPage, actualFilter)
     setCurrentPage(actualPage)
+    setUsersFilter(actualFilter)
     requestUsers(actualPage, usersOnPageCount, actualFilter)
+    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
-    /*
-    let paramsObj = new URLSearchParams() as QueryParamsType
-    */ 
-    let parsedQuery = {} as QueryParamsType
-    if (!!usersFilter.term) { parsedQuery.term = usersFilter.term }
-//  if (!!usersFilter.term) { paramsObj.set('term', usersFilter.term) }  
-    if (usersFilter.friend !== null) {
-      parsedQuery.friend = String(usersFilter.friend)
-//  paramsObj.set('friend', String(usersFilter.friend))
-    }
-    if (currentPage !== 1) { 
-      parsedQuery.page = String(currentPage)
-//  paramsObj.set('page', String(currentPage))
-    }
+    let queryParams = new URLSearchParams()
+    if (!!usersFilter.term) { queryParams.set('term', usersFilter.term) }
+    if (usersFilter.friend !== null) { queryParams.set('friend', String(usersFilter.friend)) }
+    if (currentPage !== 1) { queryParams.set('page', String(currentPage)) }
 
     history.push({
       pathname: '/users',
-      search: '?' + queryString.stringify(parsedQuery)
-//    search: '?' + paramsObj.toString()
+      search: '?' + queryParams.toString()
     })
+    // eslint-disable-next-line
   }, [usersFilter, currentPage])
 
   return (

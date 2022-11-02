@@ -35,6 +35,7 @@ const UsersSearchForm: React.FC<PropsType> = ({ usersFilter, onChangeUsersFilter
   return (
     <div>
       <Formik
+        enableReinitialize
         initialValues={initialFormValues}
         validate={formValidate}
         onSubmit={onFormSubmit}
