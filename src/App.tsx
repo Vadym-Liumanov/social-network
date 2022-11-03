@@ -75,6 +75,7 @@ const App: React.FC = (props) => {
                   <Route exact path='/music' component={() => <Music />} />
                   <Route exact path='/settings' component={() => <Settings />} />
                   <Route exact path='/login' component={() => <Login />} />
+                  <Route path='*' component={() => <div>404 NOT FOUND</div>} />
                 </Switch>
               </div>
             </div>
