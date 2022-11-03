@@ -2,6 +2,8 @@ import React from "react"
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { UsersFilterType } from '../../../redux/users-reducer'
 
+// Todo: add ResetFilter Button
+
 type PropsType = {
   usersFilter: UsersFilterType
   onChangeUsersFilter: (usersFilter: UsersFilterType) => void
