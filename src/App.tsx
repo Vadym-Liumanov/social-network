@@ -12,7 +12,7 @@ import Header from './components/Header/HeaderContainer'
 import Navbar from './components/Navbar/Navbar'
 
 import ProfileContainer from './components/Profile/ProfileContainer'
-import DialogsContainer from './components/Dialogs/DialogsContainer'
+import Dialogs from './components/Dialogs/Dialogs'
 import Users from './components/Users/Users'
 import Login from './components/Login/Login'
 
@@ -69,7 +69,7 @@ const App: React.FC = (props) => {
                   <Route exact path='/' component={() => <Redirect to='/profile' />} />
                   <Route exact path='/profile' component={() => <ProfileContainer />} />
                   <Route path='/profile/:userId' component={() => <ProfileContainer />} />
-                  <Route exact path='/dialogs' component={() => <DialogsContainer />} />
+                  <Route exact path='/dialogs' component={() => <Dialogs />} />
                   <Route exact path='/users' component={() => <Users />} />
                   <Route exact path='/news' component={() => <News />} />
                   <Route exact path='/music' component={() => <Music />} />

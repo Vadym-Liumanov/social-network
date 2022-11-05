@@ -1,4 +1,6 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 
 import dialogsStyles from './Dialogs.module.css'
@@ -8,26 +10,20 @@ import Dialog from './Dialog/Dialog'
 import { required, maxLength } from '../../utils/validators/validators'
 import { Element } from '../common/FormsControls/FormsControls'
 
-type UserType = {
-  id: number
-  userName: string
-}
+import { getIsAuth } from '../../redux/auth-selectors'
+import { getDialogs, getDialogsUsers } from '../../redux/messages-selectors'
+import { actionCreators } from '../../redux/messages-reducer'
 
-type DialogType = {
-  id: number
-  dialog: string
-}
+const Dialogs: React.FC = () => {
+  const dispatch = useDispatch()
+  const addNewDialog = (text: string) => dispatch(actionCreators.addNewDilogAC(text))
 
-type PropsType = {
-  users: Array<UserType>
-  dialogs: Array<DialogType>
-  addNewDialog: (text: string) => void
-}
+  const isAuth = useSelector(getIsAuth)
+  const users = useSelector(getDialogsUsers)
+  const dialogs = useSelector(getDialogs)
 
-const Dialogs: React.FC<PropsType> = ({ users, dialogs, addNewDialog }) => {
-
-  let dialogsUsersItems = users.map(user => <User key={user.id} userName={user.userName} />)
-  let dialogsContentItems = dialogs.map(dialog => <Dialog key={dialog.id} dialogContent={dialog.dialog} />)
+  const dialogsUsersItems = users.map(user => <User key={user.id} userName={user.userName} />)
+  const dialogsContentItems = dialogs.map(dialog => <Dialog key={dialog.id} dialogContent={dialog.dialog} />)
 
   type LoginFormValuesType = {
     dialogText: string
@@ -59,26 +55,24 @@ const Dialogs: React.FC<PropsType> = ({ users, dialogs, addNewDialog }) => {
   const DialogReduxForm = reduxForm<LoginFormValuesType, LoginFormOwnPropsType>({ form: 'dialogForm' })(DialogForm)
 
   return (
-    <div className={dialogsStyles.content}>
-      <div>
-        <div>
-          NickNames
+    <>
+      {!isAuth
+        ? <Redirect to='/login' />
+        :
+        <div className={dialogsStyles.content}>
+          <div>
+            <div>NickNames</div>
+            <div>{dialogsUsersItems}</div>
+          </div>
+          <div>
+            <div>DIALOGS</div>
+            <div>{dialogsContentItems}</div>
+            <DialogReduxForm onSubmit={onSubmitReduxForm} />
+          </div>
         </div>
-        <div>
-          {dialogsUsersItems}
-        </div>
-      </div>
-      <div>
-        <div>
-          DIALOGS
-        </div>
-        <div>
-          {dialogsContentItems}
-        </div>
-        <DialogReduxForm onSubmit={onSubmitReduxForm} />
-      </div>
-    </div>
+      }
+    </>
   )
 }
 
-export default Dialogs
+export default React.memo(Dialogs)
