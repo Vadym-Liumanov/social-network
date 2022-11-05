@@ -1,25 +1,20 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+
 import { Redirect } from 'react-router-dom'
-import { compose } from 'redux'
 
 import LoginReduxForm, { LoginFormValuesType } from './LoginReduxForm'
 
 import { loginThunk } from '../../redux/auth-reducer'
-import { AppStateType } from '../../redux/store-redux'
+import { getCaptchaUrl, getIsAuth } from '../../redux/auth-selectors'
 
-type MapStatePropsType = {
-  isAuth: boolean
-  captchaUrl: string | null
-}
+const Login: React.FC = () => {
+  // Todo: Enable Preloader when data is fetching
+  const dispatch = useDispatch()
+  const login = (email: string, password: string, rememberMe: boolean, captcha: string | null) => dispatch(loginThunk(email, password, rememberMe, captcha))
 
-type MapDispatchPropsType = {
-  loginThunk: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void
-}
-
-type LoginPropsType = MapStatePropsType & MapDispatchPropsType
-
-const Login: React.FC<LoginPropsType> = ({ loginThunk, isAuth, captchaUrl }) => {
+  const isAuth = useSelector(getIsAuth)
+  const captchaUrl = useSelector(getCaptchaUrl)
 
   /* onSubmit передается в пропсах в child component и определяет,
   что делать с собранными формой данными formData.
@@ -28,7 +23,7 @@ const Login: React.FC<LoginPropsType> = ({ loginThunk, isAuth, captchaUrl }) => 
   авторизации на сервере стороннего сервиса */
 
   const onSubmit = (formData: LoginFormValuesType) => {
-    loginThunk(formData.email, formData.password, formData.rememberMe, formData.captcha)
+    login(formData.email, formData.password, formData.rememberMe, formData.captcha)
   }
 
   if (isAuth) {
@@ -43,19 +38,4 @@ const Login: React.FC<LoginPropsType> = ({ loginThunk, isAuth, captchaUrl }) => 
   )
 }
 
-const mapStateToProps = (state: AppStateType): MapStatePropsType => {
-  return {
-    isAuth: state.auth.isAuth,
-    captchaUrl: state.auth.captchaUrl
-  }
-}
-
-const mapDispatchToProps = (dispatch: any): MapDispatchPropsType => {
-  return {
-    loginThunk: (email, password, rememberMe, captcha) => dispatch(loginThunk(email, password, rememberMe, captcha))
-  }
-}
-
-export default compose<React.ComponentType>(
-  connect<MapStatePropsType, MapDispatchPropsType, null, AppStateType>(mapStateToProps, mapDispatchToProps)
-)(Login)
+export default React.memo(Login)
