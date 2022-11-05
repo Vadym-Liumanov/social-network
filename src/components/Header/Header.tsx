@@ -1,17 +1,17 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 import headerStyles from './Header.module.css'
 import logo from '../../assets/images/logo_nike.jpg'
 
-import { StateType } from '../../redux/auth-reducer'
+import { logoutThunk } from '../../redux/auth-reducer'
+import { getAuthData } from '../../redux/auth-selectors'
 
-type PropsType = {
-  authData: StateType
-  logoutThunk: () => void
-}
-
-const Header: React.FC<PropsType> = ({ authData, logoutThunk }) => {
+const Header: React.FC = () => {
+  const dispatch = useDispatch()
+  const authData = useSelector(getAuthData)
+  const logout = () => dispatch(logoutThunk())
 
   return (
     <header className={headerStyles.header}>
@@ -22,13 +22,13 @@ const Header: React.FC<PropsType> = ({ authData, logoutThunk }) => {
             <div>
               <div>Hello {authData.login}. Your id: {authData.id}</div>
               {/* <div>Your id: {props.id}</div> */}
-              <button onClick={logoutThunk}>Logout</button>
+              <button onClick={logout}>Logout</button>
             </div>
           )
-          : <NavLink to={'/login'}>Login</NavLink>}
+          : <Link to={'/login'}>Login</Link>}
       </div>
     </header>
   )
 }
 
-export default Header
+export default React.memo(Header)

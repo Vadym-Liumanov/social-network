@@ -8,7 +8,7 @@ import { initializeAppThunk } from './redux/app-reducer'
 
 import './App.css'
 
-import Header from './components/Header/HeaderContainer'
+import Header from './components/Header/Header'
 import Navbar from './components/Navbar/Navbar'
 
 import ProfileContainer from './components/Profile/ProfileContainer'
