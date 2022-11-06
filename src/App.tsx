@@ -11,7 +11,7 @@ import './App.css'
 import Header from './components/Header/Header'
 import Navbar from './components/Navbar/Navbar'
 
-import ProfileContainer from './components/Profile/ProfileContainer'
+import ProfileContainer from './components/Profile/ProfileContainerHooks'
 import Dialogs from './components/Dialogs/Dialogs'
 import Users from './components/Users/Users'
 import Login from './components/Login/Login'

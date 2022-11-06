@@ -12,7 +12,7 @@ type PropsType = {
   myStatus: string
   updateMyStatus: (myStatus: string) => void
   savePhoto: (file: File) => void
-  updateProfile: (profileData: ProfileType) => Promise<any>
+  updateProfile: (profileData: ProfileType) => any
   profileDetails: ProfileType
 }
 

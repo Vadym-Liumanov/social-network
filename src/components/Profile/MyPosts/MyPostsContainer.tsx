@@ -29,6 +29,4 @@ const MyPostsContainer = compose<React.ComponentType>(
   connect<MapStatePropsType, MapDispatchPropsType, null, AppStateType>(mapStateToProps, mapDispatchToProps)
 )(MyPosts)
 
-
-
 export default MyPostsContainer
