@@ -1,112 +1,86 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { RouteComponentProps, withRouter } from 'react-router-dom'
-import { compose } from 'redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams, Redirect } from 'react-router-dom'
 
 import {
   setUserProfileThunk, setUserStatusThunk, setMyStatusThunk,
   updateMyStatusThunk, savePhotoThunk, updateProfileThunk
 } from '../../redux/profile-reducer'
 
-import { withAuthRedirect } from '../../hoc/withAuthRedirect'
-
 import profileStyles from './Profile.module.css'
 
 import ProfileInfo from './Profileinfo/ProfileInfo'
 import MyPostsContainer from './MyPosts/MyPostsContainer'
 import Preloader from '../common/Preloader/Preloader'
-import { AppStateType } from '../../redux/store-redux'
 import { ProfileType } from '../../types/types'
-// import ProfileStatus from './Profileinfo/ProfileStatus'
+import { getMyStatus, getProfileInfo, getUserStatus } from '../../redux/profile-selectors'
+import { getAuthId, getIsAuth } from '../../redux/auth-selectors'
 
-type PropsType = MapStatePropsType & MapDispatchPropsType & WithRouterProps
+const ProfileContainer: React.FC = () => {
+  const dispatch = useDispatch()
 
-type MapStatePropsType = ReturnType<typeof MapStateToProps>
-type MapDispatchPropsType = ReturnType<typeof MapDispatchToProps>
-type PathParamsType = {
-  userId: string
-}
-type WithRouterProps = RouteComponentProps<PathParamsType>
+  const profileInfo = useSelector(getProfileInfo)
+  const userStatus = useSelector(getUserStatus)
+  const myStatus = useSelector(getMyStatus)
+  const myId = useSelector(getAuthId)
+  const isAuth = useSelector(getIsAuth)
 
-class ProfileContainer extends React.Component<PropsType> {
+  const setUserProfile = (id: number) => dispatch(setUserProfileThunk(id))
+  const setUserStatus = (id: number) => dispatch(setUserStatusThunk(id))
+  const setMyStatus = (myId: number) => dispatch(setMyStatusThunk(myId))
+  const updateMyStatus = (myStatus: string) => dispatch(updateMyStatusThunk(myStatus))
+  const savePhoto = (fileData: File) => dispatch(savePhotoThunk(fileData))
+  const updateProfile = (profileData: ProfileType) => dispatch(updateProfileThunk(profileData))
 
-  componentDidMount() {
-    const paramsUserId = this.props.match.params.userId
-    const userId = (paramsUserId) ? paramsUserId : this.props.myId
+  const { userId } = useParams<{ userId?: string }>()
 
-    this.props.setUserProfileThunk(userId as number)
-    this.props.setUserStatusThunk(userId as number)
-    this.props.setMyStatusThunk(this.props.myId as number)
-  }
+  // const isOwner = (!userId && myId) || (Number(userId) === myId)
+  let isOwner = false
+  if (!userId && myId) { isOwner = true }
+  if (Number(userId) === myId) { isOwner = true }
 
-  render() {
-    let isOwner = false
-    if (!this.props.match.params.userId && this.props.myId) { isOwner = true }
-    if (+this.props.match.params.userId === this.props.myId) { isOwner = true }
+  // componentDidMount() {
+  //   const paramsUserId = this.props.match.params.userId
+  //   const userId = (paramsUserId) ? paramsUserId : this.props.myId
 
-    // const isOwner = (!this.props.match.params.userId && this.props.myId) || (+this.props.match.params.userId === this.props.myId)
+  //   this.props.setUserProfileThunk(userId as number)
+  //   this.props.setUserStatusThunk(userId as number)
+  //   this.props.setMyStatusThunk(this.props.myId as number)
+  // }
 
-    return (
-      <div className={profileStyles.content}>
-        {/* <div>
-          <span>My status is:</span>
-          <ProfileStatus status={this.props.myStatus} updateMyStatus={this.props.updateMyStatusThunk} />
-        </div> */}
-        {this.props.profileInfo ? <ProfileInfo
-          isOwner={isOwner}
-          profileDetails={this.props.profileInfo}
-          userStatus={this.props.userStatus}
-          myStatus={this.props.myStatus}
-          updateMyStatus={this.props.updateMyStatusThunk}
-          savePhoto={this.props.savePhotoThunk}
-          updateProfile={this.props.updateProfile} />
-          : <Preloader />}
-        {isOwner && <MyPostsContainer />}
-      </div>
-    )
-  }
-}
+  useEffect(
+    () => {
+      if (isAuth) {
+        const actualUserId = (userId) ? userId : myId
+        setUserProfile(actualUserId as number)
+        setUserStatus(actualUserId as number)
+        setMyStatus(myId as number)
+      }
 
-// type MapStatePropsType = {
-//   profileInfo: ProfileType
-//   userStatus: Nullable<string>
-//   myStatus: Nullable<string>
-//   myId: number
-//   isAuth: boolean
-// }
+      // eslint-disable-next-line
+    }, [isAuth]
+  )
 
-const MapStateToProps = (state: AppStateType) => {
-  return {
-    profileInfo: state.profile.userProfile,
-    userStatus: state.profile.userStatus,
-    myStatus: state.profile.myStatus,
-    myId: state.auth.id,
-    isAuth: state.auth.isAuth
-  }
-}
-
-// type MapDispatchPropsType = {
-//   setUserProfileThunk: (id: number) => void
-//   setUserStatusThunk: (id: number) => void
-//   setMyStatusThunk: (myId: number) => void
-//   updateMyStatusThunk: (myStatus: string) => void
-//   savePhotoThunk: (fileData: any) => void
-//   updateProfile: (profileData: ProfileType) => void
-// }
-
-const MapDispatchToProps = (dispatch: any) => {
-  return {
-    setUserProfileThunk: (id: number) => dispatch(setUserProfileThunk(id)),
-    setUserStatusThunk: (id: number) => dispatch(setUserStatusThunk(id)),
-    setMyStatusThunk: (myId: number) => dispatch(setMyStatusThunk(myId)),
-    updateMyStatusThunk: (myStatus: string) => dispatch(updateMyStatusThunk(myStatus)),
-    savePhotoThunk: (fileData: File) => dispatch(savePhotoThunk(fileData)),
-    updateProfile: (profileData: ProfileType) => dispatch(updateProfileThunk(profileData))
-  }
+  return (
+    <>
+      {!isAuth
+        ? <Redirect to='/login' />
+        :
+        <div className={profileStyles.content}>
+          {profileInfo ? <ProfileInfo
+            isOwner={isOwner}
+            profileDetails={profileInfo}
+            userStatus={userStatus}
+            myStatus={myStatus}
+            updateMyStatus={updateMyStatus}
+            savePhoto={savePhoto}
+            updateProfile={updateProfile} />
+            : <Preloader />}
+          {isOwner && <MyPostsContainer />}
+        </div>
+      }
+    </>
+  )
 }
 
-export default compose<React.ComponentType>(
-  connect(MapStateToProps, MapDispatchToProps),
-  withRouter,
-  withAuthRedirect
-)(ProfileContainer)
+export default React.memo(ProfileContainer)
