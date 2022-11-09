@@ -10,7 +10,7 @@ import {
 import profileStyles from './Profile.module.css'
 
 import ProfileInfo from './Profileinfo/ProfileInfo'
-import MyPostsContainer from './MyPosts/MyPostsContainer'
+import MyPosts from './MyPosts/MyPosts'
 import Preloader from '../common/Preloader/Preloader'
 import { ProfileType } from '../../types/types'
 import { getMyStatus, getProfileInfo, getUserStatus } from '../../redux/profile-selectors'
@@ -76,7 +76,7 @@ const ProfileContainer: React.FC = () => {
             savePhoto={savePhoto}
             updateProfile={updateProfile} />
             : <Preloader />}
-          {isOwner && <MyPostsContainer />}
+          {isOwner && <MyPosts />}
         </div>
       }
     </>
