@@ -1,0 +1,57 @@
+/* Header */
+
+.header {
+  grid-area: header;
+
+  background-color: var(--dark-bg);
+  color: var(--header-text-color);
+  letter-spacing: normal;
+}
+
+.header__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  min-height: 70px;
+}
+
+.header__logo {
+  color: var(--header-text);
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+}
+
+.header__logo strong {
+  font-weight: 700;
+}
+
+.header__block {
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 20px;
+  align-items: center;
+}
+
+/* Применится при выводе login page, когда функционал
+App не будет доступен */
+
+.header__block._unregistered {
+  visibility: hidden;
+}
+
+
+.header__avatar {
+  width: 35px;
+  height: 35px;
+  background-color: aqua;
+  border-radius: 50%;
+}
+
+
+@media (max-width: 767px) {
+  .header {
+    z-index: 20;
+  }
+}

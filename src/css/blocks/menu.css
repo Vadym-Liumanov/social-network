@@ -1,0 +1,41 @@
+/* Menu */
+
+.menu {
+  width: 200px;
+}
+
+.menu__prev-block {
+  display: none;
+}
+
+.menu__body {
+  display: grid;
+}
+
+.menu__link {
+  display: block;
+
+  padding: 10px 20px;
+  border-radius: 5px;
+
+  color: var(--text-color);
+  font-weight: 700;
+
+  transition: all 0.3s ease;
+}
+
+.menu__link:hover {
+  background-color: #ccc;
+}
+
+.menu__link_active {
+  background-color: #e6f4ff;
+  color: #5fb9ff;
+}
+
+@media (max-width: 767px) {
+  .menu {
+    background-color: var(--white);
+    padding: 20px 10px;
+  }
+}

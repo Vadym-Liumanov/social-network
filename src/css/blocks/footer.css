@@ -1,0 +1,11 @@
+/* Footer */
+
+.footer {
+  grid-area: footer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--main-bg);
+}

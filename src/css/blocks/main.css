@@ -1,0 +1,8 @@
+/* Main */
+
+.main {
+  grid-area: main;
+
+  background-color: var(--white);
+
+}

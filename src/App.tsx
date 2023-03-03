@@ -6,10 +6,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getIsAppInitialized } from './redux/app-selectors'
 import { initializeAppThunk } from './redux/app-reducer'
 
-import './App.css'
+import './css/App.css'
 
 import Header from './components/Header/Header'
 import Navbar from './components/Navbar/Navbar'
+import Footer from './components/Footer/Footer'
 
 import ProfileContainer from './components/Profile/ProfileContainer'
 import Dialogs from './components/Dialogs/Dialogs'
@@ -52,16 +53,18 @@ const App: React.FC = (props) => {
   }, [])
 
   return (
-    <div>
+    <>
       {!isAppInitialized
         ? <Preloader />
         :
         <>
           <HashRouter>
-            <div className="app-wrapper">
+            <div className="wrapper">
               <Header />
               <Navbar />
-              <div className="app-wrapper-content">
+              <Footer />
+
+              <main className="main">
                 <Switch>
                   {/* Next string is on v6 react-router-dom format */}
                   {/* <Route path='/profile/' element={<Profile />} /> */}
@@ -77,12 +80,12 @@ const App: React.FC = (props) => {
                   <Route exact path='/login' component={() => <Login />} />
                   <Route path='*' component={() => <div>404 NOT FOUND</div>} />
                 </Switch>
-              </div>
+              </main>
             </div>
           </HashRouter>
         </>
       }
-    </div>
+    </>
   )
 }
 

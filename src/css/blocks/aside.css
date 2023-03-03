@@ -1,0 +1,39 @@
+/* Aside */
+
+.aside {
+  grid-area: aside;
+  position: relative;
+
+  padding: 30px 20px;
+
+  display: flex;
+  justify-content: center;
+
+  background-color: var(--white);
+}
+
+/* Применится при выводе login page, когда функционал
+App не будет доступен */
+
+.aside._unregistered {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .aside {
+    display: none;
+  }
+
+  .aside._active {
+    display: unset;
+    position: absolute;
+    top: 70px;
+
+    height: calc(100% - 140px);
+    width: 100%;
+
+    background-color: rgba(0, 0, 0, .6);
+
+    padding: unset;
+  }
+}

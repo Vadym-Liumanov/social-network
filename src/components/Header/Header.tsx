@@ -14,20 +14,38 @@ const Header: React.FC = () => {
   const logout = () => dispatch(logoutThunk())
 
   return (
-    <header className={headerStyles.header}>
-      <img src={logo} alt="logo" />
-      <div className={headerStyles.loginBlock}>
-        {authData.isAuth
-          ? (
-            <div>
-              <div>Hello {authData.login}. Your id: {authData.id}</div>
-              {/* <div>Your id: {props.id}</div> */}
-              <button onClick={logout}>Logout</button>
+    
+    <header className="header">
+      <div className="container">
+        <div className="header__row">
+          <a href="./index.html" className="header__logo">
+            <strong>IT</strong> Social
+          </a>
+          <div className="header__block">
+            <div className="header__avatar">
             </div>
-          )
-          : <Link to={'/login'}>Login</Link>}
+            <div className="header__menu burger">
+              <span></span>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
+
+    // <header className={headerStyles.header}>
+    //   <img src={logo} alt="logo" />
+    //   <div className={headerStyles.loginBlock}>
+    //     {authData.isAuth
+    //       ? (
+    //         <div>
+    //           <div>Hello {authData.login}. Your id: {authData.id}</div>
+    //           {/* <div>Your id: {props.id}</div> */}
+    //           <button onClick={logout}>Logout</button>
+    //         </div>
+    //       )
+    //       : <Link to={'/login'}>Login</Link>}
+    //   </div>
+    // </header>
   )
 }
 

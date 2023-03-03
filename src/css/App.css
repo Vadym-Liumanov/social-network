@@ -1,0 +1,75 @@
+@import "./common/reset.css";
+@import "./common/fonts.css";
+@import "./common/variables.css";
+
+@import "./blocks/header.css";
+@import "./blocks/burger.css";
+@import "./blocks/aside.css";
+@import "./blocks/menu.css";
+@import "./blocks/main.css";
+@import "./blocks/footer.css";
+@import "./blocks/login-card.css";
+
+
+html,
+body {
+  height: 100%;
+
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  letter-spacing: -0.5px;
+
+  background-color: var(--main-bg);
+  color: var(--text-color);
+}
+
+/* Блокируем скроллинг боди под открытым бургер-меню */
+body._scrolling-lock {
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+.wrapper {
+  position: relative;
+  display: grid;
+
+  grid-template-columns: 240px 1fr;
+  grid-template-rows: 70px 1fr 70px;
+  grid-column-gap: 10px;
+
+  grid-template-areas:
+    "header header"
+    "aside main"
+    "footer footer";
+
+  margin: 0 auto;
+
+  height: 100%;
+  max-width: 900px;
+}
+
+/*._unregistered применяется на login-page, когда ф-ции App не доступны */
+
+.wrapper._unregistered {
+  grid-template-areas:
+    "header header"
+    "main main"
+    "footer footer";
+}
+
+@media (max-width: 767px) {
+  .wrapper {
+    grid-template-areas:
+      "header header"
+      "main main"
+      "footer footer";
+  }
+}
