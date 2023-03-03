@@ -1,11 +1,15 @@
 import React from 'react'
 
-import preloader from '../../../assets/images/preloaders/'
+import './preloader.css'
+
+// import preloader from '../../../assets/images/preloaders/spinning-circles.svg'
+
+import preloader from './../../../assets/preloaders/spinning-circles.svg'
 
 const Preloader: React.FC = () => {
   return (
-    <div className="">
-      <img src={preloader} alt='preloader' style={{ width: 100, height: 100 }} />
+    <div className="initial-app-preloader">
+      <img src={preloader} alt='preloader' />
     </div>
   )
 }

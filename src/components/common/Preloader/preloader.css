@@ -1,0 +1,14 @@
+.initial-app-preloader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #f0f2f5;
+  width: 100%;
+  height: 100%;
+}
+
+.initial-app-preloader img {
+  width: 100px;
+  height: 100px;
+}
