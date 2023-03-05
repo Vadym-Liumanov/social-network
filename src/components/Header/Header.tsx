@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import headerStyles from './Header.module.css'
-import logo from '../../assets/images/logo_nike.jpg'
 
 import { logoutThunk } from '../../redux/auth-reducer'
 import { getAuthData } from '../../redux/auth-selectors'

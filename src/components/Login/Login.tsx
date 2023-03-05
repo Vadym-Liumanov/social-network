@@ -23,7 +23,8 @@ const Login: React.FC = () => {
   авторизации на сервере стороннего сервиса */
 
   const onSubmit = (formData: LoginFormValuesType) => {
-    login(formData.email, formData.password, formData.rememberMe, formData.captcha)
+    const { email, password, rememberMe, captcha } = formData
+    login(email, password, rememberMe, captcha)
   }
 
   if (isAuth) {
