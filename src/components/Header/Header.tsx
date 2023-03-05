@@ -14,7 +14,7 @@ const Header: React.FC = () => {
   const logout = () => dispatch(logoutThunk())
 
   return (
-    
+
     <header className="header">
       <div className="container">
         <div className="header__row">
@@ -22,6 +22,9 @@ const Header: React.FC = () => {
             <strong>IT</strong> Social
           </a>
           <div className="header__block">
+            <div>
+              <button onClick={logout}>Logout</button>
+            </div>
             <div className="header__avatar">
             </div>
             <div className="header__menu burger">

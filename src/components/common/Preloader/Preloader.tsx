@@ -2,8 +2,6 @@ import React from 'react'
 
 import './preloader.css'
 
-// import preloader from '../../../assets/images/preloaders/spinning-circles.svg'
-
 import preloader from './../../../assets/preloaders/spinning-circles.svg'
 
 const Preloader: React.FC = () => {
