@@ -8,7 +8,7 @@ import dialogsStyles from './Dialogs.module.css'
 import User from './User/User'
 import Dialog from './Dialog/Dialog'
 import { required, maxLength } from '../../utils/validators/validators'
-import { Element } from '../common/FormsControls/FormsControls'
+import { textInput } from '../common/FormsControls/FormsControls'
 
 import { getIsAuth } from '../../redux/auth-selectors'
 import { getDialogs, getDialogsUsers } from '../../redux/messages-selectors'
@@ -42,12 +42,12 @@ const Dialogs: React.FC = () => {
   const DialogForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnPropsType> & LoginFormOwnPropsType> = (props) => {
     return (
       <form onSubmit={props.handleSubmit}>
-        <div>
+        {/* <div>
           <Field component={Element} name={'dialogText'} placeholder={'Input your message here'} validate={[required, maxLength10]} elementType='textarea' />
         </div>
         <div>
           <button>Add message</button>
-        </div>
+        </div> */}
       </form>
     )
   }

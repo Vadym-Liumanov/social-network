@@ -3,7 +3,7 @@ import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 
 import styles from './Login.module.css'
 import { required } from '../../utils/validators/validators'
-import { Element } from '../common/FormsControls/FormsControls'
+import { textInput, checkboxInput } from '../common/FormsControls/FormsControls'
 
 export type LoginFormValuesType = {
   email: string
@@ -16,25 +16,48 @@ type LoginFormOwnPropsType = {
   captchaUrl: string | null
 }
 
-const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnPropsType> & LoginFormOwnPropsType> = ({ handleSubmit, error, captchaUrl }) => {
+const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnPropsType> & LoginFormOwnPropsType> = ({ handleSubmit, error, captchaUrl, submitting }) => {
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <Field component={Element} placeholder={'Email'} name={'email'} elementType='input' validate={[required]} />
-      </div>
-      <div>
-        <Field component={Element} placeholder={'Password'} name={'password'} elementType='input' type='password' validate={[required]} />
-      </div>
-      <div>
-        <Field component={'input'} type={'checkbox'} name={'rememberMe'} /> Remember me
-      </div>
+    <form className="login-card__form login-form" onSubmit={handleSubmit}>
+
+      <Field
+        name='email'
+        type='email'
+        component={textInput}
+        placeholder='Email'
+        validate={[required]}
+        label='Email'
+        id="login-email"
+      />
+
+      <Field
+        name='password'
+        type='password'
+        component={textInput}
+        placeholder='Password'
+        validate={[required]}
+        label='Password'
+        id="login-password"
+      />
+
+      <Field
+        name='rememberMe'
+        elementType='input'
+        type='checkbox'
+        component={checkboxInput}
+        label='Remember me'
+        id="login-remember-me"
+      />
+
+      {/* <Field component={'input'} type={'checkbox'} name={'rememberMe'} /> Remember me */}
+
       {captchaUrl &&
         <div>
           <div>
             <img src={captchaUrl} alt="captcha" />
           </div>
           <div>
-            <Field component={Element} placeholder={'captcha'} name={'captcha'} elementType='input' type='text' validate={[required]} />
+            <Field component={textInput} placeholder={'captcha'} name={'captcha'} elementType='input' type='text' validate={[required]} />
           </div>
         </div>}
       {error &&
@@ -42,9 +65,17 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnPro
           {error}
         </div>
       }
-      <div>
-        <button>Login</button>
+
+      <div className="login-form__item item-for-button">
+        <div className="item-for-button__button-block">
+          <button className="login-form__button submit-button" type="submit" disabled={submitting}>Login</button>
+        </div>
       </div>
+
+
+      {/* <div>
+        <button disabled={submitting}>Login</button>
+      </div> */}
     </form>
   )
 }

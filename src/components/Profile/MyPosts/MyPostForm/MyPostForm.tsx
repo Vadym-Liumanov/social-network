@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { required, maxLength } from '../../../../utils/validators/validators'
-import { Element } from '../../../common/FormsControls/FormsControls'
+import { textInput } from '../../../common/FormsControls/FormsControls'
 
 export type PostFormValuesType = {
   postText: string
@@ -15,12 +15,12 @@ type PostFormOwnPropsType = {}
 const MyPostForm: React.FC<InjectedFormProps<PostFormValuesType, PostFormOwnPropsType> & PostFormOwnPropsType> = ({ handleSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
-      <div>
+      {/* <div>
         <Field component={Element} name={'postText'} placeholder={'Input your post here'} validate={[required, maxLength5]} elementType='textarea' />
       </div>
       <div>
         <button>Add post</button>
-      </div>
+      </div> */}
     </form>
   )
 }
