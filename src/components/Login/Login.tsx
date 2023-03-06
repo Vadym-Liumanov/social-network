@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom'
 import LoginReduxForm, { LoginFormValuesType } from './LoginReduxForm'
 
 import { loginThunk } from '../../redux/auth-reducer'
-import { getCaptchaUrl, getIsAuth } from '../../redux/auth-selectors'
+import { getCaptchaUrl, getIsAuth, getIsFetching } from '../../redux/auth-selectors'
 
 const Login: React.FC = () => {
   // Todo: Enable Preloader when data is fetching
@@ -15,6 +15,7 @@ const Login: React.FC = () => {
 
   const isAuth = useSelector(getIsAuth)
   const captchaUrl = useSelector(getCaptchaUrl)
+  const isFetching = useSelector(getIsFetching)
 
   /* onSubmit передается в пропсах в child component и определяет,
   что делать с собранными формой данными formData.
@@ -33,7 +34,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="login-card">
-      <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
+      <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} isFetching={isFetching}/>
     </div>
   )
 }

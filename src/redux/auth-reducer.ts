@@ -6,6 +6,7 @@ import { InferActionsTypes, BaseThunkType } from './store-redux'
 const SET_USER_AUTH_DATA = 'social_network/auth/SET_USER_AUTH_DATA'
 const RESET_USER_AUTH_DATA = 'social_network/auth/RESET_USER_AUTH_DATA'
 const GET_CAPTCHA_URL_SUCCESS = 'social_network/auth/GET_CAPTCHA_URL_SUCCESS'
+const SET_IS_FETCHING = 'social_network/auth/SET_IS_FETCHING'
 
 export type AuthDataType = {
   id: number,
@@ -24,7 +25,11 @@ const actionCreators = {
   },
   resetAuthData: () => {
     return { type: RESET_USER_AUTH_DATA } as const
+  },
+  setIsFetching: (isFetching: boolean) => {
+    return { type: SET_IS_FETCHING, isFetching } as const
   }
+  
 }
 
 type ThunkType = BaseThunkType<ActionTypes | FormAction>
@@ -33,6 +38,7 @@ export const getCaptchaUrlThunk = (): ThunkType => {
   return (dispatch) => {
     return authAPI.getCaptchaUrl().then((data) => {
       dispatch(actionCreators.getCaptchaUrlSuccess(data.url))
+      dispatch(actionCreators.setIsFetching(false))
     })
   }
 }
@@ -42,6 +48,7 @@ export const getAuthDataThunk = (): ThunkType => {
     return authAPI.getAuthData().then((data) => {
       if (data.resultCode === 0) {
         dispatch(actionCreators.setUserAuthData(data.data))
+        dispatch(actionCreators.setIsFetching(false))
       }
     })
   }
@@ -49,6 +56,7 @@ export const getAuthDataThunk = (): ThunkType => {
 
 export const loginThunk = (email: string, password: string, rememberMe: boolean, captcha: string | null): ThunkType => {
   return (dispatch) => {
+    dispatch(actionCreators.setIsFetching(true))
     authAPI.loginOnTheService(email, password, rememberMe, captcha).then((data) => {
       if (data.resultCode === 0) {
         dispatch(getAuthDataThunk())
@@ -60,6 +68,7 @@ export const loginThunk = (email: string, password: string, rememberMe: boolean,
         let ErrorMessage = data.messages.length > 0 ? data.messages[0] : 'Somthing wrong'
         let action = stopSubmit('login', { _error: ErrorMessage })
         dispatch(action)
+        dispatch(actionCreators.setIsFetching(false))
       }
     })
   }
@@ -81,7 +90,8 @@ const initialState = {
   login: null as Nullable<string>,
   email: null as Nullable<string>,
   isAuth: false,
-  captchaUrl: null as Nullable<string>
+  captchaUrl: null as Nullable<string>,
+  isFetching: false as boolean
 }
 
 export type StateType = typeof initialState
@@ -108,6 +118,12 @@ const authReducer = (state = initialState, action: ActionTypes): StateType => {
       return {
         ...state,
         captchaUrl: action.captchaUrl
+      }
+
+    case SET_IS_FETCHING:
+      return {
+        ...state,
+        isFetching: action.isFetching
       }
 
     default:
