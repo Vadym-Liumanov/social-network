@@ -17,9 +17,6 @@ import Dialogs from './components/Dialogs/Dialogs'
 import Users from './components/Users/Users'
 import Login from './components/Login/Login'
 
-import News from './components/News/News'
-import Music from './components/Music/Music'
-import Settings from './components/Settings/Settings'
 import Preloader from './components/common/Preloader/Preloader'
 
 const App: React.FC = (props) => {
@@ -74,9 +71,6 @@ const App: React.FC = (props) => {
                   <Route path='/profile/:userId' component={() => <ProfileContainer />} />
                   <Route exact path='/dialogs' component={() => <Dialogs />} />
                   <Route exact path='/users' component={() => <Users />} />
-                  <Route exact path='/news' component={() => <News />} />
-                  <Route exact path='/music' component={() => <Music />} />
-                  <Route exact path='/settings' component={() => <Settings />} />
                   <Route exact path='/login' component={() => <Login />} />
                   <Route path='*' component={() => <div>404 NOT FOUND</div>} />
                 </Switch>

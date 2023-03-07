@@ -1,35 +1,48 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 
-import navbarStyles from './Navbar.module.css'
+import cn from 'classnames'
 
-import NavbarItem from './Item/NavbarItem';
+import { getIsAuth } from '../../redux/auth-selectors';
 
 const Navbar: React.FC = () => {
+
+  const isAuth = useSelector(getIsAuth)
+
   return (
+    <>
+      {/* {isAuth && (
+        <aside className="aside">
+          <div className="aside__menu menu">
 
-    <aside className="aside">
-      <div className="aside__menu menu">
+            <div className="menu__prev-block">Something</div>
 
-        <div className="menu__prev-block">Something</div>
+            <nav className="menu__body">
+              <a href="#" className="menu__link menu__link_active">Login</a>
+              <a href="#" className="menu__link">Profile</a>
+              <a href="#" className="menu__link">Users</a>
+              <a href="#" className="menu__link">Chat</a>
+            </nav>
 
-        <nav className="menu__body">
-          <a href="#" className="menu__link menu__link_active">Login</a>
-          <a href="#" className="menu__link">Profile</a>
-          <a href="#" className="menu__link">Users</a>
-          <a href="#" className="menu__link">Chat</a>
-        </nav>
+          </div>
+        </aside>
+      )} */}
+      
+      <aside className="aside">
+        <div className="aside__menu menu">
 
-      </div>
-    </aside>
+          <div className="menu__prev-block">Something</div>
 
-    // <nav className={navbarStyles.nav}>
-    //   <NavbarItem value="Profile" url="/profile" />
-    //   <NavbarItem value="Messages" url="/dialogs" />
-    //   <NavbarItem value="Users" url="/users" />
-    //   <NavbarItem value="News" url="/news" />
-    //   <NavbarItem value="Music" url="/music" />
-    //   <NavbarItem value="Settings" url="/settings" />
-    // </nav>
+          <nav className="menu__body">
+            <a href="#" className="menu__link menu__link_active">Login</a>
+            <a href="#" className="menu__link">Profile</a>
+            <a href="#" className="menu__link">Users</a>
+            <a href="#" className="menu__link">Chat</a>
+          </nav>
+
+        </div>
+      </aside>
+    </>
   );
 }
 
