@@ -1,5 +1,9 @@
 export const menuList = [
   {
+    name: "Login",
+    url: "/login"
+  },
+  {
     name: "Profile",
     url: "/profile"
   },

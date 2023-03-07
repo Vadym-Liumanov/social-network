@@ -2,9 +2,11 @@
 
 .menu {
   width: 200px;
+  font-size: 1.2em;
+  letter-spacing: +0.01em;
 }
 
-.menu__prev-block {
+.menu__prevBlock {
   display: none;
 }
 

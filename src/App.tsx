@@ -6,10 +6,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getIsAppInitialized } from './redux/app-selectors'
 import { initializeAppThunk } from './redux/app-reducer'
 
-import './css/App.css'
+import { getIsAuth } from './redux/auth-selectors'
+
+// import './App.css'
+import styles from './App.module.css'
 
 import Header from './components/Header/Header'
-import Navbar from './components/Navbar/Navbar'
+import Aside from './components/Aside/Aside'
 import Footer from './components/Footer/Footer'
 
 import ProfileContainer from './components/Profile/ProfileContainer'
@@ -23,6 +26,8 @@ const App: React.FC = (props) => {
 
   const dispatch = useDispatch()
   const isAppInitialized = useSelector(getIsAppInitialized)
+
+  const isAuth = useSelector(getIsAuth)
 
   /*
   метод для обработки rejected промисов (необработанных)
@@ -56,27 +61,40 @@ const App: React.FC = (props) => {
         :
         <>
           <HashRouter>
-            <div className="wrapper">
-              <Header />
-              <Navbar />
-              <Footer />
+            <div className={styles.wrapper}>
 
-              <main className="main">
-                <Switch>
-                  {/* Next string is on v6 react-router-dom format */}
-                  {/* <Route path='/profile/' element={<Profile />} /> */}
-                  {/* <Route exact path='/' component={() => <ProfileContainer />} /> */}
-                  <Route exact path='/' component={() => <Redirect to='/profile' />} />
-                  <Route exact path='/profile' component={() => <ProfileContainer />} />
-                  <Route path='/profile/:userId' component={() => <ProfileContainer />} />
-                  <Route exact path='/dialogs' component={() => <Dialogs />} />
-                  <Route exact path='/users' component={() => <Users />} />
-                  <Route exact path='/login' component={() => <Login />} />
-                  <Route path='*' component={() => <div>404 NOT FOUND</div>} />
-                </Switch>
-              </main>
+              <div className={styles.header}>
+                <Header />
+              </div>
+
+              <div className={styles.mainRow}>
+
+                {!isAuth &&
+                  <div className={styles.aside}>
+                    <Aside />
+                  </div>
+                }
+
+                <div className={styles.main}>
+                  <Switch>
+                    <Route exact path='/' component={() => <Redirect to='/profile' />} />
+                    <Route exact path='/profile' component={() => <ProfileContainer />} />
+                    <Route path='/profile/:userId' component={() => <ProfileContainer />} />
+                    <Route exact path='/dialogs' component={() => <Dialogs />} />
+                    <Route exact path='/users' component={() => <Users />} />
+                    <Route exact path='/login' component={() => <Login />} />
+                    <Route path='*' component={() => <div>404 NOT FOUND</div>} />
+                  </Switch>
+                 
+                </div>
+              </div>
+
+              <div className={styles.footer}>
+              <Footer />
             </div>
-          </HashRouter>
+
+          </div>
+        </HashRouter>
         </>
       }
     </>

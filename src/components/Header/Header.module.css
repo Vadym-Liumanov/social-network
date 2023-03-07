@@ -1,21 +1,120 @@
+/* Header */
+
 .header {
-	grid-area: header;
-  background-color: darkolivegreen;
+  background-color: var(--dark-bg);
+  color: var(--header-text-color);
+  letter-spacing: normal;
 }
 
-.header img {
-  height: 60px;
-  width: 100px;
+.container {
+  margin: 0 50px;
 }
 
-.loginBlock {
-  float: right;
-  color: white;
-  font-weight: 600;
-  padding: 10px;
+@media (max-width: 767px) {
+  .container {
+    margin: 0 20px;
+  }
 }
 
-.loginBlock a {
-  color: white;
-  font-weight: 600;
+.header__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: 70px;
+}
+
+.header__logo {
+  color: var(--header-text);
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+}
+
+.header__logo strong {
+  font-weight: 700;
+}
+
+.header__block {
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 20px;
+  align-items: center;
+}
+
+/* Применится при выводе login page, когда функционал
+App не будет доступен */
+
+.header__block._unregistered {
+  visibility: hidden;
+}
+
+.header__avatar {
+  width: 35px;
+  height: 35px;
+  background-color: aqua;
+  border-radius: 50%;
+}
+
+
+/* Burger */
+
+.burger {
+  display: none;
+  position: relative;
+  width: 30px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.burger span,
+.burger::before,
+.burger::after {
+  position: absolute;
+  left: 0;
+  height: 10%;
+  width: 100%;
+  transition: all 0.3s ease 0s;
+  background-color: var(--white);
+}
+
+.burger::before,
+.burger::after {
+  content: "";
+}
+
+.burger::before {
+  top: 0;
+}
+
+.burger::after {
+  bottom: 0;
+}
+
+.burger span {
+  top: 50%;
+  transform: scale(1) translate(0px, -50%);
+}
+
+.burger._active span {
+  transform: scale(0) translate(0px, -50%);
+}
+
+.burger._active::before {
+  top: 50%;
+  transform: rotate(-45deg) translate(0px, -50%);
+}
+
+.burger._active::after {
+  bottom: 50%;
+  transform: rotate(45deg) translate(0px, 50%);
+}
+
+@media (max-width: 767px) {
+  .burger {
+    display: block;
+    position: relative;
+    width: 30px;
+    height: 18px;
+    cursor: pointer;
+  }
 }

@@ -2,7 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import headerStyles from './Header.module.css'
+import cn from 'classnames'
+
+import styles from './Header.module.css'
 
 import { logoutThunk } from '../../redux/auth-reducer'
 import { getAuthData } from '../../redux/auth-selectors'
@@ -14,29 +16,35 @@ const Header: React.FC = () => {
 
   return (
 
-    <header className="header">
-      <div className="container">
-        <div className="header__row">
-          <a href="./index.html" className="header__logo">
+    <header className={styles.header}>
+      <div className={styles.container}>
+        <div className={styles.header__row}>
+
+          <a href="./index.html" className={styles.header__logo}>
             <strong>IT</strong> Social
           </a>
-          <div className="header__block">
+
+          <div className={styles.header__block}>
+            
             <div>
               <button onClick={logout}>Logout</button>
             </div>
-            <div className="header__avatar">
+            
+            <div className={styles.header__avatar}>
             </div>
-            <div className="header__menu burger">
+
+            <div className={cn(styles.header__menu, styles.burger)}>
               <span></span>
             </div>
+
           </div>
         </div>
       </div>
     </header>
 
-    // <header className={headerStyles.header}>
+    // <header className={styles.header}{headerStyles.header}>
     //   <img src={logo} alt="logo" />
-    //   <div className={headerStyles.loginBlock}>
+    //   <div className={styles.header}{headerStyles.loginBlock}>
     //     {authData.isAuth
     //       ? (
     //         <div>

@@ -1,0 +1,12 @@
+.aside {
+  position: relative;
+
+  padding: 30px 20px;
+
+  display: flex;
+  justify-content: center;
+
+  background-color: var(--white);
+
+  height: 100%;
+}

@@ -1,10 +1,11 @@
 import React from "react";
 import { NavLink } from 'react-router-dom'
-import "./Menu.css"
+
+import cn from 'classnames'
+
+import styles from "./Menu.module.css"
 
 import { menuList } from "../../helpers/menuList";
-
-
 
 const Menu = () => {
 
@@ -17,20 +18,29 @@ const Menu = () => {
 
   // <NavLink to="/" className={linkClassNameDefinition}>
 
-  return (
-    <div className="menu">
+  // const activeLink: string = cn(styles.menu__link, styles.menu__link_active) 
+  // const normalLink: string = styles.menu__link
 
-      <div className="menu__prev-block">
+  // const linkClassNameDefinition = ({ isActive }: { isActive: boolean }): string => isActive ? activeLink : normalLink
+
+  return (
+    <div className={styles.menu}>
+
+      <div className={styles.menu__prevBlock}>
         {/* For some content in mobile */}
       </div>
 
-      <nav className="menu__body">
+      <nav className={styles.menu__body}>
         {menuList.map((item) => {
           return (
             <NavLink
               key={item.name}
               to={item.url}
-              className="menu__link"
+              className={styles.menu__link}
+              // className={cn(styles.menu__link, {
+              //   [styles.menu__link_active]: true
+              // })}
+              
             >
               {item.name}
             </NavLink>

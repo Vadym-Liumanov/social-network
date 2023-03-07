@@ -1,0 +1,51 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 auto;
+
+  height: 100%;
+  max-width: 900px;
+}
+
+.header {
+  width: 100%;
+  height: 70px;
+  position: absolute;
+
+  background-color: aqua;
+
+  top: 0;
+  left: 0;
+}
+
+.mainRow {
+  margin-top: 80px;
+
+  height: 100%;
+
+  display: flex;
+  column-gap: 10px;
+}
+
+.aside {
+  background-color: greenyellow;
+  min-width: 240px;
+}
+
+.main {
+  background-color: greenyellow;
+  width: 100%;
+}
+
+.footer {
+  height: 70px;
+  margin-top: auto;
+}
+
+@media (max-width: 767px) {
+  .aside {
+    display: none;
+  }
+}
