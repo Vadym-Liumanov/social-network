@@ -20,9 +20,9 @@ const Header: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.header__row}>
 
-          <a href="./index.html" className={styles.header__logo}>
+          <Link to='/' className={styles.header__logo}>
             <strong>IT</strong> Social
-          </a>
+          </Link>
 
           <div className={styles.header__block}>
             

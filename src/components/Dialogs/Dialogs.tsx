@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 
 import dialogsStyles from './Dialogs.module.css'
@@ -57,7 +57,7 @@ const Dialogs: React.FC = () => {
   return (
     <>
       {!isAuth
-        ? <Redirect to='/login' />
+        ? <Navigate replace to='/login' />
         :
         <div className={dialogsStyles.content}>
           <div>

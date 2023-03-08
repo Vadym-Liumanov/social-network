@@ -1,5 +1,5 @@
 import React from "react"
-import { Redirect } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import { connect } from "react-redux"
 import { AppStateType } from '../redux/store-redux'
 
@@ -18,7 +18,7 @@ export function withAuthRedirect<WCP extends object>(WrappedComponent: React.Com
   const RedirectComponent: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
     let { isAuth, ...restProps } = props
 
-    if (!isAuth) return <Redirect to='/login' />
+    if (!isAuth) return <Navigate replace to='/login' />
 
     return <WrappedComponent {...restProps as WCP} />
   }

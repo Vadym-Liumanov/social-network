@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useLocation, useHistory } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import {
   getCurrentPage, getIsFetching, getIsFollowingInProgress,
@@ -18,7 +18,7 @@ import UsersSearchForm from './UsersSearchForm/UsersSearchForm'
 const Users: React.FC = () => {
   const dispatch = useDispatch()
   const location = useLocation()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const usersList = useSelector(getUsers)
   const totalCount = useSelector(getTotalCount)
@@ -86,7 +86,7 @@ const Users: React.FC = () => {
     if (usersFilter.friend !== null) { queryParams.set('friend', String(usersFilter.friend)) }
     if (currentPage !== 1) { queryParams.set('page', String(currentPage)) }
 
-    history.push({
+    navigate({
       pathname: '/users',
       search: '?' + queryParams.toString()
     })

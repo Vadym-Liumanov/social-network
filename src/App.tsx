@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-// import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
-import { Route, HashRouter, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { getIsAppInitialized } from './redux/app-selectors'
@@ -60,6 +60,7 @@ const App: React.FC = (props) => {
         ? <Preloader />
         :
         <>
+          {/* <BrowserRouter> */}
           <HashRouter>
             <div className={styles.wrapper}>
 
@@ -76,27 +77,29 @@ const App: React.FC = (props) => {
                 }
 
                 <div className={styles.main}>
-                  <Switch>
-                    <Route exact path='/' component={() => <Redirect to='/profile' />} />
-                    <Route exact path='/profile' component={() => <ProfileContainer />} />
-                    <Route path='/profile/:userId' component={() => <ProfileContainer />} />
-                    <Route exact path='/dialogs' component={() => <Dialogs />} />
-                    <Route exact path='/users' component={() => <Users />} />
-                    <Route exact path='/login' component={() => <Login />} />
-                    <Route path='*' component={() => <div>404 NOT FOUND</div>} />
-                  </Switch>
-                 
+                  <Routes>
+                    <Route path='/' element={<Navigate replace to='/profile' />} />
+                    <Route path='/profile' element={<ProfileContainer />} />
+                    <Route path='/profile/:userId' element={<ProfileContainer />} />
+                    <Route path='/dialogs' element={<Dialogs />} />
+                    <Route path='/users' element={<Users />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='*' element={<div>404 NOT FOUND</div>} />
+                  </Routes>
+
                 </div>
               </div>
 
               <div className={styles.footer}>
-              <Footer />
-            </div>
+                <Footer />
+              </div>
 
-          </div>
-        </HashRouter>
+            </div>
+          </HashRouter>
+          {/* </BrowserRouter> */}
         </>
       }
+
     </>
   )
 }

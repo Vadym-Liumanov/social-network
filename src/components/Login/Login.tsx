@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import LoginReduxForm, { LoginFormValuesType } from './LoginReduxForm'
 
@@ -29,12 +29,12 @@ const Login: React.FC = () => {
   }
 
   if (isAuth) {
-    return <Redirect to='/profile' />
+    return <Navigate replace to='/profile' />
   }
 
   return (
     <div className="login-card">
-      <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} isFetching={isFetching}/>
+      <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} isFetching={isFetching} />
     </div>
   )
 }

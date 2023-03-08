@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams, Redirect } from 'react-router-dom'
+import { useParams, Navigate } from 'react-router-dom'
 
 import {
   setUserProfileThunk, setUserStatusThunk, setMyStatusThunk,
@@ -64,7 +64,7 @@ const ProfileContainer: React.FC = () => {
   return (
     <>
       {!isAuth
-        ? <Redirect to='/login' />
+        ? <Navigate replace to='/login' />
         :
         <div className={profileStyles.content}>
           {profileInfo ? <ProfileInfo
