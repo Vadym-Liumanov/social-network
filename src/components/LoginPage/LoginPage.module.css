@@ -1,0 +1,16 @@
+.loginCard {
+  max-width: 600px;
+  height: fit-content;
+
+  border: var(--main-border);
+  border-radius: 5px;
+
+  display: flex;
+  align-items: start;
+  justify-content: center;
+
+  margin: 30px auto;
+  padding: 30px 20px;
+
+  overflow: hidden;
+}

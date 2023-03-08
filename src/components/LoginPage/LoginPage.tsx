@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-
 import { Navigate } from 'react-router-dom'
 
 import LoginReduxForm, { LoginFormValuesType } from './LoginReduxForm'
@@ -8,7 +7,9 @@ import LoginReduxForm, { LoginFormValuesType } from './LoginReduxForm'
 import { loginThunk } from '../../redux/auth-reducer'
 import { getCaptchaUrl, getIsAuth, getIsFetching } from '../../redux/auth-selectors'
 
-const Login: React.FC = () => {
+import styles from './LoginPage.module.css'
+
+const LoginPage: React.FC = () => {
   // Todo: Enable Preloader when data is fetching
   const dispatch = useDispatch()
   const login = (email: string, password: string, rememberMe: boolean, captcha: string | null) => dispatch(loginThunk(email, password, rememberMe, captcha))
@@ -33,10 +34,10 @@ const Login: React.FC = () => {
   }
 
   return (
-    <div className="login-card">
+    <div className={styles.loginCard}>
       <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} isFetching={isFetching} />
     </div>
   )
 }
 
-export default React.memo(Login)
+export default React.memo(LoginPage)

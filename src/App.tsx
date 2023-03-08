@@ -19,7 +19,7 @@ import Footer from './components/Footer/Footer'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import Dialogs from './components/Dialogs/Dialogs'
 import Users from './components/Users/Users'
-import Login from './components/Login/Login'
+import LoginPage from './components/LoginPage/LoginPage'
 
 import Preloader from './components/common/Preloader/Preloader'
 
@@ -84,7 +84,7 @@ const App: React.FC = (props) => {
                     <Route path='/profile/:userId' element={<ProfileContainer />} />
                     <Route path='/dialogs' element={<Dialogs />} />
                     <Route path='/users' element={<Users />} />
-                    <Route path='/login' element={<Login />} />
+                    <Route path='/login' element={<LoginPage />} />
                     <Route path='*' element={<div>404 NOT FOUND</div>} />
                   </Routes>
 
