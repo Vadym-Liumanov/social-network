@@ -3,10 +3,11 @@
   --white: #fff;
   --black: #171718;
   --red: #ff4d4f;
+  --blue: #1677ff;
 
   --text-color: var(--black);
   --header-text-color: var(--white);
-  --error-color: var(var(--red));
+  --error-color: var(--red);
 
   /* Background-colors */
   --dark-bg: var(--black);

@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
-import LoginReduxForm, { LoginFormValuesType } from './LoginReduxForm'
+import LoginReduxForm, { LoginFormValuesType } from './LoginReduxForm/LoginReduxForm'
 
 import { loginThunk } from '../../redux/auth-reducer'
 import { getCaptchaUrl, getIsAuth, getIsFetching } from '../../redux/auth-selectors'

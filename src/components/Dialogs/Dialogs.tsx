@@ -8,7 +8,6 @@ import dialogsStyles from './Dialogs.module.css'
 import User from './User/User'
 import Dialog from './Dialog/Dialog'
 import { required, maxLength } from '../../utils/validators/validators'
-import { textInput } from '../common/FormsControls/FormsControls'
 
 import { getIsAuth } from '../../redux/auth-selectors'
 import { getDialogs, getDialogsUsers } from '../../redux/messages-selectors'

@@ -1,0 +1,22 @@
+.loginForm__captchaImg,
+.loginForm__errorOnSubmit,
+.loginForm__button {
+  display: grid;
+  grid-template-columns: 100px 200px 100px;
+}
+
+.captchaImg,
+.errorOnSubmit,
+.button {
+  grid-column: 2;
+}
+
+.errorOnSubmit {
+  color: var(--error-color);
+  font-weight: 500;
+  font-size: 1.05em;
+}
+
+.loginForm__button {
+  margin-top: 1.2em;
+}

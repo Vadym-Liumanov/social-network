@@ -1,10 +1,84 @@
-.formControl.error input,
-.formControl.error textarea
-{
-  border: solid red 2px;
+.loginInput__body {
+  display: grid;
+  grid-template-columns: 100px 200px 100px;
+  grid-template-rows: 2.2em 1.4em;
+
+  justify-items: left;
+  align-items: center;
 }
 
-.formControl.error span
-{
-  color: red;
+.loginInput__label {
+  grid-column: 1 / 2;
+  grid-row: 1;
+
+  justify-self: end;
+  margin-right: 8px;
 }
+
+/* .label{} */
+
+.label::after {
+  content: ":";
+  margin-left: 2px;
+}
+
+.requiredLabel::before {
+  content: "*";
+  color: var(--error-color);
+  margin-right: 2px;
+}
+
+.loginInput__input {
+  grid-column: 2 / 3;
+  grid-row: 1;
+}
+
+.input {
+  border: var(--main-border);
+  border-radius: 6px;
+  height: 2em;
+  width: 100%;
+  padding: 4px 1em;
+  font-size: 1em;
+}
+
+.input:hover,
+.input:focus {
+  border: 1px solid var(--blue);
+}
+
+.loginInput__error {
+  grid-row: 2;
+  grid-column: 2 / 3;
+}
+
+.error {
+  color: var(--error-color);
+  font-size: 0.9em;
+  line-height: 1.4;
+  padding: 4px 10px;
+}
+
+.loginCheckbox__body{
+  display: grid;
+  grid-template-columns: 100px 200px 100px;
+  grid-template-rows: auto;
+
+  justify-items: left;
+  align-items: center;
+}
+
+.loginCheckbox__block{
+  grid-column: 2 / 3;
+  grid-row: 1;
+
+  display: flex;
+  column-gap: 8px;
+}
+
+/* .loginCheckbox__checkbox{}
+
+.checkbox{}
+
+.loginCheckbox__label{} */
+

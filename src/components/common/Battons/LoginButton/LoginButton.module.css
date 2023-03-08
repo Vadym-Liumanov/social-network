@@ -1,0 +1,38 @@
+.submitButton {
+  display: flex;
+  column-gap: 0.6em;
+  justify-content: start;
+  align-items: center;
+
+  font-size: 1.1em;
+
+  background-color: #1677ff;
+  color: white;
+  padding: 0.4em 1em;
+  border-radius: 5px;
+
+  width: 8em;
+  height: 2.4em;
+
+  transition: all 0.3s ease;
+}
+
+.submitButton:hover {
+  opacity: 0.9;
+}
+
+.submitButton:active {
+  position: relative;
+  top: 1px;
+}
+
+.preloader {
+  width: 1.3em;
+  /* display: none; */
+  visibility: hidden;
+}
+
+.preloader._active {
+  /* display: block; */
+  visibility: visible;
+}

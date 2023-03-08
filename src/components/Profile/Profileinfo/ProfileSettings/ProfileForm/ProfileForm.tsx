@@ -3,7 +3,7 @@ import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { ProfileType } from '../../../../../types/types'
 // import styles from './ProfileForm.module.css'
 import { required } from '../../../../../utils/validators/validators'
-import { textInput } from '../../../../common/FormsControls/FormsControls'
+// import { textInput } from '../../../../common/FormsControls/FormsControls'
 
 // export type ProfileFormValuesType = {
 //   fullName: string | null
