@@ -30,12 +30,11 @@
 }
 
 .aside {
-  background-color: greenyellow;
   min-width: 240px;
 }
 
 .main {
-  background-color: greenyellow;
+  background-color: var(--white);
   width: 100%;
 }
 

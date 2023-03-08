@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
+// import { BrowserRouter } from 'react-router-dom'
 import { HashRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
