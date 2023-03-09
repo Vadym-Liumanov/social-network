@@ -55,6 +55,22 @@ App не будет доступен */
   border-radius: 50%;
 }
 
+.header__authBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 1em;
+  font-size: 1.2em;
+}
+
+.header__authBlock button {
+  transition: all 0.3s ease;
+}
+
+.header__authBlock button:hover {
+  opacity: 0.8;
+}
+
 
 /* Burger */
 

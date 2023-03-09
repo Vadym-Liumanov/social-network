@@ -7,11 +7,12 @@ import cn from 'classnames'
 import styles from './Header.module.css'
 
 import { logoutThunk } from '../../redux/auth-reducer'
-import { getAuthData } from '../../redux/auth-selectors'
+import { getAuthData, getIsAuth } from '../../redux/auth-selectors'
 
 const Header: React.FC = () => {
   const dispatch = useDispatch()
   const authData = useSelector(getAuthData)
+  const isAuth = useSelector(getIsAuth)
   const logout = () => dispatch(logoutThunk())
 
   return (
@@ -25,13 +26,19 @@ const Header: React.FC = () => {
           </Link>
 
           <div className={styles.header__block}>
-            
-            <div>
-              <button onClick={logout}>Logout</button>
-            </div>
-            
-            <div className={styles.header__avatar}>
-            </div>
+
+            {isAuth &&
+
+              <div className={styles.header__authBlock}>
+                <div>
+                  <button onClick={logout}>Logout</button>
+                </div>
+                <div className={styles.header__avatar}>
+                </div>
+              </div>
+            }
+
+            {/* Burger */}
 
             <div className={cn(styles.header__menu, styles.burger)}>
               <span></span>

@@ -1,16 +1,54 @@
-.loginCard {
-  max-width: 600px;
-  height: fit-content;
+.loginPage {
+  display: grid;
+  row-gap: 1em;
+
+  padding: 1em 2em;
+}
+
+.loginPage__card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 1em;
 
   border: var(--main-border);
   border-radius: 5px;
+}
 
-  display: flex;
-  align-items: start;
-  justify-content: center;
+.loginPage__notice {
+  display: grid;
+  grid-template-columns: 100px 200px 100px;
+  grid-template-rows: 2em auto auto;
+  row-gap: 0.2em;
+  column-gap: 0.4em;
+}
 
-  margin: 30px auto;
-  padding: 30px 20px;
+.loginPage__notice strong {
+  font-weight: 500;
+}
 
-  overflow: hidden;
+.notice__title {
+  grid-row: 1;
+  grid-column: 2/3;
+}
+
+.notice__emailKey {
+  grid-column: 1/2;
+  grid-row: 2;
+  text-align: end;
+}
+.notice__emailVal {
+  grid-column: 2/3;
+  grid-row: 2;
+}
+
+.notice__passKey {
+  grid-column: 1/2;
+  grid-row: 3;
+  text-align: end;
+}
+.notice__passVal {
+  grid-column: 2/3;
+  grid-row: 3;
 }

@@ -34,10 +34,20 @@ const LoginPage: React.FC = () => {
   }
 
   return (
-    <div className={styles.loginCard}>
-      <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} isFetching={isFetching} />
+    <div className={styles.loginPage}>
+      <div className={styles.loginPage__card}>
+        <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} isFetching={isFetching} />
+      </div>
+      <div className={styles.loginPage__card}>
+        <div className={styles.loginPage__notice}>
+          <div className={styles.notice__title}>Test account details:</div>
+          <span className={styles.notice__emailKey}>Email:</span> <strong className={styles.notice__emailVal}>free@samuraijs.com</strong>
+          <span className={styles.notice__passKey}>Password:</span> <strong className={styles.notice__passVal}>free</strong>
+        </div>
+      </div>
     </div>
   )
+
 }
 
 export default React.memo(LoginPage)

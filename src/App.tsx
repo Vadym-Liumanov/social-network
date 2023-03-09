@@ -71,7 +71,7 @@ const App: React.FC = (props) => {
 
               <div className={styles.mainRow}>
 
-                {!isAuth &&
+                {isAuth &&
                   <div className={styles.aside}>
                     <Aside />
                   </div>
