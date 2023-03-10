@@ -1,0 +1,17 @@
+.profilePage {
+  display: grid;
+  row-gap: 1em;
+
+  padding: 1em 2em;
+}
+
+.profilePage__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 1.5em;
+
+  border: var(--main-border);
+  border-radius: 5px;
+}

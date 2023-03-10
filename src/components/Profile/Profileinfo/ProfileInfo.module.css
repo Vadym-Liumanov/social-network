@@ -1,93 +1,14 @@
-* {
-  box-sizing: border-box;
-}
-
-.container {
-  font-weight: normal;
+.profileInfoWrapper {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  row-gap: 1em;
+  column-gap: 1em;
 }
 
-.avaNameStatus,
-.aboutMe {
-  margin: 5px;
-  background-color: silver;
-  padding: 10px;
-  border-radius: 5px;
-  height: 65vh;
-  overflow: hidden;
-}
-
-.aboutMe {
-  min-width: 20vw;
-}
-
-.avaNameStatus {
-  min-width: 270px;
-  width: 25vw;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.avaContainer {
-  align-self: center;
-  position: relative;
-  width: fit-content;
+.profileInfo__item {
+  background-color: aquamarine;
+  flex: 0 1 40%;
 }
 
 .imgContainer {
-  position: static;
-}
-
-img.avatar {
-  width: 250px;
-  height: 250px;
-  border-radius: 20px;
-}
-
-.inputFileContainer {
-  position: absolute;
-  margin: 10px;
-  top: 80%;
-  visibility: hidden;
-}
-
-.avaContainer:hover .inputFileContainer {
-  visibility: visible;
-}
-
-.inputFile {
-  color: rgb(236, 0, 0);
-  width: 100%;
-  margin-right: 20px;
-}
-
-/* ********************** */
-.fullName {
-  align-self: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.fullName span {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: blue;
-}
-
-.status__title {
-  color: rgb(57, 141, 226);
-  font-weight: 500;
-  margin-bottom: 10px;
-}
-
-.status__text {
-  font-size: 1rem;
-  color: rgb(203, 11, 210);
-  font-weight: 600;
-  margin-bottom: 10px;
-  border-radius: 4px;
+  width: 240px;
 }

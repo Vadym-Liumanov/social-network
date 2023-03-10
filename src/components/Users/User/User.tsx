@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 import { usersAPI } from "../../../api/usersAPI"
 import userStyles from './User.module.css'
-import userImage from '../../../assets/images/userImage.jpg'
+import userImage from '../../../assets/images/defaultUserImage.jpg'
 import { UserInfoType } from '../../../types/types'
 
 type PropsType = {

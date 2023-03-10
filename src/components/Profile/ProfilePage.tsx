@@ -7,7 +7,7 @@ import {
   updateMyStatusThunk, savePhotoThunk, updateProfileThunk
 } from '../../redux/profile-reducer'
 
-import profileStyles from './Profile.module.css'
+import styles from './ProfilePage.module.css'
 
 import ProfileInfo from './Profileinfo/ProfileInfo'
 import MyPosts from './MyPosts/MyPosts'
@@ -16,7 +16,7 @@ import { ProfileType } from '../../types/types'
 import { getMyStatus, getProfileInfo, getUserStatus } from '../../redux/profile-selectors'
 import { getAuthId, getIsAuth } from '../../redux/auth-selectors'
 
-const ProfileContainer: React.FC = () => {
+const ProfilePage: React.FC = () => {
   const dispatch = useDispatch()
 
   const profileInfo = useSelector(getProfileInfo)
@@ -66,21 +66,28 @@ const ProfileContainer: React.FC = () => {
       {!isAuth
         ? <Navigate replace to='/login' />
         :
-        <div className={profileStyles.content}>
-          {profileInfo ? <ProfileInfo
-            isOwner={isOwner}
-            profileDetails={profileInfo}
-            userStatus={userStatus}
-            myStatus={myStatus}
-            updateMyStatus={updateMyStatus}
-            savePhoto={savePhoto}
-            updateProfile={updateProfile} />
-            : <Preloader />}
-          {isOwner && <MyPosts />}
+        <div className={styles.profilePage}>
+
+          <div className={styles.profilePage__item}>
+            {profileInfo ? <ProfileInfo
+              isOwner={isOwner}
+              profileDetails={profileInfo}
+              userStatus={userStatus}
+              myStatus={myStatus}
+              updateMyStatus={updateMyStatus}
+              savePhoto={savePhoto}
+              updateProfile={updateProfile} />
+              : <Preloader />}
+          </div>
+
+          <div className={styles.profilePage__item}>
+            {isOwner && <MyPosts />}
+          </div>
+
         </div>
       }
     </>
   )
 }
 
-export default React.memo(ProfileContainer)
+export default React.memo(ProfilePage)

@@ -16,7 +16,7 @@ import Header from './components/Header/Header'
 import Aside from './components/Aside/Aside'
 import Footer from './components/Footer/Footer'
 
-import ProfileContainer from './components/Profile/ProfileContainer'
+import ProfileContainer from './components/Profile/ProfilePage'
 import Dialogs from './components/Dialogs/Dialogs'
 import Users from './components/Users/Users'
 import LoginPage from './components/LoginPage/LoginPage'
