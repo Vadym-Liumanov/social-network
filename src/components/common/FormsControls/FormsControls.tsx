@@ -22,13 +22,12 @@ export const loginInput: React.FC<WrappedFieldProps & ElementOwnPropsType> = ({ 
       <div className={cn(styles.loginInput__error, styles.error)}>
         {hasError && <span>{meta.error}</span>}
       </div>
-    </div >
+    </div>
   )
 }
 
 
 export const loginCheckbox: React.FC<WrappedFieldProps & ElementOwnPropsType> = ({ input, meta, ...props }) => {
-  const hasError: boolean = meta.touched && meta.error
 
   return (
     <div className={styles.loginCheckbox__body}>
@@ -39,6 +38,3 @@ export const loginCheckbox: React.FC<WrappedFieldProps & ElementOwnPropsType> = 
     </div>
   )
 }
-
-
-

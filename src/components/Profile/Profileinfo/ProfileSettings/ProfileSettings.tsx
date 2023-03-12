@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+
 import { ContactsType, ProfileType } from '../../../../types/types'
 import ProfileReduxForm from './ProfileForm/ProfileForm'
+import PrimaryButton from '../../../common/Battons/PrimaryButton/PrimaryButton'
 
 import styles from './ProfileSettings.module.css'
 
@@ -26,50 +28,98 @@ const ProfileSettings: React.FC<PropsType> = ({ profileDetails, isOwner, updateP
       .then(() => { setEditMode(false) })
   }
 
+  const ProfileMainDetails = {
+    fullName: 'Full Name:',
+    aboutMe: 'About:',
+    lookingForAJob: 'Looking for a job:',
+    lookingForAJobDescription: 'Job description:'
+  }
+
+  type ProfileMainDetailsType = typeof ProfileMainDetails
+
+  const ProfileMainDetailsList = Object.keys(ProfileMainDetails).map((item, index) => {
+    return (
+      <div key={index} className={styles.profileDetails__item}>
+
+        <div className={styles.profileDetails__itemTitle}>
+          {ProfileMainDetails[item as keyof ProfileMainDetailsType]}
+        </div>
+
+        {(typeof profileDetails[item as keyof ProfileMainDetailsType] !== 'boolean')
+          ? <div className={styles.profileDetails__itemValue}>
+            {profileDetails[item as keyof ProfileMainDetailsType] || '----------'}
+          </div>
+          : <div className={styles.profileDetails__itemValue}>
+            {profileDetails[item as keyof ProfileMainDetailsType] ? 'Yes' : 'No'}
+          </div>}
+      </div>
+    )
+  })
+
+  const ProfileContacts = {
+    github: 'Github:',
+    vk: 'VK:',
+    facebook: 'Facebook:',
+    instagram: 'Instagram:',
+    twitter: 'Twitter:',
+    youtube: 'Youtube:',
+    website: 'Website:',
+    mainLink: 'Main link:'
+  }
+
+  type ProfileContactsType = typeof ProfileContacts
+
+  const ProfileContactsList = Object.keys(ProfileContacts).map((item, index) => {
+    return (
+      <div key={index} className={styles.profileDetails__item}>
+
+        <div className={styles.profileDetails__itemTitle}>
+          {ProfileContacts[item as keyof ProfileContactsType]}
+        </div>
+
+        <div className={styles.profileDetails__itemValue}>
+          {profileDetails.contacts[item as keyof ProfileContactsType] || '----------'}
+        </div>
+      </div>
+    )
+  })
+
   return (
-    <div>
-      <div style={{ 'marginBottom': '10px' }}><b>ProfileSettings</b></div>
+    <div className={styles.profileSettings}>
 
       {!editMode && (
-        <div>
-          <div className={styles.settingsItem}>
-            <div><b>fullName: </b></div>
-            <div>{profileDetails.fullName || '----------'}</div>
-          </div>
-          <div className={styles.settingsItem}>
-            <div><b>aboutMe: </b></div>
-            <div>{profileDetails.aboutMe || '----------'}</div>
-          </div>
-          <div className={styles.settingsItem}>
-            <div><b>lookingForAJob: </b></div>
-            <div>{profileDetails.lookingForAJob ? 'yes' : 'no'}</div>
-          </div>
-          <div className={styles.settingsItem}>
-            <div><b>lookingForAJobDescription: </b></div>
-            <div>{profileDetails.lookingForAJobDescription || '----------'}</div>
-          </div>
-          <div className={styles.contacts}>
-            <div><b>Contacts</b></div>
-            <div>
-              {Object.keys(profileDetails.contacts).map((contact) => {
-                return (
-                  <div key={contact}>
-                    <span><b>{contact}</b></span>
-                    <span>{profileDetails.contacts[contact as keyof ContactsType] || ' -----'}</span>
-                  </div>
-                )
-              })}
+        <div className={styles.profileSettings__wrapper}>
 
-            </div>
+          <section className={styles.about}>
+            <h3 className={styles.about__title}>Profile settings</h3>
+            {ProfileMainDetailsList}
+          </section>
+
+          <section className={styles.contacts}>
+            <h3 className={styles.contacts__title}>Contacts</h3>
+            {ProfileContactsList}
+          </section>
+
+          <div className={styles.editButton}>
+            {isOwner && <PrimaryButton
+              text='Edit'
+              onClick={onEnableEditMode}
+            />}
           </div>
-          {isOwner && <button onClick={onEnableEditMode}>Edit</button>}
+
         </div>
       )}
 
       {editMode && (
-        <div>
+        <div className={styles.editProfileDetails}>
+          <div className={styles.editProfileDetails__header}>
+            <button onClick={onDisableEditMode}>
+              <div className={styles.cross}></div>
+            </button>
+          </div>
+
           <ProfileReduxForm onSubmit={onSubmitProfileReduxForm} initialValues={profileDetails} profileDetails={profileDetails} />
-          <button onClick={onDisableEditMode}>Back</button>
+
         </div>
       )}
 

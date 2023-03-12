@@ -21,12 +21,11 @@
 }
 
 .mainRow {
-  margin-top: 70px;
-
-  height: 100%;
-
   display: flex;
   column-gap: 20px;
+
+  height: fit-content;
+  margin-top: 70px;
 }
 
 .aside {

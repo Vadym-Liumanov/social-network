@@ -7,10 +7,10 @@
 
 .profilePage__item {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: start;
 
-  padding: 1.5em;
+  padding: 1.4em;
 
   border: var(--main-border);
   border-radius: 5px;

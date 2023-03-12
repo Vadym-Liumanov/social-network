@@ -1,7 +1,7 @@
 .loginInput__body {
   display: grid;
   grid-template-columns: 100px 200px 100px;
-  grid-template-rows: 2.2em 1.4em;
+  grid-template-rows: 2em 1em;
 
   justify-items: left;
   align-items: center;
@@ -62,7 +62,7 @@
 .loginCheckbox__body{
   display: grid;
   grid-template-columns: 100px 200px 100px;
-  grid-template-rows: auto;
+  grid-template-rows: 2em 1em;
 
   justify-items: left;
   align-items: center;

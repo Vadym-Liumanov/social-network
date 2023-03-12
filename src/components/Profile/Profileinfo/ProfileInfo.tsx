@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from 'react'
+import cn from 'classnames'
 
 import styles from './ProfileInfo.module.css'
 import defaultUserImage from '../../../assets/images/defaultUserImage.jpg'
@@ -27,34 +28,33 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner, userStatus, myStatus, updat
   return (
     <div className={styles.profileInfoWrapper}>
 
-      <div className={styles.profileInfo__item}>
-
-        <section className={styles.mainInfo}>
-            <div className={styles.imgContainer}>
-              <img src={profileDetails.photos.large ? profileDetails.photos.large : defaultUserImage} alt="userAvatar" className={styles.avatar} />
-            </div>
-            {/* {isOwner && (
+      <div className={cn(styles.profileInfo__item, styles.mainInfo)}>
+        <div className={styles.imgContainer}>
+          <img src={profileDetails.photos.large ? profileDetails.photos.large : defaultUserImage} alt="userAvatar" className={styles.avatar} />
+        </div>
+        {/* {isOwner && (
               <div className={styles.inputFileContainer}>
                 <input type="file" onChange={onFileSelect} className={styles.inputFile} accept="image/*" />
               </div>
             )} */}
-          <div className={styles.fullName}><span>{profileDetails.fullName}</span></div>
-          <div className={styles.status}>
-            <div className={styles.status__title}>Status:</div>
-            <div className={styles.status__text}>
-              {!isOwner && (<>{userStatus || 'User have no status!'}</>)}
-              {isOwner && (<ProfileStatus status={myStatus} updateMyStatus={updateMyStatus} />)}
-            </div>
+
+        <div className={styles.fullName}>
+          <h2>{profileDetails.fullName}</h2>
+        </div>
+
+        <div className={styles.status}>
+          <div className={styles.status__title}>Status:</div>
+          <div className={styles.status__text}>
+            {!isOwner && (<>{userStatus || 'User have no status!'}</>)}
+            {isOwner && (<ProfileStatus status={myStatus} updateMyStatus={updateMyStatus} />)}
           </div>
-        </section>
-
+        </div>
       </div>
-      <div className={styles.profileInfo__item}>
-        <section className={styles.aboutMe}>
+
+
+        <div className={cn(styles.profileInfo__item, styles.aboutMe)}>
           <ProfileSettings profileDetails={profileDetails} isOwner={isOwner} updateProfile={updateProfile} />
-        </section>
-      </div>
-
+        </div>
 
     </div>
   )

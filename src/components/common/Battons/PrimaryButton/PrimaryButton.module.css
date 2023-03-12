@@ -1,0 +1,26 @@
+.primaryButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.1em;
+
+  background-color: #1677ff;
+  color: var(--white);
+  padding: 0.4em 1em;
+  border-radius: 5px;
+
+  width: 8em;
+  height: 2.4em;
+
+  transition: all 0.3s ease;
+}
+
+.primaryButton:hover {
+  opacity: 0.9;
+}
+
+.primaryButton:active {
+  position: relative;
+  top: 1px;
+}

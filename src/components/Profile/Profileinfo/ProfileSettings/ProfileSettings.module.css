@@ -1,7 +1,113 @@
-* {
-  box-sizing: border-box;
+.profileSettings {
+  width: 100%;
+  padding-left: 0.5em;
 }
 
-.settingsItem {
+/* .about,
+.contacts {
+  border: var(--main-border)
+} */
+
+.about__title,
+.contacts__title {
+  font-size: 1.1em;
+  font-weight: 500;
+  padding-left: 30%;
+  margin-bottom: 0.4em;
+}
+
+.contacts__title {
+  margin-top: 1em;
+}
+
+.profileDetails__item {
+  display: grid;
+  grid-template-columns: 6em 1fr;
+  margin-bottom: 0.2em;
+  column-gap: 0.1em;
+}
+
+.profileDetails__itemTitle {
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+/* .profileDetails__itemValue {} */
+
+.editButton {
   display: flex;
+  justify-content: center;
+  margin: 1.5em 0;
+}
+
+.editProfileDetails {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: rgba(0, 0, 0, 0.8); */
+  background-color: var(--page-bg);
+  overflow: auto;
+}
+
+.editProfileDetails__header {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding-right: 1em;
+  height: 70px;
+  color: var(--text-color);
+  background-color: var(--page-bg);
+}
+
+/* Cross */
+
+.cross {
+  display: block;
+  position: relative;
+  width: 30px;
+  height: 18px;
+  cursor: pointer;
+  margin-right: 6px;
+
+  transition: all 0.3s ease;
+}
+
+.cross:hover {
+  opacity: 0.8;
+}
+
+.cross:active {
+  position: relative;
+  top: 1px;
+}
+
+.cross::before,
+.cross::after {
+  position: absolute;
+  left: 0;
+  height: 10%;
+  width: 100%;
+  transition: all 0.3s ease 0s;
+  background-color: var(--black);
+}
+
+.cross::before,
+.cross::after {
+  content: "";
+}
+
+.cross::before {
+  top: 50%;
+  transform: rotate(-45deg) translate(0px, -50%);
+}
+
+.cross::after {
+  bottom: 50%;
+  transform: rotate(45deg) translate(0px, 50%);
+}
+
+.editProfileDetails button {
+  color: red;
 }

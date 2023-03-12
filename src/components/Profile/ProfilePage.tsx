@@ -80,9 +80,9 @@ const ProfilePage: React.FC = () => {
               : <Preloader />}
           </div>
 
-          <div className={styles.profilePage__item}>
+          {/* <div className={styles.profilePage__item}>
             {isOwner && <MyPosts />}
-          </div>
+          </div> */}
 
         </div>
       }

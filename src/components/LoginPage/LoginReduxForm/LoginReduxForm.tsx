@@ -53,7 +53,6 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType,
 
         <Field
           name='rememberMe'
-          elementType='input'
           type='checkbox'
           component={loginCheckbox}
           label='Remember me'

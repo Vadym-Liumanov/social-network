@@ -1,3 +1,22 @@
-* {
-  box-sizing: border-box;
+.formWrapper {
+  
+  background-color: var(--page-bg);
+}
+
+.mainRow {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.about,
+.contacts {
+  border: var(--main-border)
+}
+
+.about__title,
+.contacts__title {
+  font-size: 1.1em;
+  font-weight: 500;
+  padding-left: 30%;
+  margin-bottom: 0.4em;
 }
