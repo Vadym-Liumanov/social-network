@@ -1,13 +1,11 @@
 import React from 'react'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
-import cn from 'classnames'
 
 import { required, email } from '../../../utils/validators/validators'
 import { loginInput, loginCheckbox } from '../../common/FormsControls/FormsControls'
 
 import styles from './LoginReduxForm.module.css'
 
-import btnPreloader from '../../../assets/preloaders/circle.svg'
 import LoginButton from '../../common/Battons/LoginButton/LoginButton'
 
 export type LoginFormValuesType = {

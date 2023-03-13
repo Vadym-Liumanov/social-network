@@ -85,13 +85,14 @@ export const logoutThunk = (): BaseThunkType => {
 }
 
 // getState().auth
+
 const initialState = {
   id: null as Nullable<number>,
   login: null as Nullable<string>,
   email: null as Nullable<string>,
   isAuth: false,
   captchaUrl: null as Nullable<string>,
-  isFetching: false as boolean
+  isFetching: false
 }
 
 export type StateType = typeof initialState

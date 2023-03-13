@@ -1,5 +1,4 @@
 .formWrapper {
-  
   background-color: var(--page-bg);
 }
 
@@ -10,7 +9,8 @@
 
 .about,
 .contacts {
-  border: var(--main-border)
+  border: var(--main-border);
+  padding: 1em 1em 1em 2em;
 }
 
 .about__title,
@@ -18,5 +18,23 @@
   font-size: 1.1em;
   font-weight: 500;
   padding-left: 30%;
-  margin-bottom: 0.4em;
+  margin-bottom: 1em;
 }
+
+.bottomRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileForm__errorOnSubmit {
+  margin-top: 1.2em;
+  color: var(--error-color);
+  font-weight: 500;
+  font-size: 1.05em;
+}
+
+.profileForm__button {
+  margin-top: 1.6em;
+}
+

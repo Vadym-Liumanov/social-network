@@ -10,9 +10,10 @@ type PropsType = {
   profileDetails: ProfileType
   isOwner: boolean
   updateProfile: (profileData: ProfileType) => Promise<any>
+  isFetching: boolean
 }
 
-const ProfileSettings: React.FC<PropsType> = ({ profileDetails, isOwner, updateProfile }) => {
+const ProfileSettings: React.FC<PropsType> = ({ profileDetails, isOwner, updateProfile, isFetching }) => {
   const [editMode, setEditMode] = useState(false)
 
   const onEnableEditMode = () => {
@@ -118,7 +119,12 @@ const ProfileSettings: React.FC<PropsType> = ({ profileDetails, isOwner, updateP
             </button>
           </div>
 
-          <ProfileReduxForm onSubmit={onSubmitProfileReduxForm} initialValues={profileDetails} profileDetails={profileDetails} />
+          <ProfileReduxForm
+            onSubmit={onSubmitProfileReduxForm}
+            initialValues={profileDetails}
+            profileDetails={profileDetails}
+            isFetching={isFetching}
+          />
 
         </div>
       )}

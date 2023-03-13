@@ -12,7 +12,8 @@ import styles from './LoginPage.module.css'
 const LoginPage: React.FC = () => {
   // Todo: Enable Preloader when data is fetching
   const dispatch = useDispatch()
-  const login = (email: string, password: string, rememberMe: boolean, captcha: string | null) => dispatch(loginThunk(email, password, rememberMe, captcha))
+  const login = (email: string, password: string, rememberMe: boolean, captcha: string | null) =>
+    dispatch(loginThunk(email, password, rememberMe, captcha))
 
   const isAuth = useSelector(getIsAuth)
   const captchaUrl = useSelector(getCaptchaUrl)

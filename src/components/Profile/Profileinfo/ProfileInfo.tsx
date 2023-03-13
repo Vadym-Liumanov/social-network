@@ -15,9 +15,10 @@ type PropsType = {
   savePhoto: (file: File) => void
   updateProfile: (profileData: ProfileType) => any
   profileDetails: ProfileType
+  isFetching: boolean
 }
 
-const ProfileInfo: React.FC<PropsType> = ({ isOwner, userStatus, myStatus, updateMyStatus, savePhoto, updateProfile, profileDetails }) => {
+const ProfileInfo: React.FC<PropsType> = ({ isOwner, userStatus, myStatus, updateMyStatus, savePhoto, updateProfile, profileDetails, isFetching }) => {
   const onFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
       const fileData = e.target.files[0]
@@ -52,9 +53,14 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner, userStatus, myStatus, updat
       </div>
 
 
-        <div className={cn(styles.profileInfo__item, styles.aboutMe)}>
-          <ProfileSettings profileDetails={profileDetails} isOwner={isOwner} updateProfile={updateProfile} />
-        </div>
+      <div className={cn(styles.profileInfo__item, styles.aboutMe)}>
+        <ProfileSettings
+          profileDetails={profileDetails}
+          isOwner={isOwner}
+          updateProfile={updateProfile}
+          isFetching={isFetching}
+        />
+      </div>
 
     </div>
   )

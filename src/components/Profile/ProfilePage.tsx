@@ -13,7 +13,7 @@ import ProfileInfo from './Profileinfo/ProfileInfo'
 import MyPosts from './MyPosts/MyPosts'
 import Preloader from '../common/Preloader/Preloader'
 import { ProfileType } from '../../types/types'
-import { getMyStatus, getProfileInfo, getUserStatus } from '../../redux/profile-selectors'
+import { getMyStatus, getProfileInfo, getUserStatus, getIsFetching } from '../../redux/profile-selectors'
 import { getAuthId, getIsAuth } from '../../redux/auth-selectors'
 
 const ProfilePage: React.FC = () => {
@@ -24,6 +24,7 @@ const ProfilePage: React.FC = () => {
   const myStatus = useSelector(getMyStatus)
   const myId = useSelector(getAuthId)
   const isAuth = useSelector(getIsAuth)
+  const isFetching = useSelector(getIsFetching)
 
   const setUserProfile = (id: number) => dispatch(setUserProfileThunk(id))
   const setUserStatus = (id: number) => dispatch(setUserStatusThunk(id))
@@ -76,7 +77,9 @@ const ProfilePage: React.FC = () => {
               myStatus={myStatus}
               updateMyStatus={updateMyStatus}
               savePhoto={savePhoto}
-              updateProfile={updateProfile} />
+              updateProfile={updateProfile}
+              isFetching={isFetching}
+            />
               : <Preloader />}
           </div>
 

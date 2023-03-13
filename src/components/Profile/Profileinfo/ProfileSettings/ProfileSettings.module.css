@@ -28,8 +28,8 @@
 }
 
 .profileDetails__itemTitle {
-  font-size: 0.9em;
-  font-weight: 600;
+  font-size: 1em;
+  font-weight: 500;
 }
 
 /* .profileDetails__itemValue {} */
@@ -106,8 +106,4 @@
 .cross::after {
   bottom: 50%;
   transform: rotate(45deg) translate(0px, 50%);
-}
-
-.editProfileDetails button {
-  color: red;
 }

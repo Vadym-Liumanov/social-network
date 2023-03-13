@@ -9,17 +9,20 @@ const SET_USER_STATUS = 'social_network/profile/SET_USER_STATUS'
 const SET_MY_STATUS = 'social_network/profile/SET_MY_STATUS'
 const UPDATE_MY_STATUS = 'social_network/profile/UPDATE_MY_STATUS'
 const UPDATE_MY_PHOTO = 'social_network/profile/UPDATE_MY_PHOTO'
+const SET_IS_FETCHING = 'social_network/profile/SET_IS_FETCHING'
 
 type ThunkType = BaseThunkType<ActionTypes | FormAction>
 
 export const updateProfileThunk = (profileData: ProfileType): ThunkType => {
   return (dispatch, getState) => {
     const userId = getState().auth.id
+    dispatch(actionCreators.setIsFetching(true))
     return profileAPI.updateProfile(profileData).then((data) => {
       if (data.resultCode === 0) {
         dispatch(setUserProfileThunk(userId))
       }
       else {
+        dispatch(actionCreators.setIsFetching(false))
         dispatch(stopSubmit('profile', { _error: data.messages }))
         return Promise.reject(data.messages)
       }
@@ -65,7 +68,11 @@ export const actionCreators = {
       type: ADD_POST,
       postText
     } as const
+  },
+  setIsFetching: (isFetching: boolean) => {
+    return { type: SET_IS_FETCHING, isFetching } as const
   }
+
 }
 
 export const savePhotoThunk = (file: File): ThunkType => {
@@ -98,7 +105,11 @@ export const setUserStatusThunk = (userId: number): ThunkType => {
 
 export const setUserProfileThunk = (userId: number | null): ThunkType => {
   return (dispatch) => {
-    profileAPI.getUserProfile(userId).then((data) => dispatch(actionCreators.setUserProfile(data)))
+    dispatch(actionCreators.setIsFetching(true))
+    profileAPI.getUserProfile(userId).then((data) => {
+      dispatch(actionCreators.setUserProfile(data))
+      dispatch(actionCreators.setIsFetching(false))
+    })
   }
 }
 
@@ -108,12 +119,7 @@ export type ProfilePostType = {
   likesCount: number
 }
 
-// type StateType = {
-//   profilePosts: Array<ProfilePostType>
-//   userProfile: ProfileType | null
-//   userStatus: string | null
-//   myStatus: string | null
-// }
+// state = state.profile
 
 const initialState = {
   profilePosts: [
@@ -130,10 +136,12 @@ const initialState = {
   ] as Array<ProfilePostType>,
   userProfile: null as Nullable<ProfileType>,
   userStatus: null as Nullable<string>,
-  myStatus: null as Nullable<string>
+  myStatus: null as Nullable<string>,
+  isFetching: false
 }
 
-// state = state.profile
+type StateType = typeof initialState
+
 const profileReduser = (state = initialState, action: ActionTypes): any => {
   switch (action.type) {
 
@@ -188,6 +196,12 @@ const profileReduser = (state = initialState, action: ActionTypes): any => {
       return {
         ...state,
         myStatus: action.myStatus
+      }
+
+    case SET_IS_FETCHING:
+      return {
+        ...state,
+        isFetching: action.isFetching
       }
 
     default:

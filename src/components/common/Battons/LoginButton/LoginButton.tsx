@@ -13,8 +13,7 @@ type PropsType = {
 
 const LoginButton: React.FC<PropsType> = ({ isDisabled, isFetching, text }) => {
   return (
-
-    <button className={styles.submitButton} type="submit" disabled={isDisabled}>
+    <button className={styles.submitButton} type="submit" disabled={isDisabled || isFetching}>
       <img className={cn(styles.preloader, { [styles._active]: isFetching })} src={btnPreloader} alt="" />
       <span>{text}</span>
     </button>
