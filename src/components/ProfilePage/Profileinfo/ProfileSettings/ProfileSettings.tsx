@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import ReactDOM from 'react-dom'
 
 import { ContactsType, ProfileType } from '../../../../types/types'
 import ProfileReduxForm from './ProfileForm/ProfileForm'
@@ -111,26 +112,32 @@ const ProfileSettings: React.FC<PropsType> = ({ profileDetails, isOwner, updateP
         </div>
       )}
 
-      {editMode && (
-        <div className={styles.editProfileDetails}>
-          <div className={styles.editProfileDetails__header}>
-            <button onClick={onDisableEditMode}>
-              <div className={styles.cross}></div>
-            </button>
+
+      {editMode && ReactDOM.createPortal(
+        (
+          <div className={styles.editProfileDetails}>
+            <div className={styles.editProfileDetails__header}>
+              <button onClick={onDisableEditMode}>
+                <div className={styles.cross}></div>
+              </button>
+            </div>
+
+            <ProfileReduxForm
+              onSubmit={onSubmitProfileReduxForm}
+              initialValues={profileDetails}
+              profileDetails={profileDetails}
+              isFetching={isFetching}
+            />
+
           </div>
+        ),
+        document.getElementById('root') as Element | DocumentFragment
+      )
 
-          <ProfileReduxForm
-            onSubmit={onSubmitProfileReduxForm}
-            initialValues={profileDetails}
-            profileDetails={profileDetails}
-            isFetching={isFetching}
-          />
-
-        </div>
-      )}
+      }
 
     </div>
   )
 }
 
-export default ProfileSettings
+export default React.memo(ProfileSettings)

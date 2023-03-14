@@ -107,8 +107,6 @@ const ProfileForm: React.FC<InjectedFormProps<ProfileFormValuesType,
                 requiredField={true}
               />
 
-              {/* Сделать филд компонент для текстареа и включить ее для name='aboutMe' */}
-
               <Field
                 name='aboutMe'
                 type='text'
