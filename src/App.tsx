@@ -16,7 +16,7 @@ import Header from './components/Header/Header'
 import Aside from './components/Aside/Aside'
 import Footer from './components/Footer/Footer'
 
-import ProfileContainer from './components/Profile/ProfilePage'
+import ProfilePage from './components/ProfilePage/ProfilePage'
 import Dialogs from './components/Dialogs/Dialogs'
 import Users from './components/Users/Users'
 import LoginPage from './components/LoginPage/LoginPage'
@@ -80,8 +80,8 @@ const App: React.FC = (props) => {
                 <div className={styles.main}>
                   <Routes>
                     <Route path='/' element={<Navigate replace to='/profile' />} />
-                    <Route path='/profile' element={<ProfileContainer />} />
-                    <Route path='/profile/:userId' element={<ProfileContainer />} />
+                    <Route path='/profile' element={<ProfilePage />} />
+                    <Route path='/profile/:userId' element={<ProfilePage />} />
                     <Route path='/dialogs' element={<Dialogs />} />
                     <Route path='/users' element={<Users />} />
                     <Route path='/login' element={<LoginPage />} />
