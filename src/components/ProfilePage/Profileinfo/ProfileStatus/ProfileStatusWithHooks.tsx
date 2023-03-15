@@ -1,5 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from 'react'
 
+import cn from 'classnames'
+
 import styles from './ProfileStatus.module.css'
 
 type PropsType = {
@@ -37,7 +39,7 @@ const ProfileStatusWithHooks: React.FC<PropsType> = ({ status, updateMyStatus })
           <input
             onDoubleClick={() => setEditMode(true)}
             value={statusText || 'No status'}
-            className={styles.input + ' ' + styles.input_passive}
+            className={cn(styles.input, styles.input_passive)}
             readOnly
           />
         </div>

@@ -70,16 +70,17 @@ const ProfilePage: React.FC = () => {
         <div className={styles.profilePage}>
 
           <div className={styles.profilePage__item}>
-            {profileInfo ? <ProfileInfo
-              isOwner={isOwner}
-              profileDetails={profileInfo}
-              userStatus={userStatus}
-              myStatus={myStatus}
-              updateMyStatus={updateMyStatus}
-              savePhoto={savePhoto}
-              updateProfile={updateProfile}
-              isFetching={isFetching}
-            />
+            {profileInfo
+              ? <ProfileInfo
+                isOwner={isOwner}
+                profileDetails={profileInfo}
+                userStatus={userStatus}
+                myStatus={myStatus}
+                updateMyStatus={updateMyStatus}
+                savePhoto={savePhoto}
+                updateProfile={updateProfile}
+                isFetching={isFetching}
+              />
               : <Preloader />}
           </div>
 

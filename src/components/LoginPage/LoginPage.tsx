@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Navigate } from 'react-router-dom'
+import cn from 'classnames'
 
 import LoginReduxForm, { LoginFormValuesType } from './LoginReduxForm/LoginReduxForm'
 
@@ -35,16 +36,26 @@ const LoginPage: React.FC = () => {
   }
 
   return (
-    <div className={styles.loginPage}>
-      <div className={styles.loginPage__card}>
-        <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} isFetching={isFetching} />
-      </div>
-      <div className={styles.loginPage__card}>
-        <div className={styles.loginPage__notice}>
-          <div className={styles.notice__title}>Test account details:</div>
-          <span className={styles.notice__emailKey}>Email:</span> <strong className={styles.notice__emailVal}>free@samuraijs.com</strong>
-          <span className={styles.notice__passKey}>Password:</span> <strong className={styles.notice__passVal}>free</strong>
+    <div className={styles.wrapper}>
+      <div className={styles.loginPage}>
+
+        {/* Form */}
+
+        <div className={cn(styles.loginPage__card, styles.loginPage__cardForm)}>
+          <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} isFetching={isFetching} />
         </div>
+
+        {/* Form notice */}
+
+        <div className={cn(styles.loginPage__card, styles.loginPage__cardNotice)}>
+          <div className={styles.loginPage__notice}>
+            <div className={styles.notice__title}>Test account details:</div>
+            <span className={styles.notice__emailKey}>Email:</span> <strong className={styles.notice__emailVal}>free@samuraijs.com</strong>
+            <span className={styles.notice__passKey}>Password:</span> <strong className={styles.notice__passVal}>free</strong>
+          </div>
+        </div>
+
+
       </div>
     </div>
   )

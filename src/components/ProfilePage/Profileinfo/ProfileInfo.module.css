@@ -1,32 +1,32 @@
 .profileInfoWrapper {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   row-gap: 1em;
   column-gap: 1em;
-  justify-content: center;
 }
 
 .profileInfo__item {
-  border: var(--main-border);
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  justify-content: start;
-  padding: 1em 0.5em;
+  align-items: center;
+  border: var(--main-border);
   border-radius: 5px;
+
+  padding: 1em;
+
+  width: 100%;
 }
 
 .mainInfo {
-  flex: 0 1 45%;
-  align-items: center;
+  
 }
 
 .aboutMe {
-  flex: 0 1 55%;
-  align-items: center;
 }
 
 .imgContainer {
-  width: 100%;
+  width: 200px;
 }
 
 .avatar {

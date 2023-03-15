@@ -19,6 +19,7 @@ type PropsType = {
 }
 
 const ProfileInfo: React.FC<PropsType> = ({ isOwner, userStatus, myStatus, updateMyStatus, savePhoto, updateProfile, profileDetails, isFetching }) => {
+  
   const onFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
       const fileData = e.target.files[0]

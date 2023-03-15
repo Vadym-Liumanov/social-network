@@ -7,9 +7,12 @@ import styles from "./Menu.module.css"
 
 import { menuList } from "../../helpers/menuList";
 
-const Menu = () => {
+type PropsType = {
+  onLinkClick?: (e: any) => void
+}
 
-  
+const Menu: React.FC<PropsType> = (props) => {
+
   // Ф-ция linkClassNameDefinition определяет стилизацию для пунктов меню.
   // Если {isActive} true, то этот элемент отображен.
   // <NavLink to="/" className={linkClassNameDefinition}>
@@ -32,6 +35,7 @@ const Menu = () => {
               key={item.name}
               to={item.url}
               className={linkClassNameDefinition}
+              onClick={props.onLinkClick}
             >
               {item.name}
             </NavLink>

@@ -9,7 +9,6 @@ import { initializeAppThunk } from './redux/app-reducer'
 
 import { getIsAuth } from './redux/auth-selectors'
 
-// import './App.css'
 import styles from './App.module.css'
 
 import Header from './components/Header/Header'
@@ -37,6 +36,7 @@ const App: React.FC = (props) => {
   красиво во всплывающем окне, затем через setTimeOut поле state.app.globalError обнулить - для повторения запроса
   ну или запросить у юзера нажать button for retry
   */
+
   const catchAllUnhandledErrors = (event: PromiseRejectionEvent) => {
     alert(event.reason)
     console.error(event)
@@ -71,24 +71,29 @@ const App: React.FC = (props) => {
 
               <div className={styles.mainRow}>
 
-                {isAuth &&
-                  <div className={styles.aside}>
-                    <Aside />
-                  </div>
-                }
+                <div className={styles.mainRow__container}>
 
-                <div className={styles.main}>
-                  <Routes>
-                    <Route path='/' element={<Navigate replace to='/profile' />} />
-                    <Route path='/profile' element={<ProfilePage />} />
-                    <Route path='/profile/:userId' element={<ProfilePage />} />
-                    <Route path='/dialogs' element={<Dialogs />} />
-                    <Route path='/users' element={<Users />} />
-                    <Route path='/login' element={<LoginPage />} />
-                    <Route path='*' element={<div>404 NOT FOUND</div>} />
-                  </Routes>
+                  <div className={styles.mainRow__wrapper}>
+                    {isAuth &&
+                      <div className={styles.aside}>
+                        <Aside />
+                      </div>
+                    }
+                    <div className={styles.main}>
+                      <Routes>
+                        <Route path='/' element={<Navigate replace to='/profile' />} />
+                        <Route path='/profile' element={<ProfilePage />} />
+                        <Route path='/profile/:userId' element={<ProfilePage />} />
+                        <Route path='/dialogs' element={<Dialogs />} />
+                        <Route path='/users' element={<Users />} />
+                        <Route path='/login' element={<LoginPage />} />
+                        <Route path='*' element={<div>404 NOT FOUND</div>} />
+                      </Routes>
+                    </div>
+                  </div>
 
                 </div>
+
               </div>
 
               <div className={styles.footer}>

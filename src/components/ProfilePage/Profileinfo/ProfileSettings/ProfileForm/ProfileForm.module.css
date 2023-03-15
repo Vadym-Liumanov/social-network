@@ -3,21 +3,26 @@
 }
 
 .mainRow {
-  display: grid;
-  grid-auto-flow: column;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
 }
 
 .about,
 .contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border: var(--main-border);
-  padding: 1em 1em 1em 2em;
+  border-radius: 6px;
+  padding: 1em 0.5em;
+  margin: 0 0.5em;
 }
 
 .about__title,
 .contacts__title {
   font-size: 1.1em;
   font-weight: 500;
-  padding-left: 30%;
   margin-bottom: 1em;
 }
 
@@ -36,5 +41,5 @@
 
 .profileForm__button {
   margin-top: 1.6em;
+  margin-bottom: 1.6em;
 }
-

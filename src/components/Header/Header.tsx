@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -8,12 +9,26 @@ import styles from './Header.module.css'
 
 import { logoutThunk } from '../../redux/auth-reducer'
 import { getAuthData, getIsAuth } from '../../redux/auth-selectors'
+import Menu from '../Menu/Menu'
 
 const Header: React.FC = () => {
   const dispatch = useDispatch()
   const authData = useSelector(getAuthData)
   const isAuth = useSelector(getIsAuth)
   const logout = () => dispatch(logoutThunk())
+
+  const [burgerOn, setBurgerOn] = useState(false)
+
+  const onBurgerClick = () => {
+    setBurgerOn((prevState) => prevState ? false : true)
+    document.body.classList.toggle('_scrolling-lock')
+  }
+
+  const onLinkClick = (event: Event) => {
+    // event.preventDefault()
+    setBurgerOn(false)
+    document.body.classList.remove('_scrolling-lock')
+  }
 
   return (
 
@@ -40,9 +55,23 @@ const Header: React.FC = () => {
 
             {/* Burger */}
 
-            <div className={cn(styles.header__menu, styles.burger)}>
-              <span></span>
-            </div>
+            <button onClick={onBurgerClick}>
+              <div className={cn(styles.header__menu, styles.burger, {
+                [styles._active]: burgerOn
+              })}>
+                <span></span>
+              </div>
+            </button>
+
+            {
+              burgerOn && ReactDOM.createPortal(
+                <div className={styles.burgerMenu}>
+                  <div className={styles.menuWrapper}>
+                    <Menu onLinkClick={onLinkClick} />
+                  </div>
+                </div>
+                , document.getElementById('root') as Element)
+            }
 
           </div>
         </div>

@@ -1,19 +1,20 @@
 /* Header */
 
 .header {
+  position: fixed;
+
+  width: 100%;
+  
   background-color: var(--dark-bg);
   color: var(--header-text-color);
   letter-spacing: normal;
+
+  z-index: 20;
 }
 
 .container {
-  margin: 0 50px;
-}
-
-@media (max-width: 767px) {
-  .container {
-    margin: 0 20px;
-  }
+  margin: 0 var(--container-margin-x);
+  padding: 0 2em;
 }
 
 .header__row {
@@ -133,4 +134,23 @@ App не будет доступен */
     height: 18px;
     cursor: pointer;
   }
+}
+
+.burgerMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: start;
+}
+
+.menuWrapper {
+  margin-top: 76px;
+  margin-left: 6px;
+  width: 80%;
+  display: flex;
+  justify-content: start;
 }

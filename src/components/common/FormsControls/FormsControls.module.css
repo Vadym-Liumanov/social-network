@@ -1,4 +1,39 @@
-.loginInput__body,
+.loginInput__body {
+  display: grid;
+  grid-template-columns: 80px 200px;
+  grid-template-rows: 2em minmax(1em, auto);
+  justify-items: left;
+  align-items: center;
+}
+
+.loginInput__label {
+  grid-column: 1;
+  grid-row: 1;
+
+  justify-self: end;
+  margin-right: 8px;
+}
+
+.loginInput__input {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.loginInput__error {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+.loginCheckbox__body {
+  display: grid;
+  grid-template-columns: 80px 200px;
+  grid-template-rows: 2em 1em;
+
+  justify-items: left;
+  align-items: center;
+}
+
+
 .profileInput__body {
   display: grid;
   grid-template-rows: 2em minmax(1em, auto);
@@ -10,21 +45,18 @@
 .profileTextarea__body {
   display: grid;
   grid-template-rows: auto minmax(1em, auto);
-  grid-template-columns: 120px 200px;
+  grid-template-columns: 80px 200px;
 
   justify-items: left;
   align-items: baseline;
 }
 
-.loginInput__body {
-  grid-template-columns: 100px 200px 100px;
-}
 
 .profileInput__body {
-  grid-template-columns: 120px 200px;
+  grid-template-columns: 80px 200px;
 }
 
-.loginInput__label,
+
 .profileInput__label {
   grid-column: 1 / 2;
   grid-row: 1;
@@ -32,6 +64,8 @@
   justify-self: end;
   margin-right: 8px;
 }
+
+
 
 /* .label{} */
 
@@ -46,11 +80,12 @@
   margin-right: 2px;
 }
 
-.loginInput__input,
 .profileInput__input {
   grid-column: 2 / 3;
   grid-row: 1;
 }
+
+
 
 .input {
   border: var(--main-border);
@@ -85,7 +120,7 @@
   border: 1px solid var(--blue);
 }
 
-.loginInput__error,
+
 .profileInput__error {
   grid-row: 2;
   grid-column: 2 / 3;
@@ -98,7 +133,10 @@
   padding: 4px 10px;
 }
 
-.loginCheckbox__body,
+
+
+
+
 .profileCheckbox__body {
   display: grid;
   grid-template-rows: 2em 1em;
@@ -107,9 +145,6 @@
   align-items: center;
 }
 
-.loginCheckbox__body {
-  grid-template-columns: 100px 200px 100px;
-}
 
 .profileCheckbox__body {
   grid-template-columns: 120px 200px;

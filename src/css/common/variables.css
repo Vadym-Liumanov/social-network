@@ -11,13 +11,19 @@
 
   /* Background-colors */
   --dark-bg: var(--black);
-  --main-bg: #f0f2f5;
+  /* --main-bg: #f0f2f5; */
+  --main-bg: grey;
   --page-bg: var(--white);
 
   /* Breakpoints */
   --mini: 767px;
 
   /* Borders */
-  --main-border: 1px solid #f0f0f0;
+  /* --main-border: 1px solid #f0f0f0; */
+  --main-border: 1px solid black;
 
+  /* Container margin x size
+  .container { margin: 0 60px } */
+  --container-margin-x: 0px;
 }
+

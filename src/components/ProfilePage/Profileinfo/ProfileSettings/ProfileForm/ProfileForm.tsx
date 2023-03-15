@@ -146,7 +146,6 @@ const ProfileForm: React.FC<InjectedFormProps<ProfileFormValuesType,
 
           </div>
 
-
           <div className={styles.bottomRow}>
 
             {props.error &&
