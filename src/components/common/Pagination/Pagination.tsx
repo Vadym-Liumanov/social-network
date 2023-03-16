@@ -25,8 +25,9 @@ const Pagination: React.FC<PropsType> = ({ totalCount, pageSize = 5, currentPage
 
   return (
     <div>
-      <div>totalCount: {totalCount}</div>
-      <div>currentPage: {currentPage}</div>
+      {/* <div>totalCount: {totalCount}</div>
+      <div>currentPage: {currentPage}</div> */}
+      
       <div>
 
         {(portionNumber > 1) && <button onClick={() => { setPortionNumber(portionNumber - 1) }}>PREV</button>}
