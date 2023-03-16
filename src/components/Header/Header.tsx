@@ -9,13 +9,16 @@ import styles from './Header.module.css'
 
 import { logoutThunk } from '../../redux/auth-reducer'
 import { getAuthData, getIsAuth } from '../../redux/auth-selectors'
+import { getProfileInfo } from '../../redux/profile-selectors'
 import Menu from '../Menu/Menu'
+import defaultUserImage from './../../assets/images/defaultUserImage.jpg'
 
 const Header: React.FC = () => {
   const dispatch = useDispatch()
   const authData = useSelector(getAuthData)
   const isAuth = useSelector(getIsAuth)
   const logout = () => dispatch(logoutThunk())
+  const profileInfo = useSelector(getProfileInfo)
 
   const [burgerOn, setBurgerOn] = useState(false)
 
@@ -40,40 +43,47 @@ const Header: React.FC = () => {
             <strong>IT</strong> Social
           </Link>
 
-          <div className={styles.header__block}>
-
-            {isAuth &&
-
+          {isAuth &&
+            <div className={styles.header__block}>
               <div className={styles.header__authBlock}>
                 <div>
                   <button onClick={logout}>Logout</button>
                 </div>
                 <div className={styles.header__avatar}>
-                </div>
-              </div>
-            }
-
-            {/* Burger */}
-
-            <button onClick={onBurgerClick}>
-              <div className={cn(styles.header__menu, styles.burger, {
-                [styles._active]: burgerOn
-              })}>
-                <span></span>
-              </div>
-            </button>
-
-            {
-              burgerOn && ReactDOM.createPortal(
-                <div className={styles.burgerMenu}>
-                  <div className={styles.menuWrapper}>
-                    <Menu onLinkClick={onLinkClick} />
+                  <img
+                    src={profileInfo && profileInfo.photos.large ? profileInfo.photos.large : defaultUserImage}
+                    alt="userAvatar"
+                    className={styles.avatar}
+                  />
+                  <div className={styles.avatarToolpTip}>
+                    <p>{`Hello, ${authData.login}.`}</p>
+                    <p>{`Your id: ${authData.id}`}</p>
                   </div>
                 </div>
-                , document.getElementById('root') as Element)
-            }
+              </div>
+              {/* Burger */}
 
-          </div>
+              <button onClick={onBurgerClick}>
+                <div className={cn(styles.header__menu, styles.burger, {
+                  [styles._active]: burgerOn
+                })}>
+                  <span></span>
+                </div>
+              </button>
+            </div>
+          }
+
+
+          {
+            burgerOn && ReactDOM.createPortal(
+              <div className={styles.burgerMenu}>
+                <div className={styles.menuWrapper}>
+                  <Menu onLinkClick={onLinkClick} />
+                </div>
+              </div>
+              , document.getElementById('root') as Element)
+          }
+
         </div>
       </div>
     </header>
