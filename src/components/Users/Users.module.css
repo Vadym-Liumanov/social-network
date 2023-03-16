@@ -2,6 +2,10 @@
   padding: 0.5em;
 }
 
+.form {
+  /* background-color: aquamarine; */
+}
+
 .usersList {
   display: grid;
   row-gap: 0.5em;

@@ -2,6 +2,8 @@ import React from "react"
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { UsersFilterType } from '../../../redux/users-reducer'
 
+import styles from './UsersSearchForm.module.css'
+
 // Todo: add ResetFilter Button
 
 type PropsType = {
@@ -35,7 +37,7 @@ const UsersSearchForm: React.FC<PropsType> = ({ usersFilter, onChangeUsersFilter
   }
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <Formik
         enableReinitialize
         initialValues={initialFormValues}
@@ -43,15 +45,15 @@ const UsersSearchForm: React.FC<PropsType> = ({ usersFilter, onChangeUsersFilter
         onSubmit={onFormSubmit}
       >
         {({ isSubmitting }) => (
-          <Form>
-            <Field type="text" name="term" />
-            <ErrorMessage name="term" component="div" />
-            <Field as="select" name="friend">
-              <option value="null">All users</option>
-              <option value="true">Only followed users</option>
-              <option value="false">Only unFollowed users</option>
+          <Form className={styles.form}>
+            <Field type="text" name="term" className={styles.input} />
+            <ErrorMessage name="term" component="div" className={styles.error}/>
+            <Field as="select" name="friend" className={styles.select} >
+              <option value="null" className={styles.option}>All users</option>
+              <option value="true" className={styles.option}>Only Followed</option>
+              <option value="false" className={styles.option}>Only UnFollowed</option>
             </Field>
-            <button type="submit" disabled={isSubmitting}>
+            <button type="submit" disabled={isSubmitting} className={styles.btn}>
               Find
             </button>
           </Form>

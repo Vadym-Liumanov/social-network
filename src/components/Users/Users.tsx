@@ -99,17 +99,22 @@ const Users: React.FC = () => {
         ? <Preloader />
         :
         <div className={styles.wrapper}>
-          <div>
+
+          <div className={styles.form}>
             <UsersSearchForm
               usersFilter={usersFilter}
               onChangeUsersFilter={onChangeUsersFilter}
             />
           </div>
-          <Pagination totalCount={totalCount}
-            pageSize={usersOnPageCount}
-            currentPage={currentPage}
-            onPageNumberClick={onPageNumberClick}
-          />
+
+          <div className={styles.paginator}>
+            <Pagination totalCount={totalCount}
+              pageSize={usersOnPageCount}
+              currentPage={currentPage}
+              onPageNumberClick={onPageNumberClick}
+            />
+          </div>
+
           <div className={styles.usersList}>
             {usersListItems}
           </div>
