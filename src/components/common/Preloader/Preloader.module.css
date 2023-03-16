@@ -1,4 +1,4 @@
-.initial-app-preloader {
+.appPreloader {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,7 +8,7 @@
   height: 100%;
 }
 
-.initial-app-preloader img {
+.appPreloader img {
   width: 100px;
   height: 100px;
 }
