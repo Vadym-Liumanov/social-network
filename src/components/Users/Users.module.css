@@ -1,1 +1,9 @@
+.wrapper {
+  padding: 0.5em;
+}
 
+.usersList {
+  display: grid;
+  row-gap: 0.5em;
+  justify-content: center;
+}

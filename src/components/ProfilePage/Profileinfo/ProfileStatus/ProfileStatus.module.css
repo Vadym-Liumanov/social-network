@@ -1,24 +1,23 @@
-.input {
+.textarea {
+  overflow: auto;
+  resize: none;
+  outline: none;
+
+  height: 64px;
+  width: 200px;
+  padding: 4px 1em;
+
+  font-size: 1em;
+  font-weight: 500;
+
   border: var(--main-border);
   border-radius: 6px;
-  height: 2em;
-  width: 100%;
-  padding: 4px 1em;
-  font-size: 1.1em;
-  font-weight: 500;
 }
 
-.input:hover,
-.input:focus {
+.textarea:hover {
+  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
+}
+
+.textarea:focus {
   border: 1px solid var(--blue);
 }
-
-.input_passive {
-}
-
-.input_passive:hover {
-}
-
-.input_active {
-}
-

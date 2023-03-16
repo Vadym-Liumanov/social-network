@@ -1,8 +1,9 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import cn from 'classnames'
 
 import { usersAPI } from "../../../api/usersAPI"
-import userStyles from './User.module.css'
+import styles from './User.module.css'
 import userImage from '../../../assets/images/defaultUserImage.jpg'
 import { UserInfoType } from '../../../types/types'
 
@@ -42,31 +43,38 @@ const User: React.FC<PropsType> = (props) => {
   }
 
   return (
-    <div className={userStyles.userCard}>
-      <div>
-        <div>
-          <NavLink to={userProfileUrl}>
-            <img src={props.userInfo.photos.small ? props.userInfo.photos.small : userImage} alt="avatar" />
-          </NavLink>
+    <div className={styles.userCard}>
+
+      <div className={styles.userAvatar}>
+        <NavLink to={userProfileUrl}>
+          <img src={props.userInfo.photos.small ? props.userInfo.photos.small : userImage} alt="avatar" />
+        </NavLink>
+      </div>
+
+      <div className={styles.about}>
+        <div className={cn(styles.about__item, styles.name)}>
+          {props.userInfo.name}
         </div>
-        <div>
-          <button onClick={onFollowButtonClick} disabled={props.isFollowingInProgress.indexOf(userId) >= 0} >
-            {followButtonText}
-          </button>
+        <div className={cn(styles.about__item, styles.status)}>
+          <span className={styles.status__title}>Status:</span>
+          <div className={styles.status__text}>
+            {props.userInfo.status ? props.userInfo.status : '------'}
+          </div>
         </div>
       </div>
 
-      <div>
-        <div>
-          {props.userInfo.name}
-        </div>
-        <div>
-          {props.userInfo.status}
-        </div>
+      <div className={styles.btnBlock}>
+        <button
+          className={styles.followBtn}
+          onClick={onFollowButtonClick}
+          disabled={props.isFollowingInProgress.indexOf(userId) >= 0}
+        >
+          {followButtonText}
+        </button>
       </div>
-      <div>
-        {'props.userInfo.location.city'}, {'props.userInfo.location.country'}
-      </div>
+
+
+
     </div>
   )
 }

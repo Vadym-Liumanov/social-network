@@ -20,7 +20,7 @@ const ProfileStatusWithHooks: React.FC<PropsType> = ({ status, updateMyStatus })
   const [editMode, setEditMode] = useState(false)
   const [statusText, setStatusText] = useState(status)
 
-  const onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeStatus = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setStatusText(e.target.value)
   }
 
@@ -36,10 +36,10 @@ const ProfileStatusWithHooks: React.FC<PropsType> = ({ status, updateMyStatus })
     <div className={styles.status}>
       {!editMode &&
         <div>
-          <input
+          <textarea
             onDoubleClick={() => setEditMode(true)}
             value={statusText || 'No status'}
-            className={cn(styles.input, styles.input_passive)}
+            className={cn(styles.textarea)}
             readOnly
           />
         </div>
@@ -47,12 +47,12 @@ const ProfileStatusWithHooks: React.FC<PropsType> = ({ status, updateMyStatus })
 
       {editMode &&
         <div>
-          <input
+          <textarea
             autoFocus={true}
             onBlur={updateStatus}
             value={statusText}
             onChange={onChangeStatus}
-            className={styles.input}
+            className={styles.textarea}
           />
         </div>
       }

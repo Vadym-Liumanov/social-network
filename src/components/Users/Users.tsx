@@ -11,7 +11,7 @@ import { actionCreators, requestUsersThunk, UsersFilterType } from '../../redux/
 
 import Preloader from '../common/Preloader/Preloader'
 import User from './User/User'
-import usersStyles from './Users.module.css'
+import styles from './Users.module.css'
 import Pagination from '../common/Pagination/Pagination'
 import UsersSearchForm from './UsersSearchForm/UsersSearchForm'
 
@@ -94,11 +94,11 @@ const Users: React.FC = () => {
   }, [usersFilter, currentPage])
 
   return (
-    <div>
+    <>
       {isFetching
         ? <Preloader />
         :
-        <div>
+        <div className={styles.wrapper}>
           <div>
             <UsersSearchForm
               usersFilter={usersFilter}
@@ -110,11 +110,11 @@ const Users: React.FC = () => {
             currentPage={currentPage}
             onPageNumberClick={onPageNumberClick}
           />
-          <div className={usersStyles.content}>
+          <div className={styles.usersList}>
             {usersListItems}
           </div>
         </div>}
-    </div>
+    </>
   )
 }
 

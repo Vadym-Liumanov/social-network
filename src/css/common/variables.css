@@ -11,8 +11,8 @@
 
   /* Background-colors */
   --dark-bg: var(--black);
-  /* --main-bg: #f0f2f5; */
-  --main-bg: grey;
+  --main-bg: #f0f2f5;
+  /* --main-bg: grey; */
   --page-bg: var(--white);
 
   /* Breakpoints */

@@ -51,7 +51,7 @@ const Header: React.FC = () => {
                 </div>
                 <div className={styles.header__avatar}>
                   <img
-                    src={profileInfo && profileInfo.photos.large ? profileInfo.photos.large : defaultUserImage}
+                    src={profileInfo && profileInfo.photos.small ? profileInfo.photos.small : defaultUserImage}
                     alt="userAvatar"
                     className={styles.avatar}
                   />
