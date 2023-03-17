@@ -9,7 +9,9 @@
   padding: 1em 1em;
 }
 
-.profilePage__item {
-  /* border: var(--main-border);
-  border-radius: 5px; */
+@media (min-width: 992px) {
+  .profilePage {
+    align-items: stretch;
+  }
+
 }

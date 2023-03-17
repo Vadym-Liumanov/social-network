@@ -2,6 +2,12 @@
   margin: 0;
 }
 
+@media (min-width: 768px) {
+  .wrapper {
+    padding: 60px;
+  }
+}
+
 .loginPage {
   display: flex;
   flex-direction: column;

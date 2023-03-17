@@ -27,3 +27,21 @@
   --container-margin-x: 0px;
 }
 
+@media (min-width: 468px) {
+  :root {
+    --container-margin-x: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --container-margin-x: 40px;
+  }
+}
+
+@media (min-width: 992px) {
+  :root {
+    --container-margin-x: 60px;
+  }
+}
+

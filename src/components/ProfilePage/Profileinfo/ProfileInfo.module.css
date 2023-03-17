@@ -6,6 +6,15 @@
   column-gap: 1em;
 }
 
+@media (min-width: 992px) {
+  .profileInfoWrapper {
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    column-gap: 2em;
+  }
+}
+
 .profileInfo__item {
   display: flex;
   flex-direction: column;
@@ -18,12 +27,18 @@
   width: 100%;
 }
 
-.mainInfo {
-  
+@media (min-width: 992px) {
+  .mainInfo {
+    max-width: 300px;
+  }
+  .aboutMe {
+    max-width: 400px;
+  }
 }
 
-.aboutMe {
-}
+.mainInfo {}
+
+.aboutMe {}
 
 .imgContainer {
   width: 200px;
@@ -38,7 +53,7 @@
   padding: 0.2em;
 }
 
-.fullName h2{
+.fullName h2 {
   font-size: 1.2em;
   line-height: 1.7;
   font-weight: 700;
@@ -54,4 +69,3 @@
 /* .status__text {
 
 } */
-

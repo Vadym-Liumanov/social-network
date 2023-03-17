@@ -116,18 +116,23 @@ const ProfileSettings: React.FC<PropsType> = ({ profileDetails, isOwner, updateP
       {editMode && ReactDOM.createPortal(
         (
           <div className={styles.editProfileDetails}>
-            <div className={styles.editProfileDetails__header}>
-              <button onClick={onDisableEditMode}>
-                <div className={styles.cross}></div>
-              </button>
-            </div>
 
-            <ProfileReduxForm
-              onSubmit={onSubmitProfileReduxForm}
-              initialValues={profileDetails}
-              profileDetails={profileDetails}
-              isFetching={isFetching}
-            />
+            <div className={styles.editProfileDetails__body}>
+
+              <div className={styles.editProfileDetails__header}>
+                <button onClick={onDisableEditMode}>
+                  <div className={styles.cross}></div>
+                </button>
+              </div>
+
+              <ProfileReduxForm
+                onSubmit={onSubmitProfileReduxForm}
+                initialValues={profileDetails}
+                profileDetails={profileDetails}
+                isFetching={isFetching}
+              />
+
+            </div>
 
           </div>
         ),
