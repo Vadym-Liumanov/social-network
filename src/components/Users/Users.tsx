@@ -107,7 +107,7 @@ const Users: React.FC = () => {
             />
           </div>
 
-          <div className={styles.paginator}>
+          <div className={styles.pagination}>
             <Pagination totalCount={totalCount}
               pageSize={usersOnPageCount}
               currentPage={currentPage}
