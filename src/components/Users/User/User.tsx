@@ -6,6 +6,7 @@ import { usersAPI } from "../../../api/usersAPI"
 import styles from './User.module.css'
 import userImage from '../../../assets/images/defaultUserImage.jpg'
 import { UserInfoType } from '../../../types/types'
+import FollowButton from '../../common/Battons/FollowButton/FollowButton'
 
 type PropsType = {
   userInfo: UserInfoType
@@ -64,13 +65,12 @@ const User: React.FC<PropsType> = (props) => {
       </div>
 
       <div className={styles.btnBlock}>
-        <button
-          className={styles.followBtn}
-          onClick={onFollowButtonClick}
-          disabled={props.isFollowingInProgress.indexOf(userId) >= 0}
-        >
-          {followButtonText}
-        </button>
+        <FollowButton
+          onFollowButtonClick={onFollowButtonClick}
+          followButtonText={followButtonText}
+          isDisabled={props.isFollowingInProgress.indexOf(userId) >= 0}
+        />
+
       </div>
 
 

@@ -1,0 +1,28 @@
+/* Follow button */
+
+.followBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.1em;
+
+  background-color: #1677ff;
+  color: var(--white);
+  padding: 0.4em 1em;
+  border-radius: 5px;
+
+  width: 8em;
+  height: 2.4em;
+
+  transition: all 0.3s ease;
+}
+
+.followBtn:hover {
+  opacity: 0.9;
+}
+
+.followBtn:active {
+  position: relative;
+  top: 1px;
+}

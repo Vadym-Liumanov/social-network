@@ -24,7 +24,7 @@ const ProfileSettings: React.FC<PropsType> = ({ profileDetails, isOwner, updateP
     setEditMode(false)
   }
 
-  // todo remove then latter
+  // todo remove then later
   const onSubmitProfileReduxForm = (profileData: ProfileType) => {
     updateProfile(profileData)
       .then(() => { setEditMode(false) })

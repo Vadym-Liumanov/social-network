@@ -36,10 +36,13 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner, userStatus, myStatus, updat
             alt="userAvatar"
             className={styles.avatar}
           />
-          {/* Всплывающий блок с кнопкой изменения автара */}
-          <div className={styles.edidAvatarPopup}>
 
-          </div>
+          {/* Всплывающий блок с кнопкой изменения автара */}
+          {isOwner && (
+            <div className={styles.edidAvatarPopup}>
+            </div>
+          )}
+
         </div>
 
         {/* {isOwner && (

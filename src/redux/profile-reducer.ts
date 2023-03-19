@@ -103,7 +103,6 @@ export const setUserProfileThunk = (userId: number | null): ThunkType => {
   return (dispatch, getState) => {
     const myId = getState().auth.id
     const isOwner = (userId === myId)
-    debugger
     dispatch(actionCreators.setIsFetching(true))
     profileAPI.getUserProfile(userId).then((data) => {
       if (isOwner) {

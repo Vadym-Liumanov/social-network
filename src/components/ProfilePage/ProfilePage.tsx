@@ -58,7 +58,7 @@ const ProfilePage: React.FC = () => {
       }
 
       // eslint-disable-next-line
-    }, [isAuth]
+    }, [isAuth, userId]
   )
 
   return (
