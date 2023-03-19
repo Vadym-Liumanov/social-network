@@ -2,12 +2,46 @@
   display: grid;
   grid-template-columns: 1.2fr repeat(5, 1fr) 1.2fr;
   grid-template-rows: repeat(2, 24px);
-  grid-gap: 4px;
+  row-gap: 4px;
   column-gap: 4px;
-  border: 1px solid black;
+  border: var(--main-border);
   border-radius: 6px;
   width: 270px;
   padding: 4px;
+}
+
+@media (min-width: 992px) {
+  .paginationBody {
+    display: grid;
+    grid-template-columns: 1.2fr repeat(10, 1fr) 1.2fr;
+    grid-template-rows: 2.7em;
+    row-gap: unset;
+    width: 552px;
+  }
+
+  .prevBtn {
+    grid-row: 1;
+    grid-column: 1 / 2;
+    border-radius: 6px 2px 2px 6px;
+  }
+  
+  .nextBtn {
+    grid-row: 1;
+    grid-column: -2 / -1;
+    border-radius: 2px 6px 6px 2px;
+  }
+  
+}
+
+.paginationBody span {
+  display: block;
+  cursor: pointer;
+  width: 100%;
+  /* height: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
 }
 
 .prevBtn {
@@ -47,17 +81,6 @@
   top: 1px;
 }
 
-.paginationBody span {
-  display: block;
-  cursor: pointer;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-}
-
 .activePage {
   border: 1px solid var(--blue);
   font-weight: 700;
@@ -67,13 +90,3 @@
   background-color: var(--main-bg);
   font-weight: 700;
 }
-
-
-.pages,
-.activePage {}
-
-
-
-.activePage {}
-
-.pages:hover {}

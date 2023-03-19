@@ -19,7 +19,7 @@ type PropsType = {
 }
 
 const ProfileInfo: React.FC<PropsType> = ({ isOwner, userStatus, myStatus, updateMyStatus, savePhoto, updateProfile, profileDetails, isFetching }) => {
-  
+
   const onFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
       const fileData = e.target.files[0]
@@ -32,8 +32,16 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner, userStatus, myStatus, updat
 
       <div className={cn(styles.profileInfo__item, styles.mainInfo)}>
         <div className={styles.imgContainer}>
-          <img src={profileDetails.photos.large ? profileDetails.photos.large : defaultUserImage} alt="userAvatar" className={styles.avatar} />
+          <img src={profileDetails.photos.large ? profileDetails.photos.large : defaultUserImage}
+            alt="userAvatar"
+            className={styles.avatar}
+          />
+          {/* Всплывающий блок с кнопкой изменения автара */}
+          <div className={styles.edidAvatarPopup}>
+
+          </div>
         </div>
+
         {/* {isOwner && (
               <div className={styles.inputFileContainer}>
                 <input type="file" onChange={onFileSelect} className={styles.inputFile} accept="image/*" />

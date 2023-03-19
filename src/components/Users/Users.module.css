@@ -7,10 +7,23 @@
 
 .pagination {
   margin-bottom: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .usersList {
   display: grid;
-  row-gap: 0.5em;
-  justify-content: center;
+  grid-gap: 0.5em;
+}
+
+@media (min-width: 992px) {
+  .usersList {
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 1em;
+  }
+
+  .form {
+    margin-bottom: 1em;
+  }
 }

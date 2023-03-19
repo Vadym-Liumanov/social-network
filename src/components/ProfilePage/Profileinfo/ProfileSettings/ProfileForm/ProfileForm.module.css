@@ -5,7 +5,16 @@
 .mainRow {
   display: flex;
   flex-direction: column;
+  align-items: center;
   row-gap: 1em;
+}
+
+@media (min-width: 768px) {
+  .mainRow {
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+  }
 }
 
 .about,
@@ -17,6 +26,7 @@
   border-radius: 6px;
   padding: 1em 0.5em;
   margin: 0 0.5em;
+  width: 310px;
 }
 
 .about__title,
