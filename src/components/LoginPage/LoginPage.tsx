@@ -6,7 +6,8 @@ import cn from 'classnames'
 import LoginReduxForm, { LoginFormValuesType } from './LoginReduxForm/LoginReduxForm'
 
 import { loginThunk } from '../../redux/auth-reducer'
-import { getCaptchaUrl, getIsAuth, getIsFetching } from '../../redux/auth-selectors'
+// import { getCaptchaUrl, getIsAuth, getIsFetching } from '../../redux/auth-selectors'
+import { getAuthData } from '../../redux/auth-selectors'
 
 import styles from './LoginPage.module.css'
 
@@ -16,9 +17,13 @@ const LoginPage: React.FC = () => {
   const login = (email: string, password: string, rememberMe: boolean, captcha: string | null) =>
     dispatch(loginThunk(email, password, rememberMe, captcha))
 
-  const isAuth = useSelector(getIsAuth)
-  const captchaUrl = useSelector(getCaptchaUrl)
-  const isFetching = useSelector(getIsFetching)
+  // const isAuth = useSelector(getIsAuth)
+  // const captchaUrl = useSelector(getCaptchaUrl)
+  // const isFetching = useSelector(getIsFetching)
+  const authData = useSelector(getAuthData)
+
+  const { isAuth, captchaUrl, isFetching, id } = authData
+
 
   /* onSubmit передается в пропсах в child component и определяет,
   что делать с собранными формой данными formData.
@@ -32,7 +37,7 @@ const LoginPage: React.FC = () => {
   }
 
   if (isAuth) {
-    return <Navigate replace to='/profile' />
+    return <Navigate replace to={`/profile/${id}`} />
   }
 
   return (

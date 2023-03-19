@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getIsAppInitialized } from './redux/app-selectors'
 import { initializeAppThunk } from './redux/app-reducer'
 
-import { getIsAuth } from './redux/auth-selectors'
+import { getAuthData } from './redux/auth-selectors'
 
 import styles from './App.module.css'
 
@@ -27,7 +27,8 @@ const App: React.FC = (props) => {
   const dispatch = useDispatch()
   const isAppInitialized = useSelector(getIsAppInitialized)
 
-  const isAuth = useSelector(getIsAuth)
+  const authData = useSelector(getAuthData)
+  const { isAuth, id } = authData
 
   /*
   метод для обработки rejected промисов (необработанных)
@@ -81,8 +82,8 @@ const App: React.FC = (props) => {
                     }
                     <div className={styles.main}>
                       <Routes>
-                        <Route path='/' element={<Navigate replace to='/profile' />} />
-                        <Route path='/profile' element={<ProfilePage />} />
+                        <Route path='/' element={<Navigate replace to={`/profile/${id}`} />} />
+                        <Route path='/profile' element={<Navigate replace to={`/profile/${id}`} />} />
                         <Route path='/profile/:userId' element={<ProfilePage />} />
                         <Route path='/dialogs' element={<Dialogs />} />
                         <Route path='/users' element={<Users />} />

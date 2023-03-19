@@ -13,13 +13,14 @@ import ProfileInfo from './Profileinfo/ProfileInfo'
 import MyPosts from './MyPosts/MyPosts'
 import Preloader from '../common/Preloader/Preloader'
 import { ProfileType } from '../../types/types'
-import { getMyStatus, getProfileInfo, getUserStatus, getIsFetching } from '../../redux/profile-selectors'
+import { getMyStatus, getUserProfileInfo, getMyProfileInfo, getUserStatus, getIsFetching } from '../../redux/profile-selectors'
 import { getAuthId, getIsAuth } from '../../redux/auth-selectors'
 
 const ProfilePage: React.FC = () => {
   const dispatch = useDispatch()
 
-  const profileInfo = useSelector(getProfileInfo)
+  const userProfileInfo = useSelector(getUserProfileInfo)
+  const myProfileInfo = useSelector(getMyProfileInfo)
   const userStatus = useSelector(getUserStatus)
   const myStatus = useSelector(getMyStatus)
   const myId = useSelector(getAuthId)
@@ -34,11 +35,10 @@ const ProfilePage: React.FC = () => {
   const updateProfile = (profileData: ProfileType) => dispatch(updateProfileThunk(profileData))
 
   const { userId } = useParams<{ userId?: string }>()
+  const numberedUserId = Number(userId)
 
-  // const isOwner = (!userId && myId) || (Number(userId) === myId)
-  let isOwner = false
-  if (!userId && myId) { isOwner = true }
-  if (Number(userId) === myId) { isOwner = true }
+  const isOwner: boolean = (myId === numberedUserId)
+  const profileInfo = isOwner ? myProfileInfo : userProfileInfo
 
   // componentDidMount() {
   //   const paramsUserId = this.props.match.params.userId
@@ -51,10 +51,9 @@ const ProfilePage: React.FC = () => {
 
   useEffect(
     () => {
-      if (isAuth) {
-        const actualUserId = (userId) ? userId : myId
-        setUserProfile(actualUserId as number)
-        setUserStatus(actualUserId as number)
+      if (isAuth && numberedUserId) {
+        setUserProfile(numberedUserId)
+        setUserStatus(numberedUserId)
         setMyStatus(myId as number)
       }
 

@@ -5,6 +5,7 @@ import { InferActionsTypes, BaseThunkType } from './store-redux'
 
 const ADD_POST = 'social_network/profile/ADD-POST'
 const SET_USER_PROFILE = 'social_network/profile/SET_USER_PROFILE'
+const SET_MY_PROFILE = 'social_network/profile/SET_MY_PROFILE'
 const SET_USER_STATUS = 'social_network/profile/SET_USER_STATUS'
 const SET_MY_STATUS = 'social_network/profile/SET_MY_STATUS'
 const UPDATE_MY_STATUS = 'social_network/profile/UPDATE_MY_STATUS'
@@ -13,22 +14,9 @@ const SET_IS_FETCHING = 'social_network/profile/SET_IS_FETCHING'
 
 type ThunkType = BaseThunkType<ActionTypes | FormAction>
 
-export const updateProfileThunk = (profileData: ProfileType): ThunkType => {
-  return (dispatch, getState) => {
-    const userId = getState().auth.id
-    dispatch(actionCreators.setIsFetching(true))
-    return profileAPI.updateProfile(profileData).then((data) => {
-      if (data.resultCode === 0) {
-        dispatch(setUserProfileThunk(userId))
-      }
-      else {
-        dispatch(actionCreators.setIsFetching(false))
-        dispatch(stopSubmit('profile', { _error: data.messages }))
-        return Promise.reject(data.messages)
-      }
-    })
-  }
-}
+
+
+// Action creators
 
 type ActionTypes = InferActionsTypes<typeof actionCreators>
 
@@ -63,6 +51,12 @@ export const actionCreators = {
       profile
     } as const
   },
+  setMyProfile: (profile: Nullable<ProfileType>) => {
+    return {
+      type: SET_MY_PROFILE,
+      profile
+    } as const
+  },
   addPost: (postText: string) => {
     return {
       type: ADD_POST,
@@ -74,6 +68,8 @@ export const actionCreators = {
   }
 
 }
+
+// Thunk creators
 
 export const savePhotoThunk = (file: File): ThunkType => {
   return (dispatch) => {
@@ -104,11 +100,40 @@ export const setUserStatusThunk = (userId: number): ThunkType => {
 }
 
 export const setUserProfileThunk = (userId: number | null): ThunkType => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const myId = getState().auth.id
+    const isOwner = (userId === myId)
+    debugger
     dispatch(actionCreators.setIsFetching(true))
     profileAPI.getUserProfile(userId).then((data) => {
-      dispatch(actionCreators.setUserProfile(data))
+      if (isOwner) {
+        dispatch(actionCreators.setMyProfile(data))
+      } else {
+        dispatch(actionCreators.setUserProfile(data))
+      }
       dispatch(actionCreators.setIsFetching(false))
+    })
+  }
+}
+
+// Санка апдейтит myProfile, но в стейте апдейтится userProfile !!!!!!!
+// НАДА: получаем из формы измененный профиль formData, отправляем через АПИ на сервер,
+// получаем ответ с сервера об успешной записи изменений, считываем через АПИ профайл-дату
+// и записываем в стейт
+
+export const updateProfileThunk = (profileData: ProfileType): ThunkType => {
+  return (dispatch, getState) => {
+    const userId = getState().auth.id
+    dispatch(actionCreators.setIsFetching(true))
+    return profileAPI.updateProfile(profileData).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(setUserProfileThunk(userId))
+      }
+      else {
+        dispatch(actionCreators.setIsFetching(false))
+        dispatch(stopSubmit('profile', { _error: data.messages }))
+        return Promise.reject(data.messages)
+      }
     })
   }
 }
@@ -120,6 +145,17 @@ export type ProfilePostType = {
 }
 
 // state = state.profile
+
+/*
+Описание ветки state.profile:
+  profilePosts - моковые значения постов юзера (или владельца). Их нет в АПИ
+  userProfile - объект данных о пользователе (владельце). Меняется при каждой смене id.
+    Todo: сделать ветку myProfile - чисто с данными владельца. Будет удобно из любого места достучаться к данным владельца,
+    не делая доп. запросов на сервер. Разделим профайлы юзеров и владельца.
+  userStatus - статус юзера.
+  myStatus - статус владельца. Просто так реализован АПИ.
+  isFetching - флаг загрузки данных с сервера.
+*/
 
 const initialState = {
   profilePosts: [
@@ -136,13 +172,14 @@ const initialState = {
   ] as Array<ProfilePostType>,
   userProfile: null as Nullable<ProfileType>,
   userStatus: null as Nullable<string>,
+  myProfile: null as Nullable<ProfileType>,
   myStatus: null as Nullable<string>,
   isFetching: false
 }
 
 type StateType = typeof initialState
 
-const profileReduser = (state = initialState, action: ActionTypes): any => {
+const profileReduser = (state: StateType = initialState, action: ActionTypes): any => {
   switch (action.type) {
 
     case UPDATE_MY_PHOTO:
@@ -178,6 +215,13 @@ const profileReduser = (state = initialState, action: ActionTypes): any => {
       return {
         ...state,
         userProfile: action.profile
+      }
+
+    case SET_MY_PROFILE:
+
+      return {
+        ...state,
+        myProfile: action.profile
       }
 
     case SET_USER_STATUS:

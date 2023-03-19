@@ -9,7 +9,7 @@ import styles from './Header.module.css'
 
 import { logoutThunk } from '../../redux/auth-reducer'
 import { getAuthData, getIsAuth } from '../../redux/auth-selectors'
-import { getProfileInfo } from '../../redux/profile-selectors'
+import { getMyProfileInfo } from '../../redux/profile-selectors'
 import Menu from '../Menu/Menu'
 import defaultUserImage from './../../assets/images/defaultUserImage.jpg'
 
@@ -18,7 +18,7 @@ const Header: React.FC = () => {
   const authData = useSelector(getAuthData)
   const isAuth = useSelector(getIsAuth)
   const logout = () => dispatch(logoutThunk())
-  const profileInfo = useSelector(getProfileInfo)
+  const myProfileInfo = useSelector(getMyProfileInfo)
 
   const [burgerOn, setBurgerOn] = useState(false)
 
@@ -51,7 +51,7 @@ const Header: React.FC = () => {
                 </div>
                 <div className={styles.header__avatar}>
                   <img
-                    src={profileInfo && profileInfo.photos.small ? profileInfo.photos.small : defaultUserImage}
+                    src={myProfileInfo && myProfileInfo.photos.small ? myProfileInfo.photos.small : defaultUserImage}
                     alt="userAvatar"
                     className={styles.avatar}
                   />
