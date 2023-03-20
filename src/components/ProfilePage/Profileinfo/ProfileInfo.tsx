@@ -9,6 +9,7 @@ import { ProfileType } from '../../../types/types'
 
 type PropsType = {
   isOwner: boolean
+  userId: number | null
   userStatus: string
   myStatus: string
   updateMyStatus: (myStatus: string) => void
@@ -18,7 +19,7 @@ type PropsType = {
   isFetching: boolean
 }
 
-const ProfileInfo: React.FC<PropsType> = ({ isOwner, userStatus, myStatus, updateMyStatus, savePhoto, updateProfile, profileDetails, isFetching }) => {
+const ProfileInfo: React.FC<PropsType> = ({ isOwner, userId, userStatus, myStatus, updateMyStatus, savePhoto, updateProfile, profileDetails, isFetching }) => {
 
   const onFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
@@ -69,6 +70,7 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner, userStatus, myStatus, updat
         <ProfileSettings
           profileDetails={profileDetails}
           isOwner={isOwner}
+          userId={userId}
           updateProfile={updateProfile}
           isFetching={isFetching}
         />

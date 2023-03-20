@@ -66,9 +66,7 @@ const User: React.FC<PropsType> = (props) => {
 
       <div className={styles.btnBlock}>
         <FollowButton
-          onFollowButtonClick={onFollowButtonClick}
-          followButtonText={followButtonText}
-          isDisabled={props.isFollowingInProgress.indexOf(userId) >= 0}
+          userId={userId}
         />
 
       </div>

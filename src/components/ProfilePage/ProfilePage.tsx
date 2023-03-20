@@ -72,6 +72,7 @@ const ProfilePage: React.FC = () => {
             {profileInfo
               ? <ProfileInfo
                 isOwner={isOwner}
+                userId={numberedUserId}
                 profileDetails={profileInfo}
                 userStatus={userStatus}
                 myStatus={myStatus}

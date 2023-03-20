@@ -6,15 +6,17 @@ import ProfileReduxForm from './ProfileForm/ProfileForm'
 import PrimaryButton from '../../../common/Battons/PrimaryButton/PrimaryButton'
 
 import styles from './ProfileSettings.module.css'
+import FollowButton from '../../../common/Battons/FollowButton/FollowButton'
 
 type PropsType = {
   profileDetails: ProfileType
   isOwner: boolean
+  userId: number | null
   updateProfile: (profileData: ProfileType) => Promise<any>
   isFetching: boolean
 }
 
-const ProfileSettings: React.FC<PropsType> = ({ profileDetails, isOwner, updateProfile, isFetching }) => {
+const ProfileSettings: React.FC<PropsType> = ({ profileDetails, isOwner, userId, updateProfile, isFetching }) => {
   const [editMode, setEditMode] = useState(false)
 
   const onEnableEditMode = () => {
@@ -106,6 +108,9 @@ const ProfileSettings: React.FC<PropsType> = ({ profileDetails, isOwner, updateP
             {isOwner && <PrimaryButton
               text='Edit'
               onClick={onEnableEditMode}
+            />}
+            {!isOwner && <FollowButton
+              userId={userId}
             />}
           </div>
 
