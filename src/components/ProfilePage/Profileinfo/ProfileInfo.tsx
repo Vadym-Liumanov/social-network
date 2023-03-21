@@ -7,6 +7,9 @@ import ProfileStatus from './ProfileStatus/ProfileStatusWithHooks'
 import ProfileSettings from './ProfileSettings/ProfileSettings'
 import { ProfileType } from '../../../types/types'
 
+import addPhotoIcon from './../../../assets/icons/add_photo.svg'
+import removePhotoIcon from './../../../assets/icons/trash.svg'
+
 type PropsType = {
   isOwner: boolean
   userId: number | null
@@ -40,7 +43,22 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner, userId, userStatus, myStatu
 
           {/* Всплывающий блок с кнопкой изменения автара */}
           {isOwner && (
-            <div className={styles.edidAvatarPopup}>
+            <div className={styles.edidAvatarBlock}>
+              <div className={styles.inputFileContainer}>
+                <label htmlFor="avatarFileInput">
+                  <img src={addPhotoIcon} alt="" title='Select' className={styles.photoIcon} />
+                </label>
+                <input
+                  type="file"
+                  onChange={onFileSelect}
+                  id="avatarFileInput"
+                  className={styles.fileInput}
+                  accept="image/*"
+                />
+              </div>
+              <button>
+                <img src={removePhotoIcon} alt="" title='Delete' className={styles.photoIcon} />
+              </button>
             </div>
           )}
 
