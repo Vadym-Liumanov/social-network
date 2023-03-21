@@ -71,13 +71,7 @@ export const actionCreators = {
 
 // Thunk creators
 
-export const savePhotoThunk = (file: File): ThunkType => {
-  return (dispatch) => {
-    profileAPI.savePhoto(file).then((data) => {
-      if (data.resultCode === 0) dispatch(actionCreators.updateMyPhotoSuccess(data.data.photos))
-    })
-  }
-}
+
 
 export const updateMyStatusThunk = (myStatus: string): ThunkType => {
   return (dispatch) => {
@@ -120,6 +114,7 @@ export const setUserProfileThunk = (userId: number | null): ThunkType => {
 // получаем ответ с сервера об успешной записи изменений, считываем через АПИ профайл-дату
 // и записываем в стейт
 
+
 export const updateProfileThunk = (profileData: ProfileType): ThunkType => {
   return (dispatch, getState) => {
     const userId = getState().auth.id
@@ -135,6 +130,21 @@ export const updateProfileThunk = (profileData: ProfileType): ThunkType => {
       }
     })
   }
+}
+
+export const savePhotoThunk = (file: File): ThunkType => {
+  return (dispatch) => {
+    profileAPI.savePhoto(file).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(actionCreators.updateMyPhotoSuccess(data.data.photos))
+      }
+    })
+  }
+}
+
+export const updatePhotoThunk = () => {
+
+
 }
 
 export type ProfilePostType = {
@@ -184,7 +194,7 @@ const profileReduser = (state: StateType = initialState, action: ActionTypes): a
     case UPDATE_MY_PHOTO:
       return {
         ...state,
-        userProfile: { ...state.userProfile, photos: action.photos }
+        myProfile: { ...state.myProfile, photos: {...action.photos} }
       }
 
     case ADD_POST:

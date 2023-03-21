@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import cn from 'classnames'
 
 import styles from './ProfileInfo.module.css'
@@ -23,7 +23,6 @@ type PropsType = {
 }
 
 const ProfileInfo: React.FC<PropsType> = ({ isOwner, userId, userStatus, myStatus, updateMyStatus, savePhoto, updateProfile, profileDetails, isFetching }) => {
-
   const onFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
       const fileData = e.target.files[0]
@@ -56,19 +55,14 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner, userId, userStatus, myStatu
                   accept="image/*"
                 />
               </div>
-              <button>
+              {/* Эндпоинт удаления аватара не предусмотрен АПИ */}
+              {/* <button>
                 <img src={removePhotoIcon} alt="" title='Delete' className={styles.photoIcon} />
-              </button>
+              </button> */}
             </div>
           )}
 
         </div>
-
-        {/* {isOwner && (
-              <div className={styles.inputFileContainer}>
-                <input type="file" onChange={onFileSelect} className={styles.inputFile} accept="image/*" />
-              </div>
-            )} */}
 
         <div className={styles.fullName}>
           <h2>{profileDetails.fullName}</h2>
@@ -98,4 +92,4 @@ const ProfileInfo: React.FC<PropsType> = ({ isOwner, userId, userStatus, myStatu
   )
 }
 
-export default ProfileInfo
+export default React.memo(ProfileInfo)
