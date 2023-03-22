@@ -19,6 +19,7 @@ import ProfilePage from './components/ProfilePage/ProfilePage'
 import Dialogs from './components/Dialogs/Dialogs'
 import Users from './components/Users/Users'
 import LoginPage from './components/LoginPage/LoginPage'
+import ChatPage from './components/ChatPage/ChatPage'
 
 import Preloader from './components/common/Preloader/Preloader'
 
@@ -88,6 +89,7 @@ const App: React.FC = (props) => {
                         <Route path='/dialogs' element={<Dialogs />} />
                         <Route path='/users' element={<Users />} />
                         <Route path='/login' element={<LoginPage />} />
+                        <Route path='/chat' element={<ChatPage />} />
                         <Route path='*' element={<div>404 NOT FOUND</div>} />
                       </Routes>
                     </div>

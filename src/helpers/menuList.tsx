@@ -14,5 +14,9 @@ export const menuList = [
   {
     name: "Users",
     url: "/users"
+  },
+  {
+    name: "Chat",
+    url: "/chat"
   }
 ]
