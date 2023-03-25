@@ -7,13 +7,18 @@ const mockArr = [1, 2, 3, 4, 5]
 
 const Message = (props: any) => {
   return (
-    <div>
-      <img src={userAvatar} style={{ width: '40px' }} />
-      <span>
+    <div className={styles.message}>
+
+      <img
+        src={userAvatar}
+        className={styles.message__authorAvatar}
+      />
+      <span className={styles.message__authorName}>
         {'Vasya Pupkin'}
       </span>
-      <p>
-        {'Hello world!'}
+
+      <p className={styles.message__text}>
+        {'Hello!'}
       </p>
     </div>
   )
@@ -21,16 +26,7 @@ const Message = (props: any) => {
 
 const Messages = (props: any) => {
   return (
-    <div>
-      {mockArr.map((it, index) => {
-        return <Message key={index} />
-      })}
-      {mockArr.map((it, index) => {
-        return <Message key={index} />
-      })}
-      {mockArr.map((it, index) => {
-        return <Message key={index} />
-      })}
+    <div className={styles.messages__body}>
       {mockArr.map((it, index) => {
         return <Message key={index} />
       })}
@@ -47,15 +43,20 @@ const ChatPage = (props: any) => {
         <div className={styles.messagesContainer}>
           <Messages />
         </div>
-        <div className={styles.form}>
-          <div className={styles.textareaBlock}>
-            <textarea></textarea>
-          </div>
-          <div className={styles.textareaBlock}>
-            <button>
+
+        <div className={styles.formContainer}>
+
+          <div className={styles.form__body}>
+            <textarea className={styles.form__textarea} />
+            <button className={styles.form__button}>
               Send
             </button>
+            <div className={styles.form__counter}>
+              {'40/100'}
+            </div>
+
           </div>
+
         </div>
 
       </div>
