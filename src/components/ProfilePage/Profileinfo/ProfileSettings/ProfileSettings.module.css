@@ -38,7 +38,9 @@
   font-weight: 500;
 }
 
-/* .profileDetails__itemValue {} */
+.profileDetails__itemValue {
+  word-break: break-all;
+}
 
 .editButton {
   display: flex;

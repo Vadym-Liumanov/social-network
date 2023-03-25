@@ -1,6 +1,8 @@
 import React from 'react'
 import userAvatar from './../../assets/images/defaultUserImage.jpg'
 
+import styles from './ChatPage.module.css'
+
 const mockArr = [1, 2, 3, 4, 5]
 
 const Message = (props: any) => {
@@ -38,18 +40,26 @@ const Messages = (props: any) => {
 
 const ChatPage = (props: any) => {
   return (
-    <div>
-      <div>
-        <Messages />
+    <div className={styles.wrapper}>
+
+      <div className={styles.body}>
+
+        <div className={styles.messagesContainer}>
+          <Messages />
+        </div>
+        <div className={styles.form}>
+          <div className={styles.textareaBlock}>
+            <textarea></textarea>
+          </div>
+          <div className={styles.textareaBlock}>
+            <button>
+              Send
+            </button>
+          </div>
+        </div>
+
       </div>
-      <div>
-        <textarea></textarea>
-      </div>
-      <div>
-        <button>
-          Send
-        </button>
-      </div>
+
     </div>
   )
 }

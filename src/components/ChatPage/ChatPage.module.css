@@ -1,0 +1,19 @@
+/* Chat Page */
+
+.wrapper {
+    padding: 1em;
+}
+
+.body {
+    margin: 0 auto;
+    width: 600px;
+    border: var(--main-border)
+}
+
+.messagesContainer {
+
+}
+
+.form {
+
+}

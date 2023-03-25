@@ -15,7 +15,7 @@
 
   padding: 1em;
 
-  width: 100%;
+  width: 270px;
 }
 
 .imgContainer {
@@ -90,6 +90,10 @@
     align-items: stretch;
     justify-content: center;
     column-gap: 2em;
+  }
+
+  .profileInfo__item {
+    width: 100%;
   }
 
   .mainInfo {
