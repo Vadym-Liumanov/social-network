@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent } from 'react'
 import cn from 'classnames'
 
 import styles from './ProfileInfo.module.css'
@@ -8,7 +8,6 @@ import ProfileSettings from './ProfileSettings/ProfileSettings'
 import { ProfileType } from '../../../types/types'
 
 import addPhotoIcon from './../../../assets/icons/add_photo.svg'
-import removePhotoIcon from './../../../assets/icons/trash.svg'
 
 type PropsType = {
   isOwner: boolean

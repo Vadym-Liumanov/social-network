@@ -104,7 +104,7 @@ const ProfileForm: React.FC<InjectedFormProps<ProfileFormValuesType,
                 validate={[required]}
                 label='Full Name'
                 id='profileForm-fullName'
-                requiredField={true}
+                requiredfield="true"
               />
 
               <Field
@@ -115,7 +115,7 @@ const ProfileForm: React.FC<InjectedFormProps<ProfileFormValuesType,
                 validate={[required]}
                 label='About me'
                 id='profileForm-aboutMe'
-                requiredField={true}
+                requiredfield="true"
               />
 
               <Field
@@ -134,7 +134,7 @@ const ProfileForm: React.FC<InjectedFormProps<ProfileFormValuesType,
                 validate={[]}
                 label='Job description'
                 id='profileForm-jobDescription'
-                requiredField={false}
+                requiredfield="false"
               />
 
             </div>

@@ -21,6 +21,7 @@ const Message: React.FC<{ message: ChatMessageType }> = ({ message }) => {
       <img
         src={message.photo ? message.photo : userAvatar}
         className={styles.message__authorAvatar}
+        alt='userPhoto'
       />
       <span className={styles.message__authorName}>
         {message.userName}
@@ -129,7 +130,7 @@ const ChatPage: React.FC<any> = () => {
       ws.addEventListener('close', onCloseHandler)
       setWsChannel(ws)
     }
-    
+
     createWsChannel()
 
     // Cleanup function

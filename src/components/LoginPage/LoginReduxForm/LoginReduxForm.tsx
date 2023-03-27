@@ -35,7 +35,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType,
           validate={[required, email]}
           label='Email'
           id="login-email"
-          requiredField={true}
+          requiredfield="true"
         />
 
         <Field
@@ -46,7 +46,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType,
           validate={[required]}
           label='Password'
           id="login-password"
-          requiredField={true}
+          requiredfield="true"
         />
 
         <Field
@@ -72,7 +72,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType,
               validate={[required]}
               label='Captcha'
               id="login-captcha"
-              requiredField={true}
+              requiredfield="true"
             />
 
           </>}

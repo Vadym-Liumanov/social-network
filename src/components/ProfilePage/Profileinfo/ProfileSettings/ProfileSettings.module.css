@@ -65,7 +65,7 @@
 .editProfileDetails__header {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   padding-right: 1em;
   height: 20px;
   color: var(--text-color);

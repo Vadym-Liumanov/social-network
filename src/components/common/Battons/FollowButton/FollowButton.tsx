@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import cn from 'classnames'
 
 import { getUsers, getIsFollowingInProgress } from '../../../../redux/users-selectors'
 import { actionCreators } from '../../../../redux/users-reducer'

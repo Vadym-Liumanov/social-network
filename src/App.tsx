@@ -16,7 +16,6 @@ import Aside from './components/Aside/Aside'
 import Footer from './components/Footer/Footer'
 
 import ProfilePage from './components/ProfilePage/ProfilePage'
-import Dialogs from './components/Dialogs/Dialogs'
 import Users from './components/Users/Users'
 import LoginPage from './components/LoginPage/LoginPage'
 import ChatPage from './components/ChatPage/ChatPage'
@@ -86,7 +85,6 @@ const App: React.FC = (props) => {
                         <Route path='/' element={<Navigate replace to={`/profile/${id}`} />} />
                         <Route path='/profile' element={<Navigate replace to={`/profile/${id}`} />} />
                         <Route path='/profile/:userId' element={<ProfilePage />} />
-                        <Route path='/dialogs' element={<Dialogs />} />
                         <Route path='/users' element={<Users />} />
                         <Route path='/login' element={<LoginPage />} />
                         <Route path='/chat' element={<ChatPage />} />

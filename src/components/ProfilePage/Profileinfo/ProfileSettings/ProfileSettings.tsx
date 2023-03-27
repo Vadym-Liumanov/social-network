@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-import { ContactsType, ProfileType } from '../../../../types/types'
+import { ProfileType } from '../../../../types/types'
 import ProfileReduxForm from './ProfileForm/ProfileForm'
 import PrimaryButton from '../../../common/Battons/PrimaryButton/PrimaryButton'
 
