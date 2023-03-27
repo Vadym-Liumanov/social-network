@@ -29,12 +29,12 @@
 
 @media (min-width: 468px) {
   .profileDetails__item {
-    grid-template-columns: 8.2em 1fr;
+    grid-template-columns: 6em 1fr;
   }
 }
 
 .profileDetails__itemTitle {
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: 500;
 }
 
