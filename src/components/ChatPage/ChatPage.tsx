@@ -12,16 +12,7 @@ type ChatMessageType = {
 
 type ChatMessagesType = ChatMessageType[]
 
-const WebSocketChannel = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
-
-const mockArr = [1, 2, 3, 4, 5]
-
-// {
-//   message: "asdasd",
-//   photo:        "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=4",
-//   userId: 2,
-//   userName: "samurai dimych"
-// }
+// Message component
 
 const Message: React.FC<{ message: ChatMessageType }> = ({ message }) => {
   return (
@@ -42,35 +33,110 @@ const Message: React.FC<{ message: ChatMessageType }> = ({ message }) => {
   )
 }
 
-const Messages: React.FC<{ messages: ChatMessagesType }> = ({ messages }) => {
+// Messages component
+// TODO: Replace index as key
+const Messages: React.FC<{ wsChannel: WebSocket | null }> = ({ wsChannel }) => {
+  const [messagesList, setMessagesList] = useState<ChatMessagesType>([])
+
+  useEffect(() => {
+    const onMessageHandler = (e: MessageEvent) => {
+      let newMessages = JSON.parse(e.data)
+      setMessagesList((prevMessages) => [...prevMessages, ...newMessages])
+    }
+    wsChannel?.addEventListener('message', onMessageHandler)
+    return () => {
+      wsChannel?.removeEventListener('message', onMessageHandler)
+    }
+  }, [wsChannel])
+
+
   return (
     <div className={styles.messages__body}>
-      {messages.map((message, index) => {
+      {messagesList.map((message, index) => {
         return <Message key={index} message={message} />
       })}
     </div>
   )
 }
 
-const ChatPage = (props: any) => {
-  const [messagesList, setMessagesList] = useState<ChatMessagesType>([])
+// AddMessageForm
+
+const AddMessageForm: React.FC<{ wsChannel: WebSocket | null }> = ({ wsChannel }) => {
   const [message, setMessage] = useState('')
+  const [wsChannelReadyStatus, setWsChannelReadyStatus] = useState<'pending' | 'ready'>('pending')
+
+  useEffect(() => {
+    const onOpenHandler = () => {
+      setWsChannelReadyStatus('ready')
+    }
+    wsChannel?.addEventListener('open', onOpenHandler)
+    return () => {
+      wsChannel?.removeEventListener('open', onOpenHandler)
+    }
+  }, [wsChannel])
 
   const onSendBtnClick = () => {
-    if (!message.trim()) {
+    if (!message) {
       setMessage('')
       return
     }
-    WebSocketChannel.send(message.trim())
+    wsChannel?.send(message)
     setMessage('')
   }
 
+  return (
+    <div className={styles.form__body}>
+      <textarea
+        className={styles.form__textarea}
+        onChange={(e) => { setMessage(e.target.value) }}
+        value={message}
+      />
+      <button
+        className={styles.form__button}
+        onClick={onSendBtnClick}
+        disabled={wsChannel === null || wsChannelReadyStatus === 'pending'}
+      >
+        Send
+      </button>
+      <div className={styles.form__counter}>
+        {'40/100'}
+      </div>
+
+    </div>
+  )
+}
+
+// ChatPage component
+
+const ChatPage: React.FC<any> = () => {
+  const [wsChannel, setWsChannel] = useState<WebSocket | null>(null)
+
   useEffect(() => {
-    WebSocketChannel.addEventListener('message', (e) => {
-      const newMessages: ChatMessagesType = JSON.parse(e.data)
-      setMessagesList((prevMessages) => [...prevMessages, ...newMessages])
-      console.log(messagesList)
-    })
+    let ws: WebSocket
+
+    const onCloseHandler = () => {
+      console.log('WS Channel CLOSE')
+      setTimeout(() => {
+        createWsChannel()
+      }, 5000)
+    }
+
+    const createWsChannel = () => {
+      ws?.removeEventListener('close', onCloseHandler)
+      ws?.close()
+
+      ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+      ws.addEventListener('close', onCloseHandler)
+      setWsChannel(ws)
+    }
+    
+    createWsChannel()
+
+    // Cleanup function
+    return () => {
+      ws.removeEventListener('close', onCloseHandler)
+      ws.close()
+    }
   }, [])
 
   return (
@@ -79,29 +145,11 @@ const ChatPage = (props: any) => {
       <div className={styles.body}>
 
         <div className={styles.messagesContainer}>
-          <Messages messages={messagesList} />
+          <Messages wsChannel={wsChannel} />
         </div>
 
         <div className={styles.formContainer}>
-
-          <div className={styles.form__body}>
-            <textarea
-              className={styles.form__textarea}
-              onChange={(e) => { setMessage(e.target.value) }}
-              value={message}
-            />
-            <button
-              className={styles.form__button}
-              onClick={onSendBtnClick}
-            >
-              Send
-            </button>
-            <div className={styles.form__counter}>
-              {'40/100'}
-            </div>
-
-          </div>
-
+          <AddMessageForm wsChannel={wsChannel} />
         </div>
 
       </div>
