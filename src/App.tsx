@@ -75,11 +75,13 @@ const App: React.FC = (props) => {
                 <div className={styles.mainRow__container}>
 
                   <div className={styles.mainRow__wrapper}>
+
                     {isAuth &&
                       <div className={styles.aside}>
                         <Aside />
                       </div>
                     }
+                    
                     <div className={styles.main}>
                       <Routes>
                         <Route path='/' element={<Navigate replace to={`/profile/${id}`} />} />

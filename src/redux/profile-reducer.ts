@@ -71,8 +71,6 @@ export const actionCreators = {
 
 // Thunk creators
 
-
-
 export const updateMyStatusThunk = (myStatus: string): ThunkType => {
   return (dispatch) => {
     profileAPI.putMyStatus(myStatus).then((data) => {
@@ -114,7 +112,6 @@ export const setUserProfileThunk = (userId: number | null): ThunkType => {
 // получаем ответ с сервера об успешной записи изменений, считываем через АПИ профайл-дату
 // и записываем в стейт
 
-
 export const updateProfileThunk = (profileData: ProfileType): ThunkType => {
   return (dispatch, getState) => {
     const userId = getState().auth.id
@@ -143,7 +140,6 @@ export const savePhotoThunk = (file: File): ThunkType => {
 }
 
 export const updatePhotoThunk = () => {
-
 
 }
 
