@@ -16,14 +16,19 @@ type ThunkType = BaseThunkType<ActionTypes>
 
 export const initializeAppThunk = (): ThunkType => {
   return (dispatch, getState) => {
-    const promise1 = dispatch(getAuthDataThunk())
+    const promise1 = dispatch(getAuthDataThunk()).then(() => {
+      // Добавляем фичу, чтобы при реиницилизации приложения запрашивался не только статус авторизации, но и если юзер 
+      // авторизован, запрашивалась информация по профилю владельца акка - нужно для того, чтобы при обновлении окна
+      // и переинициализации приложения из стора не пропадали данные профайла owner-а: к примеру пропадет его автврка, 
+      // если refresh произойдет на странице, отличной от profilePage.
+      const myId = getState()?.auth.id
+      if (myId) {
+        dispatch(setUserProfileThunk(myId))
+      }
+    })
     Promise.all([promise1])
       .then(() => {
         dispatch(actionCreators.appInitSuccess())
-      })
-      .then(() => {
-        const myId = getState().auth.id
-        dispatch(setUserProfileThunk(myId))
       })
   }
 }
