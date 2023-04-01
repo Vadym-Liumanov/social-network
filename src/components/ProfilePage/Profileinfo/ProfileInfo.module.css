@@ -18,6 +18,12 @@
   width: 270px;
 }
 
+@media (min-width: 330px) {
+  .profileInfo__item {
+    width: 310px;
+  }
+}
+
 .imgContainer {
   width: 200px;
   position: relative;
@@ -96,11 +102,16 @@
     width: 100%;
   }
 
+  .mainInfo,
+  .aboutMe {
+    min-width: 310px;
+  }
+
   .mainInfo {
     max-width: 300px;
   }
 
   .aboutMe {
-    max-width: 400px;
+    max-width: 460px;
   }
 }

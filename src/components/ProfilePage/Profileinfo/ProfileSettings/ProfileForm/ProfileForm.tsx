@@ -131,10 +131,10 @@ const ProfileForm: React.FC<InjectedFormProps<ProfileFormValuesType,
                 type='text'
                 component={profileTextarea}
                 placeholder={'Job description'}
-                validate={[]}
+                validate={[required]}
                 label='Job description'
                 id='profileForm-jobDescription'
-                requiredfield="false"
+                requiredfield="true"
               />
 
             </div>
