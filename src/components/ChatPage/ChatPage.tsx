@@ -70,6 +70,10 @@ const Messages: React.FC<{ wsChannel: WebSocket | null }> = ({ wsChannel }) => {
 const AddMessageForm: React.FC<{ wsChannel: WebSocket | null }> = ({ wsChannel }) => {
   const [message, setMessage] = useState('')
   const [wsChannelReadyStatus, setWsChannelReadyStatus] = useState<'pending' | 'ready'>('pending')
+  const [symbolsCounter, setSymbolsCounter] = useState<number>(0)
+
+  // Лимит символов в сообщении
+  const symbolsLimit: number = 100
 
   useEffect(() => {
     const onOpenHandler = () => {
@@ -84,17 +88,28 @@ const AddMessageForm: React.FC<{ wsChannel: WebSocket | null }> = ({ wsChannel }
   const onSendBtnClick = () => {
     if (!message) {
       setMessage('')
+      setSymbolsCounter(0)
       return
     }
     wsChannel?.send(message)
     setMessage('')
+    setSymbolsCounter(0)
+  }
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const message = e.target.value
+    const messageLenght = message ? message.length : 0
+    if (messageLenght <= symbolsLimit) {
+      setMessage(message)
+      setSymbolsCounter(messageLenght)
+    }
   }
 
   return (
     <div className={styles.form__body}>
       <textarea
         className={styles.form__textarea}
-        onChange={(e) => { setMessage(e.target.value) }}
+        onChange={onChangeHandler}
         value={message}
       />
       <button
@@ -105,7 +120,7 @@ const AddMessageForm: React.FC<{ wsChannel: WebSocket | null }> = ({ wsChannel }
         Send
       </button>
       <div className={styles.form__counter}>
-        {'40/100'}
+        {`${symbolsCounter}/${symbolsLimit}`}
       </div>
 
     </div>

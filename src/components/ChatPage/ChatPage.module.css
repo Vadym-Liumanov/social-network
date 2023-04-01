@@ -28,13 +28,15 @@
 }
 
 /* Message */
+
 .message {
     display: grid;
     grid-template-columns: 50px 1fr;
-    grid-template-rows: 25px 40px;
+    grid-template-rows: 25px minmax(40px, auto);
     column-gap: 1em;
     row-gap: 0.2em;
     align-items: end;
+    margin-right: 1em;
 }
 
 .message__authorAvatar {
