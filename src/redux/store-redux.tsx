@@ -8,13 +8,15 @@ import profileReduser from './profile-reducer'
 import usersReduser from './users-reducer'
 import authReducer from './auth-reducer'
 import appReducer from './app-reducer'
+import chatReducer from './chat-reducer'
 
 const rootReducer = combineReducers({
   profile: profileReduser,
   users: usersReduser,
   auth: authReducer,
   form: formReducer,
-  app: appReducer
+  app: appReducer,
+  chat: chatReducer
 })
 
 type RootReducerType = typeof rootReducer
