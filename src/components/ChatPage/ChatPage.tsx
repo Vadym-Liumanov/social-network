@@ -1,3 +1,5 @@
+// TODO - разнести код по отдельным компонентам
+
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
@@ -36,6 +38,7 @@ const Message: React.FC<{ message: ChatMessageType }> = ({ message }) => {
 // Messages component
 // TODO: Replace index as a key
 const Messages: React.FC = () => {
+  // Получаем массив сообщений из стейта через селектор
   const messages = useSelector(getMessages)
 
   return (
@@ -107,10 +110,9 @@ const ChatPage: React.FC = () => {
   const dispatch = useDispatch()
   const isAuth = useSelector(getIsAuth)
 
-
-
   useEffect(() => {
-    debugger
+    /* При первом рендере диспатчим санку, по которой в API запускается ws канал
+    и производится подписка BLL на получение массива messages по каналу*/
     dispatch(startMessagesListeningThunk())
     // Cleanup function
     return () => {
