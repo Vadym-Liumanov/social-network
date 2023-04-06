@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
+import cn from 'classnames'
 
 import { getIsAuth } from '../../redux/auth-selectors'
 import { getMessages } from '../../redux/chat-selectors'
@@ -90,7 +91,9 @@ const AddMessageForm: React.FC = () => {
         value={message}
       />
       <button
-        className={styles.form__button}
+        className={cn(styles.form__button, {
+          [styles.form__button_disabled]: false
+        })}
         onClick={onSendBtnClick}
         disabled={false}
       >

@@ -118,32 +118,45 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  
+
     font-size: 1em;
-  
+
     background-color: var(--blue);
     color: var(--white);
     border-radius: 5px;
-  
+
     width: 50px;
     height: 2.4em;
-  
+
     transition: all 0.3s ease;
 
     grid-column: 2;
     grid-row: 1 / 2;
-  }
-  
-  .form__button:hover {
+}
+
+.form__button:hover {
     opacity: 0.9;
-  }
-  
-  .form__button:active {
+}
+
+.form__button:active {
     position: relative;
     top: 1px;
-  }
+}
 
-  .form__counter {
+.form__button.form__button_disabled {
+    background-color: #c1c1c1;
+    cursor: default;
+}
+
+.form__button.form__button_disabled:hover {
+    opacity: 1;
+}
+
+.form__button.form__button_disabled:active {
+    position: static;
+}
+
+.form__counter {
     grid-column: 2;
     grid-row: 2 / 3;
     display: flex;
@@ -151,4 +164,4 @@
     justify-content: center;
     font-size: 0.9em;
     font-weight: 500;
-  }
+}
