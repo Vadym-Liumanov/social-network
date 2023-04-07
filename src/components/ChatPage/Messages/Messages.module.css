@@ -1,0 +1,7 @@
+.messages__body {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5em;
+    height: 360px;
+    overflow-y: auto;
+}
