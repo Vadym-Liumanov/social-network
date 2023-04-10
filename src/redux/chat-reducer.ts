@@ -53,8 +53,8 @@ export const startMessagesListeningThunk = (): ThunkType => {
 // Санка отписывания от ws канала с остановкой работы последнего через методы chatAPI
 export const stopMessagesListeningThunk = (): ThunkType => {
   return (dispatch) => {
-    chatAPI.unsubscribe(newMessagesHandlerCreator(dispatch))
     chatAPI.stop()
+    chatAPI.unsubscribe(newMessagesHandlerCreator(dispatch))
   }
 }
 
