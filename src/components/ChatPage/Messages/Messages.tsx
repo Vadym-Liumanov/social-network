@@ -15,8 +15,8 @@ const Messages: React.FC = () => {
 
     return (
         <div className={styles.messages__body}>
-            {messages.map((message, index) => {
-                return <Message key={index} message={message} />
+            {messages.map((message) => {
+                return <Message key={message.id} message={message} />
             })}
         </div>
     )

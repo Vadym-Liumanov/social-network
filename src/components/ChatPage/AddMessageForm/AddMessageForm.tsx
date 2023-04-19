@@ -5,9 +5,13 @@ import cn from 'classnames'
 import { sendMessageThunk } from "../../../redux/chat-reducer"
 
 import styles from './AddMessageForm.module.css'
+import { StatusType } from "../../../api/chatAPI"
 
+type PropsType = {
+    channelStatus: StatusType
+}
 
-const AddMessageForm: React.FC = () => {
+const AddMessageForm: React.FC<PropsType> = ({ channelStatus }) => {
     const dispatch = useDispatch()
 
     const [message, setMessage] = useState('')
@@ -48,7 +52,7 @@ const AddMessageForm: React.FC = () => {
                     [styles.form__button_disabled]: symbolsCounter === 0
                 })}
                 onClick={onSendBtnClick}
-                disabled={symbolsCounter === 0}
+                disabled={(symbolsCounter === 0) || (channelStatus !== 'ready')}
             >
                 Send
             </button>

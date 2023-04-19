@@ -6,6 +6,7 @@ import Messages from './Messages/Messages'
 import AddMessageForm from './AddMessageForm/AddMessageForm'
 
 import { getIsAuth } from '../../redux/auth-selectors'
+import { getChannelStatus } from '../../redux/chat-selectors'
 
 import styles from './ChatPage.module.css'
 
@@ -14,6 +15,7 @@ import { startMessagesListeningThunk, stopMessagesListeningThunk } from '../../r
 const ChatPage: React.FC = () => {
   const dispatch = useDispatch()
   const isAuth = useSelector(getIsAuth)
+  const channelStatus = useSelector(getChannelStatus)
 
   useEffect(() => {
     /* При первом рендере диспатчим санку, по которой в API запускается ws канал
@@ -21,6 +23,7 @@ const ChatPage: React.FC = () => {
     dispatch(startMessagesListeningThunk())
     // Cleanup function
     return () => {
+      console.log('Executing on unmount component')
       dispatch(stopMessagesListeningThunk())
     }
   }, [])
@@ -29,13 +32,14 @@ const ChatPage: React.FC = () => {
     <>
       {!isAuth
         ? <Navigate replace to='/login' />
-        : <div className={styles.wrapper}>
+        :
+        <div className={styles.wrapper}>
           <div className={styles.body}>
             <div className={styles.messagesContainer}>
               <Messages />
             </div>
             <div className={styles.formContainer}>
-              <AddMessageForm />
+              <AddMessageForm channelStatus={channelStatus} />
             </div>
           </div>
         </div>

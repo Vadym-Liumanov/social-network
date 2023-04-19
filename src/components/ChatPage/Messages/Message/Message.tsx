@@ -2,8 +2,8 @@ import React from 'react'
 
 import styles from './Message.module.css'
 import userAvatar from '../../../../assets/images/defaultUserImage.jpg'
+import { ChatMessageType } from '../../../../redux/chat-reducer'
 
-import { ChatMessageType } from '../../../../api/chatAPI'
 
 const Message: React.FC<{ message: ChatMessageType }> = ({ message }) => {
     return (
