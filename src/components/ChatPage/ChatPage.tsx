@@ -33,16 +33,20 @@ const ChatPage: React.FC = () => {
       {!isAuth
         ? <Navigate replace to='/login' />
         :
-        <div className={styles.wrapper}>
-          <div className={styles.body}>
-            <div className={styles.messagesContainer}>
-              <Messages />
-            </div>
-            <div className={styles.formContainer}>
-              <AddMessageForm channelStatus={channelStatus} />
+        <>
+        {/* При ошибке websocket выведем сообщение об ошибке */}
+        { channelStatus === 'error' && alert('Some error with WS-connection occured.')}
+          <div className={styles.wrapper}>
+            <div className={styles.body}>
+              <div className={styles.messagesContainer}>
+                <Messages />
+              </div>
+              <div className={styles.formContainer}>
+                <AddMessageForm channelStatus={channelStatus} />
+              </div>
             </div>
           </div>
-        </div>
+        </>
       }
     </>
   )
