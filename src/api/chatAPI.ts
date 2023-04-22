@@ -33,7 +33,6 @@ let ws: WebSocket | null = null
 
 // Ф-ция обработчика события "close" канала - каждые 5 сек пытается открыть закрытый канал
 const onCloseHandler = () => {
-    console.log('xxx WS Channel CLOSE xxx. Code must be 3')
     notifySubscribersAboutStatus('pending')
     setTimeout(createWsChannel, 5000)
 }
@@ -42,20 +41,17 @@ const onCloseHandler = () => {
 При запуске обработчика (возникновении события на канале) выполнятся все callback-и подписчики.
 Простыми словами - передаем messages подписчикам, а они у себя производят необходимые операции (суть callback-а)*/
 const onMessageHandler = (e: MessageEvent) => {
-    console.log('>>> New massages recieved. Code must be 1')
     const newMessages = JSON.parse(e.data)
     subscribers['messages-received'].forEach(s => s(newMessages))
 }
 
 // Обработчик события "open" канала.
 const onOpenHandler = () => {
-    console.log('Status OPEN. Code 1')
     notifySubscribersAboutStatus("ready")
 }
 
 // Обработчик события "error" канала.
 const onErrorHandler = (event: Event) => {
-    console.log('!!! Error ocured !!!')
     notifySubscribersAboutStatus("error")
 }
 
@@ -101,7 +97,6 @@ export const chatAPI = {
     /* Метод остановки канала.
     Обнуляем массивы в объекте подписчиков, убираем все eventListeners, закрываем соединение. */
     stop() {
-        console.log('WS Stoped')
         subscribers['messages-received'] = []
         subscribers['status-changed'] = []
         ws?.close()
