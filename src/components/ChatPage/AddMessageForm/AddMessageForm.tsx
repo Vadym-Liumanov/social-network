@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import cn from 'classnames'
 
@@ -17,7 +17,7 @@ const AddMessageForm: React.FC<PropsType> = ({ channelStatus }) => {
     const [message, setMessage] = useState('')
     const [symbolsCounter, setSymbolsCounter] = useState<number>(0)
 
-    // Лимит символов в сообщении
+    // Лимит символов в сообщении (ограничение сервера)
     const symbolsLimit: number = 100
 
     const onSendBtnClick = () => {
@@ -40,6 +40,32 @@ const AddMessageForm: React.FC<PropsType> = ({ channelStatus }) => {
         }
     }
 
+    /* Ф-ция для блокировки (disable) кнопки отправки сообщений. Будет использоваться также при отправке сообщения по сочитанию клавиш.
+    True - если в сообщении есть символы и статус ws-канала ready.
+    */
+    const isSendAllowed = () => (symbolsCounter !== 0) && (channelStatus === 'ready')
+
+    /* Для отправки сообщения по комбинации клавиш Ctrl+Enter используем useEffect, где добавим прослушивание события keyup.
+    На это событие вешаем обработчик keyupHandler, в кот. отслеживанием отжатие комбинации клавиш Ctrl+Enter, и если отправка 
+    сообщений доступна - отправляем сообщение.
+    */
+
+    const keyupHandler = (e: KeyboardEvent) => {
+        if (isSendAllowed()) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                onSendBtnClick()
+            }
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('keyup', keyupHandler)
+        // Cleanup function
+        return () => {
+            document.removeEventListener('keyup', keyupHandler)
+        }
+    })
+
     return (
         <div className={styles.form__body}>
             <textarea
@@ -52,7 +78,8 @@ const AddMessageForm: React.FC<PropsType> = ({ channelStatus }) => {
                     [styles.form__button_disabled]: symbolsCounter === 0
                 })}
                 onClick={onSendBtnClick}
-                disabled={(symbolsCounter === 0) || (channelStatus !== 'ready')}
+                disabled={!isSendAllowed()}
+                title='Ctrl+Enter'
             >
                 Send
             </button>

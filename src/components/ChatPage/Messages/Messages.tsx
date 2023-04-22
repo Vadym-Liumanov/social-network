@@ -24,6 +24,7 @@ const Messages: React.FC = () => {
     привязав к состоянию isAutoScroll - если false, то отбразить кнопку перемотки вниз. */
     const [isAutoScroll, setIsAutoScroll] = useState<boolean>(true)
 
+    // Обработчик события onScroll. Включает-выключает автоскролл к последнему сообщению в зависимости от позиции скролла.
     const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
         const element = e.currentTarget
         
