@@ -82,7 +82,6 @@ export const startMessagesListeningThunk = (): ThunkType => {
 // Санка отписывания от ws канала с остановкой работы последнего (ws.close()) через методы chatAPI
 export const stopMessagesListeningThunk = (): ThunkType => {
   return (dispatch) => {
-    console.log('Component ChatPage will be Unmounted soon')
     chatAPI.stop()
     chatAPI.unsubscribe('messages-received', newMessagesHandlerCreator(dispatch))
     chatAPI.unsubscribe('status-changed', statusChangedHandlerCreator(dispatch))

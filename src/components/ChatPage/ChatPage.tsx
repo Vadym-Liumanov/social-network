@@ -23,7 +23,6 @@ const ChatPage: React.FC = () => {
     dispatch(startMessagesListeningThunk())
     // Cleanup function
     return () => {
-      console.log('Executing on unmount component')
       dispatch(stopMessagesListeningThunk())
     }
   }, [])
