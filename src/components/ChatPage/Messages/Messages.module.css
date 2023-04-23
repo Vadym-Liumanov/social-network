@@ -5,3 +5,13 @@
     height: 360px;
     overflow-y: auto;
 }
+
+.downButton__container {
+    position: relative;
+}
+
+.downButton {
+    position: absolute;
+    top: -52px;
+    right: 2em;
+}

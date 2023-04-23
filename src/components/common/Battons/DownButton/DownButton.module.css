@@ -1,0 +1,42 @@
+.primaryButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.1em;
+
+  background-color: #1677ff;
+  color: var(--white);
+  padding: 0.4em 1em;
+  border-radius: 5px;
+
+  width: 8em;
+  height: 2.4em;
+
+  transition: all 0.3s ease;
+}
+
+.downButton {
+  width: 40px;
+  min-height: 40px;
+
+  background-color: #1677ff;
+  border-radius: 50%;
+
+  opacity: 0.9;
+
+  transition: all 0.3s ease;
+}
+
+.downButton img {
+  width: 24px;
+}
+
+.downButton:hover {
+  opacity: 0.8;
+}
+
+.downButton:active {
+  position: relative;
+  top: 1px;
+}
