@@ -14,13 +14,19 @@ import styles from './App.module.css'
 import Header from './components/Header/Header'
 import Aside from './components/Aside/Aside'
 import Footer from './components/Footer/Footer'
-
-import ProfilePage from './components/ProfilePage/ProfilePage'
-import UsersPage from './components/UsersPage/UsersPage'
-import LoginPage from './components/LoginPage/LoginPage'
-import ChatPage from './components/ChatPage/ChatPage'
-
 import Preloader from './components/common/Preloader/Preloader'
+
+/* Используем ф-цию lazy для организации бандлинга и 'ленивой' загрузки компонент из роутинга.
+В качесте аргумента lazy используется ф-ция динамической загрузки компонента. Lazy позволяет
+отображать динамический импорт в качестве компонента и подгружает компонент при необходимости
+при его первом рендере.
+При этом при подгрузке bundle возможны задержки, поэтому для better UIE используется обертка Suspense,
+позволяющая во время загрузки отображать fallback (в нашем случае компонент Preloader).
+*/
+const ProfilePage = lazy(() => import('./components/ProfilePage/ProfilePage'))
+const UsersPage = lazy(() => import('./components/UsersPage/UsersPage'))
+const LoginPage = lazy(() => import('./components/LoginPage/LoginPage'))
+const ChatPage = lazy(() => import('./components/ChatPage/ChatPage'))
 
 const App: React.FC = (props) => {
 
@@ -81,17 +87,19 @@ const App: React.FC = (props) => {
                         <Aside />
                       </div>
                     }
-                    
+
                     <div className={styles.main}>
-                      <Routes>
-                        <Route path='/' element={<Navigate replace to={`/profile/${id}`} />} />
-                        <Route path='/profile' element={<Navigate replace to={`/profile/${id}`} />} />
-                        <Route path='/profile/:userId' element={<ProfilePage />} />
-                        <Route path='/users' element={<UsersPage />} />
-                        <Route path='/login' element={<LoginPage />} />
-                        <Route path='/chat' element={<ChatPage />} />
-                        <Route path='*' element={<div>404 NOT FOUND</div>} />
-                      </Routes>
+                      <Suspense fallback={<Preloader />}>
+                        <Routes>
+                          <Route path='/' element={<Navigate replace to={`/profile/${id}`} />} />
+                          <Route path='/profile' element={<Navigate replace to={`/profile/${id}`} />} />
+                          <Route path='/profile/:userId' element={<ProfilePage />} />
+                          <Route path='/users' element={<UsersPage />} />
+                          <Route path='/login' element={<LoginPage />} />
+                          <Route path='/chat' element={<ChatPage />} />
+                          <Route path='*' element={<div>404 NOT FOUND</div>} />
+                        </Routes>
+                      </Suspense>
                     </div>
                   </div>
 
