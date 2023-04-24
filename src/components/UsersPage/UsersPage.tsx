@@ -15,7 +15,7 @@ import styles from './Users.module.css'
 import Pagination from '../common/Pagination/Pagination'
 import UsersSearchForm from './UsersSearchForm/UsersSearchForm'
 
-const Users: React.FC = () => {
+const UsersPage: React.FC = () => {
   const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
@@ -123,4 +123,4 @@ const Users: React.FC = () => {
   )
 }
 
-export default React.memo(Users)
+export default React.memo(UsersPage)

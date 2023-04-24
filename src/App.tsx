@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Suspense, lazy } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 // import { BrowserRouter } from 'react-router-dom'
 import { HashRouter } from 'react-router-dom'
@@ -16,7 +16,7 @@ import Aside from './components/Aside/Aside'
 import Footer from './components/Footer/Footer'
 
 import ProfilePage from './components/ProfilePage/ProfilePage'
-import Users from './components/Users/Users'
+import UsersPage from './components/UsersPage/UsersPage'
 import LoginPage from './components/LoginPage/LoginPage'
 import ChatPage from './components/ChatPage/ChatPage'
 
@@ -87,7 +87,7 @@ const App: React.FC = (props) => {
                         <Route path='/' element={<Navigate replace to={`/profile/${id}`} />} />
                         <Route path='/profile' element={<Navigate replace to={`/profile/${id}`} />} />
                         <Route path='/profile/:userId' element={<ProfilePage />} />
-                        <Route path='/users' element={<Users />} />
+                        <Route path='/users' element={<UsersPage />} />
                         <Route path='/login' element={<LoginPage />} />
                         <Route path='/chat' element={<ChatPage />} />
                         <Route path='*' element={<div>404 NOT FOUND</div>} />
